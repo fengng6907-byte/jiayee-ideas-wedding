@@ -987,6 +987,7 @@ window.onload = function() {
     renderDepositLog();
     calculateSavingGoal();
     renderGuestsTable();
+    fetchGuestsFromGoogleSheets();
     renderSeatingTables();
     updateInvitePreview();
     onDateChanged();
@@ -1646,6 +1647,23 @@ async function syncToGoogleSheets(data){
     const url='https://script.google.com/macros/s/AKfycbwsZrn30G4nhtyfVZZwLJYVIajOSFVVGdusbfVyZ2uUBTt9YHLy3c21UXsgtA3lKPf6yw/exec';
     const payload={Name:data.name,'Attendance Pax':data.pax,'Diet Requirement':data.diet,'Marraige Wishes':data.wish};
     try{await fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});}catch(e){console.error('Google Sheets sync failed:',e);}
+}
+async function fetchGuestsFromGoogleSheets(){
+    const url='https://script.google.com/macros/s/AKfycbwsZrn30G4nhtyfVZZwLJYVIajOSFVVGdusbfVyZ2uUBTt9YHLy3c21UXsgtA3lKPf6yw/exec';
+    try{
+        const res=await fetch(url,{method:'GET',redirect:'follow'});
+        if(!res.ok)return;
+        const rows=await res.json();
+        if(!Array.isArray(rows))return;
+        const existingNames=new Set(guestItems.map(g=>g.name.trim().toLowerCase()));
+        rows.forEach(r=>{
+            const name=(r['Name']||'').trim();
+            if(!name||existingNames.has(name.toLowerCase()))return;
+            existingNames.add(name.toLowerCase());
+            guestItems.push({id:'gs_'+Date.now()+Math.floor(Math.random()*1000),name:name,rsvp:'going',diet:(r['Diet Requirement']||'none').toLowerCase(),pax:parseInt(r['Attendance Pax'])||1,wish:r['Marraige Wishes']||'',tableId:''});
+        });
+        renderGuestsTable();calculateGuestStats();renderWishesOnMockBoard();
+    }catch(e){console.error('Fetch guests from Google Sheets failed:',e);}
 }
 function renderWishesOnMockBoard(){
     const board=document.getElementById('invite-wishes-board');if(!board)return;board.innerHTML='';
