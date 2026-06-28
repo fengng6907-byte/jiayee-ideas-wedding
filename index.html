@@ -1643,7 +1643,13 @@ function simulateRSVPSubmission(){
     guestItems.push({id:'guest_'+Date.now()+Math.floor(Math.random()*100),name:nameVal,rsvp:'going',diet:dietVal,pax:paxVal,wish:wishVal,tableId:''});
     nameInput.value='';paxSelect.value="1";dietSelect.value="none";wishInput.value='';
     renderGuestsTable();calculateGuestStats();renderWishesOnMockBoard();saveAllToLocalStorage();
+    syncToGoogleSheets({name:nameVal,pax:paxVal,diet:dietVal,wish:wishVal});
     triggerCustomModal("🎉 模拟宾客提交成功！",`宾客 [${nameVal}] 已经通过电子请柬成功登记！共 [${paxVal}] 人、温馨留言以及饮食需求已被实时反向统计，并同步到席位排位大表中。`);
+}
+async function syncToGoogleSheets(data){
+    const url='https://script.google.com/macros/s/AKfycbwsZrn30G4nhtyfVZZwLJYVIajOSFVVGdusbfVyZ2uUBTt9YHLy3c21UXsgtA3lKPf6yw/exec';
+    const payload={Name:data.name,'Attendance Pax':data.pax,'Diet Requirement':data.diet,'Marraige Wishes':data.wish};
+    try{await fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});}catch(e){console.error('Google Sheets sync failed:',e);}
 }
 function renderWishesOnMockBoard(){
     const board=document.getElementById('invite-wishes-board');if(!board)return;board.innerHTML='';
