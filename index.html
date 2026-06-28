@@ -32,8 +32,6 @@
         ::-webkit-scrollbar { width:6px; }
         ::-webkit-scrollbar-track { background:#f7f5f0; }
         ::-webkit-scrollbar-thumb { background:#c5a059; border-radius:3px; }
-        .shimmer { background:linear-gradient(90deg,#f3f3f3 25%,#e2e2e2 50%,#f3f3f3 75%); background-size:200% 100%; animation:loading-shimmer 1.5s infinite; }
-        @keyframes loading-shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
 
         /* ── Party member role badge colours ── */
         .badge-groom { background:#dbeafe; color:#1d4ed8; }
@@ -157,8 +155,6 @@
         <button onclick="switchTab('guests')" id="tab-guests" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">👥 宾客管理 &amp; 桌席</button>
         <button onclick="switchTab('checklist')" id="tab-checklist" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">📋 备婚倒计时清单</button>
         <button onclick="switchTab('tools')" id="tab-tools" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">📱 电子请柬与工具</button>
-        <!-- ★ NEW ★ -->
-        <button onclick="switchTab('ai-assistant')" id="tab-ai-assistant" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-burgundy-500 font-bold hover:text-burgundy-700 transition-all duration-200 whitespace-nowrap">🤖 AI 策划师</button>
     </div>
 
     <!-- ── ACT 1: Morning ── -->
@@ -581,71 +577,6 @@
         </div>
     </div>
 
-    <!-- ── AI ASSISTANT ── -->
-    <div id="content-ai-assistant" class="tab-content hidden animate-fade">
-        <div class="bg-gradient-to-r from-burgundy-50 to-champagne-100/30 rounded-2xl p-6 mb-8 border border-burgundy-100 print-card flex items-center gap-4">
-            <div class="bg-burgundy-500 text-white p-3.5 rounded-2xl text-2xl font-serif">🤖</div>
-            <div>
-                <h2 class="text-lg font-bold font-serif text-burgundy-500">AI 备婚智能策划中心</h2>
-                <p class="text-xs text-gray-500 leading-relaxed mt-0.5">基于您当前的数据，智能策划最具大马本土风情的接亲方案、多语言串场台词、深情致词稿。</p>
-            </div>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <div class="lg:col-span-5 space-y-6">
-                <div class="bg-white p-5 rounded-2xl elegant-shadow border border-gray-100">
-                    <div class="flex items-center gap-2 mb-3"><span class="text-base">🎮</span><h3 class="font-bold text-sm text-gray-800">接亲游戏生成器</h3></div>
-                    <div class="space-y-3">
-                        <label class="block text-[10px] uppercase font-bold text-gray-400">游戏风格偏好</label>
-                        <select id="ai-gate-style" class="w-full bg-gray-50 border border-gray-200 text-xs text-gray-700 rounded-lg p-2.5 outline-none focus:border-burgundy-500">
-                            <option value="搞笑欢乐但温和不脏衣">🤪 搞笑欢乐 (温和不伤面子)</option>
-                            <option value="考验默契与知识问答">🧠 默契智慧 (智力抢答与考验)</option>
-                            <option value="纯体力耐力大考验">💪 兄弟硬核 (体能与硬撑折腾)</option>
-                        </select>
-                        <button onclick="generateAIGatecrash()" class="w-full bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 rounded-lg transition">🔮 AI 策划新游戏</button>
-                    </div>
-                </div>
-                <div class="bg-white p-5 rounded-2xl elegant-shadow border border-gray-100">
-                    <div class="flex items-center gap-2 mb-3"><span class="text-base">🎤</span><h3 class="font-bold text-sm text-gray-800">定制双语司仪词</h3></div>
-                    <div class="space-y-3">
-                        <select id="ai-emcee-tone" class="w-full bg-gray-50 border border-gray-200 text-xs text-gray-700 rounded-lg p-2.5 outline-none focus:border-burgundy-500">
-                            <option value="中英双语，优雅高贵，富有电影质感的温馨深情风格">✨ 温馨优雅</option>
-                            <option value="掺杂大马方言粤语、福建话和英文的接地气极简温馨风">🗣️ 大马本土方言</option>
-                        </select>
-                        <button onclick="generateAIEmceeScript()" class="w-full bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 rounded-lg transition">✍️ 生成定制主持词</button>
-                    </div>
-                </div>
-                <div class="bg-white p-5 rounded-2xl elegant-shadow border border-gray-100">
-                    <div class="flex items-center gap-2 mb-3"><span class="text-base">✍️</span><h3 class="font-bold text-sm text-gray-800">誓言致词润色</h3></div>
-                    <div class="space-y-3">
-                        <textarea id="ai-vow-input" class="w-full border border-gray-200 rounded-lg p-2.5 text-xs h-24 focus:border-burgundy-500 outline-none" placeholder="输入你想说的话..."></textarea>
-                        <select id="ai-vow-tone" class="w-full bg-gray-50 border border-gray-200 text-xs text-gray-700 rounded-lg p-2.5 outline-none focus:border-burgundy-500">
-                            <option value="温馨感人，赚足全场长辈眼泪的真挚情书风">😭 泪目温馨</option>
-                            <option value="幽默有梗，吐槽恋爱糗事但甜度爆表的欢快路线">😂 幽默有梗</option>
-                        </select>
-                        <button onclick="polishAIVows()" class="w-full bg-gray-700 hover:bg-gray-800 text-white text-xs font-semibold py-2.5 rounded-lg transition">✨ 开始润色致词</button>
-                    </div>
-                </div>
-            </div>
-            <div class="lg:col-span-7">
-                <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100 h-full flex flex-col justify-between min-h-[500px]">
-                    <div>
-                        <div class="flex items-center justify-between border-b border-gray-100 pb-4 mb-4">
-                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">🔮 AI 智脑生成视窗</span>
-                            <span id="ai-status-tag" class="text-[10px] font-bold bg-gray-100 text-gray-500 px-2 py-1 rounded">闲置中</span>
-                        </div>
-                        <div id="ai-output-container">
-                            <div class="text-center py-20 text-gray-300"><span class="block text-4xl mb-3">🔮</span><p class="text-xs">选择左侧策划模块，AI 生成大纲及文案将展现在此处</p></div>
-                        </div>
-                    </div>
-                    <div id="ai-action-tray" class="hidden border-t border-gray-100 pt-4 mt-6 flex gap-3">
-                        <button id="ai-copy-btn" class="flex-1 bg-gray-50 hover:bg-gray-100 text-gray-700 border border-gray-200 text-xs font-semibold py-3 rounded-xl transition flex items-center justify-center gap-1.5">📄 一键复制文本</button>
-                        <button id="ai-sync-btn" class="hidden flex-1 bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-3 rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm">⚡ 同步至婚礼流程</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </main>
 
 <!-- ── Custom Modal ── -->
@@ -678,8 +609,6 @@ let depositEntries = []; // saving goal deposit log — declared here, logic bel
 let budgetNewItems = [];
 let quoteItems = [];
 let likedInspirations = [];
-let aiClipboardCache = '';
-let lastGeneratedGames = null;
 
 // ★ NEW STATE
 
@@ -1435,59 +1364,6 @@ function calculateChecklistProgress(){
 // ═══════════════════════════════════════
 let playingTrackId=null;
 function toggleMusicSimulation(trackId,btn){if(playingTrackId===trackId){playingTrackId=null;btn.innerHTML=`<i class="fa-solid fa-play"></i>`;}else{playingTrackId=trackId;btn.innerHTML=`<i class="fa-solid fa-pause text-red-500 animate-pulse"></i>`;}}
-
-// ═══════════════════════════════════════
-// AI ASSISTANT (Gemini)
-// ═══════════════════════════════════════
-async function callGeminiAPI(systemPrompt,userPrompt,useSearch=false,responseJson=false,retries=5,delay=1000){
-    const apiKey="";const apiUrl=`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-    const payload={contents:[{parts:[{text:userPrompt}]}],systemInstruction:{parts:[{text:systemPrompt}]}};
-    if(useSearch)payload.tools=[{"google_search":{}}];if(responseJson)payload.generationConfig={responseMimeType:"application/json"};
-    for(let i=0;i<retries;i++){try{const response=await fetch(apiUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(!response.ok)throw new Error(`Gemini API Error! Status: ${response.status}`);return await response.json();}catch(error){if(i===retries-1)throw error;await new Promise(r=>setTimeout(r,delay*Math.pow(2,i)));}}
-}
-function showAILoading(){
-    const container=document.getElementById('ai-output-container');const tray=document.getElementById('ai-action-tray');const tag=document.getElementById('ai-status-tag');
-    if(tag){tag.innerText="智脑运算中...";tag.className="text-[10px] font-bold bg-amber-50 text-amber-600 px-2 py-1 rounded animate-pulse";}
-    if(tray)tray.classList.add('hidden');
-    if(container)container.innerHTML=`<div class="space-y-4"><div class="h-4 shimmer rounded w-1/4"></div><div class="space-y-2"><div class="h-3 shimmer rounded w-full"></div><div class="h-3 shimmer rounded w-5/6"></div><div class="h-3 shimmer rounded w-4/5"></div></div></div>`;
-}
-async function generateAIGatecrash(){
-    const style=document.getElementById('ai-gate-style').value;const container=document.getElementById('ai-output-container');const tray=document.getElementById('ai-action-tray');const tag=document.getElementById('ai-status-tag');const syncBtn=document.getElementById('ai-sync-btn');
-    showAILoading();
-    const sysPrompt="你是一名顶级的大马华人婚礼策划师。请结合大马华人接亲（Gatecrash）习俗，策划 3 个高水平的游戏。要求：好玩有梗不低俗，不弄脏高级西装。你必须返回符合原生 JSON 结构的文本：\n{\n  \"game1\": \"简洁描述\",\n  \"game2\": \"简洁描述\",\n  \"game3\": \"简洁描述\",\n  \"details\": \"详细玩法规则、所需道具，markdown排版。\"\n}";
-    const userPrompt=`请为我策划一套【${style}】风格的大马华人接亲闯关游戏（3个项目）。`;
-    try{
-        const apiResult=await callGeminiAPI(sysPrompt,userPrompt,false,true);const rawText=apiResult.candidates?.[0]?.content?.parts?.[0]?.text;const parsedData=JSON.parse(rawText);
-        lastGeneratedGames=parsedData;aiClipboardCache=`大马创意迎亲游戏案：\n\n1. ${parsedData.game1}\n2. ${parsedData.game2}\n3. ${parsedData.game3}\n\n玩法规则说明：\n${parsedData.details}`;
-        if(tag){tag.innerText="生成完成";tag.className="text-[10px] font-bold bg-green-50 text-green-600 px-2 py-1 rounded";}
-        if(container)container.innerHTML=`<div class="space-y-4 text-xs leading-relaxed text-gray-700"><div class="bg-burgundy-50 border border-burgundy-100 p-4 rounded-xl"><span class="font-bold text-burgundy-500 block mb-2">⚡ 建议自动同步到流程表的 3 个游戏：</span><ul class="list-decimal list-inside space-y-1 font-semibold text-gray-800"><li>${parsedData.game1}</li><li>${parsedData.game2}</li><li>${parsedData.game3}</li></ul></div><div class="prose max-w-none bg-gray-50/50 border border-gray-100 p-4 rounded-xl max-h-[300px] overflow-y-auto"><h4 class="font-bold text-gray-800 border-b border-gray-200 pb-2 mb-3">📋 执行大纲与道具详情</h4><p class="whitespace-pre-line text-gray-600 text-xs">${parsedData.details}</p></div></div>`;
-        if(tray)tray.classList.remove('hidden');if(syncBtn)syncBtn.classList.remove('hidden');
-        const copyBtn=document.getElementById('ai-copy-btn');if(copyBtn)copyBtn.onclick=()=>copyToClipboard(aiClipboardCache);
-    }catch(error){console.error(error);if(tag){tag.innerText="生成失败";tag.className="text-[10px] font-bold bg-red-50 text-red-600 px-2 py-1 rounded";}if(container)container.innerHTML=`<div class="text-center py-10 text-red-500 font-semibold text-xs">❌ 智脑计算连接超时，请重试。</div>`;}
-}
-async function generateAIEmceeScript(){
-    const tone=document.getElementById('ai-emcee-tone').value;const container=document.getElementById('ai-output-container');const tray=document.getElementById('ai-action-tray');const tag=document.getElementById('ai-status-tag');const syncBtn=document.getElementById('ai-sync-btn');
-    showAILoading();const groom=document.getElementById('groom-name').value||"新郎";const bride=document.getElementById('bride-name').value||"新娘";
-    const sysPrompt=`你是一名专业的大马华人婚礼双语司仪。根据特定主持风格（${tone}）及晚宴大进场、快剪播放、突袭唱歌（8:23 PM 新郎独唱 Perfect）、饮胜（9:15 PM 倒香槟大喊三次 Yam Seng）撰写全套多语言交替的主持稿。`;
-    const userPrompt=`新郎叫【${groom}】，新妇叫【${bride}】。请生成流畅的中英文双语高品质司仪串场手稿。`;
-    try{
-        const apiResult=await callGeminiAPI(sysPrompt,userPrompt,true,false);const rawText=apiResult.candidates?.[0]?.content?.parts?.[0]?.text;aiClipboardCache=rawText;
-        if(tag){tag.innerText="生成完成";tag.className="text-[10px] font-bold bg-green-50 text-green-600 px-2 py-1 rounded";}
-        if(container)container.innerHTML=`<div class="space-y-4 text-xs leading-relaxed text-gray-700"><div class="bg-champagne-100/30 border border-champagne-100 p-4 rounded-xl text-xs"><span class="font-bold text-champagne-600 block mb-1">🎤 专属双语司仪主持稿已生成：</span></div><div class="bg-gray-50/50 border border-gray-100 p-4 rounded-xl max-h-[300px] overflow-y-auto font-mono text-gray-600 whitespace-pre-line leading-relaxed text-xs">${rawText}</div></div>`;
-        if(tray)tray.classList.remove('hidden');if(syncBtn)syncBtn.classList.add('hidden');const copyBtn=document.getElementById('ai-copy-btn');if(copyBtn)copyBtn.onclick=()=>copyToClipboard(aiClipboardCache);
-    }catch(error){console.error(error);if(tag){tag.innerText="生成失败";tag.className="text-[10px] font-bold bg-red-50 text-red-600 px-2 py-1 rounded";}if(container)container.innerHTML=`<div class="text-center py-10 text-red-500 font-semibold text-xs">❌ 连接超时。</div>`;}
-}
-async function polishAIVows(){
-    const rawInput=document.getElementById('ai-vow-input').value.trim();const tone=document.getElementById('ai-vow-tone').value;const container=document.getElementById('ai-output-container');const tray=document.getElementById('ai-action-tray');const tag=document.getElementById('ai-status-tag');const syncBtn=document.getElementById('ai-sync-btn');
-    if(!rawInput){triggerCustomModal("输入提示","请先在输入框中随便写几个字作为想法基础！");return;}
-    showAILoading();const sysPrompt=`你是一名顶级华人婚礼致词润色顾问。任务是将粗糙的真心话，升华润色成情感细腻、符合 ${tone} 风格的誓言发言词。`;const userPrompt=`我的想法草稿为：\n"${rawInput}"\n请帮我提炼润色一版。`;
-    try{
-        const apiResult=await callGeminiAPI(sysPrompt,userPrompt,false,false);const rawText=apiResult.candidates?.[0]?.content?.parts?.[0]?.text;aiClipboardCache=rawText;
-        if(tag){tag.innerText="润色完成";tag.className="text-[10px] font-bold bg-green-50 text-green-600 px-2 py-1 rounded";}
-        if(container)container.innerHTML=`<div class="space-y-4 text-xs leading-relaxed text-gray-700"><div class="bg-gray-100 border border-gray-200 p-4 rounded-xl text-xs"><span class="font-bold text-gray-700 block mb-1">✍️ 精修版晚宴致辞：</span></div><div class="bg-gray-50/50 border border-gray-100 p-5 rounded-xl max-h-[300px] overflow-y-auto font-serif text-gray-700 text-sm whitespace-pre-line leading-loose italic">"${rawText}"</div></div>`;
-        if(tray)tray.classList.remove('hidden');if(syncBtn)syncBtn.classList.add('hidden');const copyBtn=document.getElementById('ai-copy-btn');if(copyBtn)copyBtn.onclick=()=>copyToClipboard(aiClipboardCache);
-    }catch(error){console.error(error);if(tag){tag.innerText="生成失败";tag.className="text-[10px] font-bold bg-red-50 text-red-600 px-2 py-1 rounded";}if(container)container.innerHTML=`<div class="text-center py-10 text-red-500 font-semibold text-xs">❌ 连接超时。</div>`;}
-}
 
 // ═══════════════════════════════════════
 // PERSISTENCE
