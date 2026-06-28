@@ -1246,12 +1246,8 @@ function showStandaloneGuestPage() {
         const diet = document.getElementById('gst-diet').value;
         const wish = document.getElementById('gst-wish').value.trim();
 
-        // Save into localStorage alongside existing guest data
-        const raw = localStorage.getItem('wedding_v9_data') || localStorage.getItem('wedding_20290528_data_v7') || '{}';
-        let d = {}; try { d = JSON.parse(raw); } catch(e) {}
-        if (!Array.isArray(d.guestItems)) d.guestItems = [];
-        d.guestItems.push({ id:'guest_gs_'+Date.now(), name, rsvp:'going', diet, pax, wish, tableId:'' });
-        localStorage.setItem('wedding_v9_data', JSON.stringify(d));
+        // Sync to Google Sheets (the real persistent backend)
+        syncToGoogleSheets({name, pax, diet, wish});
 
         document.getElementById('gst-form-area').style.display = 'none';
         document.getElementById('gst-success').style.display = 'block';
