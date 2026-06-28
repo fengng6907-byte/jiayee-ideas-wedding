@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们结婚了 · 婚礼数字座舱</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Noto Serif SC', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        burgundy: { 50:'#fdf2f4',100:'#fbe5ea',200:'#f7ccd5',500:'#800020',600:'#66001a',700:'#4d0013' },
+                        champagne: { 100:'#f9f3eb',500:'#c5a059',600:'#b08b43' },
+                        charcoal: '#222222'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', 'Noto Serif SC', sans-serif; background-color: #faf8f5; }
+        .elegant-shadow { box-shadow: 0 4px 20px -2px rgba(128,0,32,0.05), 0 2px 8px -1px rgba(128,0,32,0.03); }
+        .input-underline { background-color:transparent; border-bottom:1px solid #e2e8f0; transition:all 0.3s; }
+        .input-underline:focus { outline:none; border-bottom-color:#800020; background-color:rgba(128,0,32,0.01); }
+        ::-webkit-scrollbar { width:6px; }
+        ::-webkit-scrollbar-track { background:#f7f5f0; }
+        ::-webkit-scrollbar-thumb { background:#c5a059; border-radius:3px; }
+        .shimmer { background:linear-gradient(90deg,#f3f3f3 25%,#e2e2e2 50%,#f3f3f3 75%); background-size:200% 100%; animation:loading-shimmer 1.5s infinite; }
+        @keyframes loading-shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+        /* ── Party member role badge colours ── */
+        .badge-groom { background:#dbeafe; color:#1d4ed8; }
+        .badge-bride { background:#fce7f3; color:#9d174d; }
+        .badge-best-man { background:#ede9fe; color:#6d28d9; }
+        .badge-maid { background:#fdf2f4; color:#800020; }
+
+        @media print {
+            .no-print { display:none !important; }
+            body { background-color:white !important; font-size:12px; }
+            .print-card { box-shadow:none !important; border:1px solid #e2e8f0 !important; background:white !important; page-break-inside:avoid; }
+            input,textarea { border:none !important; border-bottom:1px dashed #ccc !important; background:transparent !important; padding:0 !important; }
+            .tab-content { display:block !important; }
+            .tab-btn-group { display:none !important; }
+            .print-break { page-break-before:always; }
+        }
+    </style>
+</head>
+<body class="text-charcoal antialiased">
+
+<!-- ═══════════════════════════════════════════════════════════
+     ADMIN — HEADER
+═══════════════════════════════════════════════════════════ -->
+<div id="admin-shell">
+<header class="bg-gradient-to-b from-[#800020]/10 to-transparent pt-12 pb-8 px-4 text-center no-print">
+    <div class="max-w-5xl mx-auto">
+        <span class="text-xs uppercase tracking-widest text-burgundy-500 font-bold bg-burgundy-50 px-4 py-2 rounded-full border border-burgundy-100">✨ WE ARE GETTING MARRIED</span>
+        <h1 class="text-4xl md:text-6xl font-bold font-serif text-burgundy-500 mt-5 mb-2">我们结婚了</h1>
+        <p class="text-sm md:text-lg text-gray-600 font-serif tracking-wide mt-2">
+            "<span id="header-wedding-date" class="font-bold text-burgundy-600 underline decoration-champagne-500 underline-offset-4">请选择日期</span> 婚礼数字座舱 · 执子之手 与子偕老"
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
+            <div class="bg-white rounded-2xl p-4 elegant-shadow border border-burgundy-50 text-center">
+                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">距离婚礼盛典还有</div>
+                <div id="countdown-timer" class="text-lg font-bold text-burgundy-500 mt-1 font-serif">计算中...</div>
+            </div>
+            <div class="bg-white rounded-2xl p-4 elegant-shadow border border-burgundy-50 text-center">
+                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">协同任务核备率</div>
+                <div class="flex items-center justify-center mt-2">
+                    <div class="w-full bg-gray-100 rounded-full h-2 mr-2 max-w-[120px]"><div id="checklist-progress-bar" class="bg-champagne-500 h-2 rounded-full" style="width:0%"></div></div>
+                    <span id="checklist-progress-percent" class="text-xs font-bold text-champagne-600">0%</span>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl p-4 elegant-shadow border border-burgundy-50 text-center">
+                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">已用总预算占比</div>
+                <div class="flex items-center justify-center mt-2">
+                    <div class="w-full bg-gray-100 rounded-full h-2 mr-2 max-w-[120px]"><div id="header-budget-bar" class="bg-red-500 h-2 rounded-full" style="width:0%"></div></div>
+                    <span id="header-budget-percent" class="text-xs font-bold text-red-600">0%</span>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl p-4 elegant-shadow border border-burgundy-50 flex items-center justify-center gap-2">
+                <button onclick="saveAllToLocalStorage()" class="flex-1 bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-3 rounded-lg transition duration-200">💾 保存内容</button>
+                <button onclick="window.print()" class="flex-1 bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 px-3 rounded-lg transition duration-200">🖨️ 打印/PDF</button>
+            </div>
+        </div>
+        <div id="save-status-toast" class="hidden text-xs text-green-600 mt-3 font-semibold transition-all duration-300">✓ 更改已自动保存至浏览器 (Auto-Saved)</div>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 pb-20">
+
+    <!-- Couple + Date -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+        <div class="lg:col-span-7 bg-white rounded-2xl p-6 elegant-shadow border border-burgundy-50 print-card flex flex-col justify-between">
+            <div>
+                <h3 class="text-lg font-serif font-bold text-burgundy-500 mb-4 border-b border-burgundy-100 pb-2">👩‍❤️‍👨 两位新人基本资料 &amp; 婚礼日期选择</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1">新郎姓名 (Groom)</label>
+                        <input type="text" id="groom-name" oninput="updateInvitePreview()" class="w-full input-underline py-2 text-gray-700 text-sm font-semibold" placeholder="请填写新郎姓名...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1">新娘姓名 (Bride)</label>
+                        <input type="text" id="bride-name" oninput="updateInvitePreview()" class="w-full input-underline py-2 text-gray-700 text-sm font-semibold" placeholder="请填写新娘姓名...">
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1">婚礼举办公历日期 (Wedding Date)</label>
+                        <input type="date" id="wedding-date" onchange="onDateChanged()" class="w-full input-underline py-2 text-gray-700 text-sm font-semibold text-burgundy-500">
+                    </div>
+                    <div class="bg-gray-50/50 p-3.5 rounded-xl border border-gray-100 mt-2 flex flex-col gap-2">
+                        <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">吉日即时评估 (Date Evaluation)</span>
+                        <div id="date-evaluation-result" class="mt-1 transition duration-200"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 p-3 bg-gray-50 rounded-xl border border-gray-100 text-xs text-gray-500">
+                <p class="font-bold text-gray-700">📌 通书择日小百科：</p>
+                <p class="mt-1 leading-relaxed">黄历嫁娶吉日旨在寻找干支五行平衡。周末双休日通常多配有"天德、月德、三合"等吉星高照。避开"月破、闭日"等冲突日期即可获得美满顺遂的大好家庭！</p>
+            </div>
+        </div>
+        <div class="lg:col-span-5 bg-gradient-to-br from-[#800020] to-[#66001a] text-white rounded-2xl p-6 elegant-shadow border border-burgundy-700 flex flex-col justify-between relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl font-serif">囍</div>
+            <div class="border-b border-white/20 pb-4">
+                <span class="text-[10px] tracking-widest text-champagne-100 font-bold uppercase block font-serif">We Are Getting Married</span>
+                <h4 class="text-xl font-serif font-bold text-burgundy-600 mt-1"><span id="calendar-lunar">农历待定</span></h4>
+            </div>
+            <div class="my-6"><div id="calendar-grade" class="text-lg font-bold font-serif text-white">✨ 待定吉日，喜结连理</div></div>
+            <div class="space-y-3 text-xs bg-black/10 p-4 rounded-xl border border-white/5">
+                <div class="flex items-start gap-2.5">
+                    <span class="bg-green-600/30 text-green-300 text-[10px] font-bold px-2 py-0.5 rounded font-mono">宜</span>
+                    <p id="calendar-yi" class="text-xs text-gray-100 leading-relaxed">结婚、订婚、祭祀、安床</p>
+                </div>
+                <div class="flex items-start gap-2.5">
+                    <span class="bg-red-600/30 text-red-300 text-[10px] font-bold px-2 py-0.5 rounded font-mono">忌</span>
+                    <p id="calendar-ji" class="text-xs text-gray-100 leading-relaxed">作灶、开渠、盖屋</p>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 text-center text-[10px] text-champagne-100/70 italic">"良辰吉日定终身，百年琴瑟共白头"</div>
+        </div>
+    </section>
+
+    <!-- ── Tab Navigation ── -->
+    <div class="flex border-b border-gray-200 mb-8 overflow-x-auto gap-2 no-print tab-btn-group">
+        <button onclick="switchTab('morning')" id="tab-morning" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-burgundy-500 text-burgundy-500 transition-all duration-200 whitespace-nowrap">第一幕：清晨喜庆接亲</button>
+        <button onclick="switchTab('afternoon')" id="tab-afternoon" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">第二幕：傍晚首见外拍</button>
+        <button onclick="switchTab('evening')" id="tab-evening" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">第三幕：无伴电影感晚宴</button>
+        <button onclick="switchTab('todo')" id="tab-todo" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">📋 To-Do &amp; 双人同步</button>
+        <button onclick="switchTab('budget')" id="tab-budget" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">💰 预算开销与比价</button>
+        <button onclick="switchTab('guests')" id="tab-guests" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">👥 宾客管理 &amp; 桌席</button>
+        <button onclick="switchTab('checklist')" id="tab-checklist" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">📋 备婚倒计时清单</button>
+        <button onclick="switchTab('tools')" id="tab-tools" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">📱 电子请柬与工具</button>
+        <!-- ★ NEW ★ -->
+        <button onclick="switchTab('ai-assistant')" id="tab-ai-assistant" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-burgundy-500 font-bold hover:text-burgundy-700 transition-all duration-200 whitespace-nowrap">🤖 AI 策划师</button>
+    </div>
+
+    <!-- ── ACT 1: Morning ── -->
+    <div id="content-morning" class="tab-content block animate-fade">
+        <div class="bg-burgundy-50/50 rounded-2xl p-6 mb-8 border border-burgundy-100 print-card flex justify-between items-center flex-wrap gap-4">
+            <div>
+                <h2 class="text-xl font-bold font-serif text-burgundy-500 mb-2">第一幕：传统喜庆接亲 (Morning Act)</h2>
+                <p class="text-xs text-gray-500 leading-relaxed">这是全天最热闹、最本土化的时段。支持点击以下内容直接编辑重置，打造您独一无二的备婚Runsheet时间表。</p>
+            </div>
+            <div class="flex gap-2 no-print">
+                <button onclick="addNewRunsheetStep('morning')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">➕ 新增接亲步骤</button>
+                <button onclick="resetRunsheetToDefault()" class="bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">🔄 恢复默认22步模板</button>
+                <button onclick="printSection('morning')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> 打印</button>
+            </div>
+        </div>
+        <div id="runsheet-container-morning" class="space-y-6 relative border-l-2 border-champagne-100 ml-4 pl-6 md:ml-6 md:pl-8"></div>
+    </div>
+
+    <!-- ── ACT 2: Afternoon ── -->
+    <div id="content-afternoon" class="tab-content hidden animate-fade">
+        <div class="bg-burgundy-50/50 rounded-2xl p-6 mb-8 border border-burgundy-100 print-card flex justify-between items-center flex-wrap gap-4">
+            <div>
+                <h2 class="text-xl font-bold font-serif text-burgundy-500 mb-2">第二幕：私密第一眼与黄金外拍 (First Look Act)</h2>
+                <p class="text-xs text-gray-500 leading-relaxed">在晚宴喧嚣和宾客涌入之前，预留的一段极其尊贵、私密的电影感时段。</p>
+            </div>
+            <div class="flex gap-2 no-print">
+                <button onclick="addNewRunsheetStep('afternoon')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">➕ 新增外拍步骤</button>
+                <button onclick="resetRunsheetToDefault()" class="bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">🔄 恢复默认22步模板</button>
+                <button onclick="printSection('afternoon')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> 打印</button>
+            </div>
+        </div>
+        <div id="runsheet-container-afternoon" class="space-y-6 relative border-l-2 border-champagne-100 ml-4 pl-6 md:ml-6 md:pl-8"></div>
+    </div>
+
+    <!-- ── ACT 3: Evening ── -->
+    <div id="content-evening" class="tab-content hidden animate-fade">
+        <div class="bg-burgundy-50/50 rounded-2xl p-6 mb-8 border border-burgundy-100 print-card flex justify-between items-center flex-wrap gap-4">
+            <div>
+                <h2 class="text-xl font-bold font-serif text-burgundy-500 mb-2">第三幕：无伴电影感晚宴 (Banquet Act)</h2>
+                <p class="text-xs text-gray-500 leading-relaxed">剔除繁琐传统流程，晚宴完全采用极简温情的流线设计。</p>
+            </div>
+            <div class="flex gap-2 no-print">
+                <button onclick="addNewRunsheetStep('evening')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">➕ 新增晚宴步骤</button>
+                <button onclick="resetRunsheetToDefault()" class="bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">🔄 恢复默认22步模板</button>
+                <button onclick="printSection('evening')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> 打印</button>
+            </div>
+        </div>
+        <div id="runsheet-container-evening" class="space-y-6 relative border-l-2 border-champagne-100 ml-4 pl-6 md:ml-6 md:pl-8"></div>
+    </div>
+
+    <!-- ── TO-DO ── -->
+    <div id="content-todo" class="tab-content hidden animate-fade">
+        <div class="bg-burgundy-50/50 rounded-2xl p-6 mb-6 border border-burgundy-100 print-card flex flex-wrap justify-between items-center gap-4">
+            <div>
+                <h2 class="text-lg font-bold font-serif text-burgundy-500 mb-1">📋 双人防漏协作 To-Do 面板</h2>
+                <p class="text-xs text-gray-500 leading-relaxed">专设"一方宣告完成，对方点对点核准核签"，全面避免遗漏。</p>
+            </div>
+            <button onclick="triggerQuickAddTodo()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-200">➕ 新增协同待办</button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-5 rounded-2xl elegant-shadow border border-gray-100 flex flex-col">
+                <div class="flex justify-between items-center pb-3 border-b border-gray-100 mb-4 font-semibold">
+                    <span class="text-xs font-bold text-burgundy-500 uppercase tracking-wider">🎯 策划推进中</span>
+                    <span id="todo-count-planning" class="bg-burgundy-50 text-burgundy-500 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">0</span>
+                </div>
+                <div id="todo-list-planning" class="space-y-3 flex-1 overflow-y-auto max-h-[450px]"></div>
+            </div>
+            <div class="bg-white p-5 rounded-2xl elegant-shadow border border-gray-100 flex flex-col">
+                <div class="flex justify-between items-center pb-3 border-b border-gray-100 mb-4 font-semibold">
+                    <span class="text-xs font-bold text-orange-500 uppercase tracking-wider">⏳ 对方待核签</span>
+                    <span id="todo-count-verify" class="bg-orange-50 text-orange-500 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">0</span>
+                </div>
+                <div id="todo-list-verify" class="space-y-3 flex-1 overflow-y-auto max-h-[450px]"></div>
+            </div>
+            <div class="bg-white p-5 rounded-2xl elegant-shadow border border-gray-100 flex flex-col">
+                <div class="flex justify-between items-center pb-3 border-b border-gray-100 mb-4 font-semibold">
+                    <span class="text-xs font-bold text-green-500 uppercase tracking-wider">✅ 双方通过 · 尘埃落定</span>
+                    <span id="todo-count-done" class="bg-green-50 text-green-500 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">0</span>
+                </div>
+                <div id="todo-list-done" class="space-y-3 flex-1 overflow-y-auto max-h-[450px]"></div>
+            </div>
+        </div>
+        <div id="notification-toast" class="fixed bottom-5 right-5 z-50 bg-burgundy-600 text-white rounded-xl px-4 py-3 elegant-shadow text-xs font-semibold hidden flex items-center gap-2">
+            <i class="fa-solid fa-bell"></i>
+            <span id="notification-toast-msg">收到确认申请！</span>
+        </div>
+    </div>
+
+    <!-- ── BUDGET ── -->
+    <div id="content-budget" class="tab-content hidden animate-fade">
+        <div class="bg-[#faf3eb] rounded-2xl p-6 mb-6 border border-champagne-100 print-card flex flex-wrap justify-between items-center gap-4">
+            <div>
+                <h2 class="text-lg font-bold font-serif text-burgundy-500 mb-1">💰 婚礼智能预算控制水库</h2>
+                <p class="text-xs text-gray-500 leading-relaxed">开销类目明细、本地发票上传及多边报价比对，科学规避超支。</p>
+            </div>
+            <div class="flex gap-2 no-print">
+                <button onclick="addNewBudgetItemNew()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-200">➕ 增加开销与发票</button>
+                <button onclick="printSection('budget')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition flex items-center gap-1.5"><i class="fa-solid fa-print text-[10px]"></i> 打印预算表</button>
+            </div>
+        </div>
+        <!-- ── Row 1: 4 summary chips ── -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+            <div class="bg-white p-5 rounded-2xl border border-burgundy-50 elegant-shadow text-center">
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">婚礼总预算底盘</span>
+                <div class="flex justify-center items-center gap-1">
+                    <span class="text-sm font-bold text-gray-400">RM</span>
+                    <input type="number" id="budget-total-new-input" oninput="calculateBudgetNewSummary()" class="text-xl font-bold text-burgundy-500 font-mono w-24 text-center border-b border-gray-200 focus:border-burgundy-500 focus:outline-none" value="60000">
+                </div>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 elegant-shadow text-center">
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">已花总数</span>
+                <div class="text-xl font-bold text-red-600 font-mono">RM <span id="budget-new-spent">0</span></div>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 elegant-shadow text-center">
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">剩余可用余粮</span>
+                <div class="text-xl font-bold text-green-600 font-mono">RM <span id="budget-new-left">0</span></div>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 elegant-shadow text-center flex flex-col justify-center items-center">
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">预警红线指标</span>
+                <div class="flex items-center justify-center mt-1 w-full px-2">
+                    <div class="w-full bg-gray-100 rounded-full h-2.5 mr-2"><div id="budget-new-progress-bar" class="bg-green-500 h-2.5 rounded-full transition-all duration-300" style="width:0%"></div></div>
+                    <span id="budget-new-progress-percent" class="text-xs font-bold text-green-600">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Row 2: Saving Goal (deposit log) ── -->
+        <div class="bg-white rounded-2xl elegant-shadow border border-champagne-100 mb-6 overflow-hidden">
+
+            <!-- Card header -->
+            <div class="bg-gradient-to-r from-[#faf3eb] to-white px-6 py-4 border-b border-champagne-100 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-lg">🏦</span>
+                    <div>
+                        <h3 class="text-sm font-serif font-bold text-burgundy-500">婚礼存钱目标 Saving Goal</h3>
+                        <p class="text-[10px] text-gray-400 mt-0.5">每次存了多少就记录多少，自动累加追踪！</p>
+                    </div>
+                </div>
+                <!-- Goal target input -->
+                <div class="flex items-center gap-2 bg-white border border-champagne-100 rounded-xl px-3 py-2">
+                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider whitespace-nowrap">存钱目标</span>
+                    <span class="text-xs font-bold text-gray-400">RM</span>
+                    <input type="number" id="saving-goal-input" oninput="calculateSavingGoal()"
+                        placeholder="例：80000"
+                        class="text-base font-bold text-champagne-600 font-mono w-24 bg-transparent outline-none border-b border-gray-200 focus:border-champagne-500 text-center">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-0">
+
+                <!-- Left: progress visuals -->
+                <div class="md:col-span-5 p-6 flex flex-col gap-5 border-b md:border-b-0 md:border-r border-gray-100">
+
+                    <!-- Donut + total saved -->
+                    <div class="flex items-center gap-5">
+                        <div class="relative flex-shrink-0">
+                            <svg viewBox="0 0 120 120" class="w-24 h-24 -rotate-90">
+                                <circle cx="60" cy="60" r="50" fill="none" stroke="#f3f4f6" stroke-width="14"/>
+                                <circle id="saving-ring" cx="60" cy="60" r="50" fill="none"
+                                    stroke="#c5a059" stroke-width="14" stroke-linecap="round"
+                                    stroke-dasharray="314" stroke-dashoffset="314"
+                                    style="transition:stroke-dashoffset 0.6s ease"/>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center rotate-90">
+                                <span id="saving-ring-pct" class="text-base font-bold font-mono text-champagne-600 leading-none">0%</span>
+                                <span class="text-[9px] text-gray-400 font-bold">完成</span>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">累计已存入</div>
+                            <div class="text-2xl font-bold font-mono text-green-600 mt-0.5">RM <span id="saving-total-display">0</span></div>
+                            <div class="text-[10px] text-gray-400 mt-1">距离目标还差</div>
+                            <div id="saving-gap" class="text-sm font-bold font-mono text-burgundy-500">RM —</div>
+                        </div>
+                    </div>
+
+                    <!-- Progress bar -->
+                    <div>
+                        <div class="flex justify-between items-center mb-1.5">
+                            <span class="text-[10px] text-gray-400 font-bold">存款进度</span>
+                            <span id="saving-pct-label" class="text-[10px] font-bold text-champagne-600">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+                            <div id="saving-bar" class="h-3 rounded-full transition-all duration-500 bg-gradient-to-r from-champagne-500 to-green-400" style="width:0%"></div>
+                        </div>
+                        <div class="flex justify-between mt-1">
+                            <span class="text-[9px] text-gray-300">0%</span>
+                            <span class="text-[9px] text-gray-300">25%</span>
+                            <span class="text-[9px] text-gray-300">50%</span>
+                            <span class="text-[9px] text-gray-300">75%</span>
+                            <span class="text-[9px] text-gray-300">100%</span>
+                        </div>
+                    </div>
+
+                    <!-- Status pill -->
+                    <div id="saving-status-msg" class="hidden text-xs font-semibold rounded-xl px-3 py-2.5 leading-relaxed"></div>
+                </div>
+
+                <!-- Right: deposit log -->
+                <div class="md:col-span-7 p-6 flex flex-col gap-4">
+
+                    <!-- Add deposit row -->
+                    <div class="flex items-end gap-2">
+                        <div class="flex-1">
+                            <label class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1.5">存款备注 Note</label>
+                            <input type="text" id="deposit-note-input" placeholder="例如：2月份薪水、婚礼基金、年终花红…"
+                                class="w-full text-xs bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 focus:border-champagne-500 outline-none">
+                        </div>
+                        <div class="w-28 flex-shrink-0">
+                            <label class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1.5">金额 RM</label>
+                            <input type="number" id="deposit-amount-input" placeholder="0"
+                                class="w-full text-xs font-mono font-bold bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 focus:border-champagne-500 outline-none"
+                                onkeydown="if(event.key==='Enter')addDepositEntry()">
+                        </div>
+                        <button onclick="addDepositEntry()"
+                            class="flex-shrink-0 bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition h-[34px] flex items-center gap-1">
+                            <i class="fa-solid fa-plus text-[10px]"></i> 存入
+                        </button>
+                    </div>
+
+                    <!-- Deposit history list -->
+                    <div class="flex-1 max-h-52 overflow-y-auto space-y-2 pr-1" id="deposit-log-list">
+                        <div class="text-center py-6 text-gray-300 text-xs" id="deposit-empty-state">
+                            <i class="fa-solid fa-piggy-bank text-2xl block mb-2"></i>
+                            还没有存款记录，开始记录你们的第一笔婚礼基金吧！
+                        </div>
+                    </div>
+
+                    <!-- Total deposits count -->
+                    <div class="text-[10px] text-gray-300 font-semibold text-right" id="deposit-count-label"></div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100 mb-8">
+            <h3 class="text-sm font-serif font-bold text-burgundy-500 mb-4 border-b border-burgundy-100 pb-2">📋 婚礼支出明细</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead><tr class="border-b border-gray-100 text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+                        <th class="py-3 pl-2 w-3/12">分项类目</th><th class="py-3 w-2/12">分类</th><th class="py-3 w-2/12">已付金额 (RM)</th><th class="py-3 w-4/12">收据留存</th><th class="py-3 text-center w-1/12">操作</th>
+                    </tr></thead>
+                    <tbody id="budget-new-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100">
+            <div class="flex justify-between items-center mb-4 border-b border-gray-100 pb-2 flex-wrap gap-2">
+                <h3 class="text-sm font-serif font-bold text-burgundy-500">📍 核心 Vendor 商家多边比价</h3>
+                <button onclick="addNewQuoteRow()" class="bg-champagne-500 hover:bg-champagne-600 text-white text-[10px] font-bold py-1 px-3 rounded-lg transition">➕ 新增比对方案</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead><tr class="border-b border-gray-100 text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+                        <th class="py-3 pl-2 w-2/12">备选商家</th><th class="py-3 w-2/12">报价 (RM)</th><th class="py-3 w-2/12">包含细节</th><th class="py-3 w-3/12">优劣对比</th><th class="py-3 w-2/12">性价比</th><th class="py-3 text-center w-1/12">操作</th>
+                    </tr></thead>
+                    <tbody id="vendor-quote-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── VENDORS ── -->
+<!-- ── GUESTS ── -->
+    <div id="content-guests" class="tab-content hidden animate-fade">
+        <div class="bg-[#faf3eb] rounded-2xl p-6 mb-6 border border-champagne-100 print-card flex flex-wrap justify-between items-center gap-4">
+            <div>
+                <h2 class="text-lg font-bold font-serif text-burgundy-500 mb-1">👥 宾客 RSVP 登账 &amp; 10人制桌位排座</h2>
+                <p class="text-xs text-gray-500 leading-relaxed">电子请柬提交的人数与温馨祝福将自动流入。系统智能排定席位。</p>
+            </div>
+            <div class="flex gap-2 flex-wrap no-print">
+                <button onclick="addNewGuestRow()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-200">➕ 增加宾客记录</button>
+                <button onclick="printSection('guests')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition flex items-center gap-1.5"><i class="fa-solid fa-print text-[10px]"></i> 打印宾客名单</button>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center"><span class="text-[10px] text-gray-400 font-bold block uppercase">总应邀出席人数</span><span id="stats-guest-total" class="text-xl font-bold text-burgundy-500 font-mono">0</span></div>
+            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center"><span class="text-[10px] text-gray-400 font-bold block uppercase">素食人数 (Vegetarian)</span><span id="stats-guest-veg" class="text-xl font-bold text-gray-700 font-mono">0</span></div>
+            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center"><span class="text-[10px] text-gray-400 font-bold block uppercase">清真人数 (Halal)</span><span id="stats-guest-halal" class="text-xl font-bold text-green-600 font-mono">0</span></div>
+            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center flex items-center justify-center"><span class="text-[10px] text-gray-400 font-bold block uppercase">宴会厅顺利排定</span></div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100 mb-8">
+            <h3 class="text-sm font-serif font-bold text-burgundy-500 mb-4 border-b border-burgundy-100 pb-2">📋 宾客花名登账簿</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead><tr class="border-b border-gray-100 text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+                        <th class="py-3 pl-2 w-3/12">宾客姓名 &amp; 留言</th><th class="py-3 w-1/12">人数</th><th class="py-3 w-1/12">RSVP</th><th class="py-3 w-2/12">饮食</th><th class="py-3 w-3/12">桌号</th><th class="py-3 text-center w-1/12">操作</th>
+                    </tr></thead>
+                    <tbody id="guest-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100">
+            <div class="flex justify-between items-center mb-4 border-b border-burgundy-100 pb-2 flex-wrap gap-2">
+                <h3 class="text-sm font-serif font-bold text-burgundy-500">🪑 晚宴桌席投影面 (10人制)</h3>
+                <div class="flex gap-2 flex-wrap no-print">
+                    <button onclick="addNewTable()" class="bg-champagne-500 hover:bg-champagne-600 text-white text-[10px] font-bold py-1.5 px-3 rounded-lg transition">➕ 新增宴会桌</button>
+                    <button onclick="printSeatingChart()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-[10px] font-bold py-1.5 px-3 rounded-lg transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-print"></i> 打印 / 导出 PDF
+                    </button>
+                </div>
+            </div>
+            <div id="seating-tables-container" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+        </div>
+    </div>
+
+    <!-- ── CHECKLIST ── -->
+    <div id="content-checklist" class="tab-content hidden animate-fade">
+        <div class="bg-white rounded-2xl p-6 elegant-shadow border border-burgundy-50 print-card">
+            <div class="flex justify-between items-center border-b border-burgundy-100 pb-4 mb-6 flex-wrap gap-2">
+                <h2 class="text-xl font-bold font-serif text-burgundy-500">📋 备婚核心倒计时清单</h2>
+                <div class="flex gap-2 no-print">
+                    <button onclick="addChecklistItem('week-1')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">➕ 新增前1周任务</button>
+                    <button onclick="addChecklistItem('day-of')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">➕ 新增当天任务</button>
+                    <button onclick="printSection('checklist')" class="bg-gray-600 hover:bg-gray-700 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> 打印</button>
+                </div>
+            </div>
+            <div class="space-y-6">
+                <div>
+                    <h3 class="text-sm font-bold text-burgundy-500 mb-3 flex items-center"><span class="inline-block w-2.5 h-2.5 rounded-full bg-burgundy-500 mr-2"></span> 婚礼前 1 周重点排查</h3>
+                    <div id="checklist-week-1" class="space-y-2"></div>
+                </div>
+                <div class="border-t border-gray-100 pt-6">
+                    <h3 class="text-sm font-bold text-champagne-600 mb-3 flex items-center"><span class="inline-block w-2.5 h-2.5 rounded-full bg-champagne-500 mr-2"></span> 婚礼当天下午 (晚宴开场前)</h3>
+                    <div id="checklist-day-of" class="space-y-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── TOOLS / INVITATION ── -->
+    <div id="content-tools" class="tab-content hidden animate-fade">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-5 space-y-6">
+                <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100">
+                    <h3 class="font-serif font-bold text-burgundy-500 border-b border-gray-100 pb-2 mb-4">📱 请柬高阶细节设定</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1 font-semibold">婚礼晚宴举办场地</label>
+                            <input type="text" id="invite-location-input" oninput="updateInvitePreview()" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-lg p-2.5 focus:border-burgundy-500 outline-none" value="The Glasshouse Seputeh, 吉隆坡">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-2 font-semibold">上传婚纱照</label>
+                            <div class="flex items-center gap-3">
+                                <input type="file" id="wedding-photo-upload" onchange="handleWeddingPhotoUpload(this)" class="hidden" accept="image/*" multiple>
+                                <label for="wedding-photo-upload" class="cursor-pointer bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-bold py-2 px-4 rounded-xl shadow-sm transition"><i class="fa-solid fa-images mr-1"></i> 上传婚纱照</label>
+                                <button onclick="resetDefaultPhotos()" class="text-xs text-gray-400 hover:text-red-500 font-semibold transition">重置为样照</button>
+                            </div>
+                        </div>
+                        <div class="pt-2 border-t border-gray-100">
+                            <label class="block text-xs text-gray-400 mb-2 font-semibold">📨 发给来宾的电子请柬链接</label>
+                            <p class="text-[11px] text-gray-500 mb-3 leading-relaxed">复制以下链接发送给宾客，宾客打开后可直接填写 RSVP 回执，提交后自动同步进宾客管理系统。</p>
+                            <div class="flex gap-2 items-center bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 mb-2">
+                                <i class="fa-solid fa-link text-gray-300 text-xs flex-shrink-0"></i>
+                                <span id="guest-link-display" class="text-[11px] text-gray-500 font-mono flex-1 truncate select-all">加载中...</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="copyGuestLink()" class="flex-1 bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1.5">
+                                    <i class="fa-regular fa-copy text-[10px]"></i> 复制链接
+                                </button>
+                                <button onclick="openGuestPage()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 预览
+                                </button>
+                            </div>
+                            <p id="guest-link-copied" class="hidden text-[10px] text-green-600 font-semibold text-center mt-2">✓ 链接已复制！</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100">
+                    <h3 class="font-serif font-bold text-burgundy-500 border-b border-gray-100 pb-2 mb-4">🎵 婚礼经典音乐伴奏模拟</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl">
+                            <div><h5 class="text-xs font-bold text-gray-800">Perfect (Ed Sheeran)</h5><p class="text-[10px] text-gray-400">新郎独唱 / 甜蜜誓言</p></div>
+                            <button onclick="toggleMusicSimulation(1,this)" class="text-burgundy-500 hover:text-burgundy-700 text-sm"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl">
+                            <div><h5 class="text-xs font-bold text-gray-800">Beautiful In White (Shane Filan)</h5><p class="text-[10px] text-gray-400">圣洁大进场主纱音乐</p></div>
+                            <button onclick="toggleMusicSimulation(2,this)" class="text-burgundy-500 hover:text-burgundy-700 text-sm"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- H5 Phone Mockup -->
+            <div class="lg:col-span-7 flex justify-center">
+                <div class="w-full max-w-[390px] bg-white rounded-[3rem] border-8 border-gray-800 shadow-2xl p-2 relative overflow-hidden flex flex-col justify-between" style="min-height:700px">
+                    <div class="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-4 bg-gray-800 rounded-full z-20"></div>
+                    <div class="flex-1 bg-burgundy-50/20 rounded-[2.5rem] pt-8 px-4 pb-4 overflow-y-auto flex flex-col justify-between">
+                        <div class="text-center pt-2">
+                            <span class="text-[9px] tracking-widest text-burgundy-500 font-bold uppercase block font-serif">We Are Getting Married</span>
+                            <h4 class="text-xl font-serif font-bold text-burgundy-600 mt-1"><span id="preview-groom">新郎</span> &amp; <span id="preview-bride">新娘</span></h4>
+                            <div class="mt-2 bg-burgundy-500 text-white rounded-full py-1 px-3 text-[10px] inline-flex items-center gap-1 font-semibold mx-auto elegant-shadow">
+                                <i class="fa-solid fa-hourglass-start"></i><span>大典倒计时：</span><span id="invite-countdown-timer">未选择日期</span>
+                            </div>
+                        </div>
+                        <div class="relative w-full h-[200px] rounded-2xl overflow-hidden bg-gray-100 mt-4 elegant-shadow group border-2 border-champagne-100">
+                            <div id="carousel-images" class="w-full h-full flex transition-transform duration-500 ease-out"></div>
+                            <button onclick="slidePrev()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white w-6 h-6 rounded-full flex items-center justify-center text-[10px] transition"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button onclick="slideNext()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white w-6 h-6 rounded-full flex items-center justify-center text-[10px] transition"><i class="fa-solid fa-chevron-right"></i></button>
+                            <div id="carousel-dots" class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1"></div>
+                        </div>
+                        <p class="text-[10px] text-gray-700 text-center font-bold mt-3 bg-white/70 py-1.5 rounded-lg border border-burgundy-100/30"><i class="fa-solid fa-location-dot text-burgundy-500"></i> <span id="preview-location">玻璃屋</span></p>
+                        <div class="mt-4 bg-[#800020]/5 border border-[#800020]/10 rounded-xl p-3">
+                            <span class="text-[9px] font-bold block text-burgundy-600 uppercase border-b border-[#800020]/10 pb-1 mb-2"><i class="fa-solid fa-heart animate-pulse"></i> 💕 亲友祝福墙</span>
+                            <div id="invite-wishes-board" class="space-y-2 max-h-[100px] overflow-y-auto"></div>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 border border-burgundy-100/40 text-left mt-4 elegant-shadow">
+                            <span class="text-[10px] font-bold block text-burgundy-500 uppercase border-b border-gray-100 pb-1.5"><i class="fa-solid fa-file-signature"></i> 宾客 RSVP 登记回执</span>
+                            <div class="space-y-2.5 mt-2.5">
+                                <div><label class="block text-[9px] text-gray-400 font-bold mb-0.5">赴宴主宾客姓名</label><input type="text" id="mock-guest-name" class="w-full bg-gray-50 border border-gray-200 rounded p-1.5 text-xs focus:border-burgundy-500 outline-none" placeholder="例如：林志强"></div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div><label class="block text-[9px] text-gray-400 font-bold mb-0.5">出席人数</label><select id="mock-guest-pax" class="w-full bg-gray-50 border border-gray-200 rounded p-1.5 text-xs focus:border-burgundy-500 outline-none"><option value="1">1人</option><option value="2">2人</option><option value="3">3人</option><option value="4">4人</option></select></div>
+                                    <div><label class="block text-[9px] text-gray-400 font-bold mb-0.5">特殊膳食</label><select id="mock-guest-diet" class="w-full bg-gray-50 border border-gray-200 rounded p-1.5 text-xs focus:border-burgundy-500 outline-none"><option value="none">无特殊</option><option value="vegetarian">斋食</option><option value="halal">清真</option></select></div>
+                                </div>
+                                <div><label class="block text-[9px] text-gray-400 font-bold mb-0.5">温馨祝愿</label><textarea id="mock-guest-wish" class="w-full bg-gray-50 border border-gray-200 rounded p-1.5 text-xs h-12 focus:border-burgundy-500 outline-none resize-none" placeholder="祝新婚快乐，百年好合！"></textarea></div>
+                                <div class="pt-1.5"><button onclick="simulateRSVPSubmission()" class="w-full bg-burgundy-500 hover:bg-burgundy-600 text-white text-[11px] font-bold py-2.5 rounded-lg transition duration-200">发送 RSVP 回执 &amp; 祝福</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── AI ASSISTANT ── -->
+    <div id="content-ai-assistant" class="tab-content hidden animate-fade">
+        <div class="bg-gradient-to-r from-burgundy-50 to-champagne-100/30 rounded-2xl p-6 mb-8 border border-burgundy-100 print-card flex items-center gap-4">
+            <div class="bg-burgundy-500 text-white p-3.5 rounded-2xl text-2xl font-serif">🤖</div>
+            <div>
+                <h2 class="text-lg font-bold font-serif text-burgundy-500">AI 备婚智能策划中心</h2>
+                <p class="text-xs text-gray-500 leading-relaxed mt-0.5">基于您当前的数据，智能策划最具大马本土风情的接亲方案、多语言串场台词、深情致词稿。</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-5 space-y-6">
+                <div class="bg-white p-5 rounded-2xl elegant-shadow border border-gray-100">
+                    <div class="flex items-center gap-2 mb-3"><span class="text-base">🎮</span><h3 class="font-bold text-sm text-gray-800">接亲游戏生成器</h3></div>
+                    <div class="space-y-3">
+                        <label class="block text-[10px] uppercase font-bold text-gray-400">游戏风格偏好</label>
+                        <select id="ai-gate-style" class="w-full bg-gray-50 border border-gray-200 text-xs text-gray-700 rounded-lg p-2.5 outline-none focus:border-burgundy-500">
+                            <option value="搞笑欢乐但温和不脏衣">🤪 搞笑欢乐 (温和不伤面子)</option>
+                            <option value="考验默契与知识问答">🧠 默契智慧 (智力抢答与考验)</option>
+                            <option value="纯体力耐力大考验">💪 兄弟硬核 (体能与硬撑折腾)</option>
+                        </select>
+                        <button onclick="generateAIGatecrash()" class="w-full bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 rounded-lg transition">🔮 AI 策划新游戏</button>
+                    </div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl elegant-shadow border border-gray-100">
+                    <div class="flex items-center gap-2 mb-3"><span class="text-base">🎤</span><h3 class="font-bold text-sm text-gray-800">定制双语司仪词</h3></div>
+                    <div class="space-y-3">
+                        <select id="ai-emcee-tone" class="w-full bg-gray-50 border border-gray-200 text-xs text-gray-700 rounded-lg p-2.5 outline-none focus:border-burgundy-500">
+                            <option value="中英双语，优雅高贵，富有电影质感的温馨深情风格">✨ 温馨优雅</option>
+                            <option value="掺杂大马方言粤语、福建话和英文的接地气极简温馨风">🗣️ 大马本土方言</option>
+                        </select>
+                        <button onclick="generateAIEmceeScript()" class="w-full bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 rounded-lg transition">✍️ 生成定制主持词</button>
+                    </div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl elegant-shadow border border-gray-100">
+                    <div class="flex items-center gap-2 mb-3"><span class="text-base">✍️</span><h3 class="font-bold text-sm text-gray-800">誓言致词润色</h3></div>
+                    <div class="space-y-3">
+                        <textarea id="ai-vow-input" class="w-full border border-gray-200 rounded-lg p-2.5 text-xs h-24 focus:border-burgundy-500 outline-none" placeholder="输入你想说的话..."></textarea>
+                        <select id="ai-vow-tone" class="w-full bg-gray-50 border border-gray-200 text-xs text-gray-700 rounded-lg p-2.5 outline-none focus:border-burgundy-500">
+                            <option value="温馨感人，赚足全场长辈眼泪的真挚情书风">😭 泪目温馨</option>
+                            <option value="幽默有梗，吐槽恋爱糗事但甜度爆表的欢快路线">😂 幽默有梗</option>
+                        </select>
+                        <button onclick="polishAIVows()" class="w-full bg-gray-700 hover:bg-gray-800 text-white text-xs font-semibold py-2.5 rounded-lg transition">✨ 开始润色致词</button>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:col-span-7">
+                <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100 h-full flex flex-col justify-between min-h-[500px]">
+                    <div>
+                        <div class="flex items-center justify-between border-b border-gray-100 pb-4 mb-4">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">🔮 AI 智脑生成视窗</span>
+                            <span id="ai-status-tag" class="text-[10px] font-bold bg-gray-100 text-gray-500 px-2 py-1 rounded">闲置中</span>
+                        </div>
+                        <div id="ai-output-container">
+                            <div class="text-center py-20 text-gray-300"><span class="block text-4xl mb-3">🔮</span><p class="text-xs">选择左侧策划模块，AI 生成大纲及文案将展现在此处</p></div>
+                        </div>
+                    </div>
+                    <div id="ai-action-tray" class="hidden border-t border-gray-100 pt-4 mt-6 flex gap-3">
+                        <button id="ai-copy-btn" class="flex-1 bg-gray-50 hover:bg-gray-100 text-gray-700 border border-gray-200 text-xs font-semibold py-3 rounded-xl transition flex items-center justify-center gap-1.5">📄 一键复制文本</button>
+                        <button id="ai-sync-btn" class="hidden flex-1 bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-3 rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm">⚡ 同步至婚礼流程</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<!-- ── Custom Modal ── -->
+<div id="custom-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 no-print">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 elegant-shadow border border-burgundy-100">
+        <h3 id="modal-title" class="text-lg font-serif font-bold text-burgundy-500 mb-2">提示</h3>
+        <p id="modal-message" class="text-sm text-gray-600 mb-6 leading-relaxed">消息内容</p>
+        <div class="flex justify-end gap-3">
+            <button id="modal-cancel-btn" class="hidden bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold py-2 px-4 rounded-lg transition">取消</button>
+            <button id="modal-ok-btn" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-4 rounded-lg transition">确定</button>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-white border-t border-gray-100 py-10 text-center text-xs text-gray-400 no-print">
+    <p>© 2026 我们结婚了 · 婚礼主控级数字座舱</p>
+    <p class="mt-2 text-burgundy-500/50 font-serif">"Everything else is just beautiful details. Enjoy every single second."</p>
+</footer>
+</div><!-- end #admin-shell -->
+<script>
+// ═══════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════
+let runsheetItems = [];
+let targetWeddingDateValue = "";
+let seatingData = [];
+let todoItems = [];
+let guestItems = [];
+let depositEntries = []; // saving goal deposit log — declared here, logic below
+let budgetNewItems = [];
+let quoteItems = [];
+let likedInspirations = [];
+let aiClipboardCache = '';
+let lastGeneratedGames = null;
+
+// ★ NEW STATE
+
+let carouselPhotos = [
+    "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=600",
+    "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=600",
+    "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=600"
+];
+let carouselIndex = 0;
+
+const defaultChecklist = [
+    { id:"chk_game_props", text:"姐妹团准备好早上接亲闯关的游戏道具及惩罚道具，买好开门利是红包袋", section:"week-1", checked:false },
+    { id:"chk_groom_angbao", text:"新郎准备好兑换的大量零钱和开门红包 (Angbao)", section:"week-1", checked:false },
+    { id:"chk_seating_chart", text:"确认最终出席人数及桌位图，提交给宴会厅酒楼负责人", section:"week-1", checked:false },
+    { id:"chk_perfect_music", text:"确认新郎唱歌的伴奏带已由音响师就位，并确认在 8:23 PM 实行无缝暗场切换", section:"day-of", checked:false },
+    { id:"chk_breathe_love", text:"深吸一口气，享受属于你们两个人的私密 First Look，准备迎接完美的夜晚！", section:"day-of", checked:false }
+];
+let checklistItems = [];
+
+const defaultRunsheetTemplates = [
+    { id:"m1", act:"morning", time:"07:00 AM", title:"新娘与姐妹团妆发开工", desc:"化妆师 (MUA) 抵达女家，新娘晨礼服/龙凤褂妆发就位。" },
+    { id:"m2", act:"morning", time:"08:45 AM", title:"新郎车队集结启程", desc:"摄像在男家拍新郎出门前画面，兄弟团集结，确保利是包和道具完整，鸣笛出发。" },
+    { id:"m3", act:"morning", time:"09:00 AM - 09:30 AM", title:"抵达女家 & 兄弟闯关 (Gatecrash)", desc:"车队抵达。姐妹团设卡堵门，进行3个既好玩又不失体面的闯关游戏。" },
+    { id:"m4", act:"morning", time:"09:30 AM", title:"房门相见 (Morning Reveal)", desc:"新郎捧花单膝下跪迎娶，为新娘换上红底主婚鞋。" },
+    { id:"m5", act:"morning", time:"10:00 AM", title:"女家传统敬茶仪式 (Tea Ceremony)", desc:"新人向女家父母、祖辈和重要旁系长辈敬献吉祥茶水。" },
+    { id:"m6", act:"morning", time:"11:00 AM", title:"过门并启程往男家", desc:"红伞护送新娘，向地上撒红豆稻米。" },
+    { id:"m7", act:"morning", time:"11:15 AM", title:"男家敬茶仪式 (Tea Ceremony)", desc:"进门跨过火盆。敬奉男家高堂和主要亲友长辈。" },
+    { id:"m8", act:"morning", time:"12:00 PM", title:"午餐和视频快剪 (SDE) 制作", desc:"享用快捷午餐垫肚子。录像团队开始SDE快剪制作，新娘争取补觉休息。" },
+    { id:"a1", act:"afternoon", time:"02:00 PM", title:"晚宴主婚纱妆发造型", desc:"化妆师再次进驻。新娘重置晚宴高发发型，换上长拖尾亮钻主婚纱。" },
+    { id:"a2", act:"afternoon", time:"04:30 PM", title:"私密第一眼仪式 (First Look)", desc:"安排在玻璃温室走道进行。新郎背对，新娘轻拍其肩回头。" },
+    { id:"a3", act:"afternoon", time:"05:00 PM", title:"黄金时段 Portraits 外拍", desc:"利用日落前最柔和的暖阳倾斜光线，摄制组抓拍电影感大片。" },
+    { id:"a4", act:"afternoon", time:"05:30 PM", title:"新人回大套房静息", desc:"拍摄收工，回房吃些点心填肚子，充分补水，静待晚间重头戏开锣。" },
+    { id:"e1", act:"evening", time:"06:00 PM - 07:30 PM", title:"迎宾、签到及发伴手礼 (Door Gift)", desc:"现场背景乐环绕，迎宾技术站就位。宾客在签到处登记，提前分发门礼。" },
+    { id:"e2", act:"evening", time:"07:30 PM", title:"新人荣耀大进场 (Grand Entrance)", desc:"全厅暗场，新人直接手挽手走过全场视线与追光，稳步踏上主舞台。" },
+    { id:"e3", act:"evening", time:"07:35 PM", title:"浪漫切蛋糕仪式 (Cake Cutting)", desc:"在舞台切开定制的唯美千层婚礼蛋糕，作为执手一生的甜蜜开篇。" },
+    { id:"e4", act:"evening", time:"07:40 PM", title:"晚宴第一道菜上桌 (开席)", desc:"大冷盘拼盘隆重开席。大厅背景光调高，音乐调小。" },
+    { id:"e5", act:"evening", time:"08:15 PM", title:"视频快剪 (Morning SDE) 震撼首播", desc:"灯光调暗至40%。大荧幕播放上午接亲、闯关及敬茶的精彩快剪视频。" },
+    { id:"e6", act:"evening", time:"08:23 PM", title:"聚光灯突袭：新郎暗场独唱《Perfect》", desc:"快剪播完黑屏，聚光灯直接打在麦克风前，新郎在暗影中开口独唱，浪漫拉满！" },
+    { id:"e7", act:"evening", time:"08:30 PM", title:"新人Joint Speech 感恩合鸣致辞", desc:"新郎新娘并排上台。以深情、极简而高级的致辞向父母、亲属、挚友致谢。" },
+    { id:"e8", act:"evening", time:"09:15 PM", title:"全台大敬酒 & 震撼 Yam Seng!", desc:"主桌所有长辈、新人及亲友上台一字排开，开启香槟塔。全席站立大喊三次饮胜！" },
+    { id:"e9", act:"evening", time:"09:30 PM", title:"全席逐桌敬酒碰杯 (Table Toasting)", desc:"新人、家长及兄弟团依次走到每一个宾客桌前，高声祝福，碰杯留影。" },
+    { id:"e10", act:"evening", time:"10:15 PM", title:"礼成送宾 & 大堂合影留念 (Farewell)", desc:"晚宴顺利落幕。移步厅门合影处。新人握手、拥抱并欢送每一位散席贵人。" }
+];
+
+// ═══════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════
+window.onload = function() {
+    renderInteractiveChecklists();
+    loadAllFromLocalStorage();
+    const dateInput = document.getElementById('wedding-date');
+    if (dateInput) dateInput.value = targetWeddingDateValue;
+    updateDynamicDateSubtitle(targetWeddingDateValue);
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    calculateChecklistProgress();
+    renderTodoList();
+    renderBudgetNewTable();
+    renderQuotesTable();
+    renderDepositLog();
+    calculateSavingGoal();
+    renderGuestsTable();
+    renderSeatingTables();
+    updateInvitePreview();
+    onDateChanged();
+    renderWishesOnMockBoard();
+    renderAllCustomTimelineActs();
+    _initGuestLinkDisplay();
+    // Route check: standalone guest page
+    if (new URLSearchParams(window.location.search).get('view') === 'guest') showStandaloneGuestPage();
+};
+
+// ═══════════════════════════════════════
+// TAB SWITCHING
+// ═══════════════════════════════════════
+function switchTab(tabKey) {
+    document.querySelectorAll('.tab-content').forEach(el => { el.classList.add('hidden'); el.classList.remove('block'); });
+    const target = document.getElementById(`content-${tabKey}`);
+    if (target) { target.classList.remove('hidden'); target.classList.add('block'); }
+    document.querySelectorAll('.tab-btn-group button').forEach(btn => {
+        btn.classList.remove('border-burgundy-500','text-burgundy-500');
+        btn.classList.add('border-transparent','text-gray-400');
+    });
+    const currentBtn = document.getElementById(`tab-${tabKey}`);
+    if (currentBtn) { currentBtn.classList.add('border-burgundy-500','text-burgundy-500'); currentBtn.classList.remove('border-transparent','text-gray-400'); }
+}
+
+// ═══════════════════════════════════════
+// GUEST LINK — copy & standalone page
+// ═══════════════════════════════════════
+function _getGuestLink() {
+    return window.location.href.split('?')[0] + '?view=guest';
+}
+
+function _initGuestLinkDisplay() {
+    const el = document.getElementById('guest-link-display');
+    if (el) el.textContent = _getGuestLink();
+}
+
+function copyGuestLink() {
+    const link = _getGuestLink();
+    navigator.clipboard.writeText(link).then(() => {
+        const msg = document.getElementById('guest-link-copied');
+        if (msg) { msg.classList.remove('hidden'); setTimeout(() => msg.classList.add('hidden'), 2500); }
+    }).catch(() => {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = link; ta.style.position = 'fixed';
+        document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta);
+        const msg = document.getElementById('guest-link-copied');
+        if (msg) { msg.classList.remove('hidden'); setTimeout(() => msg.classList.add('hidden'), 2500); }
+    });
+}
+
+function openGuestPage() {
+    window.open(_getGuestLink(), '_blank');
+}
+
+function showStandaloneGuestPage() {
+    // Hide admin shell, show a clean standalone guest page built from saved data
+    const adminShell = document.getElementById('admin-shell');
+    if (adminShell) adminShell.style.display = 'none';
+
+    // Read data from localStorage
+    const stored = localStorage.getItem('wedding_v9_data') || localStorage.getItem('wedding_20290528_data_v7') || '{}';
+    let data = {};
+    try { data = JSON.parse(stored); } catch(e) {}
+
+    const groom   = data.groomName  || '新郎';
+    const bride   = data.brideName  || '新娘';
+    const venue   = data.carouselPhotos ? '' : '';
+    const venueStr = '';
+    const dateVal  = data.weddingDate || '';
+    const photos   = data.carouselPhotos && data.carouselPhotos.length > 0
+        ? data.carouselPhotos
+        : ['https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800',
+           'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=600',
+           'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=600'];
+    const guests   = data.guestItems || [];
+
+    // Compute date string and countdown
+    let dateStr = '待定', daysLeft = null;
+    if (dateVal) {
+        const d = new Date(dateVal);
+        if (!isNaN(d)) {
+            dateStr = `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
+            const diff = new Date(dateVal + ' 07:00:00').getTime() - Date.now();
+            if (diff > 0) daysLeft = Math.floor(diff / 86400000);
+        }
+    }
+
+    // Wishes from existing guests
+    const wishes = guests.filter(g => g.wish && g.wish.trim()).slice(-5);
+
+    // Photo slides HTML
+    const slideHtml = photos.map(p =>
+        `<div class="gs-slide"><img src="${p}" style="width:100%;height:100%;object-fit:cover"></div>`
+    ).join('');
+    const dotHtml = photos.map((_, i) =>
+        `<span class="gs-dot ${i===0?'gs-dot-active':''}" data-i="${i}"></span>`
+    ).join('');
+
+    const wishesHtml = wishes.length === 0
+        ? `<p style="font-size:10px;color:#bbb;text-align:center;font-style:italic;padding:8px 0">快来成为第一个送上祝福的人！</p>`
+        : wishes.map(g => `
+            <div style="background:#fdf2f4;border:1px solid #fbe5ea;border-radius:10px;padding:8px 12px">
+                <p style="font-size:10px;font-weight:700;color:#800020;margin-bottom:2px">💖 ${g.name}</p>
+                <p style="font-size:10px;color:#666;font-style:italic">"${g.wish}"</p>
+            </div>`).join('');
+
+    const inviteInput = localStorage.getItem('wedding_v9_data')
+        ? (JSON.parse(localStorage.getItem('wedding_v9_data') || '{}')).inviteLocation || ''
+        : '';
+
+    const page = document.createElement('div');
+    page.id = 'guest-standalone';
+    page.innerHTML = `
+        <style>
+            #guest-standalone { min-height:100vh; background:#fdfaf8; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:16px; font-family:'PingFang SC','Microsoft YaHei',sans-serif; }
+            .gs-card { width:100%; max-width:400px; background:#fff; border-radius:24px; overflow:hidden; box-shadow:0 8px 32px rgba(128,0,32,0.08); }
+            .gs-hero { position:relative; height:300px; overflow:hidden; }
+            .gs-track { display:flex; width:100%; height:100%; transition:transform .6s ease; }
+            .gs-slide { width:100%; height:100%; flex-shrink:0; }
+            .gs-gradient { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,.15) 0%, transparent 40%, rgba(0,0,0,.65) 100%); pointer-events:none; }
+            .gs-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:2; background:rgba(255,255,255,.25); border:none; border-radius:50%; width:32px; height:32px; color:#fff; font-size:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:.2s; }
+            .gs-arrow:hover { background:rgba(255,255,255,.45); }
+            .gs-dots { position:absolute; bottom:52px; left:0; right:0; display:flex; justify-content:center; gap:5px; z-index:2; }
+            .gs-dot { width:6px; height:6px; border-radius:99px; background:rgba(255,255,255,.5); transition:.3s; cursor:pointer; }
+            .gs-dot-active { width:18px; background:#fff; }
+            .gs-names { position:absolute; bottom:12px; left:0; right:0; text-align:center; color:#fff; z-index:2; }
+            .gs-names .ey { font-size:9px; letter-spacing:.25em; text-transform:uppercase; opacity:.8; }
+            .gs-names .nm { font-size:22px; font-weight:700; font-family:serif; text-shadow:0 1px 4px rgba(0,0,0,.4); }
+            .gs-body { padding:20px; }
+            .gs-chip { display:flex; align-items:center; gap:10px; border-radius:12px; padding:10px 14px; margin-bottom:8px; }
+            .gs-label { font-size:9px; text-transform:uppercase; letter-spacing:.08em; font-weight:700; margin-bottom:2px; }
+            .gs-value { font-size:12px; font-weight:700; }
+            .gs-wall { margin-bottom:16px; }
+            .gs-wall-title { font-size:10px; font-weight:700; color:#800020; text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px; }
+            .gs-wall-items { max-height:100px; overflow-y:auto; display:flex; flex-direction:column; gap:6px; }
+            .gs-form { border-top:1px solid #f0ebe4; padding-top:16px; }
+            .gs-form-title { font-size:12px; font-weight:700; color:#1a1a1a; margin-bottom:12px; font-family:serif; }
+            .gs-input { width:100%; background:#f9f9f7; border:1px solid #e5e7eb; border-radius:12px; padding:9px 12px; font-size:12px; outline:none; box-sizing:border-box; font-family:inherit; }
+            .gs-input:focus { border-color:#800020; }
+            .gs-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+            .gs-field-label { font-size:10px; color:#999; font-weight:700; text-transform:uppercase; letter-spacing:.05em; display:block; margin-bottom:4px; }
+            .gs-btn { width:100%; background:#800020; color:#fff; border:none; border-radius:12px; padding:13px; font-size:13px; font-weight:700; cursor:pointer; font-family:serif; letter-spacing:.02em; transition:.2s; }
+            .gs-btn:hover { background:#66001a; }
+            .gs-success { text-align:center; padding:24px 0; }
+            .gs-footer { font-size:9px; color:#ccc; font-style:italic; text-align:center; padding:12px 0 4px; }
+        </style>
+
+        <div class="gs-card">
+            <!-- Hero carousel -->
+            <div class="gs-hero">
+                <div class="gs-track" id="gst-track">${slideHtml}</div>
+                <div class="gs-gradient"></div>
+                <button class="gs-arrow" style="left:10px" onclick="gsPrev()">&#8249;</button>
+                <button class="gs-arrow" style="right:10px" onclick="gsNext()">&#8250;</button>
+                <div class="gs-dots" id="gst-dots">${dotHtml}</div>
+                <div class="gs-names">
+                    <div class="ey">We Are Getting Married</div>
+                    <div class="nm">${groom} &amp; ${bride}</div>
+                </div>
+            </div>
+
+            <!-- Card body -->
+            <div class="gs-body">
+                <!-- Date + venue chips -->
+                <div class="gs-chip" style="background:#fdf2f4;margin-bottom:8px">
+                    <span style="font-size:16px">📅</span>
+                    <div style="flex:1">
+                        <div class="gs-label" style="color:#b08b43">婚礼日期 Date</div>
+                        <div class="gs-value" style="color:#800020">${dateStr}</div>
+                    </div>
+                    ${daysLeft !== null ? `<div style="text-align:right"><div class="gs-label" style="color:#b08b43">倒计时</div><div class="gs-value" style="color:#800020;font-family:monospace">还有 ${daysLeft} 天</div></div>` : ''}
+                </div>
+
+                <!-- Wishes wall -->
+                <div class="gs-wall">
+                    <div class="gs-wall-title">💕 亲友祝福墙</div>
+                    <div class="gs-wall-items">${wishesHtml}</div>
+                </div>
+
+                <!-- RSVP form -->
+                <div class="gs-form">
+                    <div class="gs-form-title">✍️ 填写出席回执 RSVP</div>
+                    <div id="gst-form-area" style="display:flex;flex-direction:column;gap:10px">
+                        <div>
+                            <label class="gs-field-label">您的姓名 Your Name *</label>
+                            <input id="gst-name" class="gs-input" placeholder="例如：张大明">
+                        </div>
+                        <div class="gs-grid">
+                            <div>
+                                <label class="gs-field-label">出席人数 Pax</label>
+                                <select id="gst-pax" class="gs-input">
+                                    <option value="1">1 人</option><option value="2">2 人</option>
+                                    <option value="3">3 人</option><option value="4">4 人</option>
+                                    <option value="5">5 人</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="gs-field-label">饮食需求 Diet</label>
+                                <select id="gst-diet" class="gs-input">
+                                    <option value="none">无特殊</option>
+                                    <option value="vegetarian">素食 Veg</option>
+                                    <option value="halal">清真 Halal</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="gs-field-label">温馨祝福 Wishes</label>
+                            <textarea id="gst-wish" class="gs-input" style="height:60px;resize:none" placeholder="祝新婚快乐，百年好合！"></textarea>
+                        </div>
+                        <button class="gs-btn" onclick="gstSubmit()">💌 送出祝福 & 确认出席</button>
+                    </div>
+                    <div id="gst-success" style="display:none" class="gs-success">
+                        <div style="font-size:40px;margin-bottom:8px">🎉</div>
+                        <p style="font-family:serif;font-weight:700;color:#800020;font-size:15px">感谢您的出席！</p>
+                        <p style="font-size:11px;color:#888;margin-top:6px;line-height:1.6">我们已收到您的回执，<br>期待与您共度美好时光！</p>
+                        <button onclick="gstReset()" style="margin-top:12px;font-size:11px;color:#bbb;background:none;border:none;cursor:pointer;text-decoration:underline">再次填写</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="gs-footer" style="max-width:400px">"良辰吉日定终身，百年琴瑟共白头"</p>
+    `;
+    document.body.appendChild(page);
+
+    // Carousel logic
+    let gsIdx = 0, gsTotal = photos.length, gsTimer = null;
+    function gsMoveTo(i) {
+        gsIdx = (i + gsTotal) % gsTotal;
+        document.getElementById('gst-track').style.transform = `translateX(-${gsIdx*100}%)`;
+        document.querySelectorAll('.gs-dot').forEach((d,j) => {
+            d.className = 'gs-dot' + (j === gsIdx ? ' gs-dot-active' : '');
+        });
+    }
+    window.gsNext = () => { gsMoveTo(gsIdx+1); resetTimer(); };
+    window.gsPrev = () => { gsMoveTo(gsIdx-1); resetTimer(); };
+    function resetTimer() { clearInterval(gsTimer); gsTimer = setInterval(() => gsMoveTo(gsIdx+1), 3500); }
+    document.querySelectorAll('.gs-dot').forEach(d => d.addEventListener('click', () => { gsMoveTo(+d.dataset.i); resetTimer(); }));
+    resetTimer();
+
+    // Countdown live update
+    if (dateVal) {
+        setInterval(() => {
+            const diff = new Date(dateVal + ' 07:00:00').getTime() - Date.now();
+            // (subtle live update only if daysLeft element exists — skip for simplicity)
+        }, 60000);
+    }
+
+    // RSVP submit
+    window.gstSubmit = () => {
+        const name = document.getElementById('gst-name').value.trim();
+        if (!name) { document.getElementById('gst-name').focus(); return; }
+        const pax  = parseInt(document.getElementById('gst-pax').value) || 1;
+        const diet = document.getElementById('gst-diet').value;
+        const wish = document.getElementById('gst-wish').value.trim();
+
+        // Save into localStorage alongside existing guest data
+        const raw = localStorage.getItem('wedding_v9_data') || localStorage.getItem('wedding_20290528_data_v7') || '{}';
+        let d = {}; try { d = JSON.parse(raw); } catch(e) {}
+        if (!Array.isArray(d.guestItems)) d.guestItems = [];
+        d.guestItems.push({ id:'guest_gs_'+Date.now(), name, rsvp:'going', diet, pax, wish, tableId:'' });
+        localStorage.setItem('wedding_v9_data', JSON.stringify(d));
+
+        document.getElementById('gst-form-area').style.display = 'none';
+        document.getElementById('gst-success').style.display = 'block';
+    };
+    window.gstReset = () => {
+        document.getElementById('gst-form-area').style.display = 'flex';
+        document.getElementById('gst-success').style.display = 'none';
+        document.getElementById('gst-name').value = '';
+        document.getElementById('gst-pax').value = '1';
+        document.getElementById('gst-diet').value = 'none';
+        document.getElementById('gst-wish').value = '';
+    };
+}
+
+// ═══════════════════════════════════════
+// DATE / COUNTDOWN / HEADER
+// ═══════════════════════════════════════
+function updateDynamicDateSubtitle(dateValue) {
+    const el = document.getElementById('header-wedding-date');
+    if (!el) return;
+    if (!dateValue) { el.innerText = "请选择日期"; return; }
+    const d = new Date(dateValue);
+    if (isNaN(d.getTime())) { el.innerText = "请选择日期"; return; }
+    el.innerText = `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
+}
+
+function onDateChanged() {
+    const input = document.getElementById('wedding-date');
+    if (input) {
+        targetWeddingDateValue = input.value;
+        updateDynamicDateSubtitle(targetWeddingDateValue);
+        evaluateAuspiciousDay(input.value);
+        updateCountdown();
+        updateInvitePreview();
+        saveAllToLocalStorage();
+    }
+}
+
+function evaluateAuspiciousDay(dateStr) {
+    const lunarEl = document.getElementById('calendar-lunar');
+    const gradeEl = document.getElementById('calendar-grade');
+    const yiEl = document.getElementById('calendar-yi');
+    const jiEl = document.getElementById('calendar-ji');
+    const adviceContainer = document.getElementById('date-evaluation-result');
+    if (!dateStr) {
+        if(lunarEl) lunarEl.innerText="岁次与阴历待定";
+        if(gradeEl) gradeEl.innerText="✨ 待定吉日，喜结连理";
+        if(yiEl) yiEl.innerText="结婚、订婚、祭祀、安床";
+        if(jiEl) jiEl.innerText="作灶、开渠、盖屋";
+        if(adviceContainer) adviceContainer.innerHTML=`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-bold border border-gray-200">📅 请先在上方挑选公历日期以进行即时吉凶鉴定</span>`;
+        return;
+    }
+    const date = new Date(dateStr);
+    if (isNaN(date)) return;
+    const day=date.getDate(), month=date.getMonth()+1, year=date.getFullYear(), dow=date.getDay();
+    const lunarMonths=["正月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","腊月"];
+    const lunarDays=["初一","初二","初三","初四","初五","初六","初七","初八","初九","初十","十一","十二","十三","十四","十五","十六","十七","十八","十九","二十","廿一","廿二","廿三","廿四","廿五","廿六","廿七","廿八","廿九","三十"];
+    const lunarMonthStr=lunarMonths[(month+(year%12))%12];
+    const lunarDayStr=lunarDays[(day+(month*2))%30];
+    let grade,yi,ji,adviceHtml,isTop=false;
+    if(dow===0||dow===6){isTop=true;grade="✨【上吉】鸾凤和鸣，天德合照之吉日";yi="嫁娶、会亲友、订盟、纳采、祈福、安床、裁衣";ji="开渠、掘井、作灶、伐木";adviceHtml=`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-50 text-green-700 text-xs font-bold border border-green-200">🟢 【极佳吉日】鸾凤和鸣，天赐姻缘！非常适合在此周末举办婚礼盛典</span>`;}
+    else if([2,6,8,9,16,18,22,26,28].includes(day)){isTop=true;grade="✨【上吉】月德合吉，五合临照之吉日";yi="嫁娶、冠笄、纳采、出行、开市、纳财、祈福";ji="伐木、筑堤、破土、动土";adviceHtml=`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-50 text-green-700 text-xs font-bold border border-green-200">🟢 【上等良辰】神星庇护，气运极佳！极力推荐在此日成婚</span>`;}
+    else if(day%4===0){grade="⚠️【避忌】月破大耗，诸事避忌之凶日";yi="求医、扫舍、求治病、解除、扫除";ji="结婚嫁娶、入宅动土、修造、移徙";adviceHtml=`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-50 text-red-700 text-xs font-bold border border-red-200">🔴 【避忌凶日】通书标记今日忌嫁娶，建议新人另择佳期</span>`;}
+    else{grade="【平吉】岁德并照，宜成良缘之日";yi="求医、祭祀、沐浴、整手足甲";ji="出行、栽种、开渠、盖屋";adviceHtml=`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 text-amber-700 text-xs font-bold border border-amber-200">🟡 【普通平吉】平稳祥和之日，可做备选方案</span>`;}
+    if(lunarEl) lunarEl.innerText=`农历 ${lunarMonthStr}${lunarDayStr}`;
+    if(gradeEl){gradeEl.innerText=grade;gradeEl.className=isTop?"text-lg font-bold font-serif text-yellow-300 mt-2 animate-pulse":"text-lg font-bold font-serif text-white mt-2";}
+    if(yiEl) yiEl.innerText=yi;
+    if(jiEl) jiEl.innerText=ji;
+    if(adviceContainer) adviceContainer.innerHTML=adviceHtml;
+}
+
+function updateCountdown() {
+    const timerContainer=document.getElementById('countdown-timer');
+    const inviteCountdown=document.getElementById('invite-countdown-timer');
+    if(!targetWeddingDateValue){if(timerContainer)timerContainer.innerText="待选公历日期";if(inviteCountdown)inviteCountdown.innerText="未选择日期";return;}
+    const diff=new Date(`${targetWeddingDateValue} 07:00:00`).getTime()-Date.now();
+    if(diff<0){if(timerContainer)timerContainer.innerText="💖 新婚快乐，幸福美满！";if(inviteCountdown)inviteCountdown.innerText="已到期 🎉";return;}
+    const days=Math.floor(diff/86400000),hours=Math.floor((diff%86400000)/3600000),minutes=Math.floor((diff%3600000)/60000),seconds=Math.floor((diff%60000)/1000);
+    if(timerContainer)timerContainer.innerText=`${days}天 ${hours}时 ${minutes}分 ${seconds}秒`;
+    if(inviteCountdown)inviteCountdown.innerText=`${days}天 ${hours}小时`;
+}
+
+// ═══════════════════════════════════════
+// RUNSHEET
+// ═══════════════════════════════════════
+function renderAllCustomTimelineActs() { ['morning','afternoon','evening'].forEach(a=>renderTimelineByAct(a)); }
+function renderTimelineByAct(actKey) {
+    const container=document.getElementById(`runsheet-container-${actKey}`);
+    if(!container) return;
+    container.innerHTML='';
+    const actNodes=runsheetItems.filter(item=>item.act===actKey);
+    if(actNodes.length===0){container.innerHTML=`<p class="text-xs text-gray-400 italic py-4">暂无该环节的自定义步骤，点击右上方按钮增加步骤。</p>`;return;}
+    actNodes.forEach((node,idx)=>{
+        container.insertAdjacentHTML('beforeend',`
+            <div class="relative print-card group">
+                <span class="absolute -left-[31px] md:-left-[39px] top-1.5 bg-burgundy-500 text-white text-[10px] w-6 h-6 rounded-full flex items-center justify-center font-bold font-mono">${idx+1}</span>
+                <div class="bg-white rounded-xl p-5 elegant-shadow border border-burgundy-50">
+                    <div class="flex justify-between items-start gap-4">
+                        <div class="space-y-3 flex-1">
+                            <div class="flex flex-col md:flex-row md:items-center gap-2">
+                                <input type="text" value="${node.time}" oninput="updateRunsheetNodeValue('${node.id}','time',this.value)" class="text-burgundy-500 font-bold text-sm bg-transparent border-b border-transparent hover:border-gray-200 focus:border-burgundy-500 focus:outline-none w-32 py-0.5" placeholder="例如: 09:00 AM">
+                                <span class="hidden md:inline text-gray-300">|</span>
+                                <input type="text" value="${node.title}" oninput="updateRunsheetNodeValue('${node.id}','title',this.value)" class="font-bold text-sm text-gray-800 bg-transparent border-b border-transparent hover:border-gray-200 focus:border-burgundy-500 focus:outline-none flex-1 py-0.5" placeholder="例如: 兄弟接亲迎嫁">
+                            </div>
+                            <textarea oninput="updateRunsheetNodeValue('${node.id}','desc',this.value)" class="w-full text-xs text-gray-500 bg-transparent border-b border-transparent hover:border-gray-100 focus:border-burgundy-500 focus:outline-none resize-none leading-relaxed h-12" placeholder="在这里详细写下该环节的主要内容...">${node.desc}</textarea>
+                        </div>
+                        <button onclick="deleteRunsheetNode('${node.id}')" class="text-gray-300 hover:text-red-500 text-xs py-1 px-2 transition opacity-0 group-hover:opacity-100 no-print"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                </div>
+            </div>`);
+    });
+}
+function updateRunsheetNodeValue(id,key,value){const node=runsheetItems.find(i=>i.id===id);if(node){node[key]=value;saveAllToLocalStorage();}}
+function addNewRunsheetStep(actKey){runsheetItems.push({id:'node_'+Date.now(),act:actKey,time:'00:00 AM',title:'新增流程步骤',desc:'在此处编辑写下本步流程的具体操作要求。'});renderTimelineByAct(actKey);saveAllToLocalStorage();}
+function deleteRunsheetNode(id){const node=runsheetItems.find(i=>i.id===id);if(node){const a=node.act;runsheetItems=runsheetItems.filter(i=>i.id!==id);renderTimelineByAct(a);saveAllToLocalStorage();}}
+function resetRunsheetToDefault(){triggerCustomModal("确定要重置吗？","这将清空您已经个性化编辑过的全部 Runsheet 细节，并用最经典的 22 步大马华人传统流程覆盖。此操作无法撤销。",true,()=>{runsheetItems=JSON.parse(JSON.stringify(defaultRunsheetTemplates));renderAllCustomTimelineActs();saveAllToLocalStorage();});}
+
+// ═══════════════════════════════════════
+// CAROUSEL
+// ═══════════════════════════════════════
+function renderCarousel(){
+    const carousel=document.getElementById('carousel-images');const dots=document.getElementById('carousel-dots');
+    if(!carousel||!dots)return;carousel.innerHTML='';dots.innerHTML='';
+    carouselPhotos.forEach((photo,idx)=>{
+        const slide=document.createElement('div');slide.className="w-full h-full flex-shrink-0";slide.innerHTML=`<img src="${photo}" class="w-full h-full object-cover">`;carousel.appendChild(slide);
+        const dot=document.createElement('span');dot.className=`w-2 h-2 rounded-full transition-all duration-300 ${idx===carouselIndex?'bg-burgundy-500 w-4':'bg-gray-300'}`;dots.appendChild(dot);
+    });
+    carousel.style.transform=`translateX(-${carouselIndex*100}%)`;
+}
+function slideNext(){carouselIndex=(carouselIndex+1)%carouselPhotos.length;renderCarousel();}
+function slidePrev(){carouselIndex=(carouselIndex-1+carouselPhotos.length)%carouselPhotos.length;renderCarousel();}
+function handleWeddingPhotoUpload(input){
+    const files=input.files;if(files&&files.length>0){carouselPhotos=[];let loaded=0;
+        for(let i=0;i<files.length;i++){const reader=new FileReader();reader.onload=function(e){carouselPhotos.push(e.target.result);loaded++;if(loaded===files.length){carouselIndex=0;renderCarousel();saveAllToLocalStorage();}};reader.readAsDataURL(files[i]);}
+    }
+}
+function resetDefaultPhotos(){carouselPhotos=["https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=600","https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=600","https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=600"];carouselIndex=0;renderCarousel();saveAllToLocalStorage();}
+
+function updateInvitePreview(){
+    const loc=document.getElementById('invite-location-input');const groom=document.getElementById('groom-name');const bride=document.getElementById('bride-name');
+    const pG=document.getElementById('preview-groom');const pB=document.getElementById('preview-bride');const pL=document.getElementById('preview-location');
+    if(pG)pG.innerText=groom?(groom.value||"新郎"):"新郎";if(pB)pB.innerText=bride?(bride.value||"新娘"):"新娘";if(pL)pL.innerText=loc?(loc.value||"玻璃温室"):"玻璃温室";
+    renderCarousel();
+}
+
+// ═══════════════════════════════════════
+// TO-DO
+// ═══════════════════════════════════════
+function renderTodoList(){
+    const pC=document.getElementById('todo-list-planning'),vC=document.getElementById('todo-list-verify'),dC=document.getElementById('todo-list-done');
+    if(!pC||!vC||!dC)return;pC.innerHTML='';vC.innerHTML='';dC.innerHTML='';
+    let cP=0,cV=0,cD=0;
+    todoItems.forEach(item=>{
+        let badge='';
+        if(item.owner==='groom')badge=`<span class="bg-blue-50 text-blue-600 text-[10px] px-1.5 py-0.5 rounded font-bold">新郎</span>`;
+        else if(item.owner==='bride')badge=`<span class="bg-pink-50 text-pink-600 text-[10px] px-1.5 py-0.5 rounded font-bold">新娘</span>`;
+        else badge=`<span class="bg-purple-50 text-purple-600 text-[10px] px-1.5 py-0.5 rounded font-bold">双人协作</span>`;
+        const card=`<div class="bg-gray-50 border border-gray-100 p-3 rounded-xl hover:bg-white transition"><div class="flex justify-between items-start"><span class="text-xs font-bold text-gray-800 leading-relaxed">${item.text}</span><button onclick="deleteTodo('${item.id}')" class="text-gray-300 hover:text-red-500 text-[10px]"><i class="fa-solid fa-trash"></i></button></div><div class="flex justify-between items-center mt-3">${badge}${getTodoActionButton(item)}</div></div>`;
+        if(item.status==='planning'){pC.insertAdjacentHTML('beforeend',card);cP++;}else if(item.status==='verify'){vC.insertAdjacentHTML('beforeend',card);cV++;}else{dC.insertAdjacentHTML('beforeend',card);cD++;}
+    });
+    const cpEl=document.getElementById('todo-count-planning'),cvEl=document.getElementById('todo-count-verify'),cdEl=document.getElementById('todo-count-done');
+    if(cpEl)cpEl.innerText=cP;if(cvEl)cvEl.innerText=cV;if(cdEl)cdEl.innerText=cD;
+}
+function getTodoActionButton(item){
+    if(item.status==='planning')return`<button onclick="changeTodoStatus('${item.id}','verify')" class="bg-orange-500 hover:bg-orange-600 text-white text-[9px] font-bold py-1 px-2.5 rounded-lg transition">完成待验证 <i class="fa-solid fa-paper-plane"></i></button>`;
+    if(item.status==='verify')return`<button onclick="changeTodoStatus('${item.id}','done')" class="bg-green-500 hover:bg-green-600 text-white text-[9px] font-bold py-1 px-2.5 rounded-lg transition"><i class="fa-solid fa-circle-check"></i> 准予通过</button>`;
+    return`<span class="text-[10px] text-green-600 font-bold"><i class="fa-solid fa-circle-check"></i> 双方通过</span>`;
+}
+function changeTodoStatus(id,newStatus){const item=todoItems.find(t=>t.id===id);if(item){item.status=newStatus;const toast=document.getElementById('notification-toast');const msg=document.getElementById('notification-toast-msg');if(toast&&msg){msg.innerText=newStatus==='verify'?'🔔 提报了待办，待另一方核准！':'💖 双方均核签通过，任务归档！';toast.classList.remove('hidden');setTimeout(()=>toast.classList.add('hidden'),3500);}renderTodoList();saveAllToLocalStorage();}}
+function deleteTodo(id){todoItems=todoItems.filter(t=>t.id!==id);renderTodoList();saveAllToLocalStorage();}
+function triggerQuickAddTodo(){triggerCustomModal("📝 新增备婚协同待办",`<div class="space-y-3 text-left"><div><label class="block text-xs font-semibold text-gray-400 mb-1">待办事项内容</label><input type="text" id="modal-todo-text" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-lg p-2.5 outline-none focus:border-burgundy-500" placeholder="如：向酒家核实订金账单"></div><div><label class="block text-xs font-semibold text-gray-400 mb-1">主要负责人</label><select id="modal-todo-owner" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-lg p-2.5 outline-none focus:border-burgundy-500"><option value="groom">新郎主理</option><option value="bride">新娘主理</option><option value="joint">双人协力</option></select></div></div>`,true,()=>{const textVal=document.getElementById('modal-todo-text').value.trim();const ownerVal=document.getElementById('modal-todo-owner').value;if(textVal){todoItems.push({id:'todo_'+Date.now(),text:textVal,owner:ownerVal,status:'planning'});renderTodoList();saveAllToLocalStorage();}});}
+
+// ═══════════════════════════════════════
+// BUDGET
+// ═══════════════════════════════════════
+function renderBudgetNewTable(){
+    const tbody=document.getElementById('budget-new-tbody');if(!tbody)return;tbody.innerHTML='';
+    if(budgetNewItems.length===0){tbody.innerHTML=`<tr><td colspan="5" class="text-center py-6 text-xs text-gray-400 italic">暂无开销支出，点击右上角添加项目。</td></tr>`;calculateBudgetNewSummary();return;}
+    budgetNewItems.forEach(item=>{
+        tbody.insertAdjacentHTML('beforeend',`<tr class="border-b border-gray-50 text-xs text-gray-700 hover:bg-gray-50/50"><td class="py-2.5 pl-2"><input type="text" value="${item.name}" oninput="updateBudgetNewItem('${item.id}','name',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-semibold" placeholder="支出细节"></td><td><select onchange="updateBudgetNewItem('${item.id}','category',this.value)" class="bg-transparent outline-none text-gray-600 font-medium py-0.5"><option value="宴席" ${item.category==='宴席'?'selected':''}>宴席场地</option><option value="摄像" ${item.category==='摄像'?'selected':''}>影像物料</option><option value="妆造" ${item.category==='妆造'?'selected':''}>婚纱妆造</option><option value="布置" ${item.category==='布置'?'selected':''}>婚礼布置</option><option value="其他" ${item.category==='其他'?'selected':''}>其他支出</option></select></td><td class="font-mono"><input type="number" value="${item.amount}" oninput="updateBudgetNewItem('${item.id}','amount',this.value)" class="w-20 bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-bold text-gray-800" placeholder="0"></td><td><div class="flex items-center gap-2 flex-wrap"><input type="file" id="file-${item.id}" onchange="handleReceiptUpload('${item.id}',this)" class="hidden" accept="image/*"><label for="file-${item.id}" class="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 text-[10px] font-bold py-1 px-2.5 rounded transition"><i class="fa-solid fa-upload"></i> 上传凭证</label>${item.receiptURL?`<a href="${item.receiptURL}" target="_blank" class="text-burgundy-500 font-bold hover:underline text-[10px]"><i class="fa-regular fa-image"></i> 预览</a>`:'<span class="text-[10px] text-gray-300">未录入</span>'}</div></td><td class="text-center"><button onclick="deleteBudgetNewItem('${item.id}')" class="text-red-500 hover:text-red-700 font-bold text-[11px]"><i class="fa-regular fa-trash-can"></i></button></td></tr>`);
+    });
+    calculateBudgetNewSummary();
+}
+function handleReceiptUpload(id,input){const file=input.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(e){const item=budgetNewItems.find(b=>b.id===id);if(item){item.receiptURL=e.target.result;renderBudgetNewTable();saveAllToLocalStorage();}};reader.readAsDataURL(file);}
+function addNewBudgetItemNew(){budgetNewItems.push({id:'budget_item_'+Date.now(),name:'',category:'宴席',amount:0,receiptURL:''});renderBudgetNewTable();saveAllToLocalStorage();}
+function deleteBudgetNewItem(id){budgetNewItems=budgetNewItems.filter(b=>b.id!==id);renderBudgetNewTable();saveAllToLocalStorage();}
+function updateBudgetNewItem(id,field,value){const item=budgetNewItems.find(b=>b.id===id);if(item){if(field==='amount'){item.amount=parseFloat(value)||0;calculateBudgetNewSummary();}else{item[field]=value;}}}
+function calculateBudgetNewSummary(){
+    const totalBudgetInput=document.getElementById('budget-total-new-input');if(!totalBudgetInput)return;
+    const totalBudget=parseFloat(totalBudgetInput.value)||0;let spent=0;budgetNewItems.forEach(item=>spent+=item.amount);
+    const left=totalBudget-spent,percentage=totalBudget>0?Math.round((spent/totalBudget)*100):0;
+    const els={spent:document.getElementById('budget-new-spent'),left:document.getElementById('budget-new-left'),bar:document.getElementById('budget-new-progress-bar'),pct:document.getElementById('budget-new-progress-percent'),hBar:document.getElementById('header-budget-bar'),hPct:document.getElementById('header-budget-percent')};
+    if(els.spent)els.spent.innerText=spent.toLocaleString();if(els.left)els.left.innerText=left.toLocaleString();if(els.pct)els.pct.innerText=`${percentage}%`;if(els.hPct)els.hPct.innerText=`${percentage}%`;
+    if(els.bar)els.bar.style.width=`${Math.min(percentage,100)}%`;if(els.hBar)els.hBar.style.width=`${Math.min(percentage,100)}%`;
+    const color=percentage>100?'red':percentage>85?'orange':'green';
+    if(els.bar)els.bar.className=`bg-${color}-500 h-2.5 rounded-full transition-all duration-300`;
+}
+
+// ═══════════════════════════════════════
+// SAVING GOAL — deposit log
+// ═══════════════════════════════════════
+
+function addDepositEntry() {
+    const noteEl   = document.getElementById('deposit-note-input');
+    const amountEl = document.getElementById('deposit-amount-input');
+    const amount   = parseFloat(amountEl?.value) || 0;
+    if (amount <= 0) { amountEl?.focus(); return; }
+
+    const note = noteEl?.value.trim() || '存款';
+    depositEntries.push({
+        id:     'dep_' + Date.now(),
+        date:   new Date().toLocaleDateString('zh-MY', { year:'numeric', month:'short', day:'numeric' }),
+        note,
+        amount
+    });
+
+    // Reset inputs
+    if (noteEl)   noteEl.value   = '';
+    if (amountEl) amountEl.value = '';
+
+    renderDepositLog();
+    calculateSavingGoal();
+    saveAllToLocalStorage();
+}
+
+function deleteDepositEntry(id) {
+    depositEntries = depositEntries.filter(d => d.id !== id);
+    renderDepositLog();
+    calculateSavingGoal();
+    saveAllToLocalStorage();
+}
+
+function renderDepositLog() {
+    const list      = document.getElementById('deposit-log-list');
+    const emptyEl   = document.getElementById('deposit-empty-state');
+    const countEl   = document.getElementById('deposit-count-label');
+    if (!list) return;
+
+    if (depositEntries.length === 0) {
+        list.innerHTML = `
+            <div class="text-center py-6 text-gray-300 text-xs" id="deposit-empty-state">
+                <i class="fa-solid fa-piggy-bank text-2xl block mb-2"></i>
+                还没有存款记录，开始记录你们的第一笔婚礼基金吧！
+            </div>`;
+        if (countEl) countEl.textContent = '';
+        return;
+    }
+
+    // Show newest first
+    const sorted = [...depositEntries].reverse();
+    list.innerHTML = '';
+    sorted.forEach(dep => {
+        list.insertAdjacentHTML('beforeend', `
+            <div class="flex items-center gap-3 bg-gray-50 hover:bg-champagne-100/20 rounded-xl px-3 py-2.5 group transition-all">
+                <div class="w-7 h-7 rounded-full bg-champagne-100 flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-coins text-champagne-600 text-[10px]"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="text-xs font-bold text-gray-800 truncate">${dep.note}</p>
+                    <p class="text-[10px] text-gray-400">${dep.date}</p>
+                </div>
+                <div class="text-right flex-shrink-0">
+                    <p class="text-xs font-bold font-mono text-green-600">+RM ${dep.amount.toLocaleString()}</p>
+                </div>
+                <button onclick="deleteDepositEntry('${dep.id}')"
+                    class="text-gray-200 hover:text-red-400 text-[11px] opacity-0 group-hover:opacity-100 transition flex-shrink-0">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </div>
+        `);
+    });
+
+    if (countEl) countEl.textContent = `共 ${depositEntries.length} 笔存款记录`;
+}
+
+function calculateSavingGoal() {
+    const goalInput = document.getElementById('saving-goal-input');
+    const goal      = parseFloat(goalInput?.value) || 0;
+    const saved     = depositEntries.reduce((sum, d) => sum + d.amount, 0);
+
+    const totalDisplay = document.getElementById('saving-total-display');
+    const bar          = document.getElementById('saving-bar');
+    const ring         = document.getElementById('saving-ring');
+    const pctLabel     = document.getElementById('saving-pct-label');
+    const ringPct      = document.getElementById('saving-ring-pct');
+    const gapEl        = document.getElementById('saving-gap');
+    const statusEl     = document.getElementById('saving-status-msg');
+
+    if (totalDisplay) totalDisplay.textContent = saved.toLocaleString();
+
+    if (goal <= 0) {
+        if (bar)      bar.style.width = '0%';
+        if (ring)     ring.style.strokeDashoffset = '314';
+        if (pctLabel) pctLabel.textContent = '0%';
+        if (ringPct)  ringPct.textContent  = '0%';
+        if (gapEl)    gapEl.textContent    = 'RM —';
+        if (statusEl) statusEl.classList.add('hidden');
+        return;
+    }
+
+    const pct = Math.min(Math.round((saved / goal) * 100), 100);
+    const gap = Math.max(goal - saved, 0);
+
+    if (bar)      bar.style.width = `${pct}%`;
+    if (ring)  {
+        ring.style.strokeDashoffset = String(314 - (314 * pct / 100));
+        ring.style.stroke = pct >= 100 ? '#22c55e' : '#c5a059';
+    }
+    if (pctLabel) pctLabel.textContent = `${pct}%`;
+    if (ringPct)  ringPct.textContent  = `${pct}%`;
+    if (gapEl)    gapEl.textContent    = pct >= 100 ? '🎉 目标达成！' : `RM ${gap.toLocaleString()}`;
+
+    if (statusEl) {
+        statusEl.classList.remove('hidden');
+        if (pct >= 100) {
+            statusEl.className = 'text-xs font-semibold rounded-xl px-3 py-2.5 leading-relaxed bg-green-50 text-green-700 border border-green-200';
+            statusEl.innerHTML = '🎉 <strong>恭喜！存款目标已达成！</strong> 可以放心预订各项婚礼服务了！';
+        } else if (pct >= 75) {
+            statusEl.className = 'text-xs font-semibold rounded-xl px-3 py-2.5 leading-relaxed bg-champagne-100 text-champagne-600 border border-champagne-100';
+            statusEl.innerHTML = `✨ <strong>冲刺阶段！</strong> 已存 ${pct}%，还差 RM ${gap.toLocaleString()}，快了！`;
+        } else if (pct >= 50) {
+            statusEl.className = 'text-xs font-semibold rounded-xl px-3 py-2.5 leading-relaxed bg-blue-50 text-blue-700 border border-blue-100';
+            statusEl.innerHTML = `💪 <strong>过半了！</strong> 已达成 ${pct}%，继续保持！`;
+        } else if (pct >= 25) {
+            statusEl.className = 'text-xs font-semibold rounded-xl px-3 py-2.5 leading-relaxed bg-purple-50 text-purple-700 border border-purple-100';
+            statusEl.innerHTML = `🌱 <strong>良好起步！</strong> 建议每月存入 RM ${Math.ceil(gap/12).toLocaleString()} 可在一年内达标。`;
+        } else {
+            statusEl.className = 'text-xs font-semibold rounded-xl px-3 py-2.5 leading-relaxed bg-gray-50 text-gray-600 border border-gray-200';
+            statusEl.innerHTML = `📌 <strong>婚礼基金已开启！</strong> 坚持每月定存，梦想婚礼不远了！`;
+        }
+    }
+}
+
+// ═══════════════════════════════════════
+// VENDOR QUOTES
+// ═══════════════════════════════════════
+function renderQuotesTable(){
+    const tbody=document.getElementById('vendor-quote-tbody');if(!tbody)return;tbody.innerHTML='';
+    if(quoteItems.length===0){tbody.innerHTML=`<tr><td colspan="6" class="text-center py-6 text-xs text-gray-400 italic">目前无多方比对方案，点击右上角新增。</td></tr>`;return;}
+    quoteItems.forEach(item=>{
+        tbody.insertAdjacentHTML('beforeend',`<tr class="border-b border-gray-50 text-xs text-gray-700 hover:bg-gray-50/50"><td class="py-2 pl-2"><input type="text" value="${item.vendor}" oninput="updateQuote('${item.id}','vendor',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-bold text-gray-800" placeholder="商家名称"></td><td><input type="number" value="${item.price}" oninput="updateQuote('${item.id}','price',this.value)" class="w-20 bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-mono font-bold" placeholder="0"></td><td><input type="text" value="${item.service}" oninput="updateQuote('${item.id}','service',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500" placeholder="包含细节"></td><td><input type="text" value="${item.prosCons}" oninput="updateQuote('${item.id}','prosCons',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500" placeholder="优劣评价"></td><td><select onchange="updateQuote('${item.id}','rating',this.value)" class="bg-transparent outline-none font-semibold text-champagne-600 py-0.5"><option value="🌟🌟🌟🌟🌟" ${item.rating==='🌟🌟🌟🌟🌟'?'selected':''}>🌟🌟🌟🌟🌟</option><option value="🌟🌟🌟🌟" ${item.rating==='🌟🌟🌟🌟'?'selected':''}>🌟🌟🌟🌟</option><option value="🌟🌟🌟" ${item.rating==='🌟🌟🌟'?'selected':''}>🌟🌟🌟</option></select></td><td class="text-center"><button onclick="deleteQuoteRow('${item.id}')" class="text-red-500 hover:text-red-700 font-semibold text-[11px]">🗑️</button></td></tr>`);
+    });
+}
+function addNewQuoteRow(){quoteItems.push({id:'quote_'+Date.now(),vendor:'',price:0,service:'',prosCons:'',rating:'🌟🌟🌟🌟'});renderQuotesTable();saveAllToLocalStorage();}
+function deleteQuoteRow(id){quoteItems=quoteItems.filter(i=>i.id!==id);renderQuotesTable();saveAllToLocalStorage();}
+function updateQuote(id,field,value){const item=quoteItems.find(i=>i.id===id);if(item){item[field]=value;saveAllToLocalStorage();}}
+function sendWhatsAppInquiry(vendorName,phoneNum){const groom=document.getElementById('groom-name').value||"新郎";const bride=document.getElementById('bride-name').value||"新娘";const msg=`您好 ${vendorName}，我是 ${groom}/${bride}。我们目前在吉隆坡筹备婚礼。我想咨询一下您的服务报价和档期详情，期待您的回复！`;window.open(`https://api.whatsapp.com/send?phone=${phoneNum}&text=${encodeURIComponent(msg)}`,'_blank');}
+
+// ═══════════════════════════════════════
+// GUESTS
+// ═══════════════════════════════════════
+function renderGuestsTable(){
+    const tbody=document.getElementById('guest-tbody');if(!tbody)return;tbody.innerHTML='';
+    if(guestItems.length===0){tbody.innerHTML=`<tr><td colspan="6" class="text-center py-6 text-xs text-gray-400 italic">暂无宾客，可以在 Guest Mode 或电子请柬模拟登记自动流入。</td></tr>`;calculateGuestStats();return;}
+    guestItems.forEach(item=>{
+        let tableOptions=`<option value="">未安排席位</option>`;seatingData.forEach(tbl=>{tableOptions+=`<option value="${tbl.id}" ${item.tableId===tbl.id?'selected':''}>${tbl.name}</option>`;});
+        tbody.insertAdjacentHTML('beforeend',`<tr class="border-b border-gray-50 text-xs text-gray-700 hover:bg-gray-50/50"><td class="py-3 pl-2"><input type="text" value="${item.name}" oninput="updateGuest('${item.id}','name',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-bold text-gray-800" placeholder="姓名"><div class="text-[11px] text-champagne-600 italic mt-1 leading-relaxed max-w-xs overflow-hidden text-ellipsis whitespace-nowrap" title="${item.wish||''}">${item.wish?`💬 "${item.wish}"`:'<span class="text-gray-300">暂无留言祝福</span>'}</div></td><td><input type="number" value="${item.pax||1}" onchange="updateGuest('${item.id}','pax',this.value)" class="w-12 bg-transparent outline-none font-bold" min="1" max="10"></td><td><select onchange="updateGuest('${item.id}','rsvp',this.value)" class="bg-transparent outline-none font-semibold text-gray-600"><option value="going" ${item.rsvp==='going'?'selected':''}>确认出席</option><option value="maybe" ${item.rsvp==='maybe'?'selected':''}>待定</option><option value="no" ${item.rsvp==='no'?'selected':''}>无法出席</option></select></td><td><select onchange="updateGuest('${item.id}','diet',this.value)" class="bg-transparent outline-none text-gray-600 font-medium"><option value="none" ${item.diet==='none'?'selected':''}>无特殊</option><option value="vegetarian" ${item.diet==='vegetarian'?'selected':''}>素食</option><option value="halal" ${item.diet==='halal'?'selected':''}>清真</option></select></td><td><select onchange="assignGuestToSeatingTable('${item.id}',this.value)" class="bg-transparent outline-none text-burgundy-600 font-bold">${tableOptions}</select></td><td class="text-center"><button onclick="deleteGuest('${item.id}')" class="text-red-500 hover:text-red-700 font-bold text-[11px]"><i class="fa-regular fa-trash-can"></i></button></td></tr>`);
+    });
+    calculateGuestStats();
+}
+function addNewGuestRow(nameVal='',dietVal='none',rsvpVal='going',paxVal=1,wishVal=''){guestItems.push({id:'guest_'+Date.now()+Math.floor(Math.random()*100),name:nameVal||'新宾客',rsvp:rsvpVal,diet:dietVal,pax:parseInt(paxVal)||1,wish:wishVal||'',tableId:''});renderGuestsTable();saveAllToLocalStorage();}
+function deleteGuest(id){const guest=guestItems.find(g=>g.id===id);if(guest&&guest.tableId)removeGuestFromTable(guest.tableId,guest.name);guestItems=guestItems.filter(g=>g.id!==id);renderGuestsTable();renderSeatingTables();saveAllToLocalStorage();}
+function updateGuest(id,field,value){const item=guestItems.find(g=>g.id===id);if(item){if(field==='pax'){item.pax=parseInt(value)||1;if(item.tableId)assignGuestToSeatingTable(item.id,item.tableId);}else{item[field]=value;}calculateGuestStats();saveAllToLocalStorage();}}
+function calculateGuestStats(){let t=0,v=0,h=0;guestItems.forEach(item=>{if(item.rsvp==='going'){const px=parseInt(item.pax)||1;t+=px;if(item.diet==='vegetarian')v+=px;if(item.diet==='halal')h+=px;}});const sT=document.getElementById('stats-guest-total'),sV=document.getElementById('stats-guest-veg'),sH=document.getElementById('stats-guest-halal');if(sT)sT.innerText=t;if(sV)sV.innerText=v;if(sH)sH.innerText=h;}
+function assignGuestToSeatingTable(guestId,tableId){
+    const guest=guestItems.find(g=>g.id===guestId);if(!guest)return;if(guest.tableId)clearGuestFromTable(guest.tableId,guest.name);
+    if(!tableId){guest.tableId='';renderGuestsTable();renderSeatingTables();saveAllToLocalStorage();return;}
+    const table=seatingData.find(t=>t.id===tableId);if(table){const guestPax=parseInt(guest.pax)||1;let freeSlots=0;for(let i=0;i<10;i++)if(!table.guests[i]||table.guests[i]==='')freeSlots++;
+        if(freeSlots>=guestPax){guest.tableId=tableId;let paxPlaced=0;for(let i=0;i<10;i++){if(paxPlaced<guestPax&&(!table.guests[i]||table.guests[i]==='')){table.guests[i]=paxPlaced===0?guest.name:`${guest.name}-眷属${paxPlaced}`;paxPlaced++;}}}
+        else{triggerCustomModal("排位警报 ⚠️",`当前桌席仅剩 ${freeSlots} 个空座位，无法容纳该宾客及家属共 ${guestPax} 人！`);guest.tableId='';}}
+    renderGuestsTable();renderSeatingTables();saveAllToLocalStorage();
+}
+function clearGuestFromTable(tableId,guestName){const table=seatingData.find(t=>t.id===tableId);if(table)for(let i=0;i<10;i++)if(table.guests[i]===guestName||(table.guests[i]&&table.guests[i].startsWith(`${guestName}-眷属`)))table.guests[i]='';}
+function removeGuestFromTable(tableId,guestName){clearGuestFromTable(tableId,guestName);}
+function renderSeatingTables(){
+    const container=document.getElementById('seating-tables-container');if(!container)return;container.innerHTML='';
+    seatingData.forEach(table=>{
+        let seatsHtml='';for(let i=0;i<10;i++){const seatName=table.guests[i]||'';seatsHtml+=`<div class="flex items-center gap-1 py-1 border-b border-gray-50"><span class="text-[9px] font-mono text-gray-300 w-3">${i+1}</span><span class="text-xs font-semibold ${seatName?'text-burgundy-600 font-bold':'text-gray-300 italic'}">${seatName||'空座'}</span></div>`;}
+        container.insertAdjacentHTML('beforeend',`<div class="bg-[#faf8f5] rounded-2xl p-4 border border-burgundy-50 elegant-shadow flex flex-col justify-between"><div><div class="flex justify-between items-center border-b border-burgundy-100 pb-2 mb-3"><span class="font-serif font-bold text-xs text-burgundy-500">${table.name}</span><button onclick="deleteTable('${table.id}')" class="text-red-400 hover:text-red-600 text-[10px]"><i class="fa-solid fa-trash"></i></button></div><div class="grid grid-cols-2 gap-2">${seatsHtml}</div></div></div>`);
+    });
+}
+function addNewTable(){const newId='table_'+Date.now();seatingData.push({id:newId,name:`第 ${seatingData.length+1} 桌 - 亲友席`,guests:Array(10).fill('')});renderSeatingTables();renderGuestsTable();saveAllToLocalStorage();}
+function deleteTable(id){guestItems.forEach(guest=>{if(guest.tableId===id)guest.tableId='';});seatingData=seatingData.filter(t=>t.id!==id);renderSeatingTables();renderGuestsTable();saveAllToLocalStorage();}
+
+function simulateRSVPSubmission(){
+    const nameInput=document.getElementById('mock-guest-name');const paxSelect=document.getElementById('mock-guest-pax');const dietSelect=document.getElementById('mock-guest-diet');const wishInput=document.getElementById('mock-guest-wish');
+    if(!nameInput||!nameInput.value.trim()){triggerCustomModal("提示","请在模拟电子请柬中，填入赴宴宾客的名字！");return;}
+    const nameVal=nameInput.value.trim(),paxVal=parseInt(paxSelect.value)||1,dietVal=dietSelect.value,wishVal=wishInput.value.trim();
+    guestItems.push({id:'guest_'+Date.now()+Math.floor(Math.random()*100),name:nameVal,rsvp:'going',diet:dietVal,pax:paxVal,wish:wishVal,tableId:''});
+    nameInput.value='';paxSelect.value="1";dietSelect.value="none";wishInput.value='';
+    renderGuestsTable();calculateGuestStats();renderWishesOnMockBoard();saveAllToLocalStorage();
+    triggerCustomModal("🎉 模拟宾客提交成功！",`宾客 [${nameVal}] 已经通过电子请柬成功登记！共 [${paxVal}] 人、温馨留言以及饮食需求已被实时反向统计，并同步到席位排位大表中。`);
+}
+function renderWishesOnMockBoard(){
+    const board=document.getElementById('invite-wishes-board');if(!board)return;board.innerHTML='';
+    const messages=[];guestItems.forEach(g=>{if(g.wish&&g.wish.trim())messages.push({name:g.name,msg:g.wish});});
+    if(messages.length===0){messages.push({name:"李小明 (小姑堂弟)",msg:"恭喜恭喜！祝你们百年好合，白头偕老！"});messages.push({name:"张美玲 (伴娘好姐妹)",msg:"终于等到这一天了！新娘今天简直美上天！"});messages.push({name:"陈阿姨 (男家长辈)",msg:"看着你们一路走来真心不易，新婚快乐，早生贵子呀！"});}
+    messages.forEach(item=>{board.insertAdjacentHTML('beforeend',`<div class="bg-white p-2 rounded-lg border border-burgundy-100/50 shadow-sm text-left scale-95 origin-left"><div class="flex justify-between items-center text-[8px] font-bold text-burgundy-500 mb-0.5"><span>💖 ${item.name}</span><span class="text-gray-300">刚刚</span></div><p class="text-[9px] text-gray-600 leading-normal font-sans italic">"${item.msg}"</p></div>`);});
+    board.scrollTop=board.scrollHeight;
+}
+
+// ═══════════════════════════════════════
+// CHECKLIST
+// ═══════════════════════════════════════
+function renderInteractiveChecklists(){
+    const w1=document.getElementById('checklist-week-1'),dO=document.getElementById('checklist-day-of');if(!w1||!dO)return;w1.innerHTML='';dO.innerHTML='';
+    const w1Items=checklistItems.filter(i=>i.section==='week-1'),dOItems=checklistItems.filter(i=>i.section==='day-of');
+    if(w1Items.length===0)w1.innerHTML=`<p class="text-xs text-gray-400 italic py-2">暂无该时段的备忘，点击上方按钮新增项目。</p>`;
+    if(dOItems.length===0)dO.innerHTML=`<p class="text-xs text-gray-400 italic py-2">暂无该时段的备忘，点击上方按钮新增项目。</p>`;
+    checklistItems.forEach(item=>{
+        const domString=`<div class="flex items-center justify-between p-3 bg-gray-50/50 hover:bg-burgundy-50/10 rounded-xl border border-gray-100 transition group"><div class="flex items-center flex-1 mr-4"><input id="${item.id}" type="checkbox" ${item.checked?'checked':''} onchange="toggleChecklistItem('${item.id}')" class="w-4 h-4 text-burgundy-500 border-gray-300 rounded focus:ring-burgundy-500 cursor-pointer"><input type="text" value="${item.text}" oninput="updateChecklistItemText('${item.id}',this.value)" class="ml-3 text-xs text-gray-600 bg-transparent border-b border-transparent hover:border-gray-200 focus:border-burgundy-500 focus:outline-none flex-1 py-0.5 transition font-medium ${item.checked?'line-through text-gray-400':''}" placeholder="在此填写新的备婚任务要点..."></div><button onclick="deleteChecklistItem('${item.id}')" class="text-gray-300 hover:text-red-500 text-[11px] opacity-0 group-hover:opacity-100 transition no-print"><i class="fa-solid fa-trash-can"></i></button></div>`;
+        if(item.section==='week-1')w1.insertAdjacentHTML('beforeend',domString);else dO.insertAdjacentHTML('beforeend',domString);
+    });
+}
+function toggleChecklistItem(id){const item=checklistItems.find(c=>c.id===id);if(item){item.checked=!item.checked;renderInteractiveChecklists();calculateChecklistProgress();saveAllToLocalStorage();}}
+function updateChecklistItemText(id,value){const item=checklistItems.find(c=>c.id===id);if(item){item.text=value;saveAllToLocalStorage();}}
+function addChecklistItem(sectionKey){const newItem={id:'chk_custom_'+Date.now(),text:'',section:sectionKey,checked:false};checklistItems.push(newItem);renderInteractiveChecklists();calculateChecklistProgress();saveAllToLocalStorage();}
+function deleteChecklistItem(id){checklistItems=checklistItems.filter(c=>c.id!==id);renderInteractiveChecklists();calculateChecklistProgress();saveAllToLocalStorage();}
+function calculateChecklistProgress(){
+    const total=checklistItems.length;if(total===0){const p=document.getElementById('checklist-progress-bar');const pt=document.getElementById('checklist-progress-percent');if(p)p.style.width='0%';if(pt)pt.innerText='0%';return;}
+    let checkedCount=0;checklistItems.forEach(item=>{if(item.checked)checkedCount++;});
+    const percentage=Math.round((checkedCount/total)*100)||0;const p=document.getElementById('checklist-progress-bar');const pt=document.getElementById('checklist-progress-percent');if(p)p.style.width=`${percentage}%`;if(pt)pt.innerText=`${percentage}%`;
+}
+
+// ═══════════════════════════════════════
+// MUSIC
+// ═══════════════════════════════════════
+let playingTrackId=null;
+function toggleMusicSimulation(trackId,btn){if(playingTrackId===trackId){playingTrackId=null;btn.innerHTML=`<i class="fa-solid fa-play"></i>`;}else{playingTrackId=trackId;btn.innerHTML=`<i class="fa-solid fa-pause text-red-500 animate-pulse"></i>`;}}
+
+// ═══════════════════════════════════════
+// AI ASSISTANT (Gemini)
+// ═══════════════════════════════════════
+async function callGeminiAPI(systemPrompt,userPrompt,useSearch=false,responseJson=false,retries=5,delay=1000){
+    const apiKey="";const apiUrl=`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    const payload={contents:[{parts:[{text:userPrompt}]}],systemInstruction:{parts:[{text:systemPrompt}]}};
+    if(useSearch)payload.tools=[{"google_search":{}}];if(responseJson)payload.generationConfig={responseMimeType:"application/json"};
+    for(let i=0;i<retries;i++){try{const response=await fetch(apiUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(!response.ok)throw new Error(`Gemini API Error! Status: ${response.status}`);return await response.json();}catch(error){if(i===retries-1)throw error;await new Promise(r=>setTimeout(r,delay*Math.pow(2,i)));}}
+}
+function showAILoading(){
+    const container=document.getElementById('ai-output-container');const tray=document.getElementById('ai-action-tray');const tag=document.getElementById('ai-status-tag');
+    if(tag){tag.innerText="智脑运算中...";tag.className="text-[10px] font-bold bg-amber-50 text-amber-600 px-2 py-1 rounded animate-pulse";}
+    if(tray)tray.classList.add('hidden');
+    if(container)container.innerHTML=`<div class="space-y-4"><div class="h-4 shimmer rounded w-1/4"></div><div class="space-y-2"><div class="h-3 shimmer rounded w-full"></div><div class="h-3 shimmer rounded w-5/6"></div><div class="h-3 shimmer rounded w-4/5"></div></div></div>`;
+}
+async function generateAIGatecrash(){
+    const style=document.getElementById('ai-gate-style').value;const container=document.getElementById('ai-output-container');const tray=document.getElementById('ai-action-tray');const tag=document.getElementById('ai-status-tag');const syncBtn=document.getElementById('ai-sync-btn');
+    showAILoading();
+    const sysPrompt="你是一名顶级的大马华人婚礼策划师。请结合大马华人接亲（Gatecrash）习俗，策划 3 个高水平的游戏。要求：好玩有梗不低俗，不弄脏高级西装。你必须返回符合原生 JSON 结构的文本：\n{\n  \"game1\": \"简洁描述\",\n  \"game2\": \"简洁描述\",\n  \"game3\": \"简洁描述\",\n  \"details\": \"详细玩法规则、所需道具，markdown排版。\"\n}";
+    const userPrompt=`请为我策划一套【${style}】风格的大马华人接亲闯关游戏（3个项目）。`;
+    try{
+        const apiResult=await callGeminiAPI(sysPrompt,userPrompt,false,true);const rawText=apiResult.candidates?.[0]?.content?.parts?.[0]?.text;const parsedData=JSON.parse(rawText);
+        lastGeneratedGames=parsedData;aiClipboardCache=`大马创意迎亲游戏案：\n\n1. ${parsedData.game1}\n2. ${parsedData.game2}\n3. ${parsedData.game3}\n\n玩法规则说明：\n${parsedData.details}`;
+        if(tag){tag.innerText="生成完成";tag.className="text-[10px] font-bold bg-green-50 text-green-600 px-2 py-1 rounded";}
+        if(container)container.innerHTML=`<div class="space-y-4 text-xs leading-relaxed text-gray-700"><div class="bg-burgundy-50 border border-burgundy-100 p-4 rounded-xl"><span class="font-bold text-burgundy-500 block mb-2">⚡ 建议自动同步到流程表的 3 个游戏：</span><ul class="list-decimal list-inside space-y-1 font-semibold text-gray-800"><li>${parsedData.game1}</li><li>${parsedData.game2}</li><li>${parsedData.game3}</li></ul></div><div class="prose max-w-none bg-gray-50/50 border border-gray-100 p-4 rounded-xl max-h-[300px] overflow-y-auto"><h4 class="font-bold text-gray-800 border-b border-gray-200 pb-2 mb-3">📋 执行大纲与道具详情</h4><p class="whitespace-pre-line text-gray-600 text-xs">${parsedData.details}</p></div></div>`;
+        if(tray)tray.classList.remove('hidden');if(syncBtn)syncBtn.classList.remove('hidden');
+        const copyBtn=document.getElementById('ai-copy-btn');if(copyBtn)copyBtn.onclick=()=>copyToClipboard(aiClipboardCache);
+    }catch(error){console.error(error);if(tag){tag.innerText="生成失败";tag.className="text-[10px] font-bold bg-red-50 text-red-600 px-2 py-1 rounded";}if(container)container.innerHTML=`<div class="text-center py-10 text-red-500 font-semibold text-xs">❌ 智脑计算连接超时，请重试。</div>`;}
+}
+async function generateAIEmceeScript(){
+    const tone=document.getElementById('ai-emcee-tone').value;const container=document.getElementById('ai-output-container');const tray=document.getElementById('ai-action-tray');const tag=document.getElementById('ai-status-tag');const syncBtn=document.getElementById('ai-sync-btn');
+    showAILoading();const groom=document.getElementById('groom-name').value||"新郎";const bride=document.getElementById('bride-name').value||"新娘";
+    const sysPrompt=`你是一名专业的大马华人婚礼双语司仪。根据特定主持风格（${tone}）及晚宴大进场、快剪播放、突袭唱歌（8:23 PM 新郎独唱 Perfect）、饮胜（9:15 PM 倒香槟大喊三次 Yam Seng）撰写全套多语言交替的主持稿。`;
+    const userPrompt=`新郎叫【${groom}】，新妇叫【${bride}】。请生成流畅的中英文双语高品质司仪串场手稿。`;
+    try{
+        const apiResult=await callGeminiAPI(sysPrompt,userPrompt,true,false);const rawText=apiResult.candidates?.[0]?.content?.parts?.[0]?.text;aiClipboardCache=rawText;
+        if(tag){tag.innerText="生成完成";tag.className="text-[10px] font-bold bg-green-50 text-green-600 px-2 py-1 rounded";}
+        if(container)container.innerHTML=`<div class="space-y-4 text-xs leading-relaxed text-gray-700"><div class="bg-champagne-100/30 border border-champagne-100 p-4 rounded-xl text-xs"><span class="font-bold text-champagne-600 block mb-1">🎤 专属双语司仪主持稿已生成：</span></div><div class="bg-gray-50/50 border border-gray-100 p-4 rounded-xl max-h-[300px] overflow-y-auto font-mono text-gray-600 whitespace-pre-line leading-relaxed text-xs">${rawText}</div></div>`;
+        if(tray)tray.classList.remove('hidden');if(syncBtn)syncBtn.classList.add('hidden');const copyBtn=document.getElementById('ai-copy-btn');if(copyBtn)copyBtn.onclick=()=>copyToClipboard(aiClipboardCache);
+    }catch(error){console.error(error);if(tag){tag.innerText="生成失败";tag.className="text-[10px] font-bold bg-red-50 text-red-600 px-2 py-1 rounded";}if(container)container.innerHTML=`<div class="text-center py-10 text-red-500 font-semibold text-xs">❌ 连接超时。</div>`;}
+}
+async function polishAIVows(){
+    const rawInput=document.getElementById('ai-vow-input').value.trim();const tone=document.getElementById('ai-vow-tone').value;const container=document.getElementById('ai-output-container');const tray=document.getElementById('ai-action-tray');const tag=document.getElementById('ai-status-tag');const syncBtn=document.getElementById('ai-sync-btn');
+    if(!rawInput){triggerCustomModal("输入提示","请先在输入框中随便写几个字作为想法基础！");return;}
+    showAILoading();const sysPrompt=`你是一名顶级华人婚礼致词润色顾问。任务是将粗糙的真心话，升华润色成情感细腻、符合 ${tone} 风格的誓言发言词。`;const userPrompt=`我的想法草稿为：\n"${rawInput}"\n请帮我提炼润色一版。`;
+    try{
+        const apiResult=await callGeminiAPI(sysPrompt,userPrompt,false,false);const rawText=apiResult.candidates?.[0]?.content?.parts?.[0]?.text;aiClipboardCache=rawText;
+        if(tag){tag.innerText="润色完成";tag.className="text-[10px] font-bold bg-green-50 text-green-600 px-2 py-1 rounded";}
+        if(container)container.innerHTML=`<div class="space-y-4 text-xs leading-relaxed text-gray-700"><div class="bg-gray-100 border border-gray-200 p-4 rounded-xl text-xs"><span class="font-bold text-gray-700 block mb-1">✍️ 精修版晚宴致辞：</span></div><div class="bg-gray-50/50 border border-gray-100 p-5 rounded-xl max-h-[300px] overflow-y-auto font-serif text-gray-700 text-sm whitespace-pre-line leading-loose italic">"${rawText}"</div></div>`;
+        if(tray)tray.classList.remove('hidden');if(syncBtn)syncBtn.classList.add('hidden');const copyBtn=document.getElementById('ai-copy-btn');if(copyBtn)copyBtn.onclick=()=>copyToClipboard(aiClipboardCache);
+    }catch(error){console.error(error);if(tag){tag.innerText="生成失败";tag.className="text-[10px] font-bold bg-red-50 text-red-600 px-2 py-1 rounded";}if(container)container.innerHTML=`<div class="text-center py-10 text-red-500 font-semibold text-xs">❌ 连接超时。</div>`;}
+}
+
+// ═══════════════════════════════════════
+// PERSISTENCE
+// ═══════════════════════════════════════
+function saveAllToLocalStorage(){
+    const payload={
+        groomName:document.getElementById('groom-name')?.value||'',
+        brideName:document.getElementById('bride-name')?.value||'',
+        weddingDate:targetWeddingDateValue,
+        carouselPhotos,checklistItems,seatingData,todoItems,guestItems,
+        budgetNewItems,quoteItems,likedInspirations,
+        budgetTotalNew:document.getElementById('budget-total-new-input')?.value||'60000',
+        savingGoal:document.getElementById('saving-goal-input')?.value||'',
+        depositEntries,
+        runsheetItems,
+    };
+    localStorage.setItem('wedding_v9_data',JSON.stringify(payload));
+    const toast=document.getElementById('save-status-toast');if(toast){toast.classList.remove('hidden');setTimeout(()=>toast.classList.add('hidden'),1200);}
+}
+
+function loadAllFromLocalStorage(){
+    const storedStr=localStorage.getItem('wedding_v9_data')||localStorage.getItem('wedding_20290528_data_v7')||localStorage.getItem('wedding_20290528_data_v6');
+    if(!storedStr){
+        seatingData=[{id:'table_1',name:'第 1 桌 - 男家主桌 (Groom VIP)',guests:['新郎','新郎父亲','新郎母亲','','','','','','','']},{id:'table_2',name:'第 2 桌 - 女家主桌 (Bride VIP)',guests:['新娘','新娘父亲','新娘母亲','','','','','','','']}];
+        todoItems=[{id:'todo1',text:'挑选大马吉隆坡经典宴会厅并支付酒席订金',owner:'joint',status:'planning'},{id:'todo2',text:'跟妆造型设计试妆',owner:'bride',status:'verify'}];
+        guestItems=[{id:'g1',name:'陈大伯',rsvp:'going',diet:'none',pax:1,wish:"新婚大吉，恩爱永驻！",tableId:'table_1'},{id:'g2',name:'李阿姨',rsvp:'going',diet:'vegetarian',pax:2,wish:"恭喜新人！祝百年好合！",tableId:'table_2'}];
+        budgetNewItems=[{id:'b1',name:'吉隆坡 Glasshouse Seputeh 场地费',category:'布置',amount:15000,receiptURL:''},{id:'b2',name:'影像摄制团队费用（包含接亲快剪）',category:'摄像',amount:4500,receiptURL:''}];
+        quoteItems=[{id:'q1',vendor:'Mocha Studio 吉隆坡',price:4500,service:'双摄 包含早上接亲快剪 SDE',prosCons:'本地好评、交片迅速，档期需要提早约',rating:'🌟🌟🌟🌟🌟'}];
+        checklistItems=JSON.parse(JSON.stringify(defaultChecklist));
+        runsheetItems=JSON.parse(JSON.stringify(defaultRunsheetTemplates));
+        renderSeatingTables();
+        return;
+    }
+    try{
+        const data=JSON.parse(storedStr);
+        if(document.getElementById('groom-name'))document.getElementById('groom-name').value=data.groomName||'';
+        if(document.getElementById('bride-name'))document.getElementById('bride-name').value=data.brideName||'';
+        targetWeddingDateValue=data.weddingDate||"";
+        if(data.carouselPhotos&&data.carouselPhotos.length>0)carouselPhotos=data.carouselPhotos;
+        checklistItems=data.checklistItems&&data.checklistItems.length>0?data.checklistItems:JSON.parse(JSON.stringify(defaultChecklist));
+        renderInteractiveChecklists();calculateChecklistProgress();
+        seatingData=data.seatingData&&data.seatingData.length>0?data.seatingData:[];renderSeatingTables();
+        todoItems=data.todoItems&&data.todoItems.length>0?data.todoItems:[];
+        guestItems=data.guestItems&&data.guestItems.length>0?data.guestItems:[];
+        budgetNewItems=data.budgetNewItems&&data.budgetNewItems.length>0?data.budgetNewItems:[];
+        if(data.budgetTotalNew&&document.getElementById('budget-total-new-input'))document.getElementById('budget-total-new-input').value=data.budgetTotalNew;
+        if(data.savingGoal&&document.getElementById('saving-goal-input'))document.getElementById('saving-goal-input').value=data.savingGoal;
+        depositEntries=data.depositEntries&&data.depositEntries.length>0?data.depositEntries:[];
+        quoteItems=data.quoteItems&&data.quoteItems.length>0?data.quoteItems:[];
+        likedInspirations=data.likedInspirations||[];
+        runsheetItems=data.runsheetItems&&data.runsheetItems.length>0?data.runsheetItems:JSON.parse(JSON.stringify(defaultRunsheetTemplates));
+        // ★ NEW
+    }catch(e){console.error("Failed to load: ",e);}
+}
+
+// ═══════════════════════════════════════
+// PRINT / PDF — clean data-driven renderers
+// ═══════════════════════════════════════
+
+function _printMeta() {
+    return {
+        groom: document.getElementById('groom-name')?.value   || '新郎',
+        bride: document.getElementById('bride-name')?.value   || '新娘',
+        venue: document.getElementById('invite-location-input')?.value || '',
+        date:  document.getElementById('header-wedding-date')?.innerText || '',
+    };
+}
+
+function _openPrintWindow(title, bodyHtml, extraCss) {
+    const m = _printMeta();
+    const html = `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
+<title>${title} · ${m.groom} &amp; ${m.bride}</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a;font-size:12px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@page{size:A4 portrait;margin:14mm 12mm}
+@media print{.no-print{display:none!important}}
+.ph{text-align:center;padding-bottom:14px;border-bottom:1.5px solid #ddd;margin-bottom:20px}
+.ph .ey{font-size:9px;letter-spacing:.25em;color:#b08b43;text-transform:uppercase;margin-bottom:5px}
+.ph .nm{font-size:22px;font-weight:700;color:#800020;font-family:serif;letter-spacing:.03em}
+.ph .sb{font-size:10px;color:#999;margin-top:3px}
+.pb{display:inline-flex;align-items:center;gap:6px;background:#800020;color:#fff;border:none;border-radius:7px;padding:7px 20px;font-size:11px;font-weight:700;cursor:pointer}
+.pb:hover{background:#66001a}
+.ft{text-align:center;font-size:9px;color:#ccc;margin-top:22px;font-style:italic;border-top:1px solid #eee;padding-top:10px}
+${extraCss || ''}
+</style></head><body>
+<div class="no-print" style="text-align:center;padding:10px 0 14px">
+  <button class="pb" onclick="window.print()">🖨️ 打印 / 另存为 PDF</button>
+</div>
+<div class="ph">
+  <div class="ey">Wedding Planning · ${m.date}</div>
+  <div class="nm">${m.groom} &amp; ${m.bride}</div>
+  <div class="sb">${title}${m.venue ? ' · ' + m.venue : ''}</div>
+</div>
+${bodyHtml}
+<div class="ft">"良辰吉日定终身，百年琴瑟共白头" · 婚礼数字座舱</div>
+</body></html>`;
+    const w = window.open('', '_blank', 'width=860,height=720');
+    w.document.write(html);
+    w.document.close();
+    w.focus();
+}
+
+// ── SEATING CHART ─────────────────────────────────────────────────────
+function printSeatingChart() {
+    const totalGuests = seatingData.reduce((s,t) => s + t.guests.filter(g=>g&&g.trim()).length, 0);
+
+    let cards = '';
+    seatingData.forEach((table, idx) => {
+        const filled = table.guests.filter(g => g && g.trim()).length;
+        const pct    = Math.round(filled / 10 * 100);
+
+        // SVG round-table diagram
+        const dots = Array.from({length:10}, (_,i) => {
+            const a = (i * 36 - 90) * Math.PI / 180;
+            const x = (28 + 26 * Math.cos(a)).toFixed(1);
+            const y = (28 + 26 * Math.sin(a)).toFixed(1);
+            const on = table.guests[i] && table.guests[i].trim();
+            return `<circle cx="${x}" cy="${y}" r="4.5" fill="${on?'#800020':'#e5e7eb'}"/>`;
+        }).join('');
+        const svg = `<svg width="56" height="56" viewBox="0 0 56 56">
+            <circle cx="28" cy="28" r="14" fill="#faf8f5" stroke="#e8ddd0" stroke-width="1.5"/>
+            <text x="28" y="32" text-anchor="middle" font-size="9" fill="#800020" font-weight="700">${filled}/10</text>
+            ${dots}</svg>`;
+
+        // Seat rows — two columns side by side
+        const leftSeats  = table.guests.slice(0,5);
+        const rightSeats = table.guests.slice(5,10);
+        const makeRow = (name, num) => `
+            <div style="display:flex;align-items:center;gap:5px;padding:3px 0;border-bottom:1px solid #f5f0eb">
+                <span style="font-size:9px;color:#ccc;width:12px;text-align:right;flex-shrink:0">${num}</span>
+                <span style="font-size:11px;font-weight:${name?'600':'400'};color:${name?'#800020':'#bbb'}">${name||'—'}</span>
+            </div>`;
+        const leftHtml  = leftSeats.map((n,i) => makeRow(n, i+1)).join('');
+        const rightHtml = rightSeats.map((n,i) => makeRow(n, i+6)).join('');
+
+        cards += `
+        <div style="background:#fff;border:1px solid #e8ddd0;border-radius:10px;padding:14px;break-inside:avoid;page-break-inside:avoid;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f0e8df;padding-bottom:8px">
+                <div>
+                    <div style="font-size:9px;color:#b08b43;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px">Table ${idx+1}</div>
+                    <div style="font-size:12px;font-weight:700;color:#800020;font-family:serif">${table.name}</div>
+                </div>
+                ${svg}
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 12px">
+                <div>${leftHtml}</div>
+                <div>${rightHtml}</div>
+            </div>
+            <div>
+                <div style="height:3px;background:#f3ece5;border-radius:99px;overflow:hidden">
+                    <div style="height:100%;width:${pct}%;background:${pct>=100?'#22c55e':'#c5a059'};border-radius:99px"></div>
+                </div>
+                <div style="font-size:9px;color:#bbb;margin-top:2px;text-align:right">${filled} 已排 · ${10-filled} 空位</div>
+            </div>
+        </div>`;
+    });
+
+    const summary = `
+        <div style="display:flex;gap:10px;justify-content:center;margin-bottom:18px;flex-wrap:wrap">
+            ${[`🪑 共 ${seatingData.length} 桌`,`👥 已排 ${totalGuests} 位`,`💺 空位 ${seatingData.length*10-totalGuests} 个`]
+                .map(t=>`<span style="background:#faf3eb;border:1px solid #e8ddd0;border-radius:99px;padding:4px 14px;font-size:10px;color:#800020;font-weight:600">${t}</span>`).join('')}
+        </div>`;
+
+    const body = seatingData.length === 0
+        ? `<div style="text-align:center;padding:60px;color:#ccc">暂无桌席数据</div>`
+        : summary + `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">${cards}</div>`;
+
+    _openPrintWindow('婚礼座位表 Seating Chart', body);
+}
+
+// ── SECTION PRINTERS — each builds from data, not DOM ─────────────────
+function printSection(key) {
+    const builders = {
+        morning:   () => _buildRunsheet('morning',   '第一幕：清晨喜庆接亲'),
+        afternoon: () => _buildRunsheet('afternoon', '第二幕：傍晚首见外拍'),
+        evening:   () => _buildRunsheet('evening',   '第三幕：无伴电影感晚宴'),
+        guests:    _buildGuestList,
+        checklist: _buildChecklist,
+        budget:    _buildBudget,
+    };
+    const fn = builders[key];
+    if (fn) fn();
+}
+
+// Shared row CSS for tables
+const _TD = 'padding:6px 8px;border-bottom:1px solid #f0ebe4;font-size:11px;vertical-align:top';
+const _TH = 'padding:5px 8px;font-size:9px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.05em;border-bottom:1.5px solid #ddd;background:#faf8f5';
+
+function _buildRunsheet(act, title) {
+    const items = runsheetItems.filter(r => r.act === act);
+    if (items.length === 0) {
+        _openPrintWindow(title, `<p style="color:#ccc;text-align:center;padding:40px">暂无步骤</p>`);
+        return;
+    }
+    const rows = items.map((r, i) => `
+        <tr>
+            <td style="${_TD};width:22px;text-align:center">
+                <span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#800020;color:#fff;font-size:9px;font-weight:700">${i+1}</span>
+            </td>
+            <td style="${_TD};width:100px;color:#800020;font-weight:600;white-space:nowrap">${r.time}</td>
+            <td style="${_TD};font-weight:700;color:#1a1a1a">${r.title}</td>
+            <td style="${_TD};color:#555;line-height:1.5">${r.desc}</td>
+        </tr>`).join('');
+
+    const body = `
+        <table style="width:100%;border-collapse:collapse">
+            <thead><tr>
+                <th style="${_TH};width:22px">#</th>
+                <th style="${_TH}">时间</th>
+                <th style="${_TH}">环节</th>
+                <th style="${_TH}">详情</th>
+            </tr></thead>
+            <tbody>${rows}</tbody>
+        </table>`;
+    _openPrintWindow(title, body);
+}
+
+function _buildGuestList() {
+    const going = guestItems.filter(g => g.rsvp !== 'no');
+    const total = going.reduce((s,g) => s + (parseInt(g.pax)||1), 0);
+    const veg   = going.filter(g => g.diet === 'vegetarian').reduce((s,g) => s+(parseInt(g.pax)||1), 0);
+    const hal   = going.filter(g => g.diet === 'halal').reduce((s,g) => s+(parseInt(g.pax)||1), 0);
+
+    const chips = (label, val, color) =>
+        `<span style="background:${color}15;border:1px solid ${color}40;border-radius:99px;padding:3px 12px;font-size:10px;color:${color};font-weight:600">${label} ${val}</span>`;
+
+    const summary = `<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+        ${chips('👥 出席',total,'#800020')}
+        ${chips('🌿 素食',veg,'#16a34a')}
+        ${chips('☪️ 清真',hal,'#0369a1')}
+    </div>`;
+
+    const rows = guestItems.map((g,i) => {
+        const table = seatingData.find(t => t.id === g.tableId);
+        const dietLabel = {none:'—', vegetarian:'素食', halal:'清真'}[g.diet] || '—';
+        const rsvpLabel = {going:'✅ 出席', maybe:'⏳ 待定', no:'❌ 不出席'}[g.rsvp] || g.rsvp;
+        return `<tr style="background:${i%2===0?'#fff':'#faf8f5'}">
+            <td style="${_TD};font-weight:600;color:#1a1a1a">${g.name}</td>
+            <td style="${_TD};text-align:center">${g.pax||1}</td>
+            <td style="${_TD}">${rsvpLabel}</td>
+            <td style="${_TD};color:#555">${dietLabel}</td>
+            <td style="${_TD};color:#800020;font-weight:600">${table ? table.name : '未安排'}</td>
+            <td style="${_TD};color:#777;font-style:italic;font-size:10px">${g.wish ? '"'+g.wish+'"' : ''}</td>
+        </tr>`;
+    }).join('');
+
+    const body = summary + `
+        <table style="width:100%;border-collapse:collapse">
+            <thead><tr>
+                <th style="${_TH}">姓名</th>
+                <th style="${_TH};text-align:center">人数</th>
+                <th style="${_TH}">RSVP</th>
+                <th style="${_TH}">饮食</th>
+                <th style="${_TH}">桌位</th>
+                <th style="${_TH}">祝福留言</th>
+            </tr></thead>
+            <tbody>${rows}</tbody>
+        </table>`;
+    _openPrintWindow('宾客花名登账簿 Guest List', body);
+}
+
+function _buildChecklist() {
+    const sections = [
+        { key:'week-1', label:'婚礼前 1 周重点排查' },
+        { key:'day-of', label:'婚礼当天下午（晚宴开场前）' },
+    ];
+    let body = '';
+    sections.forEach(sec => {
+        const items = checklistItems.filter(c => c.section === sec.key);
+        if (items.length === 0) return;
+        body += `<div style="margin-bottom:20px">
+            <div style="font-size:11px;font-weight:700;color:#800020;border-left:3px solid #800020;padding-left:8px;margin-bottom:10px">${sec.label}</div>
+            ${items.map(c => `
+                <div style="display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid #f5f0eb">
+                    <span style="font-size:14px;flex-shrink:0;line-height:1">${c.checked ? '☑' : '☐'}</span>
+                    <span style="font-size:11px;color:${c.checked?'#aaa':'#1a1a1a'};text-decoration:${c.checked?'line-through':'none'};line-height:1.5">${c.text}</span>
+                </div>`).join('')}
+        </div>`;
+    });
+    _openPrintWindow('备婚核心倒计时清单 Checklist', body || '<p style="color:#ccc;text-align:center;padding:40px">暂无清单项目</p>');
+}
+
+function _buildBudget() {
+    const totalBudget = parseFloat(document.getElementById('budget-total-new-input')?.value) || 0;
+    const spent = budgetNewItems.reduce((s,b) => s + b.amount, 0);
+    const left  = totalBudget - spent;
+    const pct   = totalBudget > 0 ? Math.round(spent/totalBudget*100) : 0;
+    const barColor = pct > 100 ? '#ef4444' : pct > 85 ? '#f97316' : '#22c55e';
+
+    const summary = `
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px">
+            ${[['婚礼总预算',`RM ${totalBudget.toLocaleString()}`,'#800020'],
+               ['已花总数',`RM ${spent.toLocaleString()}`,'#dc2626'],
+               ['剩余余粮',`RM ${left.toLocaleString()}`,left>=0?'#16a34a':'#dc2626']]
+                .map(([l,v,c])=>`<div style="border:1px solid #eee;border-radius:8px;padding:10px;text-align:center">
+                    <div style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">${l}</div>
+                    <div style="font-size:14px;font-weight:700;color:${c};font-family:monospace">${v}</div>
+                </div>`).join('')}
+        </div>
+        <div style="margin-bottom:6px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+                <span style="font-size:10px;color:#999">预算使用进度</span>
+                <span style="font-size:10px;font-weight:700;color:${barColor}">${pct}%</span>
+            </div>
+            <div style="height:6px;background:#f3f4f6;border-radius:99px;overflow:hidden;margin-bottom:16px">
+                <div style="height:100%;width:${Math.min(pct,100)}%;background:${barColor};border-radius:99px"></div>
+            </div>
+        </div>`;
+
+    const rows = budgetNewItems.map((b,i) => `
+        <tr style="background:${i%2===0?'#fff':'#faf8f5'}">
+            <td style="${_TD};font-weight:600;color:#1a1a1a">${b.name || '—'}</td>
+            <td style="${_TD};color:#555">${b.category}</td>
+            <td style="${_TD};font-family:monospace;font-weight:700;color:#dc2626;text-align:right">RM ${b.amount.toLocaleString()}</td>
+            <td style="${_TD};color:${b.receiptURL?'#16a34a':'#ccc'}">${b.receiptURL?'✓ 已上传':'—'}</td>
+        </tr>`).join('');
+
+    const body = summary + (budgetNewItems.length === 0
+        ? `<p style="color:#ccc;text-align:center;padding:30px">暂无支出记录</p>`
+        : `<table style="width:100%;border-collapse:collapse">
+            <thead><tr>
+                <th style="${_TH}">分项类目</th>
+                <th style="${_TH}">分类</th>
+                <th style="${_TH};text-align:right">金额 (RM)</th>
+                <th style="${_TH}">收据</th>
+            </tr></thead>
+            <tbody>${rows}</tbody>
+            <tfoot><tr>
+                <td colspan="2" style="padding:8px;font-weight:700;font-size:12px;text-align:right;border-top:2px solid #ddd">合计</td>
+                <td style="padding:8px;font-weight:700;font-size:12px;font-family:monospace;color:#dc2626;text-align:right;border-top:2px solid #ddd">RM ${spent.toLocaleString()}</td>
+                <td style="border-top:2px solid #ddd"></td>
+            </tr></tfoot>
+        </table>`);
+
+    _openPrintWindow('婚礼预算开销明细 Budget', body);
+}
+
+// ═══════════════════════════════════════
+// MODAL
+// ═══════════════════════════════════════
+function triggerCustomModal(title,message,isConfirm=false,onConfirmCallback=null){
+    const modal=document.getElementById('custom-modal');const modalTitle=document.getElementById('modal-title');const modalMessage=document.getElementById('modal-message');const okBtn=document.getElementById('modal-ok-btn');const cancelBtn=document.getElementById('modal-cancel-btn');
+    if(!modal||!modalTitle||!modalMessage||!okBtn||!cancelBtn)return;
+    modalTitle.innerText=title;modalMessage.innerHTML=message;modal.classList.remove('hidden');
+    if(isConfirm)cancelBtn.classList.remove('hidden');else cancelBtn.classList.add('hidden');
+    const newOk=okBtn.cloneNode(true);const newCancelBtn=cancelBtn.cloneNode(true);okBtn.parentNode.replaceChild(newOk,okBtn);cancelBtn.parentNode.replaceChild(newCancelBtn,cancelBtn);
+    newOk.addEventListener('click',()=>{modal.classList.add('hidden');if(onConfirmCallback)onConfirmCallback();});newCancelBtn.addEventListener('click',()=>modal.classList.add('hidden'));
+}
+function copyToClipboard(text){const ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');triggerCustomModal("复制成功","生成的大纲与台词内容已经成功复制到您的系统剪贴板！");}catch(err){triggerCustomModal("复制失败","由于浏览器安全权限受限，请在屏幕上长按选择文本手动复制。");}document.body.removeChild(ta);}
+</script>
+</body>
+</html>
