@@ -56,38 +56,45 @@
      ADMIN — HEADER
 ═══════════════════════════════════════════════════════════ -->
 <div id="admin-shell">
+<!-- Language Toggle -->
+<div class="fixed top-4 right-4 z-50 no-print">
+    <button onclick="toggleLanguage()" id="lang-toggle-btn" class="bg-white hover:bg-gray-50 text-burgundy-500 border border-burgundy-100 text-xs font-bold py-2 px-3.5 rounded-full elegant-shadow transition duration-200 flex items-center gap-1.5">
+        <i class="fa-solid fa-globe text-[10px]"></i>
+        <span id="lang-toggle-label">EN</span>
+    </button>
+</div>
 <header class="bg-gradient-to-b from-[#800020]/10 to-transparent pt-12 pb-8 px-4 text-center no-print">
     <div class="max-w-5xl mx-auto">
         <span class="text-xs uppercase tracking-widest text-burgundy-500 font-bold bg-burgundy-50 px-4 py-2 rounded-full border border-burgundy-100">✨ WE ARE GETTING MARRIED</span>
-        <h1 class="text-4xl md:text-6xl font-bold font-serif text-burgundy-500 mt-5 mb-2">我们结婚了</h1>
+        <h1 class="text-4xl md:text-6xl font-bold font-serif text-burgundy-500 mt-5 mb-2" data-i18n="header_title">我们结婚了</h1>
         <p class="text-sm md:text-lg text-gray-600 font-serif tracking-wide mt-2">
-            "<span id="header-wedding-date" class="font-bold text-burgundy-600 underline decoration-champagne-500 underline-offset-4">请选择日期</span> 婚礼数字座舱 · 执子之手 与子偕老"
+            "<span id="header-wedding-date" class="font-bold text-burgundy-600 underline decoration-champagne-500 underline-offset-4" data-i18n="header_select_date">请选择日期</span> <span data-i18n="header_subtitle">婚礼数字座舱 · 执子之手 与子偕老</span>"
         </p>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
             <div class="bg-white rounded-2xl p-4 elegant-shadow border border-burgundy-50 text-center">
-                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">距离婚礼盛典还有</div>
-                <div id="countdown-timer" class="text-lg font-bold text-burgundy-500 mt-1 font-serif">计算中...</div>
+                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider" data-i18n="countdown_label">距离婚礼盛典还有</div>
+                <div id="countdown-timer" class="text-lg font-bold text-burgundy-500 mt-1 font-serif" data-i18n="countdown_calculating">计算中...</div>
             </div>
             <div class="bg-white rounded-2xl p-4 elegant-shadow border border-burgundy-50 text-center">
-                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">协同任务核备率</div>
+                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider" data-i18n="task_readiness">协同任务核备率</div>
                 <div class="flex items-center justify-center mt-2">
                     <div class="w-full bg-gray-100 rounded-full h-2 mr-2 max-w-[120px]"><div id="checklist-progress-bar" class="bg-champagne-500 h-2 rounded-full" style="width:0%"></div></div>
                     <span id="checklist-progress-percent" class="text-xs font-bold text-champagne-600">0%</span>
                 </div>
             </div>
             <div class="bg-white rounded-2xl p-4 elegant-shadow border border-burgundy-50 text-center">
-                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">已用总预算占比</div>
+                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider" data-i18n="budget_used_ratio">已用总预算占比</div>
                 <div class="flex items-center justify-center mt-2">
                     <div class="w-full bg-gray-100 rounded-full h-2 mr-2 max-w-[120px]"><div id="header-budget-bar" class="bg-red-500 h-2 rounded-full" style="width:0%"></div></div>
                     <span id="header-budget-percent" class="text-xs font-bold text-red-600">0%</span>
                 </div>
             </div>
             <div class="bg-white rounded-2xl p-4 elegant-shadow border border-burgundy-50 flex items-center justify-center gap-2">
-                <button onclick="saveAllToLocalStorage()" class="flex-1 bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-3 rounded-lg transition duration-200">💾 保存内容</button>
-                <button onclick="window.print()" class="flex-1 bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 px-3 rounded-lg transition duration-200">🖨️ 打印/PDF</button>
+                <button onclick="saveAllToLocalStorage()" class="flex-1 bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-3 rounded-lg transition duration-200" data-i18n="btn_save">💾 保存内容</button>
+                <button onclick="window.print()" class="flex-1 bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 px-3 rounded-lg transition duration-200" data-i18n="btn_print">🖨️ 打印/PDF</button>
             </div>
         </div>
-        <div id="save-status-toast" class="hidden text-xs text-green-600 mt-3 font-semibold transition-all duration-300">✓ 更改已自动保存至浏览器 (Auto-Saved)</div>
+        <div id="save-status-toast" class="hidden text-xs text-green-600 mt-3 font-semibold transition-all duration-300" data-i18n="save_toast">✓ 更改已自动保存至浏览器 (Auto-Saved)</div>
     </div>
 </header>
 
@@ -97,40 +104,40 @@
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
         <div class="lg:col-span-7 bg-white rounded-2xl p-6 elegant-shadow border border-burgundy-50 print-card flex flex-col justify-between">
             <div>
-                <h3 class="text-lg font-serif font-bold text-burgundy-500 mb-4 border-b border-burgundy-100 pb-2">👩‍❤️‍👨 两位新人基本资料 &amp; 婚礼日期选择</h3>
+                <h3 class="text-lg font-serif font-bold text-burgundy-500 mb-4 border-b border-burgundy-100 pb-2" data-i18n="couple_title">👩‍❤️‍👨 两位新人基本资料 &amp; 婚礼日期选择</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-400 mb-1">新郎姓名 (Groom)</label>
-                        <input type="text" id="groom-name" oninput="updateInvitePreview()" class="w-full input-underline py-2 text-gray-700 text-sm font-semibold" placeholder="请填写新郎姓名...">
+                        <label class="block text-xs font-semibold text-gray-400 mb-1" data-i18n="groom_label">新郎姓名 (Groom)</label>
+                        <input type="text" id="groom-name" oninput="updateInvitePreview()" class="w-full input-underline py-2 text-gray-700 text-sm font-semibold" placeholder="请填写新郎姓名..." data-i18n-ph="groom_ph">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-400 mb-1">新娘姓名 (Bride)</label>
-                        <input type="text" id="bride-name" oninput="updateInvitePreview()" class="w-full input-underline py-2 text-gray-700 text-sm font-semibold" placeholder="请填写新娘姓名...">
+                        <label class="block text-xs font-semibold text-gray-400 mb-1" data-i18n="bride_label">新娘姓名 (Bride)</label>
+                        <input type="text" id="bride-name" oninput="updateInvitePreview()" class="w-full input-underline py-2 text-gray-700 text-sm font-semibold" placeholder="请填写新娘姓名..." data-i18n-ph="bride_ph">
                     </div>
                 </div>
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-400 mb-1">婚礼举办公历日期 (Wedding Date)</label>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1" data-i18n="wedding_date_label">婚礼举办公历日期 (Wedding Date)</label>
                         <input type="date" id="wedding-date" onchange="onDateChanged()" class="w-full input-underline py-2 text-gray-700 text-sm font-semibold text-burgundy-500">
                     </div>
                     <div class="bg-gray-50/50 p-3.5 rounded-xl border border-gray-100 mt-2 flex flex-col gap-2">
-                        <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">吉日即时评估 (Date Evaluation)</span>
+                        <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider" data-i18n="date_eval_label">吉日即时评估 (Date Evaluation)</span>
                         <div id="date-evaluation-result" class="mt-1 transition duration-200"></div>
                     </div>
                 </div>
             </div>
             <div class="mt-6 p-3 bg-gray-50 rounded-xl border border-gray-100 text-xs text-gray-500">
-                <p class="font-bold text-gray-700">📌 通书择日小百科：</p>
-                <p class="mt-1 leading-relaxed">黄历嫁娶吉日旨在寻找干支五行平衡。周末双休日通常多配有"天德、月德、三合"等吉星高照。避开"月破、闭日"等冲突日期即可获得美满顺遂的大好家庭！</p>
+                <p class="font-bold text-gray-700" data-i18n="date_tip_title">📌 通书择日小百科：</p>
+                <p class="mt-1 leading-relaxed" data-i18n="date_tip_body">黄历嫁娶吉日旨在寻找干支五行平衡。周末双休日通常多配有"天德、月德、三合"等吉星高照。避开"月破、闭日"等冲突日期即可获得美满顺遂的大好家庭！</p>
             </div>
         </div>
         <div class="lg:col-span-5 bg-gradient-to-br from-[#800020] to-[#66001a] text-white rounded-2xl p-6 elegant-shadow border border-burgundy-700 flex flex-col justify-between relative overflow-hidden">
             <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl font-serif">囍</div>
             <div class="border-b border-white/20 pb-4">
                 <span class="text-[10px] tracking-widest text-champagne-100 font-bold uppercase block font-serif">We Are Getting Married</span>
-                <h4 class="text-xl font-serif font-bold text-burgundy-600 mt-1"><span id="calendar-lunar">农历待定</span></h4>
+                <h4 class="text-xl font-serif font-bold text-burgundy-600 mt-1"><span id="calendar-lunar" data-i18n="lunar_pending">农历待定</span></h4>
             </div>
-            <div class="my-6"><div id="calendar-grade" class="text-lg font-bold font-serif text-white">✨ 待定吉日，喜结连理</div></div>
+            <div class="my-6"><div id="calendar-grade" class="text-lg font-bold font-serif text-white" data-i18n="auspicious_pending">✨ 待定吉日，喜结连理</div></div>
             <div class="space-y-3 text-xs bg-black/10 p-4 rounded-xl border border-white/5">
                 <div class="flex items-start gap-2.5">
                     <span class="bg-green-600/30 text-green-300 text-[10px] font-bold px-2 py-0.5 rounded font-mono">宜</span>
@@ -147,27 +154,27 @@
 
     <!-- ── Tab Navigation ── -->
     <div class="flex border-b border-gray-200 mb-8 overflow-x-auto gap-2 no-print tab-btn-group">
-        <button onclick="switchTab('morning')" id="tab-morning" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-burgundy-500 text-burgundy-500 transition-all duration-200 whitespace-nowrap">第一幕：清晨喜庆接亲</button>
-        <button onclick="switchTab('afternoon')" id="tab-afternoon" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">第二幕：傍晚首见外拍</button>
-        <button onclick="switchTab('evening')" id="tab-evening" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">第三幕：无伴电影感晚宴</button>
-        <button onclick="switchTab('todo')" id="tab-todo" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">📋 To-Do &amp; 双人同步</button>
-        <button onclick="switchTab('budget')" id="tab-budget" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">💰 预算开销与比价</button>
-        <button onclick="switchTab('guests')" id="tab-guests" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">👥 宾客管理 &amp; 桌席</button>
-        <button onclick="switchTab('checklist')" id="tab-checklist" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">📋 备婚倒计时清单</button>
-        <button onclick="switchTab('tools')" id="tab-tools" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap">📱 电子请柬与工具</button>
+        <button onclick="switchTab('morning')" id="tab-morning" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-burgundy-500 text-burgundy-500 transition-all duration-200 whitespace-nowrap" data-i18n="tab_morning">第一幕：清晨喜庆接亲</button>
+        <button onclick="switchTab('afternoon')" id="tab-afternoon" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap" data-i18n="tab_afternoon">第二幕：傍晚首见外拍</button>
+        <button onclick="switchTab('evening')" id="tab-evening" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap" data-i18n="tab_evening">第三幕：无伴电影感晚宴</button>
+        <button onclick="switchTab('todo')" id="tab-todo" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap" data-i18n="tab_todo">📋 To-Do &amp; 双人同步</button>
+        <button onclick="switchTab('budget')" id="tab-budget" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap" data-i18n="tab_budget">💰 预算开销与比价</button>
+        <button onclick="switchTab('guests')" id="tab-guests" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap" data-i18n="tab_guests">👥 宾客管理 &amp; 桌席</button>
+        <button onclick="switchTab('checklist')" id="tab-checklist" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap" data-i18n="tab_checklist">📋 备婚倒计时清单</button>
+        <button onclick="switchTab('tools')" id="tab-tools" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap" data-i18n="tab_tools">📱 电子请柬与工具</button>
     </div>
 
     <!-- ── ACT 1: Morning ── -->
     <div id="content-morning" class="tab-content block animate-fade">
         <div class="bg-burgundy-50/50 rounded-2xl p-6 mb-8 border border-burgundy-100 print-card flex justify-between items-center flex-wrap gap-4">
             <div>
-                <h2 class="text-xl font-bold font-serif text-burgundy-500 mb-2">第一幕：传统喜庆接亲 (Morning Act)</h2>
-                <p class="text-xs text-gray-500 leading-relaxed">这是全天最热闹、最本土化的时段。支持点击以下内容直接编辑重置，打造您独一无二的备婚Runsheet时间表。</p>
+                <h2 class="text-xl font-bold font-serif text-burgundy-500 mb-2" data-i18n="act1_title">第一幕：传统喜庆接亲 (Morning Act)</h2>
+                <p class="text-xs text-gray-500 leading-relaxed" data-i18n="act1_desc">这是全天最热闹、最本土化的时段。支持点击以下内容直接编辑重置，打造您独一无二的备婚Runsheet时间表。</p>
             </div>
             <div class="flex gap-2 no-print">
-                <button onclick="addNewRunsheetStep('morning')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">➕ 新增接亲步骤</button>
-                <button onclick="resetRunsheetToDefault()" class="bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">🔄 恢复默认22步模板</button>
-                <button onclick="printSection('morning')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> 打印</button>
+                <button onclick="addNewRunsheetStep('morning')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_add_morning_step">➕ 新增接亲步骤</button>
+                <button onclick="resetRunsheetToDefault()" class="bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_reset_template">🔄 恢复默认22步模板</button>
+                <button onclick="printSection('morning')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> <span data-i18n="btn_print_short">打印</span></button>
             </div>
         </div>
         <div id="runsheet-container-morning" class="space-y-6 relative border-l-2 border-champagne-100 ml-4 pl-6 md:ml-6 md:pl-8"></div>
@@ -177,13 +184,13 @@
     <div id="content-afternoon" class="tab-content hidden animate-fade">
         <div class="bg-burgundy-50/50 rounded-2xl p-6 mb-8 border border-burgundy-100 print-card flex justify-between items-center flex-wrap gap-4">
             <div>
-                <h2 class="text-xl font-bold font-serif text-burgundy-500 mb-2">第二幕：私密第一眼与黄金外拍 (First Look Act)</h2>
-                <p class="text-xs text-gray-500 leading-relaxed">在晚宴喧嚣和宾客涌入之前，预留的一段极其尊贵、私密的电影感时段。</p>
+                <h2 class="text-xl font-bold font-serif text-burgundy-500 mb-2" data-i18n="act2_title">第二幕：私密第一眼与黄金外拍 (First Look Act)</h2>
+                <p class="text-xs text-gray-500 leading-relaxed" data-i18n="act2_desc">在晚宴喧嚣和宾客涌入之前，预留的一段极其尊贵、私密的电影感时段。</p>
             </div>
             <div class="flex gap-2 no-print">
-                <button onclick="addNewRunsheetStep('afternoon')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">➕ 新增外拍步骤</button>
-                <button onclick="resetRunsheetToDefault()" class="bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">🔄 恢复默认22步模板</button>
-                <button onclick="printSection('afternoon')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> 打印</button>
+                <button onclick="addNewRunsheetStep('afternoon')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_add_afternoon_step">➕ 新增外拍步骤</button>
+                <button onclick="resetRunsheetToDefault()" class="bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_reset_template2">🔄 恢复默认22步模板</button>
+                <button onclick="printSection('afternoon')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> <span data-i18n="btn_print_short2">打印</span></button>
             </div>
         </div>
         <div id="runsheet-container-afternoon" class="space-y-6 relative border-l-2 border-champagne-100 ml-4 pl-6 md:ml-6 md:pl-8"></div>
@@ -193,13 +200,13 @@
     <div id="content-evening" class="tab-content hidden animate-fade">
         <div class="bg-burgundy-50/50 rounded-2xl p-6 mb-8 border border-burgundy-100 print-card flex justify-between items-center flex-wrap gap-4">
             <div>
-                <h2 class="text-xl font-bold font-serif text-burgundy-500 mb-2">第三幕：无伴电影感晚宴 (Banquet Act)</h2>
-                <p class="text-xs text-gray-500 leading-relaxed">剔除繁琐传统流程，晚宴完全采用极简温情的流线设计。</p>
+                <h2 class="text-xl font-bold font-serif text-burgundy-500 mb-2" data-i18n="act3_title">第三幕：无伴电影感晚宴 (Banquet Act)</h2>
+                <p class="text-xs text-gray-500 leading-relaxed" data-i18n="act3_desc">剔除繁琐传统流程，晚宴完全采用极简温情的流线设计。</p>
             </div>
             <div class="flex gap-2 no-print">
-                <button onclick="addNewRunsheetStep('evening')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">➕ 新增晚宴步骤</button>
-                <button onclick="resetRunsheetToDefault()" class="bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">🔄 恢复默认22步模板</button>
-                <button onclick="printSection('evening')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> 打印</button>
+                <button onclick="addNewRunsheetStep('evening')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_add_evening_step">➕ 新增晚宴步骤</button>
+                <button onclick="resetRunsheetToDefault()" class="bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_reset_template3">🔄 恢复默认22步模板</button>
+                <button onclick="printSection('evening')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> <span data-i18n="btn_print_short3">打印</span></button>
             </div>
         </div>
         <div id="runsheet-container-evening" class="space-y-6 relative border-l-2 border-champagne-100 ml-4 pl-6 md:ml-6 md:pl-8"></div>
@@ -209,29 +216,29 @@
     <div id="content-todo" class="tab-content hidden animate-fade">
         <div class="bg-burgundy-50/50 rounded-2xl p-6 mb-6 border border-burgundy-100 print-card flex flex-wrap justify-between items-center gap-4">
             <div>
-                <h2 class="text-lg font-bold font-serif text-burgundy-500 mb-1">📋 双人防漏协作 To-Do 面板</h2>
-                <p class="text-xs text-gray-500 leading-relaxed">专设"一方宣告完成，对方点对点核准核签"，全面避免遗漏。</p>
+                <h2 class="text-lg font-bold font-serif text-burgundy-500 mb-1" data-i18n="todo_title">📋 双人防漏协作 To-Do 面板</h2>
+                <p class="text-xs text-gray-500 leading-relaxed" data-i18n="todo_desc">专设"一方宣告完成，对方点对点核准核签"，全面避免遗漏。</p>
             </div>
-            <button onclick="triggerQuickAddTodo()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-200">➕ 新增协同待办</button>
+            <button onclick="triggerQuickAddTodo()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-200" data-i18n="btn_add_todo">➕ 新增协同待办</button>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="bg-white p-5 rounded-2xl elegant-shadow border border-gray-100 flex flex-col">
                 <div class="flex justify-between items-center pb-3 border-b border-gray-100 mb-4 font-semibold">
-                    <span class="text-xs font-bold text-burgundy-500 uppercase tracking-wider">🎯 策划推进中</span>
+                    <span class="text-xs font-bold text-burgundy-500 uppercase tracking-wider" data-i18n="todo_planning">🎯 策划推进中</span>
                     <span id="todo-count-planning" class="bg-burgundy-50 text-burgundy-500 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">0</span>
                 </div>
                 <div id="todo-list-planning" class="space-y-3 flex-1 overflow-y-auto max-h-[450px]"></div>
             </div>
             <div class="bg-white p-5 rounded-2xl elegant-shadow border border-gray-100 flex flex-col">
                 <div class="flex justify-between items-center pb-3 border-b border-gray-100 mb-4 font-semibold">
-                    <span class="text-xs font-bold text-orange-500 uppercase tracking-wider">⏳ 对方待核签</span>
+                    <span class="text-xs font-bold text-orange-500 uppercase tracking-wider" data-i18n="todo_verify">⏳ 对方待核签</span>
                     <span id="todo-count-verify" class="bg-orange-50 text-orange-500 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">0</span>
                 </div>
                 <div id="todo-list-verify" class="space-y-3 flex-1 overflow-y-auto max-h-[450px]"></div>
             </div>
             <div class="bg-white p-5 rounded-2xl elegant-shadow border border-gray-100 flex flex-col">
                 <div class="flex justify-between items-center pb-3 border-b border-gray-100 mb-4 font-semibold">
-                    <span class="text-xs font-bold text-green-500 uppercase tracking-wider">✅ 双方通过 · 尘埃落定</span>
+                    <span class="text-xs font-bold text-green-500 uppercase tracking-wider" data-i18n="todo_done">✅ 双方通过 · 尘埃落定</span>
                     <span id="todo-count-done" class="bg-green-50 text-green-500 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">0</span>
                 </div>
                 <div id="todo-list-done" class="space-y-3 flex-1 overflow-y-auto max-h-[450px]"></div>
@@ -239,7 +246,7 @@
         </div>
         <div id="notification-toast" class="fixed bottom-5 right-5 z-50 bg-burgundy-600 text-white rounded-xl px-4 py-3 elegant-shadow text-xs font-semibold hidden flex items-center gap-2">
             <i class="fa-solid fa-bell"></i>
-            <span id="notification-toast-msg">收到确认申请！</span>
+            <span id="notification-toast-msg" data-i18n="toast_confirm">收到确认申请！</span>
         </div>
     </div>
 
@@ -247,33 +254,33 @@
     <div id="content-budget" class="tab-content hidden animate-fade">
         <div class="bg-[#faf3eb] rounded-2xl p-6 mb-6 border border-champagne-100 print-card flex flex-wrap justify-between items-center gap-4">
             <div>
-                <h2 class="text-lg font-bold font-serif text-burgundy-500 mb-1">💰 婚礼智能预算控制水库</h2>
-                <p class="text-xs text-gray-500 leading-relaxed">开销类目明细、本地发票上传及多边报价比对，科学规避超支。</p>
+                <h2 class="text-lg font-bold font-serif text-burgundy-500 mb-1" data-i18n="budget_title">💰 婚礼智能预算控制水库</h2>
+                <p class="text-xs text-gray-500 leading-relaxed" data-i18n="budget_desc">开销类目明细、本地发票上传及多边报价比对，科学规避超支。</p>
             </div>
             <div class="flex gap-2 no-print">
-                <button onclick="addNewBudgetItemNew()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-200">➕ 增加开销与发票</button>
-                <button onclick="printSection('budget')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition flex items-center gap-1.5"><i class="fa-solid fa-print text-[10px]"></i> 打印预算表</button>
+                <button onclick="addNewBudgetItemNew()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-200" data-i18n="btn_add_expense">➕ 增加开销与发票</button>
+                <button onclick="printSection('budget')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition flex items-center gap-1.5"><i class="fa-solid fa-print text-[10px]"></i> <span data-i18n="btn_print_budget">打印预算表</span></button>
             </div>
         </div>
         <!-- ── Row 1: 4 summary chips ── -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
             <div class="bg-white p-5 rounded-2xl border border-burgundy-50 elegant-shadow text-center">
-                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">婚礼总预算底盘</span>
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1" data-i18n="budget_total_label">婚礼总预算底盘</span>
                 <div class="flex justify-center items-center gap-1">
                     <span class="text-sm font-bold text-gray-400">RM</span>
                     <input type="number" id="budget-total-new-input" oninput="calculateBudgetNewSummary()" class="text-xl font-bold text-burgundy-500 font-mono w-24 text-center border-b border-gray-200 focus:border-burgundy-500 focus:outline-none" value="60000">
                 </div>
             </div>
             <div class="bg-white p-5 rounded-2xl border border-gray-100 elegant-shadow text-center">
-                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">已花总数</span>
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1" data-i18n="budget_spent_label">已花总数</span>
                 <div class="text-xl font-bold text-red-600 font-mono">RM <span id="budget-new-spent">0</span></div>
             </div>
             <div class="bg-white p-5 rounded-2xl border border-gray-100 elegant-shadow text-center">
-                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">剩余可用余粮</span>
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1" data-i18n="budget_remaining_label">剩余可用余粮</span>
                 <div class="text-xl font-bold text-green-600 font-mono">RM <span id="budget-new-left">0</span></div>
             </div>
             <div class="bg-white p-5 rounded-2xl border border-gray-100 elegant-shadow text-center flex flex-col justify-center items-center">
-                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">预警红线指标</span>
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1" data-i18n="budget_warning_label">预警红线指标</span>
                 <div class="flex items-center justify-center mt-1 w-full px-2">
                     <div class="w-full bg-gray-100 rounded-full h-2.5 mr-2"><div id="budget-new-progress-bar" class="bg-green-500 h-2.5 rounded-full transition-all duration-300" style="width:0%"></div></div>
                     <span id="budget-new-progress-percent" class="text-xs font-bold text-green-600">0%</span>
@@ -289,13 +296,13 @@
                 <div class="flex items-center gap-2">
                     <span class="text-lg">🏦</span>
                     <div>
-                        <h3 class="text-sm font-serif font-bold text-burgundy-500">婚礼存钱目标 Saving Goal</h3>
-                        <p class="text-[10px] text-gray-400 mt-0.5">每次存了多少就记录多少，自动累加追踪！</p>
+                        <h3 class="text-sm font-serif font-bold text-burgundy-500" data-i18n="saving_title">婚礼存钱目标 Saving Goal</h3>
+                        <p class="text-[10px] text-gray-400 mt-0.5" data-i18n="saving_desc">每次存了多少就记录多少，自动累加追踪！</p>
                     </div>
                 </div>
                 <!-- Goal target input -->
                 <div class="flex items-center gap-2 bg-white border border-champagne-100 rounded-xl px-3 py-2">
-                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider whitespace-nowrap">存钱目标</span>
+                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider whitespace-nowrap" data-i18n="saving_goal_label">存钱目标</span>
                     <span class="text-xs font-bold text-gray-400">RM</span>
                     <input type="number" id="saving-goal-input" oninput="calculateSavingGoal()"
                         placeholder="例：80000"
@@ -320,13 +327,13 @@
                             </svg>
                             <div class="absolute inset-0 flex flex-col items-center justify-center rotate-90">
                                 <span id="saving-ring-pct" class="text-base font-bold font-mono text-champagne-600 leading-none">0%</span>
-                                <span class="text-[9px] text-gray-400 font-bold">完成</span>
+                                <span class="text-[9px] text-gray-400 font-bold" data-i18n="saving_done">完成</span>
                             </div>
                         </div>
                         <div class="flex-1">
-                            <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">累计已存入</div>
+                            <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider" data-i18n="saving_deposited">累计已存入</div>
                             <div class="text-2xl font-bold font-mono text-green-600 mt-0.5">RM <span id="saving-total-display">0</span></div>
-                            <div class="text-[10px] text-gray-400 mt-1">距离目标还差</div>
+                            <div class="text-[10px] text-gray-400 mt-1" data-i18n="saving_remaining">距离目标还差</div>
                             <div id="saving-gap" class="text-sm font-bold font-mono text-burgundy-500">RM —</div>
                         </div>
                     </div>
@@ -334,7 +341,7 @@
                     <!-- Progress bar -->
                     <div>
                         <div class="flex justify-between items-center mb-1.5">
-                            <span class="text-[10px] text-gray-400 font-bold">存款进度</span>
+                            <span class="text-[10px] text-gray-400 font-bold" data-i18n="saving_progress">存款进度</span>
                             <span id="saving-pct-label" class="text-[10px] font-bold text-champagne-600">0%</span>
                         </div>
                         <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
@@ -359,19 +366,19 @@
                     <!-- Add deposit row -->
                     <div class="flex items-end gap-2">
                         <div class="flex-1">
-                            <label class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1.5">存款备注 Note</label>
-                            <input type="text" id="deposit-note-input" placeholder="例如：2月份薪水、婚礼基金、年终花红…"
+                            <label class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1.5" data-i18n="deposit_note_label">存款备注 Note</label>
+                            <input type="text" id="deposit-note-input" placeholder="例如：2月份薪水、婚礼基金、年终花红…" data-i18n-ph="deposit_note_ph"
                                 class="w-full text-xs bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 focus:border-champagne-500 outline-none">
                         </div>
                         <div class="w-28 flex-shrink-0">
-                            <label class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1.5">金额 RM</label>
+                            <label class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1.5" data-i18n="deposit_amount_label">金额 RM</label>
                             <input type="number" id="deposit-amount-input" placeholder="0"
                                 class="w-full text-xs font-mono font-bold bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 focus:border-champagne-500 outline-none"
                                 onkeydown="if(event.key==='Enter')addDepositEntry()">
                         </div>
                         <button onclick="addDepositEntry()"
                             class="flex-shrink-0 bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition h-[34px] flex items-center gap-1">
-                            <i class="fa-solid fa-plus text-[10px]"></i> 存入
+                            <i class="fa-solid fa-plus text-[10px]"></i> <span data-i18n="btn_deposit">存入</span>
                         </button>
                     </div>
 
@@ -379,7 +386,7 @@
                     <div class="flex-1 max-h-52 overflow-y-auto space-y-2 pr-1" id="deposit-log-list">
                         <div class="text-center py-6 text-gray-300 text-xs" id="deposit-empty-state">
                             <i class="fa-solid fa-piggy-bank text-2xl block mb-2"></i>
-                            还没有存款记录，开始记录你们的第一笔婚礼基金吧！
+                            <span data-i18n="deposit_empty">还没有存款记录，开始记录你们的第一笔婚礼基金吧！</span>
                         </div>
                     </div>
 
@@ -389,11 +396,11 @@
             </div>
         </div>
         <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100 mb-8">
-            <h3 class="text-sm font-serif font-bold text-burgundy-500 mb-4 border-b border-burgundy-100 pb-2">📋 婚礼支出明细</h3>
+            <h3 class="text-sm font-serif font-bold text-burgundy-500 mb-4 border-b border-burgundy-100 pb-2" data-i18n="expense_detail_title">📋 婚礼支出明细</h3>
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead><tr class="border-b border-gray-100 text-[10px] font-bold text-gray-400 uppercase tracking-wider">
-                        <th class="py-3 pl-2 w-3/12">分项类目</th><th class="py-3 w-2/12">分类</th><th class="py-3 w-2/12">已付金额 (RM)</th><th class="py-3 w-4/12">收据留存</th><th class="py-3 text-center w-1/12">操作</th>
+                        <th class="py-3 pl-2 w-3/12" data-i18n="th_item">分项类目</th><th class="py-3 w-2/12" data-i18n="th_category">分类</th><th class="py-3 w-2/12" data-i18n="th_paid">已付金额 (RM)</th><th class="py-3 w-4/12" data-i18n="th_receipt">收据留存</th><th class="py-3 text-center w-1/12" data-i18n="th_action">操作</th>
                     </tr></thead>
                     <tbody id="budget-new-tbody"></tbody>
                 </table>
@@ -401,13 +408,13 @@
         </div>
         <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100">
             <div class="flex justify-between items-center mb-4 border-b border-gray-100 pb-2 flex-wrap gap-2">
-                <h3 class="text-sm font-serif font-bold text-burgundy-500">📍 核心 Vendor 商家多边比价</h3>
-                <button onclick="addNewQuoteRow()" class="bg-champagne-500 hover:bg-champagne-600 text-white text-[10px] font-bold py-1 px-3 rounded-lg transition">➕ 新增比对方案</button>
+                <h3 class="text-sm font-serif font-bold text-burgundy-500" data-i18n="vendor_compare_title">📍 核心 Vendor 商家多边比价</h3>
+                <button onclick="addNewQuoteRow()" class="bg-champagne-500 hover:bg-champagne-600 text-white text-[10px] font-bold py-1 px-3 rounded-lg transition" data-i18n="btn_add_quote">➕ 新增比对方案</button>
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead><tr class="border-b border-gray-100 text-[10px] font-bold text-gray-400 uppercase tracking-wider">
-                        <th class="py-3 pl-2 w-2/12">备选商家</th><th class="py-3 w-2/12">报价 (RM)</th><th class="py-3 w-2/12">包含细节</th><th class="py-3 w-3/12">优劣对比</th><th class="py-3 w-2/12">性价比</th><th class="py-3 text-center w-1/12">操作</th>
+                        <th class="py-3 pl-2 w-2/12" data-i18n="th_vendor">备选商家</th><th class="py-3 w-2/12" data-i18n="th_quote">报价 (RM)</th><th class="py-3 w-2/12" data-i18n="th_details">包含细节</th><th class="py-3 w-3/12" data-i18n="th_pros_cons">优劣对比</th><th class="py-3 w-2/12" data-i18n="th_value">性价比</th><th class="py-3 text-center w-1/12" data-i18n="th_action2">操作</th>
                     </tr></thead>
                     <tbody id="vendor-quote-tbody"></tbody>
                 </table>
@@ -420,26 +427,26 @@
     <div id="content-guests" class="tab-content hidden animate-fade">
         <div class="bg-[#faf3eb] rounded-2xl p-6 mb-6 border border-champagne-100 print-card flex flex-wrap justify-between items-center gap-4">
             <div>
-                <h2 class="text-lg font-bold font-serif text-burgundy-500 mb-1">👥 宾客 RSVP 登账 &amp; 10人制桌位排座</h2>
-                <p class="text-xs text-gray-500 leading-relaxed">电子请柬提交的人数与温馨祝福将自动流入。系统智能排定席位。</p>
+                <h2 class="text-lg font-bold font-serif text-burgundy-500 mb-1" data-i18n="guest_title">👥 宾客 RSVP 登账 &amp; 10人制桌位排座</h2>
+                <p class="text-xs text-gray-500 leading-relaxed" data-i18n="guest_desc">电子请柬提交的人数与温馨祝福将自动流入。系统智能排定席位。</p>
             </div>
             <div class="flex gap-2 flex-wrap no-print">
-                <button onclick="addNewGuestRow()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-200">➕ 增加宾客记录</button>
-                <button onclick="printSection('guests')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition flex items-center gap-1.5"><i class="fa-solid fa-print text-[10px]"></i> 打印宾客名单</button>
+                <button onclick="addNewGuestRow()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-200" data-i18n="btn_add_guest">➕ 增加宾客记录</button>
+                <button onclick="printSection('guests')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition flex items-center gap-1.5"><i class="fa-solid fa-print text-[10px]"></i> <span data-i18n="btn_print_guests">打印宾客名单</span></button>
             </div>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center"><span class="text-[10px] text-gray-400 font-bold block uppercase">总应邀出席人数</span><span id="stats-guest-total" class="text-xl font-bold text-burgundy-500 font-mono">0</span></div>
-            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center"><span class="text-[10px] text-gray-400 font-bold block uppercase">素食人数 (Vegetarian)</span><span id="stats-guest-veg" class="text-xl font-bold text-gray-700 font-mono">0</span></div>
-            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center"><span class="text-[10px] text-gray-400 font-bold block uppercase">清真人数 (Halal)</span><span id="stats-guest-halal" class="text-xl font-bold text-green-600 font-mono">0</span></div>
-            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center flex items-center justify-center"><span class="text-[10px] text-gray-400 font-bold block uppercase">宴会厅顺利排定</span></div>
+            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center"><span class="text-[10px] text-gray-400 font-bold block uppercase" data-i18n="guest_total">总应邀出席人数</span><span id="stats-guest-total" class="text-xl font-bold text-burgundy-500 font-mono">0</span></div>
+            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center"><span class="text-[10px] text-gray-400 font-bold block uppercase" data-i18n="guest_veg">素食人数 (Vegetarian)</span><span id="stats-guest-veg" class="text-xl font-bold text-gray-700 font-mono">0</span></div>
+            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center"><span class="text-[10px] text-gray-400 font-bold block uppercase" data-i18n="guest_halal">清真人数 (Halal)</span><span id="stats-guest-halal" class="text-xl font-bold text-green-600 font-mono">0</span></div>
+            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center flex items-center justify-center"><span class="text-[10px] text-gray-400 font-bold block uppercase" data-i18n="guest_seating_ok">宴会厅顺利排定</span></div>
         </div>
         <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100 mb-8">
-            <h3 class="text-sm font-serif font-bold text-burgundy-500 mb-4 border-b border-burgundy-100 pb-2">📋 宾客花名登账簿</h3>
+            <h3 class="text-sm font-serif font-bold text-burgundy-500 mb-4 border-b border-burgundy-100 pb-2" data-i18n="guest_roster_title">📋 宾客花名登账簿</h3>
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead><tr class="border-b border-gray-100 text-[10px] font-bold text-gray-400 uppercase tracking-wider">
-                        <th class="py-3 pl-2 w-3/12">宾客姓名 &amp; 留言</th><th class="py-3 w-1/12">人数</th><th class="py-3 w-1/12">RSVP</th><th class="py-3 w-2/12">饮食</th><th class="py-3 w-3/12">桌号</th><th class="py-3 text-center w-1/12">操作</th>
+                        <th class="py-3 pl-2 w-3/12" data-i18n="th_guest_name">宾客姓名 &amp; 留言</th><th class="py-3 w-1/12" data-i18n="th_pax">人数</th><th class="py-3 w-1/12">RSVP</th><th class="py-3 w-2/12" data-i18n="th_diet">饮食</th><th class="py-3 w-3/12" data-i18n="th_table">桌号</th><th class="py-3 text-center w-1/12" data-i18n="th_action3">操作</th>
                     </tr></thead>
                     <tbody id="guest-tbody"></tbody>
                 </table>
@@ -447,11 +454,11 @@
         </div>
         <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100">
             <div class="flex justify-between items-center mb-4 border-b border-burgundy-100 pb-2 flex-wrap gap-2">
-                <h3 class="text-sm font-serif font-bold text-burgundy-500">🪑 晚宴桌席投影面 (10人制)</h3>
+                <h3 class="text-sm font-serif font-bold text-burgundy-500" data-i18n="seating_title">🪑 晚宴桌席投影面 (10人制)</h3>
                 <div class="flex gap-2 flex-wrap no-print">
-                    <button onclick="addNewTable()" class="bg-champagne-500 hover:bg-champagne-600 text-white text-[10px] font-bold py-1.5 px-3 rounded-lg transition">➕ 新增宴会桌</button>
+                    <button onclick="addNewTable()" class="bg-champagne-500 hover:bg-champagne-600 text-white text-[10px] font-bold py-1.5 px-3 rounded-lg transition" data-i18n="btn_add_table">➕ 新增宴会桌</button>
                     <button onclick="printSeatingChart()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-[10px] font-bold py-1.5 px-3 rounded-lg transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-print"></i> 打印 / 导出 PDF
+                        <i class="fa-solid fa-print"></i> <span data-i18n="btn_print_seating">打印 / 导出 PDF</span>
                     </button>
                 </div>
             </div>
@@ -463,20 +470,20 @@
     <div id="content-checklist" class="tab-content hidden animate-fade">
         <div class="bg-white rounded-2xl p-6 elegant-shadow border border-burgundy-50 print-card">
             <div class="flex justify-between items-center border-b border-burgundy-100 pb-4 mb-6 flex-wrap gap-2">
-                <h2 class="text-xl font-bold font-serif text-burgundy-500">📋 备婚核心倒计时清单</h2>
+                <h2 class="text-xl font-bold font-serif text-burgundy-500" data-i18n="checklist_title">📋 备婚核心倒计时清单</h2>
                 <div class="flex gap-2 no-print">
-                    <button onclick="addChecklistItem('week-1')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">➕ 新增前1周任务</button>
-                    <button onclick="addChecklistItem('day-of')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition">➕ 新增当天任务</button>
-                    <button onclick="printSection('checklist')" class="bg-gray-600 hover:bg-gray-700 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> 打印</button>
+                    <button onclick="addChecklistItem('week-1')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_add_week1">➕ 新增前1周任务</button>
+                    <button onclick="addChecklistItem('day-of')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_add_dayof">➕ 新增当天任务</button>
+                    <button onclick="printSection('checklist')" class="bg-gray-600 hover:bg-gray-700 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> <span data-i18n="btn_print_short4">打印</span></button>
                 </div>
             </div>
             <div class="space-y-6">
                 <div>
-                    <h3 class="text-sm font-bold text-burgundy-500 mb-3 flex items-center"><span class="inline-block w-2.5 h-2.5 rounded-full bg-burgundy-500 mr-2"></span> 婚礼前 1 周重点排查</h3>
+                    <h3 class="text-sm font-bold text-burgundy-500 mb-3 flex items-center"><span class="inline-block w-2.5 h-2.5 rounded-full bg-burgundy-500 mr-2"></span> <span data-i18n="checklist_week1">婚礼前 1 周重点排查</span></h3>
                     <div id="checklist-week-1" class="space-y-2"></div>
                 </div>
                 <div class="border-t border-gray-100 pt-6">
-                    <h3 class="text-sm font-bold text-champagne-600 mb-3 flex items-center"><span class="inline-block w-2.5 h-2.5 rounded-full bg-champagne-500 mr-2"></span> 婚礼当天下午 (晚宴开场前)</h3>
+                    <h3 class="text-sm font-bold text-champagne-600 mb-3 flex items-center"><span class="inline-block w-2.5 h-2.5 rounded-full bg-champagne-500 mr-2"></span> <span data-i18n="checklist_dayof">婚礼当天下午 (晚宴开场前)</span></h3>
                     <div id="checklist-day-of" class="space-y-2"></div>
                 </div>
             </div>
@@ -488,48 +495,48 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-5 space-y-6">
                 <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100">
-                    <h3 class="font-serif font-bold text-burgundy-500 border-b border-gray-100 pb-2 mb-4">📱 请柬高阶细节设定</h3>
+                    <h3 class="font-serif font-bold text-burgundy-500 border-b border-gray-100 pb-2 mb-4" data-i18n="invite_settings_title">📱 请柬高阶细节设定</h3>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1 font-semibold">婚礼晚宴举办场地</label>
+                            <label class="block text-xs text-gray-400 mb-1 font-semibold" data-i18n="invite_venue_label">婚礼晚宴举办场地</label>
                             <input type="text" id="invite-location-input" oninput="updateInvitePreview()" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-lg p-2.5 focus:border-burgundy-500 outline-none" value="The Glasshouse Seputeh, 吉隆坡">
                         </div>
                         <div>
-                            <label class="block text-xs text-gray-400 mb-2 font-semibold">上传婚纱照</label>
+                            <label class="block text-xs text-gray-400 mb-2 font-semibold" data-i18n="upload_photo_label">上传婚纱照</label>
                             <div class="flex items-center gap-3">
                                 <input type="file" id="wedding-photo-upload" onchange="handleWeddingPhotoUpload(this)" class="hidden" accept="image/*" multiple>
-                                <label for="wedding-photo-upload" class="cursor-pointer bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-bold py-2 px-4 rounded-xl shadow-sm transition"><i class="fa-solid fa-images mr-1"></i> 上传婚纱照</label>
-                                <button onclick="resetDefaultPhotos()" class="text-xs text-gray-400 hover:text-red-500 font-semibold transition">重置为样照</button>
+                                <label for="wedding-photo-upload" class="cursor-pointer bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-bold py-2 px-4 rounded-xl shadow-sm transition"><i class="fa-solid fa-images mr-1"></i> <span data-i18n="btn_upload_photo">上传婚纱照</span></label>
+                                <button onclick="resetDefaultPhotos()" class="text-xs text-gray-400 hover:text-red-500 font-semibold transition" data-i18n="btn_reset_photo">重置为样照</button>
                             </div>
                         </div>
                         <div class="pt-2 border-t border-gray-100">
-                            <label class="block text-xs text-gray-400 mb-2 font-semibold">📨 发给来宾的电子请柬链接</label>
-                            <p class="text-[11px] text-gray-500 mb-3 leading-relaxed">复制以下链接发送给宾客，宾客打开后可直接填写 RSVP 回执，提交后自动同步进宾客管理系统。</p>
+                            <label class="block text-xs text-gray-400 mb-2 font-semibold" data-i18n="invite_link_label">📨 发给来宾的电子请柬链接</label>
+                            <p class="text-[11px] text-gray-500 mb-3 leading-relaxed" data-i18n="invite_link_desc">复制以下链接发送给宾客，宾客打开后可直接填写 RSVP 回执，提交后自动同步进宾客管理系统。</p>
                             <div class="flex gap-2 items-center bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 mb-2">
                                 <i class="fa-solid fa-link text-gray-300 text-xs flex-shrink-0"></i>
                                 <span id="guest-link-display" class="text-[11px] text-gray-500 font-mono flex-1 truncate select-all">加载中...</span>
                             </div>
                             <div class="flex gap-2">
                                 <button onclick="copyGuestLink()" class="flex-1 bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1.5">
-                                    <i class="fa-regular fa-copy text-[10px]"></i> 复制链接
+                                    <i class="fa-regular fa-copy text-[10px]"></i> <span data-i18n="btn_copy_link">复制链接</span>
                                 </button>
                                 <button onclick="openGuestPage()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1.5">
-                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 预览
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> <span data-i18n="btn_preview">预览</span>
                                 </button>
                             </div>
-                            <p id="guest-link-copied" class="hidden text-[10px] text-green-600 font-semibold text-center mt-2">✓ 链接已复制！</p>
+                            <p id="guest-link-copied" class="hidden text-[10px] text-green-600 font-semibold text-center mt-2" data-i18n="link_copied">✓ 链接已复制！</p>
                         </div>
                     </div>
                 </div>
                 <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100">
-                    <h3 class="font-serif font-bold text-burgundy-500 border-b border-gray-100 pb-2 mb-4">🎵 婚礼经典音乐伴奏模拟</h3>
+                    <h3 class="font-serif font-bold text-burgundy-500 border-b border-gray-100 pb-2 mb-4" data-i18n="music_title">🎵 婚礼经典音乐伴奏模拟</h3>
                     <div class="space-y-3">
                         <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl">
-                            <div><h5 class="text-xs font-bold text-gray-800">Perfect (Ed Sheeran)</h5><p class="text-[10px] text-gray-400">新郎独唱 / 甜蜜誓言</p></div>
+                            <div><h5 class="text-xs font-bold text-gray-800">Perfect (Ed Sheeran)</h5><p class="text-[10px] text-gray-400" data-i18n="music_perfect_desc">新郎独唱 / 甜蜜誓言</p></div>
                             <button onclick="toggleMusicSimulation(1,this)" class="text-burgundy-500 hover:text-burgundy-700 text-sm"><i class="fa-solid fa-play"></i></button>
                         </div>
                         <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl">
-                            <div><h5 class="text-xs font-bold text-gray-800">Beautiful In White (Shane Filan)</h5><p class="text-[10px] text-gray-400">圣洁大进场主纱音乐</p></div>
+                            <div><h5 class="text-xs font-bold text-gray-800">Beautiful In White (Shane Filan)</h5><p class="text-[10px] text-gray-400" data-i18n="music_biw_desc">圣洁大进场主纱音乐</p></div>
                             <button onclick="toggleMusicSimulation(2,this)" class="text-burgundy-500 hover:text-burgundy-700 text-sm"><i class="fa-solid fa-play"></i></button>
                         </div>
                     </div>
@@ -545,7 +552,7 @@
                             <span class="text-[9px] tracking-widest text-burgundy-500 font-bold uppercase block font-serif">We Are Getting Married</span>
                             <h4 class="text-xl font-serif font-bold text-burgundy-600 mt-1"><span id="preview-groom">新郎</span> &amp; <span id="preview-bride">新娘</span></h4>
                             <div class="mt-2 bg-burgundy-500 text-white rounded-full py-1 px-3 text-[10px] inline-flex items-center gap-1 font-semibold mx-auto elegant-shadow">
-                                <i class="fa-solid fa-hourglass-start"></i><span>大典倒计时：</span><span id="invite-countdown-timer">未选择日期</span>
+                                <i class="fa-solid fa-hourglass-start"></i><span data-i18n="invite_countdown_prefix">大典倒计时：</span><span id="invite-countdown-timer" data-i18n="invite_no_date">未选择日期</span>
                             </div>
                         </div>
                         <div class="relative w-full h-[200px] rounded-2xl overflow-hidden bg-gray-100 mt-4 elegant-shadow group border-2 border-champagne-100">
@@ -556,19 +563,19 @@
                         </div>
                         <p class="text-[10px] text-gray-700 text-center font-bold mt-3 bg-white/70 py-1.5 rounded-lg border border-burgundy-100/30"><i class="fa-solid fa-location-dot text-burgundy-500"></i> <span id="preview-location">玻璃屋</span></p>
                         <div class="mt-4 bg-[#800020]/5 border border-[#800020]/10 rounded-xl p-3">
-                            <span class="text-[9px] font-bold block text-burgundy-600 uppercase border-b border-[#800020]/10 pb-1 mb-2"><i class="fa-solid fa-heart animate-pulse"></i> 💕 亲友祝福墙</span>
+                            <span class="text-[9px] font-bold block text-burgundy-600 uppercase border-b border-[#800020]/10 pb-1 mb-2"><i class="fa-solid fa-heart animate-pulse"></i> <span data-i18n="wish_wall">💕 亲友祝福墙</span></span>
                             <div id="invite-wishes-board" class="space-y-2 max-h-[100px] overflow-y-auto"></div>
                         </div>
                         <div class="bg-white rounded-xl p-4 border border-burgundy-100/40 text-left mt-4 elegant-shadow">
-                            <span class="text-[10px] font-bold block text-burgundy-500 uppercase border-b border-gray-100 pb-1.5"><i class="fa-solid fa-file-signature"></i> 宾客 RSVP 登记回执</span>
+                            <span class="text-[10px] font-bold block text-burgundy-500 uppercase border-b border-gray-100 pb-1.5"><i class="fa-solid fa-file-signature"></i> <span data-i18n="rsvp_form_title">宾客 RSVP 登记回执</span></span>
                             <div class="space-y-2.5 mt-2.5">
-                                <div><label class="block text-[9px] text-gray-400 font-bold mb-0.5">赴宴主宾客姓名</label><input type="text" id="mock-guest-name" class="w-full bg-gray-50 border border-gray-200 rounded p-1.5 text-xs focus:border-burgundy-500 outline-none" placeholder="例如：林志强"></div>
+                                <div><label class="block text-[9px] text-gray-400 font-bold mb-0.5" data-i18n="rsvp_name">赴宴主宾客姓名</label><input type="text" id="mock-guest-name" class="w-full bg-gray-50 border border-gray-200 rounded p-1.5 text-xs focus:border-burgundy-500 outline-none" placeholder="例如：林志强" data-i18n-ph="rsvp_name_ph"></div>
                                 <div class="grid grid-cols-2 gap-2">
-                                    <div><label class="block text-[9px] text-gray-400 font-bold mb-0.5">出席人数</label><select id="mock-guest-pax" class="w-full bg-gray-50 border border-gray-200 rounded p-1.5 text-xs focus:border-burgundy-500 outline-none"><option value="1">1人</option><option value="2">2人</option><option value="3">3人</option><option value="4">4人</option></select></div>
-                                    <div><label class="block text-[9px] text-gray-400 font-bold mb-0.5">特殊膳食</label><select id="mock-guest-diet" class="w-full bg-gray-50 border border-gray-200 rounded p-1.5 text-xs focus:border-burgundy-500 outline-none"><option value="none">无特殊</option><option value="vegetarian">斋食</option><option value="halal">清真</option></select></div>
+                                    <div><label class="block text-[9px] text-gray-400 font-bold mb-0.5" data-i18n="rsvp_pax">出席人数</label><select id="mock-guest-pax" class="w-full bg-gray-50 border border-gray-200 rounded p-1.5 text-xs focus:border-burgundy-500 outline-none"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div>
+                                    <div><label class="block text-[9px] text-gray-400 font-bold mb-0.5" data-i18n="rsvp_diet">特殊膳食</label><select id="mock-guest-diet" class="w-full bg-gray-50 border border-gray-200 rounded p-1.5 text-xs focus:border-burgundy-500 outline-none"><option value="none" data-i18n="diet_none">无特殊</option><option value="vegetarian" data-i18n="diet_veg">斋食</option><option value="halal" data-i18n="diet_halal">清真</option></select></div>
                                 </div>
-                                <div><label class="block text-[9px] text-gray-400 font-bold mb-0.5">温馨祝愿</label><textarea id="mock-guest-wish" class="w-full bg-gray-50 border border-gray-200 rounded p-1.5 text-xs h-12 focus:border-burgundy-500 outline-none resize-none" placeholder="祝新婚快乐，百年好合！"></textarea></div>
-                                <div class="pt-1.5"><button onclick="simulateRSVPSubmission()" class="w-full bg-burgundy-500 hover:bg-burgundy-600 text-white text-[11px] font-bold py-2.5 rounded-lg transition duration-200">发送 RSVP 回执 &amp; 祝福</button></div>
+                                <div><label class="block text-[9px] text-gray-400 font-bold mb-0.5" data-i18n="rsvp_wish">温馨祝愿</label><textarea id="mock-guest-wish" class="w-full bg-gray-50 border border-gray-200 rounded p-1.5 text-xs h-12 focus:border-burgundy-500 outline-none resize-none" placeholder="祝新婚快乐，百年好合！" data-i18n-ph="rsvp_wish_ph"></textarea></div>
+                                <div class="pt-1.5"><button onclick="simulateRSVPSubmission()" class="w-full bg-burgundy-500 hover:bg-burgundy-600 text-white text-[11px] font-bold py-2.5 rounded-lg transition duration-200" data-i18n="btn_send_rsvp">发送 RSVP 回执 &amp; 祝福</button></div>
                             </div>
                         </div>
                     </div>
@@ -582,17 +589,17 @@
 <!-- ── Custom Modal ── -->
 <div id="custom-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 no-print">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 elegant-shadow border border-burgundy-100">
-        <h3 id="modal-title" class="text-lg font-serif font-bold text-burgundy-500 mb-2">提示</h3>
+        <h3 id="modal-title" class="text-lg font-serif font-bold text-burgundy-500 mb-2" data-i18n="modal_title">提示</h3>
         <p id="modal-message" class="text-sm text-gray-600 mb-6 leading-relaxed">消息内容</p>
         <div class="flex justify-end gap-3">
-            <button id="modal-cancel-btn" class="hidden bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold py-2 px-4 rounded-lg transition">取消</button>
-            <button id="modal-ok-btn" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-4 rounded-lg transition">确定</button>
+            <button id="modal-cancel-btn" class="hidden bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold py-2 px-4 rounded-lg transition" data-i18n="modal_cancel">取消</button>
+            <button id="modal-ok-btn" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-4 rounded-lg transition" data-i18n="modal_ok">确定</button>
         </div>
     </div>
 </div>
 
 <footer class="bg-white border-t border-gray-100 py-10 text-center text-xs text-gray-400 no-print">
-    <p>© 2026 我们结婚了 · 婚礼主控级数字座舱</p>
+    <p data-i18n="footer_text">© 2026 我们结婚了 · 婚礼主控级数字座舱</p>
     <p class="mt-2 text-burgundy-500/50 font-serif">"Everything else is just beautiful details. Enjoy every single second."</p>
 </footer>
 </div><!-- end #admin-shell -->
@@ -610,7 +617,316 @@ let budgetNewItems = [];
 let quoteItems = [];
 let likedInspirations = [];
 
-// ★ NEW STATE
+let currentLang = localStorage.getItem('wedding_lang') || 'zh';
+
+const i18n = {
+  zh: {
+    header_title: "我们结婚了",
+    header_select_date: "请选择日期",
+    header_subtitle: "婚礼数字座舱 · 执子之手 与子偕老",
+    countdown_label: "距离婚礼盛典还有",
+    countdown_calculating: "计算中...",
+    task_readiness: "协同任务核备率",
+    budget_used_ratio: "已用总预算占比",
+    btn_save: "💾 保存内容",
+    btn_print: "🖨️ 打印/PDF",
+    save_toast: "✓ 更改已自动保存至浏览器 (Auto-Saved)",
+    couple_title: "👩‍❤️‍👨 两位新人基本资料 & 婚礼日期选择",
+    groom_label: "新郎姓名 (Groom)",
+    bride_label: "新娘姓名 (Bride)",
+    groom_ph: "请填写新郎姓名...",
+    bride_ph: "请填写新娘姓名...",
+    wedding_date_label: "婚礼举办公历日期 (Wedding Date)",
+    date_eval_label: "吉日即时评估 (Date Evaluation)",
+    date_tip_title: "📌 通书择日小百科：",
+    date_tip_body: "黄历嫁娶吉日旨在寻找干支五行平衡。周末双休日通常多配有"天德、月德、三合"等吉星高照。避开"月破、闭日"等冲突日期即可获得美满顺遂的大好家庭！",
+    lunar_pending: "农历待定",
+    auspicious_pending: "✨ 待定吉日，喜结连理",
+    tab_morning: "第一幕：清晨喜庆接亲",
+    tab_afternoon: "第二幕：傍晚首见外拍",
+    tab_evening: "第三幕：无伴电影感晚宴",
+    tab_todo: "📋 To-Do & 双人同步",
+    tab_budget: "💰 预算开销与比价",
+    tab_guests: "👥 宾客管理 & 桌席",
+    tab_checklist: "📋 备婚倒计时清单",
+    tab_tools: "📱 电子请柬与工具",
+    act1_title: "第一幕：传统喜庆接亲 (Morning Act)",
+    act1_desc: "这是全天最热闹、最本土化的时段。支持点击以下内容直接编辑重置，打造您独一无二的备婚Runsheet时间表。",
+    btn_add_morning_step: "➕ 新增接亲步骤",
+    btn_reset_template: "🔄 恢复默认22步模板",
+    btn_reset_template2: "🔄 恢复默认22步模板",
+    btn_reset_template3: "🔄 恢复默认22步模板",
+    btn_print_short: "打印",
+    btn_print_short2: "打印",
+    btn_print_short3: "打印",
+    btn_print_short4: "打印",
+    act2_title: "第二幕：私密第一眼与黄金外拍 (First Look Act)",
+    act2_desc: "在晚宴喧嚣和宾客涌入之前，预留的一段极其尊贵、私密的电影感时段。",
+    btn_add_afternoon_step: "➕ 新增外拍步骤",
+    act3_title: "第三幕：无伴电影感晚宴 (Banquet Act)",
+    act3_desc: "剔除繁琐传统流程，晚宴完全采用极简温情的流线设计。",
+    btn_add_evening_step: "➕ 新增晚宴步骤",
+    todo_title: "📋 双人防漏协作 To-Do 面板",
+    todo_desc: "专设"一方宣告完成，对方点对点核准核签"，全面避免遗漏。",
+    btn_add_todo: "➕ 新增协同待办",
+    todo_planning: "🎯 策划推进中",
+    todo_verify: "⏳ 对方待核签",
+    todo_done: "✅ 双方通过 · 尘埃落定",
+    toast_confirm: "收到确认申请！",
+    budget_title: "💰 婚礼智能预算控制水库",
+    budget_desc: "开销类目明细、本地发票上传及多边报价比对，科学规避超支。",
+    btn_add_expense: "➕ 增加开销与发票",
+    btn_print_budget: "打印预算表",
+    budget_total_label: "婚礼总预算底盘",
+    budget_spent_label: "已花总数",
+    budget_remaining_label: "剩余可用余粮",
+    budget_warning_label: "预警红线指标",
+    saving_title: "婚礼存钱目标 Saving Goal",
+    saving_desc: "每次存了多少就记录多少，自动累加追踪！",
+    saving_goal_label: "存钱目标",
+    saving_done: "完成",
+    saving_deposited: "累计已存入",
+    saving_remaining: "距离目标还差",
+    saving_progress: "存款进度",
+    deposit_note_label: "存款备注 Note",
+    deposit_note_ph: "例如：2月份薪水、婚礼基金、年终花红…",
+    deposit_amount_label: "金额 RM",
+    btn_deposit: "存入",
+    deposit_empty: "还没有存款记录，开始记录你们的第一笔婚礼基金吧！",
+    expense_detail_title: "📋 婚礼支出明细",
+    th_item: "分项类目",
+    th_category: "分类",
+    th_paid: "已付金额 (RM)",
+    th_receipt: "收据留存",
+    th_action: "操作",
+    vendor_compare_title: "📍 核心 Vendor 商家多边比价",
+    btn_add_quote: "➕ 新增比对方案",
+    th_vendor: "备选商家",
+    th_quote: "报价 (RM)",
+    th_details: "包含细节",
+    th_pros_cons: "优劣对比",
+    th_value: "性价比",
+    th_action2: "操作",
+    guest_title: "👥 宾客 RSVP 登账 & 10人制桌位排座",
+    guest_desc: "电子请柬提交的人数与温馨祝福将自动流入。系统智能排定席位。",
+    btn_add_guest: "➕ 增加宾客记录",
+    btn_print_guests: "打印宾客名单",
+    guest_total: "总应邀出席人数",
+    guest_veg: "素食人数 (Vegetarian)",
+    guest_halal: "清真人数 (Halal)",
+    guest_seating_ok: "宴会厅顺利排定",
+    guest_roster_title: "📋 宾客花名登账簿",
+    th_guest_name: "宾客姓名 & 留言",
+    th_pax: "人数",
+    th_diet: "饮食",
+    th_table: "桌号",
+    th_action3: "操作",
+    seating_title: "🪑 晚宴桌席投影面 (10人制)",
+    btn_add_table: "➕ 新增宴会桌",
+    btn_print_seating: "打印 / 导出 PDF",
+    checklist_title: "📋 备婚核心倒计时清单",
+    btn_add_week1: "➕ 新增前1周任务",
+    btn_add_dayof: "➕ 新增当天任务",
+    checklist_week1: "婚礼前 1 周重点排查",
+    checklist_dayof: "婚礼当天下午 (晚宴开场前)",
+    invite_settings_title: "📱 请柬高阶细节设定",
+    invite_venue_label: "婚礼晚宴举办场地",
+    upload_photo_label: "上传婚纱照",
+    btn_upload_photo: "上传婚纱照",
+    btn_reset_photo: "重置为样照",
+    invite_link_label: "📨 发给来宾的电子请柬链接",
+    invite_link_desc: "复制以下链接发送给宾客，宾客打开后可直接填写 RSVP 回执，提交后自动同步进宾客管理系统。",
+    btn_copy_link: "复制链接",
+    btn_preview: "预览",
+    link_copied: "✓ 链接已复制！",
+    music_title: "🎵 婚礼经典音乐伴奏模拟",
+    music_perfect_desc: "新郎独唱 / 甜蜜誓言",
+    music_biw_desc: "圣洁大进场主纱音乐",
+    invite_countdown_prefix: "大典倒计时：",
+    invite_no_date: "未选择日期",
+    wish_wall: "💕 亲友祝福墙",
+    rsvp_form_title: "宾客 RSVP 登记回执",
+    rsvp_name: "赴宴主宾客姓名",
+    rsvp_name_ph: "例如：林志强",
+    rsvp_pax: "出席人数",
+    rsvp_diet: "特殊膳食",
+    diet_none: "无特殊",
+    diet_veg: "斋食",
+    diet_halal: "清真",
+    rsvp_wish: "温馨祝愿",
+    rsvp_wish_ph: "祝新婚快乐，百年好合！",
+    btn_send_rsvp: "发送 RSVP 回执 & 祝福",
+    modal_title: "提示",
+    modal_cancel: "取消",
+    modal_ok: "确定",
+    footer_text: "© 2026 我们结婚了 · 婚礼主控级数字座舱",
+    lang_toggle: "EN"
+  },
+  en: {
+    header_title: "We're Getting Married",
+    header_select_date: "Select Date",
+    header_subtitle: "Wedding Digital Dashboard · Together Forever",
+    countdown_label: "Countdown to the Big Day",
+    countdown_calculating: "Calculating...",
+    task_readiness: "Task Readiness",
+    budget_used_ratio: "Budget Used",
+    btn_save: "💾 Save",
+    btn_print: "🖨️ Print/PDF",
+    save_toast: "✓ Changes auto-saved to browser",
+    couple_title: "👩‍❤️‍👨 Couple Info & Wedding Date",
+    groom_label: "Groom's Name",
+    bride_label: "Bride's Name",
+    groom_ph: "Enter groom's name...",
+    bride_ph: "Enter bride's name...",
+    wedding_date_label: "Wedding Date",
+    date_eval_label: "Date Evaluation",
+    date_tip_title: "📌 Date Selection Tips:",
+    date_tip_body: "Traditional Chinese calendars seek balance in the Five Elements. Weekends often align with auspicious stars. Avoid conflicting dates for a harmonious start to your family!",
+    lunar_pending: "Lunar date TBD",
+    auspicious_pending: "✨ Awaiting auspicious date",
+    tab_morning: "Act 1: Morning Gatecrash",
+    tab_afternoon: "Act 2: First Look & Shoot",
+    tab_evening: "Act 3: Evening Banquet",
+    tab_todo: "📋 To-Do & Sync",
+    tab_budget: "💰 Budget & Quotes",
+    tab_guests: "👥 Guests & Seating",
+    tab_checklist: "📋 Countdown Checklist",
+    tab_tools: "📱 Invitation & Tools",
+    act1_title: "Act 1: Traditional Morning Gatecrash",
+    act1_desc: "The liveliest part of the day. Click any item to edit and build your custom runsheet timeline.",
+    btn_add_morning_step: "➕ Add Step",
+    btn_reset_template: "🔄 Reset to Default Template",
+    btn_reset_template2: "🔄 Reset to Default Template",
+    btn_reset_template3: "🔄 Reset to Default Template",
+    btn_print_short: "Print",
+    btn_print_short2: "Print",
+    btn_print_short3: "Print",
+    btn_print_short4: "Print",
+    act2_title: "Act 2: First Look & Golden Hour Shoot",
+    act2_desc: "A private, cinematic moment reserved before the evening festivities begin.",
+    btn_add_afternoon_step: "➕ Add Step",
+    act3_title: "Act 3: Elegant Evening Banquet",
+    act3_desc: "A streamlined, minimalist banquet design with warmth and elegance.",
+    btn_add_evening_step: "➕ Add Step",
+    todo_title: "📋 Collaborative To-Do Board",
+    todo_desc: "One person marks done, the other verifies — nothing gets missed.",
+    btn_add_todo: "➕ Add New Task",
+    todo_planning: "🎯 In Progress",
+    todo_verify: "⏳ Pending Verification",
+    todo_done: "✅ Completed & Confirmed",
+    toast_confirm: "Verification request received!",
+    budget_title: "💰 Smart Wedding Budget Control",
+    budget_desc: "Expense tracking, receipt uploads, and vendor quote comparison.",
+    btn_add_expense: "➕ Add Expense",
+    btn_print_budget: "Print Budget",
+    budget_total_label: "Total Budget",
+    budget_spent_label: "Total Spent",
+    budget_remaining_label: "Remaining Balance",
+    budget_warning_label: "Warning Threshold",
+    saving_title: "Wedding Saving Goal",
+    saving_desc: "Record each deposit, auto-track your progress!",
+    saving_goal_label: "Saving Target",
+    saving_done: "Done",
+    saving_deposited: "Total Deposited",
+    saving_remaining: "Remaining to Goal",
+    saving_progress: "Saving Progress",
+    deposit_note_label: "Deposit Note",
+    deposit_note_ph: "e.g.: Feb salary, wedding fund, bonus...",
+    deposit_amount_label: "Amount (RM)",
+    btn_deposit: "Deposit",
+    deposit_empty: "No deposits yet — start recording your first wedding fund!",
+    expense_detail_title: "📋 Wedding Expense Details",
+    th_item: "Item",
+    th_category: "Category",
+    th_paid: "Paid (RM)",
+    th_receipt: "Receipt",
+    th_action: "Action",
+    vendor_compare_title: "📍 Vendor Quote Comparison",
+    btn_add_quote: "➕ Add Quote",
+    th_vendor: "Vendor",
+    th_quote: "Quote (RM)",
+    th_details: "Details",
+    th_pros_cons: "Pros & Cons",
+    th_value: "Value",
+    th_action2: "Action",
+    guest_title: "👥 Guest RSVP & Seating (10 per table)",
+    guest_desc: "RSVP submissions and wishes sync automatically. Smart seating arrangement.",
+    btn_add_guest: "➕ Add Guest",
+    btn_print_guests: "Print Guest List",
+    guest_total: "Total Guests",
+    guest_veg: "Vegetarian",
+    guest_halal: "Halal",
+    guest_seating_ok: "Seating Arranged",
+    guest_roster_title: "📋 Guest Roster",
+    th_guest_name: "Guest Name & Message",
+    th_pax: "Pax",
+    th_diet: "Diet",
+    th_table: "Table",
+    th_action3: "Action",
+    seating_title: "🪑 Banquet Seating Chart (10 per table)",
+    btn_add_table: "➕ Add Table",
+    btn_print_seating: "Print / Export PDF",
+    checklist_title: "📋 Wedding Countdown Checklist",
+    btn_add_week1: "➕ Add Week-1 Task",
+    btn_add_dayof: "➕ Add Day-of Task",
+    checklist_week1: "1 Week Before Wedding — Key Checks",
+    checklist_dayof: "Wedding Day Afternoon (Before Banquet)",
+    invite_settings_title: "📱 Invitation Advanced Settings",
+    invite_venue_label: "Wedding Venue",
+    upload_photo_label: "Upload Wedding Photos",
+    btn_upload_photo: "Upload Photos",
+    btn_reset_photo: "Reset to Samples",
+    invite_link_label: "📨 Guest E-Invitation Link",
+    invite_link_desc: "Copy this link to send to guests. They can fill in RSVP and it syncs to your guest management system.",
+    btn_copy_link: "Copy Link",
+    btn_preview: "Preview",
+    link_copied: "✓ Link copied!",
+    music_title: "🎵 Wedding Music Preview",
+    music_perfect_desc: "Groom Solo / Sweet Vows",
+    music_biw_desc: "Grand Entrance Bridal Music",
+    invite_countdown_prefix: "Countdown: ",
+    invite_no_date: "No date selected",
+    wish_wall: "💕 Blessings Wall",
+    rsvp_form_title: "Guest RSVP Form",
+    rsvp_name: "Guest Name",
+    rsvp_name_ph: "e.g.: John Smith",
+    rsvp_pax: "Number of Guests",
+    rsvp_diet: "Dietary Needs",
+    diet_none: "None",
+    diet_veg: "Vegetarian",
+    diet_halal: "Halal",
+    rsvp_wish: "Your Wishes",
+    rsvp_wish_ph: "Wishing you a happy marriage!",
+    btn_send_rsvp: "Send RSVP & Wishes",
+    modal_title: "Notice",
+    modal_cancel: "Cancel",
+    modal_ok: "OK",
+    footer_text: "© 2026 Wedding Digital Dashboard",
+    lang_toggle: "中文"
+  }
+};
+
+function applyLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('wedding_lang', lang);
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.title = lang === 'zh' ? '我们结婚了 · 婚礼数字座舱' : 'Wedding Digital Dashboard';
+    const dict = i18n[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const key = el.getAttribute('data-i18n-ph');
+        if (dict[key] !== undefined) el.placeholder = dict[key];
+    });
+    const toggleLabel = document.getElementById('lang-toggle-label');
+    if (toggleLabel) toggleLabel.textContent = dict.lang_toggle;
+}
+
+function toggleLanguage() {
+    applyLanguage(currentLang === 'zh' ? 'en' : 'zh');
+}
 
 let carouselPhotos = [
     "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=600",
@@ -676,6 +992,7 @@ window.onload = function() {
     onDateChanged();
     renderWishesOnMockBoard();
     renderAllCustomTimelineActs();
+    applyLanguage(currentLang);
     _initGuestLinkDisplay();
     // Route check: standalone guest page
     if (new URLSearchParams(window.location.search).get('view') === 'guest') showStandaloneGuestPage();
