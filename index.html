@@ -1644,12 +1644,12 @@ function simulateRSVPSubmission(){
     triggerCustomModal("🎉 模拟宾客提交成功！",`宾客 [${nameVal}] 已经通过电子请柬成功登记！共 [${paxVal}] 人、温馨留言以及饮食需求已被实时反向统计，并同步到席位排位大表中。`);
 }
 async function syncToGoogleSheets(data){
-    const url='https://script.google.com/macros/s/AKfycbwsZrn30G4nhtyfVZZwLJYVIajOSFVVGdusbfVyZ2uUBTt9YHLy3c21UXsgtA3lKPf6yw/exec';
+    const url='https://script.google.com/macros/s/AKfycbxENKmWUjRjjbs4HxvUwbZJfvsq2WQeLAGMPzQ4uElRZDwJ-Tzhze4hdZjAH-tUsmme9Q/exec';
     const payload={Name:data.name,'Attendance Pax':data.pax,'Diet Requirement':data.diet,'Marraige Wishes':data.wish};
     try{await fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});}catch(e){console.error('Google Sheets sync failed:',e);}
 }
 async function fetchGuestsFromGoogleSheets(){
-    const url='https://script.google.com/macros/s/AKfycbwsZrn30G4nhtyfVZZwLJYVIajOSFVVGdusbfVyZ2uUBTt9YHLy3c21UXsgtA3lKPf6yw/exec';
+    const url='https://script.google.com/macros/s/AKfycbxENKmWUjRjjbs4HxvUwbZJfvsq2WQeLAGMPzQ4uElRZDwJ-Tzhze4hdZjAH-tUsmme9Q/exec';
     try{
         const res=await fetch(url,{method:'GET',redirect:'follow'});
         if(!res.ok)return;
