@@ -140,15 +140,15 @@
             <div class="my-6"><div id="calendar-grade" class="text-lg font-bold font-serif text-white" data-i18n="auspicious_pending">✨ 待定吉日，喜结连理</div></div>
             <div class="space-y-3 text-xs bg-black/10 p-4 rounded-xl border border-white/5">
                 <div class="flex items-start gap-2.5">
-                    <span class="bg-green-600/30 text-green-300 text-[10px] font-bold px-2 py-0.5 rounded font-mono">宜</span>
+                    <span class="bg-green-600/30 text-green-300 text-[10px] font-bold px-2 py-0.5 rounded font-mono" data-i18n="yi_label">宜</span>
                     <p id="calendar-yi" class="text-xs text-gray-100 leading-relaxed">结婚、订婚、祭祀、安床</p>
                 </div>
                 <div class="flex items-start gap-2.5">
-                    <span class="bg-red-600/30 text-red-300 text-[10px] font-bold px-2 py-0.5 rounded font-mono">忌</span>
+                    <span class="bg-red-600/30 text-red-300 text-[10px] font-bold px-2 py-0.5 rounded font-mono" data-i18n="ji_label">忌</span>
                     <p id="calendar-ji" class="text-xs text-gray-100 leading-relaxed">作灶、开渠、盖屋</p>
                 </div>
             </div>
-            <div class="mt-4 pt-3 border-t border-white/10 text-center text-[10px] text-champagne-100/70 italic">"良辰吉日定终身，百年琴瑟共白头"</div>
+            <div class="mt-4 pt-3 border-t border-white/10 text-center text-[10px] text-champagne-100/70 italic" data-i18n="poem_quote">「良辰吉日定终身，百年琴瑟共白头」</div>
         </div>
     </section>
 
@@ -514,7 +514,7 @@
                             <p class="text-[11px] text-gray-500 mb-3 leading-relaxed" data-i18n="invite_link_desc">复制以下链接发送给宾客，宾客打开后可直接填写 RSVP 回执，提交后自动同步进宾客管理系统。</p>
                             <div class="flex gap-2 items-center bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 mb-2">
                                 <i class="fa-solid fa-link text-gray-300 text-xs flex-shrink-0"></i>
-                                <span id="guest-link-display" class="text-[11px] text-gray-500 font-mono flex-1 truncate select-all">加载中...</span>
+                                <span id="guest-link-display" class="text-[11px] text-gray-500 font-mono flex-1 truncate select-all" data-i18n="loading">加载中...</span>
                             </div>
                             <div class="flex gap-2">
                                 <button onclick="copyGuestLink()" class="flex-1 bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1.5">
@@ -760,7 +760,142 @@ const i18n = {
     modal_cancel: "取消",
     modal_ok: "确定",
     footer_text: "© 2026 我们结婚了 · 婚礼主控级数字座舱",
-    lang_toggle: "EN"
+    lang_toggle: "EN",
+    yi_label: "宜",
+    ji_label: "忌",
+    poem_quote: "「良辰吉日定终身，百年琴瑟共白头」",
+    loading: "加载中...",
+    groom_default: "新郎",
+    bride_default: "新娘",
+    venue_default: "玻璃温室",
+    date_tbd: "待定",
+    date_format: "${y}年${m}月${d}日",
+    countdown_format: "${d}天 ${h}时 ${m}分 ${s}秒",
+    countdown_short: "${d}天 ${h}小时",
+    countdown_pending: "待选公历日期",
+    countdown_expired: "💖 新婚快乐，幸福美满！",
+    countdown_expired_short: "已到期 🎉",
+    select_date_prompt: "请选择日期",
+    lunar_prefix: "农历",
+    lunar_pending_full: "岁次与阴历待定",
+    eval_pending: "📅 请先在上方挑选公历日期以进行即时吉凶鉴定",
+    grade_top_weekend: "✨【上吉】鸾凤和鸣，天德合照之吉日",
+    grade_top_lucky: "✨【上吉】月德合吉，五合临照之吉日",
+    grade_bad: "⚠️【避忌】月破大耗，诸事避忌之凶日",
+    grade_normal: "【平吉】岁德并照，宜成良缘之日",
+    yi_weekend: "嫁娶、会亲友、订盟、纳采、祈福、安床、裁衣",
+    ji_weekend: "开渠、掘井、作灶、伐木",
+    yi_lucky: "嫁娶、冠笄、纳采、出行、开市、纳财、祈福",
+    ji_lucky: "伐木、筑堤、破土、动土",
+    yi_bad: "求医、扫舍、求治病、解除、扫除",
+    ji_bad: "结婚嫁娶、入宅动土、修造、移徙",
+    yi_normal: "求医、祭祀、沐浴、整手足甲",
+    ji_normal: "出行、栽种、开渠、盖屋",
+    advice_top_weekend: "🟢 【极佳吉日】鸾凤和鸣，天赐姻缘！非常适合在此周末举办婚礼盛典",
+    advice_top_lucky: "🟢 【上等良辰】神星庇护，气运极佳！极力推荐在此日成婚",
+    advice_bad: "🔴 【避忌凶日】通书标记今日忌嫁娶，建议新人另择佳期",
+    advice_normal: "🟡 【普通平吉】平稳祥和之日，可做备选方案",
+    no_steps: "暂无该环节的自定义步骤，点击右上方按钮增加步骤。",
+    new_step_title: "新增流程步骤",
+    new_step_desc: "在此处编辑写下本步流程的具体操作要求。",
+    reset_confirm_title: "确定要重置吗？",
+    reset_confirm_msg: "这将清空您已经个性化编辑过的全部 Runsheet 细节，并用最经典的 22 步大马华人传统流程覆盖。此操作无法撤销。",
+    ph_time: "例如: 09:00 AM",
+    ph_title: "例如: 兄弟接亲迎嫁",
+    ph_desc: "在这里详细写下该环节的主要内容...",
+    owner_groom: "新郎",
+    owner_bride: "新娘",
+    owner_joint: "双人协作",
+    btn_mark_verify: "完成待验证",
+    btn_approve: "准予通过",
+    status_approved: "双方通过",
+    toast_verify: "🔔 提报了待办，待另一方核准！",
+    toast_done: "💖 双方均核签通过，任务归档！",
+    add_todo_title: "📝 新增备婚协同待办",
+    add_todo_text_label: "待办事项内容",
+    add_todo_text_ph: "如：向酒家核实订金账单",
+    add_todo_owner_label: "主要负责人",
+    add_todo_groom: "新郎主理",
+    add_todo_bride: "新娘主理",
+    add_todo_joint: "双人协力",
+    no_expenses: "暂无开销支出，点击右上角添加项目。",
+    ph_expense_name: "支出细节",
+    cat_banquet: "宴席场地",
+    cat_photo: "影像物料",
+    cat_makeup: "婚纱妆造",
+    cat_decor: "婚礼布置",
+    cat_other: "其他支出",
+    btn_upload_receipt: "上传凭证",
+    btn_preview_receipt: "预览",
+    receipt_none: "未录入",
+    deposit_default_note: "存款",
+    deposit_count: "共 ${n} 笔存款记录",
+    deposit_empty_msg: "还没有存款记录，开始记录你们的第一笔婚礼基金吧！",
+    saving_goal_reached: "🎉 目标达成！",
+    saving_msg_100: "🎉 <strong>恭喜！存款目标已达成！</strong> 可以放心预订各项婚礼服务了！",
+    saving_msg_75: "✨ <strong>冲刺阶段！</strong> 已存 ${pct}%，还差 RM ${gap}，快了！",
+    saving_msg_50: "💪 <strong>过半了！</strong> 已达成 ${pct}%，继续保持！",
+    saving_msg_25: "🌱 <strong>良好起步！</strong> 建议每月存入 RM ${monthly} 可在一年内达标。",
+    saving_msg_0: "📌 <strong>婚礼基金已开启！</strong> 坚持每月定存，梦想婚礼不远了！",
+    no_quotes: "目前无多方比对方案，点击右上角新增。",
+    ph_vendor: "商家名称",
+    ph_service: "包含细节",
+    ph_pros_cons: "优劣评价",
+    no_guests: "暂无宾客，可以在 Guest Mode 或电子请柬模拟登记自动流入。",
+    ph_guest_name: "姓名",
+    no_wish: "暂无留言祝福",
+    rsvp_going: "确认出席",
+    rsvp_maybe: "待定",
+    rsvp_no: "无法出席",
+    diet_none_short: "无特殊",
+    diet_veg_short: "素食",
+    diet_halal_short: "清真",
+    unassigned_seat: "未安排席位",
+    new_guest: "新宾客",
+    family_suffix: "眷属",
+    seat_alert_title: "排位警报 ⚠️",
+    seat_alert_msg: "当前桌席仅剩 ${free} 个空座位，无法容纳该宾客及家属共 ${pax} 人！",
+    empty_seat: "空座",
+    new_table_name: "第 ${n} 桌 - 亲友席",
+    rsvp_prompt_title: "提示",
+    rsvp_prompt_msg: "请在模拟电子请柬中，填入赴宴宾客的名字！",
+    rsvp_success_title: "🎉 模拟宾客提交成功！",
+    rsvp_success_msg: "宾客 [${name}] 已经通过电子请柬成功登记！共 [${pax}] 人、温馨留言以及饮食需求已被实时反向统计，并同步到席位排位大表中。",
+    sample_wish1_name: "李小明 (小姑堂弟)",
+    sample_wish1: "恭喜恭喜！祝你们百年好合，白头偕老！",
+    sample_wish2_name: "张美玲 (伴娘好姐妹)",
+    sample_wish2: "终于等到这一天了！新娘今天简直美上天！",
+    sample_wish3_name: "陈阿姨 (男家长辈)",
+    sample_wish3: "看着你们一路走来真心不易，新婚快乐，早生贵子呀！",
+    wish_time: "刚刚",
+    no_checklist: "暂无该时段的备忘，点击上方按钮新增项目。",
+    ph_checklist: "在此填写新的备婚任务要点...",
+    whatsapp_msg: "您好 ${vendor}，我是 ${groom}/${bride}。我们目前在吉隆坡筹备婚礼。我想咨询一下您的服务报价和档期详情，期待您的回复！",
+    gs_date_label: "婚礼日期 Date",
+    gs_countdown_label: "倒计时",
+    gs_countdown_days: "还有 ${d} 天",
+    gs_wall_title: "💕 亲友祝福墙",
+    gs_no_wishes: "快来成为第一个送上祝福的人！",
+    gs_form_title: "✍️ 填写出席回执 RSVP",
+    gs_name_label: "您的姓名 Your Name *",
+    gs_name_ph: "例如：张大明",
+    gs_pax_label: "出席人数 Pax",
+    gs_pax_unit: "人",
+    gs_diet_label: "饮食需求 Diet",
+    gs_diet_none: "无特殊",
+    gs_diet_veg: "素食 Veg",
+    gs_diet_halal: "清真 Halal",
+    gs_wish_label: "温馨祝福 Wishes",
+    gs_wish_ph: "祝新婚快乐，百年好合！",
+    gs_submit: "💌 送出祝福 & 确认出席",
+    gs_thanks: "感谢您的出席！",
+    gs_thanks_detail: "我们已收到您的回执，<br>期待与您共度美好时光！",
+    gs_retry: "再次填写",
+    print_btn: "🖨️ 打印 / 另存为 PDF",
+    copy_success_title: "复制成功",
+    copy_success_msg: "内容已经成功复制到您的系统剪贴板！",
+    copy_fail_title: "复制失败",
+    copy_fail_msg: "由于浏览器安全权限受限，请在屏幕上长按选择文本手动复制。"
   },
   en: {
     header_title: "We're Getting Married",
@@ -902,9 +1037,149 @@ const i18n = {
     modal_cancel: "Cancel",
     modal_ok: "OK",
     footer_text: "© 2026 Wedding Digital Dashboard",
-    lang_toggle: "中文"
+    lang_toggle: "中文",
+    yi_label: "Do",
+    ji_label: "Don't",
+    poem_quote: "\"A perfect day for a perfect union\"",
+    loading: "Loading...",
+    groom_default: "Groom",
+    bride_default: "Bride",
+    venue_default: "Glass House",
+    date_tbd: "TBD",
+    date_format: "${m}/${d}/${y}",
+    countdown_format: "${d}d ${h}h ${m}m ${s}s",
+    countdown_short: "${d} days ${h}h",
+    countdown_pending: "Select a date",
+    countdown_expired: "💖 Happy Wedding Day!",
+    countdown_expired_short: "Today! 🎉",
+    select_date_prompt: "Select Date",
+    lunar_prefix: "Lunar",
+    lunar_pending_full: "Lunar date TBD",
+    eval_pending: "📅 Please select a date above for auspicious day evaluation",
+    grade_top_weekend: "✨ Excellent — Auspicious weekend for wedding",
+    grade_top_lucky: "✨ Excellent — Stars aligned, highly auspicious",
+    grade_bad: "⚠️ Avoid — Inauspicious day per Chinese almanac",
+    grade_normal: "Neutral — Acceptable day for wedding",
+    yi_weekend: "Marriage, meet friends, betroth, pray, set bed, tailoring",
+    ji_weekend: "Dig wells, build stove, cut trees",
+    yi_lucky: "Marriage, coming-of-age, betroth, travel, open shop, pray",
+    ji_lucky: "Cut trees, build dam, break ground",
+    yi_bad: "See doctor, clean house, remove obstacles",
+    ji_bad: "Marriage, move in, construction, relocation",
+    yi_normal: "See doctor, worship, bathe, grooming",
+    ji_normal: "Travel, planting, dig wells, build house",
+    advice_top_weekend: "🟢 Excellent day! Perfect weekend for your wedding celebration",
+    advice_top_lucky: "🟢 Highly auspicious! Strongly recommended for your wedding",
+    advice_bad: "🔴 Inauspicious — Chinese almanac advises against marriage today",
+    advice_normal: "🟡 Neutral — A calm, stable day, suitable as backup option",
+    no_steps: "No custom steps yet. Click the button above to add one.",
+    new_step_title: "New Step",
+    new_step_desc: "Describe what happens in this step.",
+    reset_confirm_title: "Reset to default?",
+    reset_confirm_msg: "This will replace all your customized runsheet with the classic 22-step template. This cannot be undone.",
+    ph_time: "e.g.: 09:00 AM",
+    ph_title: "e.g.: Gatecrash games",
+    ph_desc: "Describe this step in detail...",
+    owner_groom: "Groom",
+    owner_bride: "Bride",
+    owner_joint: "Joint",
+    btn_mark_verify: "Mark for Review",
+    btn_approve: "Approve",
+    status_approved: "Approved",
+    toast_verify: "🔔 Task submitted for partner review!",
+    toast_done: "💖 Both parties approved, task completed!",
+    add_todo_title: "📝 Add Wedding Task",
+    add_todo_text_label: "Task description",
+    add_todo_text_ph: "e.g.: Confirm deposit with banquet hall",
+    add_todo_owner_label: "Assigned to",
+    add_todo_groom: "Groom leads",
+    add_todo_bride: "Bride leads",
+    add_todo_joint: "Joint effort",
+    no_expenses: "No expenses yet. Click the button above to add one.",
+    ph_expense_name: "Expense item",
+    cat_banquet: "Venue & Banquet",
+    cat_photo: "Photo & Video",
+    cat_makeup: "Bridal & Makeup",
+    cat_decor: "Decoration",
+    cat_other: "Other",
+    btn_upload_receipt: "Upload",
+    btn_preview_receipt: "Preview",
+    receipt_none: "None",
+    deposit_default_note: "Deposit",
+    deposit_count: "${n} deposit records",
+    deposit_empty_msg: "No deposits yet — start recording your first wedding fund!",
+    saving_goal_reached: "🎉 Goal reached!",
+    saving_msg_100: "🎉 <strong>Congratulations! Saving goal reached!</strong> You can now book all wedding services with confidence!",
+    saving_msg_75: "✨ <strong>Almost there!</strong> Saved ${pct}%, only RM ${gap} to go!",
+    saving_msg_50: "💪 <strong>Halfway there!</strong> ${pct}% achieved, keep it up!",
+    saving_msg_25: "🌱 <strong>Great start!</strong> Save RM ${monthly}/month to reach your goal in a year.",
+    saving_msg_0: "📌 <strong>Wedding fund started!</strong> Keep depositing monthly, your dream wedding awaits!",
+    no_quotes: "No vendor quotes yet. Click above to add one.",
+    ph_vendor: "Vendor name",
+    ph_service: "Service details",
+    ph_pros_cons: "Pros & cons",
+    no_guests: "No guests yet. Use Guest Mode or the e-invitation to add them automatically.",
+    ph_guest_name: "Name",
+    no_wish: "No message",
+    rsvp_going: "Attending",
+    rsvp_maybe: "Maybe",
+    rsvp_no: "Not attending",
+    diet_none_short: "None",
+    diet_veg_short: "Vegetarian",
+    diet_halal_short: "Halal",
+    unassigned_seat: "Not assigned",
+    new_guest: "New Guest",
+    family_suffix: "Guest",
+    seat_alert_title: "Seating Alert ⚠️",
+    seat_alert_msg: "This table only has ${free} seats left, cannot fit ${pax} guests!",
+    empty_seat: "Empty",
+    new_table_name: "Table ${n} - Friends & Family",
+    rsvp_prompt_title: "Notice",
+    rsvp_prompt_msg: "Please enter the guest's name in the invitation form!",
+    rsvp_success_title: "🎉 RSVP Submitted!",
+    rsvp_success_msg: "Guest [${name}] has been registered! ${pax} pax with wishes and dietary needs have been recorded and synced to the seating chart.",
+    sample_wish1_name: "Xiao Ming (Cousin)",
+    sample_wish1: "Congratulations! Wishing you a lifetime of happiness!",
+    sample_wish2_name: "Mei Ling (Bridesmaid)",
+    sample_wish2: "Finally the big day! The bride looks absolutely stunning!",
+    sample_wish3_name: "Auntie Chen (Family elder)",
+    sample_wish3: "So happy to see you two together. Wishing you endless joy!",
+    wish_time: "Just now",
+    no_checklist: "No tasks in this section. Click above to add one.",
+    ph_checklist: "Enter a new wedding task...",
+    whatsapp_msg: "Hi ${vendor}, I'm ${groom}/${bride}. We're planning our wedding in KL. I'd like to enquire about your pricing and availability. Looking forward to hearing from you!",
+    gs_date_label: "Wedding Date",
+    gs_countdown_label: "Countdown",
+    gs_countdown_days: "${d} days left",
+    gs_wall_title: "💕 Blessings Wall",
+    gs_no_wishes: "Be the first to send your blessings!",
+    gs_form_title: "✍️ RSVP Form",
+    gs_name_label: "Your Name *",
+    gs_name_ph: "e.g.: John Smith",
+    gs_pax_label: "Number of Guests",
+    gs_pax_unit: "pax",
+    gs_diet_label: "Dietary Needs",
+    gs_diet_none: "None",
+    gs_diet_veg: "Vegetarian",
+    gs_diet_halal: "Halal",
+    gs_wish_label: "Wishes",
+    gs_wish_ph: "Wishing you a happy marriage!",
+    gs_submit: "💌 Send Wishes & Confirm RSVP",
+    gs_thanks: "Thank you for your RSVP!",
+    gs_thanks_detail: "We've received your response.<br>Looking forward to celebrating with you!",
+    gs_retry: "Submit another",
+    print_btn: "🖨️ Print / Save as PDF",
+    copy_success_title: "Copied!",
+    copy_success_msg: "Content copied to clipboard successfully!",
+    copy_fail_title: "Copy Failed",
+    copy_fail_msg: "Browser security restrictions prevent copying. Please select and copy the text manually."
   }
 };
+
+function t(key, fallback) {
+    const dict = i18n[currentLang] || i18n['zh'];
+    return dict[key] !== undefined ? dict[key] : (fallback || key);
+}
 
 function applyLanguage(lang) {
     currentLang = lang;
@@ -922,6 +1197,21 @@ function applyLanguage(lang) {
     });
     const toggleLabel = document.getElementById('lang-toggle-label');
     if (toggleLabel) toggleLabel.textContent = dict.lang_toggle;
+    // Re-render dynamic content with new language
+    updateDynamicDateSubtitle(targetWeddingDateValue);
+    updateCountdown();
+    if(targetWeddingDateValue) evaluateAuspiciousDay(targetWeddingDateValue);
+    renderAllCustomTimelineActs();
+    renderTodoList();
+    renderBudgetNewTable();
+    renderDepositLog();
+    calculateSavingGoal();
+    renderQuotesTable();
+    renderGuestsTable();
+    renderSeatingTables();
+    renderWishesOnMockBoard();
+    renderInteractiveChecklists();
+    updateInvitePreview();
 }
 
 function toggleLanguage() {
@@ -1056,8 +1346,8 @@ function showStandaloneGuestPage() {
     let data = {};
     try { data = JSON.parse(stored); } catch(e) {}
 
-    const groom   = data.groomName  || '新郎';
-    const bride   = data.brideName  || '新娘';
+    const groom   = data.groomName  || t('groom_default');
+    const bride   = data.brideName  || t('bride_default');
     const venue   = data.carouselPhotos ? '' : '';
     const venueStr = '';
     const dateVal  = data.weddingDate || '';
@@ -1069,11 +1359,11 @@ function showStandaloneGuestPage() {
     const guests   = data.guestItems || [];
 
     // Compute date string and countdown
-    let dateStr = '待定', daysLeft = null;
+    let dateStr = t('date_tbd'), daysLeft = null;
     if (dateVal) {
         const d = new Date(dateVal);
         if (!isNaN(d)) {
-            dateStr = `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
+            dateStr = formatDate(d);
             const diff = new Date(dateVal + ' 07:00:00').getTime() - Date.now();
             if (diff > 0) daysLeft = Math.floor(diff / 86400000);
         }
@@ -1091,7 +1381,7 @@ function showStandaloneGuestPage() {
     ).join('');
 
     const wishesHtml = wishes.length === 0
-        ? `<p style="font-size:10px;color:#bbb;text-align:center;font-style:italic;padding:8px 0">快来成为第一个送上祝福的人！</p>`
+        ? `<p style="font-size:10px;color:#bbb;text-align:center;font-style:italic;padding:8px 0">${t('gs_no_wishes')}</p>`
         : wishes.map(g => `
             <div style="background:#fdf2f4;border:1px solid #fbe5ea;border-radius:10px;padding:8px 12px">
                 <p style="font-size:10px;font-weight:700;color:#800020;margin-bottom:2px">💖 ${g.name}</p>
@@ -1159,60 +1449,60 @@ function showStandaloneGuestPage() {
                 <div class="gs-chip" style="background:#fdf2f4;margin-bottom:8px">
                     <span style="font-size:16px">📅</span>
                     <div style="flex:1">
-                        <div class="gs-label" style="color:#b08b43">婚礼日期 Date</div>
+                        <div class="gs-label" style="color:#b08b43">${t('gs_date_label')}</div>
                         <div class="gs-value" style="color:#800020">${dateStr}</div>
                     </div>
-                    ${daysLeft !== null ? `<div style="text-align:right"><div class="gs-label" style="color:#b08b43">倒计时</div><div class="gs-value" style="color:#800020;font-family:monospace">还有 ${daysLeft} 天</div></div>` : ''}
+                    ${daysLeft !== null ? `<div style="text-align:right"><div class="gs-label" style="color:#b08b43">${t('gs_countdown_label')}</div><div class="gs-value" style="color:#800020;font-family:monospace">${t('gs_countdown_days').replace('${d}',daysLeft)}</div></div>` : ''}
                 </div>
 
                 <!-- Wishes wall -->
                 <div class="gs-wall">
-                    <div class="gs-wall-title">💕 亲友祝福墙</div>
+                    <div class="gs-wall-title">${t('gs_wall_title')}</div>
                     <div class="gs-wall-items">${wishesHtml}</div>
                 </div>
 
                 <!-- RSVP form -->
                 <div class="gs-form">
-                    <div class="gs-form-title">✍️ 填写出席回执 RSVP</div>
+                    <div class="gs-form-title">${t('gs_form_title')}</div>
                     <div id="gst-form-area" style="display:flex;flex-direction:column;gap:10px">
                         <div>
-                            <label class="gs-field-label">您的姓名 Your Name *</label>
-                            <input id="gst-name" class="gs-input" placeholder="例如：张大明">
+                            <label class="gs-field-label">${t('gs_name_label')}</label>
+                            <input id="gst-name" class="gs-input" placeholder="${t('gs_name_ph')}">
                         </div>
                         <div class="gs-grid">
                             <div>
-                                <label class="gs-field-label">出席人数 Pax</label>
+                                <label class="gs-field-label">${t('gs_pax_label')}</label>
                                 <select id="gst-pax" class="gs-input">
-                                    <option value="1">1 人</option><option value="2">2 人</option>
-                                    <option value="3">3 人</option><option value="4">4 人</option>
-                                    <option value="5">5 人</option>
+                                    <option value="1">1 ${t('gs_pax_unit')}</option><option value="2">2 ${t('gs_pax_unit')}</option>
+                                    <option value="3">3 ${t('gs_pax_unit')}</option><option value="4">4 ${t('gs_pax_unit')}</option>
+                                    <option value="5">5 ${t('gs_pax_unit')}</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="gs-field-label">饮食需求 Diet</label>
+                                <label class="gs-field-label">${t('gs_diet_label')}</label>
                                 <select id="gst-diet" class="gs-input">
-                                    <option value="none">无特殊</option>
-                                    <option value="vegetarian">素食 Veg</option>
-                                    <option value="halal">清真 Halal</option>
+                                    <option value="none">${t('gs_diet_none')}</option>
+                                    <option value="vegetarian">${t('gs_diet_veg')}</option>
+                                    <option value="halal">${t('gs_diet_halal')}</option>
                                 </select>
                             </div>
                         </div>
                         <div>
-                            <label class="gs-field-label">温馨祝福 Wishes</label>
-                            <textarea id="gst-wish" class="gs-input" style="height:60px;resize:none" placeholder="祝新婚快乐，百年好合！"></textarea>
+                            <label class="gs-field-label">${t('gs_wish_label')}</label>
+                            <textarea id="gst-wish" class="gs-input" style="height:60px;resize:none" placeholder="${t('gs_wish_ph')}"></textarea>
                         </div>
-                        <button class="gs-btn" onclick="gstSubmit()">💌 送出祝福 & 确认出席</button>
+                        <button class="gs-btn" onclick="gstSubmit()">${t('gs_submit')}</button>
                     </div>
                     <div id="gst-success" style="display:none" class="gs-success">
                         <div style="font-size:40px;margin-bottom:8px">🎉</div>
-                        <p style="font-family:serif;font-weight:700;color:#800020;font-size:15px">感谢您的出席！</p>
-                        <p style="font-size:11px;color:#888;margin-top:6px;line-height:1.6">我们已收到您的回执，<br>期待与您共度美好时光！</p>
-                        <button onclick="gstReset()" style="margin-top:12px;font-size:11px;color:#bbb;background:none;border:none;cursor:pointer;text-decoration:underline">再次填写</button>
+                        <p style="font-family:serif;font-weight:700;color:#800020;font-size:15px">${t('gs_thanks')}</p>
+                        <p style="font-size:11px;color:#888;margin-top:6px;line-height:1.6">${t('gs_thanks_detail')}</p>
+                        <button onclick="gstReset()" style="margin-top:12px;font-size:11px;color:#bbb;background:none;border:none;cursor:pointer;text-decoration:underline">${t('gs_retry')}</button>
                     </div>
                 </div>
             </div>
         </div>
-        <p class="gs-footer" style="max-width:400px">"良辰吉日定终身，百年琴瑟共白头"</p>
+        <p class="gs-footer" style="max-width:400px">${t('poem_quote')}</p>
     `;
     document.body.appendChild(page);
 
@@ -1266,13 +1556,16 @@ function showStandaloneGuestPage() {
 // ═══════════════════════════════════════
 // DATE / COUNTDOWN / HEADER
 // ═══════════════════════════════════════
+function formatDate(d) {
+    return t('date_format').replace('${y}',d.getFullYear()).replace('${m}',d.getMonth()+1).replace('${d}',d.getDate());
+}
 function updateDynamicDateSubtitle(dateValue) {
     const el = document.getElementById('header-wedding-date');
     if (!el) return;
-    if (!dateValue) { el.innerText = "请选择日期"; return; }
+    if (!dateValue) { el.innerText = t('select_date_prompt'); return; }
     const d = new Date(dateValue);
-    if (isNaN(d.getTime())) { el.innerText = "请选择日期"; return; }
-    el.innerText = `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
+    if (isNaN(d.getTime())) { el.innerText = t('select_date_prompt'); return; }
+    el.innerText = formatDate(d);
 }
 
 function onDateChanged() {
@@ -1294,11 +1587,11 @@ function evaluateAuspiciousDay(dateStr) {
     const jiEl = document.getElementById('calendar-ji');
     const adviceContainer = document.getElementById('date-evaluation-result');
     if (!dateStr) {
-        if(lunarEl) lunarEl.innerText="岁次与阴历待定";
-        if(gradeEl) gradeEl.innerText="✨ 待定吉日，喜结连理";
-        if(yiEl) yiEl.innerText="结婚、订婚、祭祀、安床";
-        if(jiEl) jiEl.innerText="作灶、开渠、盖屋";
-        if(adviceContainer) adviceContainer.innerHTML=`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-bold border border-gray-200">📅 请先在上方挑选公历日期以进行即时吉凶鉴定</span>`;
+        if(lunarEl) lunarEl.innerText=t('lunar_pending_full');
+        if(gradeEl) gradeEl.innerText=t('auspicious_pending');
+        if(yiEl) yiEl.innerText=t('yi_normal');
+        if(jiEl) jiEl.innerText=t('ji_normal');
+        if(adviceContainer) adviceContainer.innerHTML=`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-bold border border-gray-200">${t('eval_pending')}</span>`;
         return;
     }
     const date = new Date(dateStr);
@@ -1309,11 +1602,11 @@ function evaluateAuspiciousDay(dateStr) {
     const lunarMonthStr=lunarMonths[(month+(year%12))%12];
     const lunarDayStr=lunarDays[(day+(month*2))%30];
     let grade,yi,ji,adviceHtml,isTop=false;
-    if(dow===0||dow===6){isTop=true;grade="✨【上吉】鸾凤和鸣，天德合照之吉日";yi="嫁娶、会亲友、订盟、纳采、祈福、安床、裁衣";ji="开渠、掘井、作灶、伐木";adviceHtml=`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-50 text-green-700 text-xs font-bold border border-green-200">🟢 【极佳吉日】鸾凤和鸣，天赐姻缘！非常适合在此周末举办婚礼盛典</span>`;}
-    else if([2,6,8,9,16,18,22,26,28].includes(day)){isTop=true;grade="✨【上吉】月德合吉，五合临照之吉日";yi="嫁娶、冠笄、纳采、出行、开市、纳财、祈福";ji="伐木、筑堤、破土、动土";adviceHtml=`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-50 text-green-700 text-xs font-bold border border-green-200">🟢 【上等良辰】神星庇护，气运极佳！极力推荐在此日成婚</span>`;}
-    else if(day%4===0){grade="⚠️【避忌】月破大耗，诸事避忌之凶日";yi="求医、扫舍、求治病、解除、扫除";ji="结婚嫁娶、入宅动土、修造、移徙";adviceHtml=`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-50 text-red-700 text-xs font-bold border border-red-200">🔴 【避忌凶日】通书标记今日忌嫁娶，建议新人另择佳期</span>`;}
-    else{grade="【平吉】岁德并照，宜成良缘之日";yi="求医、祭祀、沐浴、整手足甲";ji="出行、栽种、开渠、盖屋";adviceHtml=`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 text-amber-700 text-xs font-bold border border-amber-200">🟡 【普通平吉】平稳祥和之日，可做备选方案</span>`;}
-    if(lunarEl) lunarEl.innerText=`农历 ${lunarMonthStr}${lunarDayStr}`;
+    if(dow===0||dow===6){isTop=true;grade=t('grade_top_weekend');yi=t('yi_weekend');ji=t('ji_weekend');adviceHtml=`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-50 text-green-700 text-xs font-bold border border-green-200">${t('advice_top_weekend')}</span>`;}
+    else if([2,6,8,9,16,18,22,26,28].includes(day)){isTop=true;grade=t('grade_top_lucky');yi=t('yi_lucky');ji=t('ji_lucky');adviceHtml=`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-50 text-green-700 text-xs font-bold border border-green-200">${t('advice_top_lucky')}</span>`;}
+    else if(day%4===0){grade=t('grade_bad');yi=t('yi_bad');ji=t('ji_bad');adviceHtml=`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-50 text-red-700 text-xs font-bold border border-red-200">${t('advice_bad')}</span>`;}
+    else{grade=t('grade_normal');yi=t('yi_normal');ji=t('ji_normal');adviceHtml=`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 text-amber-700 text-xs font-bold border border-amber-200">${t('advice_normal')}</span>`;}
+    if(lunarEl) lunarEl.innerText=`${t('lunar_prefix')} ${lunarMonthStr}${lunarDayStr}`;
     if(gradeEl){gradeEl.innerText=grade;gradeEl.className=isTop?"text-lg font-bold font-serif text-yellow-300 mt-2 animate-pulse":"text-lg font-bold font-serif text-white mt-2";}
     if(yiEl) yiEl.innerText=yi;
     if(jiEl) jiEl.innerText=ji;
@@ -1323,12 +1616,12 @@ function evaluateAuspiciousDay(dateStr) {
 function updateCountdown() {
     const timerContainer=document.getElementById('countdown-timer');
     const inviteCountdown=document.getElementById('invite-countdown-timer');
-    if(!targetWeddingDateValue){if(timerContainer)timerContainer.innerText="待选公历日期";if(inviteCountdown)inviteCountdown.innerText="未选择日期";return;}
+    if(!targetWeddingDateValue){if(timerContainer)timerContainer.innerText=t('countdown_pending');if(inviteCountdown)inviteCountdown.innerText=t('invite_no_date');return;}
     const diff=new Date(`${targetWeddingDateValue} 07:00:00`).getTime()-Date.now();
-    if(diff<0){if(timerContainer)timerContainer.innerText="💖 新婚快乐，幸福美满！";if(inviteCountdown)inviteCountdown.innerText="已到期 🎉";return;}
+    if(diff<0){if(timerContainer)timerContainer.innerText=t('countdown_expired');if(inviteCountdown)inviteCountdown.innerText=t('countdown_expired_short');return;}
     const days=Math.floor(diff/86400000),hours=Math.floor((diff%86400000)/3600000),minutes=Math.floor((diff%3600000)/60000),seconds=Math.floor((diff%60000)/1000);
-    if(timerContainer)timerContainer.innerText=`${days}天 ${hours}时 ${minutes}分 ${seconds}秒`;
-    if(inviteCountdown)inviteCountdown.innerText=`${days}天 ${hours}小时`;
+    if(timerContainer)timerContainer.innerText=t('countdown_format').replace('${d}',days).replace('${h}',hours).replace('${m}',minutes).replace('${s}',seconds);
+    if(inviteCountdown)inviteCountdown.innerText=t('countdown_short').replace('${d}',days).replace('${h}',hours);
 }
 
 // ═══════════════════════════════════════
@@ -1340,7 +1633,7 @@ function renderTimelineByAct(actKey) {
     if(!container) return;
     container.innerHTML='';
     const actNodes=runsheetItems.filter(item=>item.act===actKey);
-    if(actNodes.length===0){container.innerHTML=`<p class="text-xs text-gray-400 italic py-4">暂无该环节的自定义步骤，点击右上方按钮增加步骤。</p>`;return;}
+    if(actNodes.length===0){container.innerHTML=`<p class="text-xs text-gray-400 italic py-4">${t('no_steps')}</p>`;return;}
     actNodes.forEach((node,idx)=>{
         container.insertAdjacentHTML('beforeend',`
             <div class="relative print-card group">
@@ -1349,11 +1642,11 @@ function renderTimelineByAct(actKey) {
                     <div class="flex justify-between items-start gap-4">
                         <div class="space-y-3 flex-1">
                             <div class="flex flex-col md:flex-row md:items-center gap-2">
-                                <input type="text" value="${node.time}" oninput="updateRunsheetNodeValue('${node.id}','time',this.value)" class="text-burgundy-500 font-bold text-sm bg-transparent border-b border-transparent hover:border-gray-200 focus:border-burgundy-500 focus:outline-none w-32 py-0.5" placeholder="例如: 09:00 AM">
+                                <input type="text" value="${node.time}" oninput="updateRunsheetNodeValue('${node.id}','time',this.value)" class="text-burgundy-500 font-bold text-sm bg-transparent border-b border-transparent hover:border-gray-200 focus:border-burgundy-500 focus:outline-none w-32 py-0.5" placeholder="${t('ph_time')}">
                                 <span class="hidden md:inline text-gray-300">|</span>
-                                <input type="text" value="${node.title}" oninput="updateRunsheetNodeValue('${node.id}','title',this.value)" class="font-bold text-sm text-gray-800 bg-transparent border-b border-transparent hover:border-gray-200 focus:border-burgundy-500 focus:outline-none flex-1 py-0.5" placeholder="例如: 兄弟接亲迎嫁">
+                                <input type="text" value="${node.title}" oninput="updateRunsheetNodeValue('${node.id}','title',this.value)" class="font-bold text-sm text-gray-800 bg-transparent border-b border-transparent hover:border-gray-200 focus:border-burgundy-500 focus:outline-none flex-1 py-0.5" placeholder="${t('ph_title')}">
                             </div>
-                            <textarea oninput="updateRunsheetNodeValue('${node.id}','desc',this.value)" class="w-full text-xs text-gray-500 bg-transparent border-b border-transparent hover:border-gray-100 focus:border-burgundy-500 focus:outline-none resize-none leading-relaxed h-12" placeholder="在这里详细写下该环节的主要内容...">${node.desc}</textarea>
+                            <textarea oninput="updateRunsheetNodeValue('${node.id}','desc',this.value)" class="w-full text-xs text-gray-500 bg-transparent border-b border-transparent hover:border-gray-100 focus:border-burgundy-500 focus:outline-none resize-none leading-relaxed h-12" placeholder="${t('ph_desc')}">${node.desc}</textarea>
                         </div>
                         <button onclick="deleteRunsheetNode('${node.id}')" class="text-gray-300 hover:text-red-500 text-xs py-1 px-2 transition opacity-0 group-hover:opacity-100 no-print"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
@@ -1362,9 +1655,9 @@ function renderTimelineByAct(actKey) {
     });
 }
 function updateRunsheetNodeValue(id,key,value){const node=runsheetItems.find(i=>i.id===id);if(node){node[key]=value;saveAllToLocalStorage();}}
-function addNewRunsheetStep(actKey){runsheetItems.push({id:'node_'+Date.now(),act:actKey,time:'00:00 AM',title:'新增流程步骤',desc:'在此处编辑写下本步流程的具体操作要求。'});renderTimelineByAct(actKey);saveAllToLocalStorage();}
+function addNewRunsheetStep(actKey){runsheetItems.push({id:'node_'+Date.now(),act:actKey,time:'00:00 AM',title:t('new_step_title'),desc:t('new_step_desc')});renderTimelineByAct(actKey);saveAllToLocalStorage();}
 function deleteRunsheetNode(id){const node=runsheetItems.find(i=>i.id===id);if(node){const a=node.act;runsheetItems=runsheetItems.filter(i=>i.id!==id);renderTimelineByAct(a);saveAllToLocalStorage();}}
-function resetRunsheetToDefault(){triggerCustomModal("确定要重置吗？","这将清空您已经个性化编辑过的全部 Runsheet 细节，并用最经典的 22 步大马华人传统流程覆盖。此操作无法撤销。",true,()=>{runsheetItems=JSON.parse(JSON.stringify(defaultRunsheetTemplates));renderAllCustomTimelineActs();saveAllToLocalStorage();});}
+function resetRunsheetToDefault(){triggerCustomModal(t('reset_confirm_title'),t('reset_confirm_msg'),true,()=>{runsheetItems=JSON.parse(JSON.stringify(defaultRunsheetTemplates));renderAllCustomTimelineActs();saveAllToLocalStorage();});}
 
 // ═══════════════════════════════════════
 // CAROUSEL
@@ -1390,7 +1683,7 @@ function resetDefaultPhotos(){carouselPhotos=["https://images.unsplash.com/photo
 function updateInvitePreview(){
     const loc=document.getElementById('invite-location-input');const groom=document.getElementById('groom-name');const bride=document.getElementById('bride-name');
     const pG=document.getElementById('preview-groom');const pB=document.getElementById('preview-bride');const pL=document.getElementById('preview-location');
-    if(pG)pG.innerText=groom?(groom.value||"新郎"):"新郎";if(pB)pB.innerText=bride?(bride.value||"新娘"):"新娘";if(pL)pL.innerText=loc?(loc.value||"玻璃温室"):"玻璃温室";
+    if(pG)pG.innerText=groom?(groom.value||t('groom_default')):t('groom_default');if(pB)pB.innerText=bride?(bride.value||t('bride_default')):t('bride_default');if(pL)pL.innerText=loc?(loc.value||t('venue_default')):t('venue_default');
     renderCarousel();
 }
 
@@ -1403,9 +1696,9 @@ function renderTodoList(){
     let cP=0,cV=0,cD=0;
     todoItems.forEach(item=>{
         let badge='';
-        if(item.owner==='groom')badge=`<span class="bg-blue-50 text-blue-600 text-[10px] px-1.5 py-0.5 rounded font-bold">新郎</span>`;
-        else if(item.owner==='bride')badge=`<span class="bg-pink-50 text-pink-600 text-[10px] px-1.5 py-0.5 rounded font-bold">新娘</span>`;
-        else badge=`<span class="bg-purple-50 text-purple-600 text-[10px] px-1.5 py-0.5 rounded font-bold">双人协作</span>`;
+        if(item.owner==='groom')badge=`<span class="bg-blue-50 text-blue-600 text-[10px] px-1.5 py-0.5 rounded font-bold">${t('owner_groom')}</span>`;
+        else if(item.owner==='bride')badge=`<span class="bg-pink-50 text-pink-600 text-[10px] px-1.5 py-0.5 rounded font-bold">${t('owner_bride')}</span>`;
+        else badge=`<span class="bg-purple-50 text-purple-600 text-[10px] px-1.5 py-0.5 rounded font-bold">${t('owner_joint')}</span>`;
         const card=`<div class="bg-gray-50 border border-gray-100 p-3 rounded-xl hover:bg-white transition"><div class="flex justify-between items-start"><span class="text-xs font-bold text-gray-800 leading-relaxed">${item.text}</span><button onclick="deleteTodo('${item.id}')" class="text-gray-300 hover:text-red-500 text-[10px]"><i class="fa-solid fa-trash"></i></button></div><div class="flex justify-between items-center mt-3">${badge}${getTodoActionButton(item)}</div></div>`;
         if(item.status==='planning'){pC.insertAdjacentHTML('beforeend',card);cP++;}else if(item.status==='verify'){vC.insertAdjacentHTML('beforeend',card);cV++;}else{dC.insertAdjacentHTML('beforeend',card);cD++;}
     });
@@ -1413,22 +1706,22 @@ function renderTodoList(){
     if(cpEl)cpEl.innerText=cP;if(cvEl)cvEl.innerText=cV;if(cdEl)cdEl.innerText=cD;
 }
 function getTodoActionButton(item){
-    if(item.status==='planning')return`<button onclick="changeTodoStatus('${item.id}','verify')" class="bg-orange-500 hover:bg-orange-600 text-white text-[9px] font-bold py-1 px-2.5 rounded-lg transition">完成待验证 <i class="fa-solid fa-paper-plane"></i></button>`;
-    if(item.status==='verify')return`<button onclick="changeTodoStatus('${item.id}','done')" class="bg-green-500 hover:bg-green-600 text-white text-[9px] font-bold py-1 px-2.5 rounded-lg transition"><i class="fa-solid fa-circle-check"></i> 准予通过</button>`;
-    return`<span class="text-[10px] text-green-600 font-bold"><i class="fa-solid fa-circle-check"></i> 双方通过</span>`;
+    if(item.status==='planning')return`<button onclick="changeTodoStatus('${item.id}','verify')" class="bg-orange-500 hover:bg-orange-600 text-white text-[9px] font-bold py-1 px-2.5 rounded-lg transition">${t('btn_mark_verify')} <i class="fa-solid fa-paper-plane"></i></button>`;
+    if(item.status==='verify')return`<button onclick="changeTodoStatus('${item.id}','done')" class="bg-green-500 hover:bg-green-600 text-white text-[9px] font-bold py-1 px-2.5 rounded-lg transition"><i class="fa-solid fa-circle-check"></i> ${t('btn_approve')}</button>`;
+    return`<span class="text-[10px] text-green-600 font-bold"><i class="fa-solid fa-circle-check"></i> ${t('status_approved')}</span>`;
 }
-function changeTodoStatus(id,newStatus){const item=todoItems.find(t=>t.id===id);if(item){item.status=newStatus;const toast=document.getElementById('notification-toast');const msg=document.getElementById('notification-toast-msg');if(toast&&msg){msg.innerText=newStatus==='verify'?'🔔 提报了待办，待另一方核准！':'💖 双方均核签通过，任务归档！';toast.classList.remove('hidden');setTimeout(()=>toast.classList.add('hidden'),3500);}renderTodoList();saveAllToLocalStorage();}}
+function changeTodoStatus(id,newStatus){const item=todoItems.find(ti=>ti.id===id);if(item){item.status=newStatus;const toast=document.getElementById('notification-toast');const msg=document.getElementById('notification-toast-msg');if(toast&&msg){msg.innerText=newStatus==='verify'?t('toast_verify'):t('toast_done');toast.classList.remove('hidden');setTimeout(()=>toast.classList.add('hidden'),3500);}renderTodoList();saveAllToLocalStorage();}}
 function deleteTodo(id){todoItems=todoItems.filter(t=>t.id!==id);renderTodoList();saveAllToLocalStorage();}
-function triggerQuickAddTodo(){triggerCustomModal("📝 新增备婚协同待办",`<div class="space-y-3 text-left"><div><label class="block text-xs font-semibold text-gray-400 mb-1">待办事项内容</label><input type="text" id="modal-todo-text" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-lg p-2.5 outline-none focus:border-burgundy-500" placeholder="如：向酒家核实订金账单"></div><div><label class="block text-xs font-semibold text-gray-400 mb-1">主要负责人</label><select id="modal-todo-owner" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-lg p-2.5 outline-none focus:border-burgundy-500"><option value="groom">新郎主理</option><option value="bride">新娘主理</option><option value="joint">双人协力</option></select></div></div>`,true,()=>{const textVal=document.getElementById('modal-todo-text').value.trim();const ownerVal=document.getElementById('modal-todo-owner').value;if(textVal){todoItems.push({id:'todo_'+Date.now(),text:textVal,owner:ownerVal,status:'planning'});renderTodoList();saveAllToLocalStorage();}});}
+function triggerQuickAddTodo(){triggerCustomModal(t('add_todo_title'),`<div class="space-y-3 text-left"><div><label class="block text-xs font-semibold text-gray-400 mb-1">${t('add_todo_text_label')}</label><input type="text" id="modal-todo-text" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-lg p-2.5 outline-none focus:border-burgundy-500" placeholder="${t('add_todo_text_ph')}"></div><div><label class="block text-xs font-semibold text-gray-400 mb-1">${t('add_todo_owner_label')}</label><select id="modal-todo-owner" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-lg p-2.5 outline-none focus:border-burgundy-500"><option value="groom">${t('add_todo_groom')}</option><option value="bride">${t('add_todo_bride')}</option><option value="joint">${t('add_todo_joint')}</option></select></div></div>`,true,()=>{const textVal=document.getElementById('modal-todo-text').value.trim();const ownerVal=document.getElementById('modal-todo-owner').value;if(textVal){todoItems.push({id:'todo_'+Date.now(),text:textVal,owner:ownerVal,status:'planning'});renderTodoList();saveAllToLocalStorage();}});}
 
 // ═══════════════════════════════════════
 // BUDGET
 // ═══════════════════════════════════════
 function renderBudgetNewTable(){
     const tbody=document.getElementById('budget-new-tbody');if(!tbody)return;tbody.innerHTML='';
-    if(budgetNewItems.length===0){tbody.innerHTML=`<tr><td colspan="5" class="text-center py-6 text-xs text-gray-400 italic">暂无开销支出，点击右上角添加项目。</td></tr>`;calculateBudgetNewSummary();return;}
+    if(budgetNewItems.length===0){tbody.innerHTML=`<tr><td colspan="5" class="text-center py-6 text-xs text-gray-400 italic">${t('no_expenses')}</td></tr>`;calculateBudgetNewSummary();return;}
     budgetNewItems.forEach(item=>{
-        tbody.insertAdjacentHTML('beforeend',`<tr class="border-b border-gray-50 text-xs text-gray-700 hover:bg-gray-50/50"><td class="py-2.5 pl-2"><input type="text" value="${item.name}" oninput="updateBudgetNewItem('${item.id}','name',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-semibold" placeholder="支出细节"></td><td><select onchange="updateBudgetNewItem('${item.id}','category',this.value)" class="bg-transparent outline-none text-gray-600 font-medium py-0.5"><option value="宴席" ${item.category==='宴席'?'selected':''}>宴席场地</option><option value="摄像" ${item.category==='摄像'?'selected':''}>影像物料</option><option value="妆造" ${item.category==='妆造'?'selected':''}>婚纱妆造</option><option value="布置" ${item.category==='布置'?'selected':''}>婚礼布置</option><option value="其他" ${item.category==='其他'?'selected':''}>其他支出</option></select></td><td class="font-mono"><input type="number" value="${item.amount}" oninput="updateBudgetNewItem('${item.id}','amount',this.value)" class="w-20 bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-bold text-gray-800" placeholder="0"></td><td><div class="flex items-center gap-2 flex-wrap"><input type="file" id="file-${item.id}" onchange="handleReceiptUpload('${item.id}',this)" class="hidden" accept="image/*"><label for="file-${item.id}" class="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 text-[10px] font-bold py-1 px-2.5 rounded transition"><i class="fa-solid fa-upload"></i> 上传凭证</label>${item.receiptURL?`<a href="${item.receiptURL}" target="_blank" class="text-burgundy-500 font-bold hover:underline text-[10px]"><i class="fa-regular fa-image"></i> 预览</a>`:'<span class="text-[10px] text-gray-300">未录入</span>'}</div></td><td class="text-center"><button onclick="deleteBudgetNewItem('${item.id}')" class="text-red-500 hover:text-red-700 font-bold text-[11px]"><i class="fa-regular fa-trash-can"></i></button></td></tr>`);
+        tbody.insertAdjacentHTML('beforeend',`<tr class="border-b border-gray-50 text-xs text-gray-700 hover:bg-gray-50/50"><td class="py-2.5 pl-2"><input type="text" value="${item.name}" oninput="updateBudgetNewItem('${item.id}','name',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-semibold" placeholder="${t('ph_expense_name')}"></td><td><select onchange="updateBudgetNewItem('${item.id}','category',this.value)" class="bg-transparent outline-none text-gray-600 font-medium py-0.5"><option value="宴席" ${item.category==='宴席'?'selected':''}>${t('cat_banquet')}</option><option value="摄像" ${item.category==='摄像'?'selected':''}>${t('cat_photo')}</option><option value="妆造" ${item.category==='妆造'?'selected':''}>${t('cat_makeup')}</option><option value="布置" ${item.category==='布置'?'selected':''}>${t('cat_decor')}</option><option value="其他" ${item.category==='其他'?'selected':''}>${t('cat_other')}</option></select></td><td class="font-mono"><input type="number" value="${item.amount}" oninput="updateBudgetNewItem('${item.id}','amount',this.value)" class="w-20 bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-bold text-gray-800" placeholder="0"></td><td><div class="flex items-center gap-2 flex-wrap"><input type="file" id="file-${item.id}" onchange="handleReceiptUpload('${item.id}',this)" class="hidden" accept="image/*"><label for="file-${item.id}" class="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 text-[10px] font-bold py-1 px-2.5 rounded transition"><i class="fa-solid fa-upload"></i> ${t('btn_upload_receipt')}</label>${item.receiptURL?`<a href="${item.receiptURL}" target="_blank" class="text-burgundy-500 font-bold hover:underline text-[10px]"><i class="fa-regular fa-image"></i> ${t('btn_preview_receipt')}</a>`:`<span class="text-[10px] text-gray-300">${t('receipt_none')}</span>`}</div></td><td class="text-center"><button onclick="deleteBudgetNewItem('${item.id}')" class="text-red-500 hover:text-red-700 font-bold text-[11px]"><i class="fa-regular fa-trash-can"></i></button></td></tr>`);
     });
     calculateBudgetNewSummary();
 }
@@ -1457,10 +1750,10 @@ function addDepositEntry() {
     const amount   = parseFloat(amountEl?.value) || 0;
     if (amount <= 0) { amountEl?.focus(); return; }
 
-    const note = noteEl?.value.trim() || '存款';
+    const note = noteEl?.value.trim() || t('deposit_default_note');
     depositEntries.push({
         id:     'dep_' + Date.now(),
-        date:   new Date().toLocaleDateString('zh-MY', { year:'numeric', month:'short', day:'numeric' }),
+        date:   new Date().toLocaleDateString(currentLang === 'zh' ? 'zh-MY' : 'en-MY', { year:'numeric', month:'short', day:'numeric' }),
         note,
         amount
     });
@@ -1491,7 +1784,7 @@ function renderDepositLog() {
         list.innerHTML = `
             <div class="text-center py-6 text-gray-300 text-xs" id="deposit-empty-state">
                 <i class="fa-solid fa-piggy-bank text-2xl block mb-2"></i>
-                还没有存款记录，开始记录你们的第一笔婚礼基金吧！
+                ${t('deposit_empty_msg')}
             </div>`;
         if (countEl) countEl.textContent = '';
         return;
@@ -1521,7 +1814,7 @@ function renderDepositLog() {
         `);
     });
 
-    if (countEl) countEl.textContent = `共 ${depositEntries.length} 笔存款记录`;
+    if (countEl) countEl.textContent = t('deposit_count').replace('${n}', depositEntries.length);
 }
 
 function calculateSavingGoal() {
@@ -1559,25 +1852,25 @@ function calculateSavingGoal() {
     }
     if (pctLabel) pctLabel.textContent = `${pct}%`;
     if (ringPct)  ringPct.textContent  = `${pct}%`;
-    if (gapEl)    gapEl.textContent    = pct >= 100 ? '🎉 目标达成！' : `RM ${gap.toLocaleString()}`;
+    if (gapEl)    gapEl.textContent    = pct >= 100 ? t('saving_goal_reached') : `RM ${gap.toLocaleString()}`;
 
     if (statusEl) {
         statusEl.classList.remove('hidden');
         if (pct >= 100) {
             statusEl.className = 'text-xs font-semibold rounded-xl px-3 py-2.5 leading-relaxed bg-green-50 text-green-700 border border-green-200';
-            statusEl.innerHTML = '🎉 <strong>恭喜！存款目标已达成！</strong> 可以放心预订各项婚礼服务了！';
+            statusEl.innerHTML = t('saving_msg_100');
         } else if (pct >= 75) {
             statusEl.className = 'text-xs font-semibold rounded-xl px-3 py-2.5 leading-relaxed bg-champagne-100 text-champagne-600 border border-champagne-100';
-            statusEl.innerHTML = `✨ <strong>冲刺阶段！</strong> 已存 ${pct}%，还差 RM ${gap.toLocaleString()}，快了！`;
+            statusEl.innerHTML = t('saving_msg_75').replace('${pct}',pct).replace('${gap}',gap.toLocaleString());
         } else if (pct >= 50) {
             statusEl.className = 'text-xs font-semibold rounded-xl px-3 py-2.5 leading-relaxed bg-blue-50 text-blue-700 border border-blue-100';
-            statusEl.innerHTML = `💪 <strong>过半了！</strong> 已达成 ${pct}%，继续保持！`;
+            statusEl.innerHTML = t('saving_msg_50').replace('${pct}',pct);
         } else if (pct >= 25) {
             statusEl.className = 'text-xs font-semibold rounded-xl px-3 py-2.5 leading-relaxed bg-purple-50 text-purple-700 border border-purple-100';
-            statusEl.innerHTML = `🌱 <strong>良好起步！</strong> 建议每月存入 RM ${Math.ceil(gap/12).toLocaleString()} 可在一年内达标。`;
+            statusEl.innerHTML = t('saving_msg_25').replace('${monthly}',Math.ceil(gap/12).toLocaleString());
         } else {
             statusEl.className = 'text-xs font-semibold rounded-xl px-3 py-2.5 leading-relaxed bg-gray-50 text-gray-600 border border-gray-200';
-            statusEl.innerHTML = `📌 <strong>婚礼基金已开启！</strong> 坚持每月定存，梦想婚礼不远了！`;
+            statusEl.innerHTML = t('saving_msg_0');
         }
     }
 }
@@ -1587,29 +1880,29 @@ function calculateSavingGoal() {
 // ═══════════════════════════════════════
 function renderQuotesTable(){
     const tbody=document.getElementById('vendor-quote-tbody');if(!tbody)return;tbody.innerHTML='';
-    if(quoteItems.length===0){tbody.innerHTML=`<tr><td colspan="6" class="text-center py-6 text-xs text-gray-400 italic">目前无多方比对方案，点击右上角新增。</td></tr>`;return;}
+    if(quoteItems.length===0){tbody.innerHTML=`<tr><td colspan="6" class="text-center py-6 text-xs text-gray-400 italic">${t('no_quotes')}</td></tr>`;return;}
     quoteItems.forEach(item=>{
-        tbody.insertAdjacentHTML('beforeend',`<tr class="border-b border-gray-50 text-xs text-gray-700 hover:bg-gray-50/50"><td class="py-2 pl-2"><input type="text" value="${item.vendor}" oninput="updateQuote('${item.id}','vendor',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-bold text-gray-800" placeholder="商家名称"></td><td><input type="number" value="${item.price}" oninput="updateQuote('${item.id}','price',this.value)" class="w-20 bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-mono font-bold" placeholder="0"></td><td><input type="text" value="${item.service}" oninput="updateQuote('${item.id}','service',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500" placeholder="包含细节"></td><td><input type="text" value="${item.prosCons}" oninput="updateQuote('${item.id}','prosCons',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500" placeholder="优劣评价"></td><td><select onchange="updateQuote('${item.id}','rating',this.value)" class="bg-transparent outline-none font-semibold text-champagne-600 py-0.5"><option value="🌟🌟🌟🌟🌟" ${item.rating==='🌟🌟🌟🌟🌟'?'selected':''}>🌟🌟🌟🌟🌟</option><option value="🌟🌟🌟🌟" ${item.rating==='🌟🌟🌟🌟'?'selected':''}>🌟🌟🌟🌟</option><option value="🌟🌟🌟" ${item.rating==='🌟🌟🌟'?'selected':''}>🌟🌟🌟</option></select></td><td class="text-center"><button onclick="deleteQuoteRow('${item.id}')" class="text-red-500 hover:text-red-700 font-semibold text-[11px]">🗑️</button></td></tr>`);
+        tbody.insertAdjacentHTML('beforeend',`<tr class="border-b border-gray-50 text-xs text-gray-700 hover:bg-gray-50/50"><td class="py-2 pl-2"><input type="text" value="${item.vendor}" oninput="updateQuote('${item.id}','vendor',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-bold text-gray-800" placeholder="${t('ph_vendor')}"></td><td><input type="number" value="${item.price}" oninput="updateQuote('${item.id}','price',this.value)" class="w-20 bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-mono font-bold" placeholder="0"></td><td><input type="text" value="${item.service}" oninput="updateQuote('${item.id}','service',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500" placeholder="${t('ph_service')}"></td><td><input type="text" value="${item.prosCons}" oninput="updateQuote('${item.id}','prosCons',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500" placeholder="${t('ph_pros_cons')}"></td><td><select onchange="updateQuote('${item.id}','rating',this.value)" class="bg-transparent outline-none font-semibold text-champagne-600 py-0.5"><option value="🌟🌟🌟🌟🌟" ${item.rating==='🌟🌟🌟🌟🌟'?'selected':''}>🌟🌟🌟🌟🌟</option><option value="🌟🌟🌟🌟" ${item.rating==='🌟🌟🌟🌟'?'selected':''}>🌟🌟🌟🌟</option><option value="🌟🌟🌟" ${item.rating==='🌟🌟🌟'?'selected':''}>🌟🌟🌟</option></select></td><td class="text-center"><button onclick="deleteQuoteRow('${item.id}')" class="text-red-500 hover:text-red-700 font-semibold text-[11px]">🗑️</button></td></tr>`);
     });
 }
 function addNewQuoteRow(){quoteItems.push({id:'quote_'+Date.now(),vendor:'',price:0,service:'',prosCons:'',rating:'🌟🌟🌟🌟'});renderQuotesTable();saveAllToLocalStorage();}
 function deleteQuoteRow(id){quoteItems=quoteItems.filter(i=>i.id!==id);renderQuotesTable();saveAllToLocalStorage();}
 function updateQuote(id,field,value){const item=quoteItems.find(i=>i.id===id);if(item){item[field]=value;saveAllToLocalStorage();}}
-function sendWhatsAppInquiry(vendorName,phoneNum){const groom=document.getElementById('groom-name').value||"新郎";const bride=document.getElementById('bride-name').value||"新娘";const msg=`您好 ${vendorName}，我是 ${groom}/${bride}。我们目前在吉隆坡筹备婚礼。我想咨询一下您的服务报价和档期详情，期待您的回复！`;window.open(`https://api.whatsapp.com/send?phone=${phoneNum}&text=${encodeURIComponent(msg)}`,'_blank');}
+function sendWhatsAppInquiry(vendorName,phoneNum){const groom=document.getElementById('groom-name').value||t('groom_default');const bride=document.getElementById('bride-name').value||t('bride_default');const msg=t('whatsapp_msg').replace('${vendor}',vendorName).replace('${groom}',groom).replace('${bride}',bride);window.open(`https://api.whatsapp.com/send?phone=${phoneNum}&text=${encodeURIComponent(msg)}`,'_blank');}
 
 // ═══════════════════════════════════════
 // GUESTS
 // ═══════════════════════════════════════
 function renderGuestsTable(){
     const tbody=document.getElementById('guest-tbody');if(!tbody)return;tbody.innerHTML='';
-    if(guestItems.length===0){tbody.innerHTML=`<tr><td colspan="6" class="text-center py-6 text-xs text-gray-400 italic">暂无宾客，可以在 Guest Mode 或电子请柬模拟登记自动流入。</td></tr>`;calculateGuestStats();return;}
+    if(guestItems.length===0){tbody.innerHTML=`<tr><td colspan="6" class="text-center py-6 text-xs text-gray-400 italic">${t('no_guests')}</td></tr>`;calculateGuestStats();return;}
     guestItems.forEach(item=>{
-        let tableOptions=`<option value="">未安排席位</option>`;seatingData.forEach(tbl=>{tableOptions+=`<option value="${tbl.id}" ${item.tableId===tbl.id?'selected':''}>${tbl.name}</option>`;});
-        tbody.insertAdjacentHTML('beforeend',`<tr class="border-b border-gray-50 text-xs text-gray-700 hover:bg-gray-50/50"><td class="py-3 pl-2"><input type="text" value="${item.name}" oninput="updateGuest('${item.id}','name',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-bold text-gray-800" placeholder="姓名"><div class="text-[11px] text-champagne-600 italic mt-1 leading-relaxed max-w-xs overflow-hidden text-ellipsis whitespace-nowrap" title="${item.wish||''}">${item.wish?`💬 "${item.wish}"`:'<span class="text-gray-300">暂无留言祝福</span>'}</div></td><td><input type="number" value="${item.pax||1}" onchange="updateGuest('${item.id}','pax',this.value)" class="w-12 bg-transparent outline-none font-bold" min="1" max="10"></td><td><select onchange="updateGuest('${item.id}','rsvp',this.value)" class="bg-transparent outline-none font-semibold text-gray-600"><option value="going" ${item.rsvp==='going'?'selected':''}>确认出席</option><option value="maybe" ${item.rsvp==='maybe'?'selected':''}>待定</option><option value="no" ${item.rsvp==='no'?'selected':''}>无法出席</option></select></td><td><select onchange="updateGuest('${item.id}','diet',this.value)" class="bg-transparent outline-none text-gray-600 font-medium"><option value="none" ${item.diet==='none'?'selected':''}>无特殊</option><option value="vegetarian" ${item.diet==='vegetarian'?'selected':''}>素食</option><option value="halal" ${item.diet==='halal'?'selected':''}>清真</option></select></td><td><select onchange="assignGuestToSeatingTable('${item.id}',this.value)" class="bg-transparent outline-none text-burgundy-600 font-bold">${tableOptions}</select></td><td class="text-center"><button onclick="deleteGuest('${item.id}')" class="text-red-500 hover:text-red-700 font-bold text-[11px]"><i class="fa-regular fa-trash-can"></i></button></td></tr>`);
+        let tableOptions=`<option value="">${t('unassigned_seat')}</option>`;seatingData.forEach(tbl=>{tableOptions+=`<option value="${tbl.id}" ${item.tableId===tbl.id?'selected':''}>${tbl.name}</option>`;});
+        tbody.insertAdjacentHTML('beforeend',`<tr class="border-b border-gray-50 text-xs text-gray-700 hover:bg-gray-50/50"><td class="py-3 pl-2"><input type="text" value="${item.name}" oninput="updateGuest('${item.id}','name',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-bold text-gray-800" placeholder="${t('ph_guest_name')}"><div class="text-[11px] text-champagne-600 italic mt-1 leading-relaxed max-w-xs overflow-hidden text-ellipsis whitespace-nowrap" title="${item.wish||''}">${item.wish?`💬 "${item.wish}"`:`<span class="text-gray-300">${t('no_wish')}</span>`}</div></td><td><input type="number" value="${item.pax||1}" onchange="updateGuest('${item.id}','pax',this.value)" class="w-12 bg-transparent outline-none font-bold" min="1" max="10"></td><td><select onchange="updateGuest('${item.id}','rsvp',this.value)" class="bg-transparent outline-none font-semibold text-gray-600"><option value="going" ${item.rsvp==='going'?'selected':''}>${t('rsvp_going')}</option><option value="maybe" ${item.rsvp==='maybe'?'selected':''}>${t('rsvp_maybe')}</option><option value="no" ${item.rsvp==='no'?'selected':''}>${t('rsvp_no')}</option></select></td><td><select onchange="updateGuest('${item.id}','diet',this.value)" class="bg-transparent outline-none text-gray-600 font-medium"><option value="none" ${item.diet==='none'?'selected':''}>${t('diet_none_short')}</option><option value="vegetarian" ${item.diet==='vegetarian'?'selected':''}>${t('diet_veg_short')}</option><option value="halal" ${item.diet==='halal'?'selected':''}>${t('diet_halal_short')}</option></select></td><td><select onchange="assignGuestToSeatingTable('${item.id}',this.value)" class="bg-transparent outline-none text-burgundy-600 font-bold">${tableOptions}</select></td><td class="text-center"><button onclick="deleteGuest('${item.id}')" class="text-red-500 hover:text-red-700 font-bold text-[11px]"><i class="fa-regular fa-trash-can"></i></button></td></tr>`);
     });
     calculateGuestStats();
 }
-function addNewGuestRow(nameVal='',dietVal='none',rsvpVal='going',paxVal=1,wishVal=''){guestItems.push({id:'guest_'+Date.now()+Math.floor(Math.random()*100),name:nameVal||'新宾客',rsvp:rsvpVal,diet:dietVal,pax:parseInt(paxVal)||1,wish:wishVal||'',tableId:''});renderGuestsTable();saveAllToLocalStorage();}
+function addNewGuestRow(nameVal='',dietVal='none',rsvpVal='going',paxVal=1,wishVal=''){guestItems.push({id:'guest_'+Date.now()+Math.floor(Math.random()*100),name:nameVal||t('new_guest'),rsvp:rsvpVal,diet:dietVal,pax:parseInt(paxVal)||1,wish:wishVal||'',tableId:''});renderGuestsTable();saveAllToLocalStorage();}
 function deleteGuest(id){const guest=guestItems.find(g=>g.id===id);if(guest&&guest.tableId)removeGuestFromTable(guest.tableId,guest.name);guestItems=guestItems.filter(g=>g.id!==id);renderGuestsTable();renderSeatingTables();saveAllToLocalStorage();}
 function updateGuest(id,field,value){const item=guestItems.find(g=>g.id===id);if(item){if(field==='pax'){item.pax=parseInt(value)||1;if(item.tableId)assignGuestToSeatingTable(item.id,item.tableId);}else{item[field]=value;}calculateGuestStats();saveAllToLocalStorage();}}
 function calculateGuestStats(){let t=0,v=0,h=0;guestItems.forEach(item=>{if(item.rsvp==='going'){const px=parseInt(item.pax)||1;t+=px;if(item.diet==='vegetarian')v+=px;if(item.diet==='halal')h+=px;}});const sT=document.getElementById('stats-guest-total'),sV=document.getElementById('stats-guest-veg'),sH=document.getElementById('stats-guest-halal');if(sT)sT.innerText=t;if(sV)sV.innerText=v;if(sH)sH.innerText=h;}
@@ -1617,8 +1910,8 @@ function assignGuestToSeatingTable(guestId,tableId){
     const guest=guestItems.find(g=>g.id===guestId);if(!guest)return;if(guest.tableId)clearGuestFromTable(guest.tableId,guest.name);
     if(!tableId){guest.tableId='';renderGuestsTable();renderSeatingTables();saveAllToLocalStorage();return;}
     const table=seatingData.find(t=>t.id===tableId);if(table){const guestPax=parseInt(guest.pax)||1;let freeSlots=0;for(let i=0;i<10;i++)if(!table.guests[i]||table.guests[i]==='')freeSlots++;
-        if(freeSlots>=guestPax){guest.tableId=tableId;let paxPlaced=0;for(let i=0;i<10;i++){if(paxPlaced<guestPax&&(!table.guests[i]||table.guests[i]==='')){table.guests[i]=paxPlaced===0?guest.name:`${guest.name}-眷属${paxPlaced}`;paxPlaced++;}}}
-        else{triggerCustomModal("排位警报 ⚠️",`当前桌席仅剩 ${freeSlots} 个空座位，无法容纳该宾客及家属共 ${guestPax} 人！`);guest.tableId='';}}
+        if(freeSlots>=guestPax){guest.tableId=tableId;let paxPlaced=0;for(let i=0;i<10;i++){if(paxPlaced<guestPax&&(!table.guests[i]||table.guests[i]==='')){table.guests[i]=paxPlaced===0?guest.name:`${guest.name}-${t('family_suffix')}${paxPlaced}`;paxPlaced++;}}}
+        else{triggerCustomModal(t('seat_alert_title'),t('seat_alert_msg').replace('${free}',freeSlots).replace('${pax}',guestPax));guest.tableId='';}}
     renderGuestsTable();renderSeatingTables();saveAllToLocalStorage();
 }
 function clearGuestFromTable(tableId,guestName){const table=seatingData.find(t=>t.id===tableId);if(table)for(let i=0;i<10;i++)if(table.guests[i]===guestName||(table.guests[i]&&table.guests[i].startsWith(`${guestName}-眷属`)))table.guests[i]='';}
@@ -1626,22 +1919,22 @@ function removeGuestFromTable(tableId,guestName){clearGuestFromTable(tableId,gue
 function renderSeatingTables(){
     const container=document.getElementById('seating-tables-container');if(!container)return;container.innerHTML='';
     seatingData.forEach(table=>{
-        let seatsHtml='';for(let i=0;i<10;i++){const seatName=table.guests[i]||'';seatsHtml+=`<div class="flex items-center gap-1 py-1 border-b border-gray-50"><span class="text-[9px] font-mono text-gray-300 w-3">${i+1}</span><span class="text-xs font-semibold ${seatName?'text-burgundy-600 font-bold':'text-gray-300 italic'}">${seatName||'空座'}</span></div>`;}
+        let seatsHtml='';for(let i=0;i<10;i++){const seatName=table.guests[i]||'';seatsHtml+=`<div class="flex items-center gap-1 py-1 border-b border-gray-50"><span class="text-[9px] font-mono text-gray-300 w-3">${i+1}</span><span class="text-xs font-semibold ${seatName?'text-burgundy-600 font-bold':'text-gray-300 italic'}">${seatName||t('empty_seat')}</span></div>`;}
         container.insertAdjacentHTML('beforeend',`<div class="bg-[#faf8f5] rounded-2xl p-4 border border-burgundy-50 elegant-shadow flex flex-col justify-between"><div><div class="flex justify-between items-center border-b border-burgundy-100 pb-2 mb-3"><span class="font-serif font-bold text-xs text-burgundy-500">${table.name}</span><button onclick="deleteTable('${table.id}')" class="text-red-400 hover:text-red-600 text-[10px]"><i class="fa-solid fa-trash"></i></button></div><div class="grid grid-cols-2 gap-2">${seatsHtml}</div></div></div>`);
     });
 }
-function addNewTable(){const newId='table_'+Date.now();seatingData.push({id:newId,name:`第 ${seatingData.length+1} 桌 - 亲友席`,guests:Array(10).fill('')});renderSeatingTables();renderGuestsTable();saveAllToLocalStorage();}
+function addNewTable(){const newId='table_'+Date.now();seatingData.push({id:newId,name:t('new_table_name').replace('${n}',seatingData.length+1),guests:Array(10).fill('')});renderSeatingTables();renderGuestsTable();saveAllToLocalStorage();}
 function deleteTable(id){guestItems.forEach(guest=>{if(guest.tableId===id)guest.tableId='';});seatingData=seatingData.filter(t=>t.id!==id);renderSeatingTables();renderGuestsTable();saveAllToLocalStorage();}
 
 function simulateRSVPSubmission(){
     const nameInput=document.getElementById('mock-guest-name');const paxSelect=document.getElementById('mock-guest-pax');const dietSelect=document.getElementById('mock-guest-diet');const wishInput=document.getElementById('mock-guest-wish');
-    if(!nameInput||!nameInput.value.trim()){triggerCustomModal("提示","请在模拟电子请柬中，填入赴宴宾客的名字！");return;}
+    if(!nameInput||!nameInput.value.trim()){triggerCustomModal(t('rsvp_prompt_title'),t('rsvp_prompt_msg'));return;}
     const nameVal=nameInput.value.trim(),paxVal=parseInt(paxSelect.value)||1,dietVal=dietSelect.value,wishVal=wishInput.value.trim();
     guestItems.push({id:'guest_'+Date.now()+Math.floor(Math.random()*100),name:nameVal,rsvp:'going',diet:dietVal,pax:paxVal,wish:wishVal,tableId:''});
     nameInput.value='';paxSelect.value="1";dietSelect.value="none";wishInput.value='';
     renderGuestsTable();calculateGuestStats();renderWishesOnMockBoard();saveAllToLocalStorage();
     syncToGoogleSheets({name:nameVal,pax:paxVal,diet:dietVal,wish:wishVal});
-    triggerCustomModal("🎉 模拟宾客提交成功！",`宾客 [${nameVal}] 已经通过电子请柬成功登记！共 [${paxVal}] 人、温馨留言以及饮食需求已被实时反向统计，并同步到席位排位大表中。`);
+    triggerCustomModal(t('rsvp_success_title'),t('rsvp_success_msg').replace('${name}',nameVal).replace('${pax}',paxVal));
 }
 async function syncToGoogleSheets(data){
     const url='https://script.google.com/macros/s/AKfycbxENKmWUjRjjbs4HxvUwbZJfvsq2WQeLAGMPzQ4uElRZDwJ-Tzhze4hdZjAH-tUsmme9Q/exec';
@@ -1668,8 +1961,8 @@ async function fetchGuestsFromGoogleSheets(){
 function renderWishesOnMockBoard(){
     const board=document.getElementById('invite-wishes-board');if(!board)return;board.innerHTML='';
     const messages=[];guestItems.forEach(g=>{if(g.wish&&g.wish.trim())messages.push({name:g.name,msg:g.wish});});
-    if(messages.length===0){messages.push({name:"李小明 (小姑堂弟)",msg:"恭喜恭喜！祝你们百年好合，白头偕老！"});messages.push({name:"张美玲 (伴娘好姐妹)",msg:"终于等到这一天了！新娘今天简直美上天！"});messages.push({name:"陈阿姨 (男家长辈)",msg:"看着你们一路走来真心不易，新婚快乐，早生贵子呀！"});}
-    messages.forEach(item=>{board.insertAdjacentHTML('beforeend',`<div class="bg-white p-2 rounded-lg border border-burgundy-100/50 shadow-sm text-left scale-95 origin-left"><div class="flex justify-between items-center text-[8px] font-bold text-burgundy-500 mb-0.5"><span>💖 ${item.name}</span><span class="text-gray-300">刚刚</span></div><p class="text-[9px] text-gray-600 leading-normal font-sans italic">"${item.msg}"</p></div>`);});
+    if(messages.length===0){messages.push({name:t('sample_wish1_name'),msg:t('sample_wish1')});messages.push({name:t('sample_wish2_name'),msg:t('sample_wish2')});messages.push({name:t('sample_wish3_name'),msg:t('sample_wish3')});}
+    messages.forEach(item=>{board.insertAdjacentHTML('beforeend',`<div class="bg-white p-2 rounded-lg border border-burgundy-100/50 shadow-sm text-left scale-95 origin-left"><div class="flex justify-between items-center text-[8px] font-bold text-burgundy-500 mb-0.5"><span>💖 ${item.name}</span><span class="text-gray-300">${t('wish_time')}</span></div><p class="text-[9px] text-gray-600 leading-normal font-sans italic">"${item.msg}"</p></div>`);});
     board.scrollTop=board.scrollHeight;
 }
 
@@ -1679,10 +1972,10 @@ function renderWishesOnMockBoard(){
 function renderInteractiveChecklists(){
     const w1=document.getElementById('checklist-week-1'),dO=document.getElementById('checklist-day-of');if(!w1||!dO)return;w1.innerHTML='';dO.innerHTML='';
     const w1Items=checklistItems.filter(i=>i.section==='week-1'),dOItems=checklistItems.filter(i=>i.section==='day-of');
-    if(w1Items.length===0)w1.innerHTML=`<p class="text-xs text-gray-400 italic py-2">暂无该时段的备忘，点击上方按钮新增项目。</p>`;
-    if(dOItems.length===0)dO.innerHTML=`<p class="text-xs text-gray-400 italic py-2">暂无该时段的备忘，点击上方按钮新增项目。</p>`;
+    if(w1Items.length===0)w1.innerHTML=`<p class="text-xs text-gray-400 italic py-2">${t('no_checklist')}</p>`;
+    if(dOItems.length===0)dO.innerHTML=`<p class="text-xs text-gray-400 italic py-2">${t('no_checklist')}</p>`;
     checklistItems.forEach(item=>{
-        const domString=`<div class="flex items-center justify-between p-3 bg-gray-50/50 hover:bg-burgundy-50/10 rounded-xl border border-gray-100 transition group"><div class="flex items-center flex-1 mr-4"><input id="${item.id}" type="checkbox" ${item.checked?'checked':''} onchange="toggleChecklistItem('${item.id}')" class="w-4 h-4 text-burgundy-500 border-gray-300 rounded focus:ring-burgundy-500 cursor-pointer"><input type="text" value="${item.text}" oninput="updateChecklistItemText('${item.id}',this.value)" class="ml-3 text-xs text-gray-600 bg-transparent border-b border-transparent hover:border-gray-200 focus:border-burgundy-500 focus:outline-none flex-1 py-0.5 transition font-medium ${item.checked?'line-through text-gray-400':''}" placeholder="在此填写新的备婚任务要点..."></div><button onclick="deleteChecklistItem('${item.id}')" class="text-gray-300 hover:text-red-500 text-[11px] opacity-0 group-hover:opacity-100 transition no-print"><i class="fa-solid fa-trash-can"></i></button></div>`;
+        const domString=`<div class="flex items-center justify-between p-3 bg-gray-50/50 hover:bg-burgundy-50/10 rounded-xl border border-gray-100 transition group"><div class="flex items-center flex-1 mr-4"><input id="${item.id}" type="checkbox" ${item.checked?'checked':''} onchange="toggleChecklistItem('${item.id}')" class="w-4 h-4 text-burgundy-500 border-gray-300 rounded focus:ring-burgundy-500 cursor-pointer"><input type="text" value="${item.text}" oninput="updateChecklistItemText('${item.id}',this.value)" class="ml-3 text-xs text-gray-600 bg-transparent border-b border-transparent hover:border-gray-200 focus:border-burgundy-500 focus:outline-none flex-1 py-0.5 transition font-medium ${item.checked?'line-through text-gray-400':''}" placeholder="${t('ph_checklist')}"></div><button onclick="deleteChecklistItem('${item.id}')" class="text-gray-300 hover:text-red-500 text-[11px] opacity-0 group-hover:opacity-100 transition no-print"><i class="fa-solid fa-trash-can"></i></button></div>`;
         if(item.section==='week-1')w1.insertAdjacentHTML('beforeend',domString);else dO.insertAdjacentHTML('beforeend',domString);
     });
 }
@@ -1762,8 +2055,8 @@ function loadAllFromLocalStorage(){
 
 function _printMeta() {
     return {
-        groom: document.getElementById('groom-name')?.value   || '新郎',
-        bride: document.getElementById('bride-name')?.value   || '新娘',
+        groom: document.getElementById('groom-name')?.value   || t('groom_default'),
+        bride: document.getElementById('bride-name')?.value   || t('bride_default'),
         venue: document.getElementById('invite-location-input')?.value || '',
         date:  document.getElementById('header-wedding-date')?.innerText || '',
     };
@@ -1788,7 +2081,7 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#fff;colo
 ${extraCss || ''}
 </style></head><body>
 <div class="no-print" style="text-align:center;padding:10px 0 14px">
-  <button class="pb" onclick="window.print()">🖨️ 打印 / 另存为 PDF</button>
+  <button class="pb" onclick="window.print()">${t('print_btn')}</button>
 </div>
 <div class="ph">
   <div class="ey">Wedding Planning · ${m.date}</div>
@@ -1796,7 +2089,7 @@ ${extraCss || ''}
   <div class="sb">${title}${m.venue ? ' · ' + m.venue : ''}</div>
 </div>
 ${bodyHtml}
-<div class="ft">"良辰吉日定终身，百年琴瑟共白头" · 婚礼数字座舱</div>
+<div class="ft">${t('poem_quote')} · ${t('header_title')}</div>
 </body></html>`;
     const w = window.open('', '_blank', 'width=860,height=720');
     w.document.write(html);
@@ -1854,30 +2147,30 @@ function printSeatingChart() {
                 <div style="height:3px;background:#f3ece5;border-radius:99px;overflow:hidden">
                     <div style="height:100%;width:${pct}%;background:${pct>=100?'#22c55e':'#c5a059'};border-radius:99px"></div>
                 </div>
-                <div style="font-size:9px;color:#bbb;margin-top:2px;text-align:right">${filled} 已排 · ${10-filled} 空位</div>
+                <div style="font-size:9px;color:#bbb;margin-top:2px;text-align:right">${filled} ${currentLang==='zh'?'已排':'seated'} · ${10-filled} ${currentLang==='zh'?'空位':'empty'}</div>
             </div>
         </div>`;
     });
 
     const summary = `
         <div style="display:flex;gap:10px;justify-content:center;margin-bottom:18px;flex-wrap:wrap">
-            ${[`🪑 共 ${seatingData.length} 桌`,`👥 已排 ${totalGuests} 位`,`💺 空位 ${seatingData.length*10-totalGuests} 个`]
-                .map(t=>`<span style="background:#faf3eb;border:1px solid #e8ddd0;border-radius:99px;padding:4px 14px;font-size:10px;color:#800020;font-weight:600">${t}</span>`).join('')}
+            ${[`🪑 ${currentLang==='zh'?'共':'Total'} ${seatingData.length} ${currentLang==='zh'?'桌':'tables'}`,`👥 ${currentLang==='zh'?'已排':'Seated'} ${totalGuests} ${currentLang==='zh'?'位':'pax'}`,`💺 ${currentLang==='zh'?'空位':'Empty'} ${seatingData.length*10-totalGuests} ${currentLang==='zh'?'个':'seats'}`]
+                .map(s=>`<span style="background:#faf3eb;border:1px solid #e8ddd0;border-radius:99px;padding:4px 14px;font-size:10px;color:#800020;font-weight:600">${s}</span>`).join('')}
         </div>`;
 
     const body = seatingData.length === 0
-        ? `<div style="text-align:center;padding:60px;color:#ccc">暂无桌席数据</div>`
+        ? `<div style="text-align:center;padding:60px;color:#ccc">${currentLang==='zh'?'暂无桌席数据':'No seating data'}</div>`
         : summary + `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">${cards}</div>`;
 
-    _openPrintWindow('婚礼座位表 Seating Chart', body);
+    _openPrintWindow(currentLang==='zh'?'婚礼座位表 Seating Chart':'Seating Chart', body);
 }
 
 // ── SECTION PRINTERS — each builds from data, not DOM ─────────────────
 function printSection(key) {
     const builders = {
-        morning:   () => _buildRunsheet('morning',   '第一幕：清晨喜庆接亲'),
-        afternoon: () => _buildRunsheet('afternoon', '第二幕：傍晚首见外拍'),
-        evening:   () => _buildRunsheet('evening',   '第三幕：无伴电影感晚宴'),
+        morning:   () => _buildRunsheet('morning',   t('act1_title')),
+        afternoon: () => _buildRunsheet('afternoon', t('act2_title')),
+        evening:   () => _buildRunsheet('evening',   t('act3_title')),
         guests:    _buildGuestList,
         checklist: _buildChecklist,
         budget:    _buildBudget,
@@ -1893,7 +2186,7 @@ const _TH = 'padding:5px 8px;font-size:9px;font-weight:700;color:#999;text-trans
 function _buildRunsheet(act, title) {
     const items = runsheetItems.filter(r => r.act === act);
     if (items.length === 0) {
-        _openPrintWindow(title, `<p style="color:#ccc;text-align:center;padding:40px">暂无步骤</p>`);
+        _openPrintWindow(title, `<p style="color:#ccc;text-align:center;padding:40px">${t('no_steps')}</p>`);
         return;
     }
     const rows = items.map((r, i) => `
@@ -1910,9 +2203,9 @@ function _buildRunsheet(act, title) {
         <table style="width:100%;border-collapse:collapse">
             <thead><tr>
                 <th style="${_TH};width:22px">#</th>
-                <th style="${_TH}">时间</th>
-                <th style="${_TH}">环节</th>
-                <th style="${_TH}">详情</th>
+                <th style="${_TH}">${currentLang==='zh'?'时间':'Time'}</th>
+                <th style="${_TH}">${currentLang==='zh'?'环节':'Step'}</th>
+                <th style="${_TH}">${currentLang==='zh'?'详情':'Details'}</th>
             </tr></thead>
             <tbody>${rows}</tbody>
         </table>`;
@@ -1935,15 +2228,15 @@ function _buildGuestList() {
     </div>`;
 
     const rows = guestItems.map((g,i) => {
-        const table = seatingData.find(t => t.id === g.tableId);
-        const dietLabel = {none:'—', vegetarian:'素食', halal:'清真'}[g.diet] || '—';
-        const rsvpLabel = {going:'✅ 出席', maybe:'⏳ 待定', no:'❌ 不出席'}[g.rsvp] || g.rsvp;
+        const table = seatingData.find(tb => tb.id === g.tableId);
+        const dietLabel = {none:'—', vegetarian:t('diet_veg_short'), halal:t('diet_halal_short')}[g.diet] || '—';
+        const rsvpLabel = {going:`✅ ${t('rsvp_going')}`, maybe:`⏳ ${t('rsvp_maybe')}`, no:`❌ ${t('rsvp_no')}`}[g.rsvp] || g.rsvp;
         return `<tr style="background:${i%2===0?'#fff':'#faf8f5'}">
             <td style="${_TD};font-weight:600;color:#1a1a1a">${g.name}</td>
             <td style="${_TD};text-align:center">${g.pax||1}</td>
             <td style="${_TD}">${rsvpLabel}</td>
             <td style="${_TD};color:#555">${dietLabel}</td>
-            <td style="${_TD};color:#800020;font-weight:600">${table ? table.name : '未安排'}</td>
+            <td style="${_TD};color:#800020;font-weight:600">${table ? table.name : t('unassigned_seat')}</td>
             <td style="${_TD};color:#777;font-style:italic;font-size:10px">${g.wish ? '"'+g.wish+'"' : ''}</td>
         </tr>`;
     }).join('');
@@ -1951,22 +2244,22 @@ function _buildGuestList() {
     const body = summary + `
         <table style="width:100%;border-collapse:collapse">
             <thead><tr>
-                <th style="${_TH}">姓名</th>
-                <th style="${_TH};text-align:center">人数</th>
+                <th style="${_TH}">${currentLang==='zh'?'姓名':'Name'}</th>
+                <th style="${_TH};text-align:center">${currentLang==='zh'?'人数':'Pax'}</th>
                 <th style="${_TH}">RSVP</th>
-                <th style="${_TH}">饮食</th>
-                <th style="${_TH}">桌位</th>
-                <th style="${_TH}">祝福留言</th>
+                <th style="${_TH}">${currentLang==='zh'?'饮食':'Diet'}</th>
+                <th style="${_TH}">${currentLang==='zh'?'桌位':'Table'}</th>
+                <th style="${_TH}">${currentLang==='zh'?'祝福留言':'Wishes'}</th>
             </tr></thead>
             <tbody>${rows}</tbody>
         </table>`;
-    _openPrintWindow('宾客花名登账簿 Guest List', body);
+    _openPrintWindow(currentLang==='zh'?'宾客花名登账簿 Guest List':'Guest List', body);
 }
 
 function _buildChecklist() {
     const sections = [
-        { key:'week-1', label:'婚礼前 1 周重点排查' },
-        { key:'day-of', label:'婚礼当天下午（晚宴开场前）' },
+        { key:'week-1', label:t('checklist_week1') },
+        { key:'day-of', label:t('checklist_dayof') },
     ];
     let body = '';
     sections.forEach(sec => {
@@ -1981,7 +2274,7 @@ function _buildChecklist() {
                 </div>`).join('')}
         </div>`;
     });
-    _openPrintWindow('备婚核心倒计时清单 Checklist', body || '<p style="color:#ccc;text-align:center;padding:40px">暂无清单项目</p>');
+    _openPrintWindow(t('checklist_title'), body || `<p style="color:#ccc;text-align:center;padding:40px">${t('no_checklist')}</p>`);
 }
 
 function _buildBudget() {
@@ -1993,9 +2286,9 @@ function _buildBudget() {
 
     const summary = `
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px">
-            ${[['婚礼总预算',`RM ${totalBudget.toLocaleString()}`,'#800020'],
-               ['已花总数',`RM ${spent.toLocaleString()}`,'#dc2626'],
-               ['剩余余粮',`RM ${left.toLocaleString()}`,left>=0?'#16a34a':'#dc2626']]
+            ${[[t('budget_total_label'),`RM ${totalBudget.toLocaleString()}`,'#800020'],
+               [t('budget_spent_label'),`RM ${spent.toLocaleString()}`,'#dc2626'],
+               [t('budget_remaining_label'),`RM ${left.toLocaleString()}`,left>=0?'#16a34a':'#dc2626']]
                 .map(([l,v,c])=>`<div style="border:1px solid #eee;border-radius:8px;padding:10px;text-align:center">
                     <div style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">${l}</div>
                     <div style="font-size:14px;font-weight:700;color:${c};font-family:monospace">${v}</div>
@@ -2003,7 +2296,7 @@ function _buildBudget() {
         </div>
         <div style="margin-bottom:6px">
             <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-                <span style="font-size:10px;color:#999">预算使用进度</span>
+                <span style="font-size:10px;color:#999">${currentLang==='zh'?'预算使用进度':'Budget Progress'}</span>
                 <span style="font-size:10px;font-weight:700;color:${barColor}">${pct}%</span>
             </div>
             <div style="height:6px;background:#f3f4f6;border-radius:99px;overflow:hidden;margin-bottom:16px">
@@ -2020,23 +2313,23 @@ function _buildBudget() {
         </tr>`).join('');
 
     const body = summary + (budgetNewItems.length === 0
-        ? `<p style="color:#ccc;text-align:center;padding:30px">暂无支出记录</p>`
+        ? `<p style="color:#ccc;text-align:center;padding:30px">${t('no_expenses')}</p>`
         : `<table style="width:100%;border-collapse:collapse">
             <thead><tr>
-                <th style="${_TH}">分项类目</th>
-                <th style="${_TH}">分类</th>
-                <th style="${_TH};text-align:right">金额 (RM)</th>
-                <th style="${_TH}">收据</th>
+                <th style="${_TH}">${t('th_item')}</th>
+                <th style="${_TH}">${t('th_category')}</th>
+                <th style="${_TH};text-align:right">${t('th_paid')}</th>
+                <th style="${_TH}">${t('th_receipt')}</th>
             </tr></thead>
             <tbody>${rows}</tbody>
             <tfoot><tr>
-                <td colspan="2" style="padding:8px;font-weight:700;font-size:12px;text-align:right;border-top:2px solid #ddd">合计</td>
+                <td colspan="2" style="padding:8px;font-weight:700;font-size:12px;text-align:right;border-top:2px solid #ddd">${currentLang==='zh'?'合计':'Total'}</td>
                 <td style="padding:8px;font-weight:700;font-size:12px;font-family:monospace;color:#dc2626;text-align:right;border-top:2px solid #ddd">RM ${spent.toLocaleString()}</td>
                 <td style="border-top:2px solid #ddd"></td>
             </tr></tfoot>
         </table>`);
 
-    _openPrintWindow('婚礼预算开销明细 Budget', body);
+    _openPrintWindow(t('budget_title'), body);
 }
 
 // ═══════════════════════════════════════
@@ -2050,7 +2343,7 @@ function triggerCustomModal(title,message,isConfirm=false,onConfirmCallback=null
     const newOk=okBtn.cloneNode(true);const newCancelBtn=cancelBtn.cloneNode(true);okBtn.parentNode.replaceChild(newOk,okBtn);cancelBtn.parentNode.replaceChild(newCancelBtn,cancelBtn);
     newOk.addEventListener('click',()=>{modal.classList.add('hidden');if(onConfirmCallback)onConfirmCallback();});newCancelBtn.addEventListener('click',()=>modal.classList.add('hidden'));
 }
-function copyToClipboard(text){const ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');triggerCustomModal("复制成功","生成的大纲与台词内容已经成功复制到您的系统剪贴板！");}catch(err){triggerCustomModal("复制失败","由于浏览器安全权限受限，请在屏幕上长按选择文本手动复制。");}document.body.removeChild(ta);}
+function copyToClipboard(text){const ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');triggerCustomModal(t('copy_success_title'),t('copy_success_msg'));}catch(err){triggerCustomModal(t('copy_fail_title'),t('copy_fail_msg'));}document.body.removeChild(ta);}
 </script>
 </body>
 </html>
