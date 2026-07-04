@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JiaYee Wedding — Plan Every Moment Beautifully</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ivory: '#FFFFF0',
+                        'soft-pink': '#FFE4E1',
+                        champagne: '#F7E7CE',
+                        'rose-gold': '#B76E79',
+                        sage: '#9CAF88',
+                        charcoal: '#2D2D2D',
+                        beige: '#F5F0E8',
+                    },
+                    fontFamily: {
+                        serif: ['Georgia', 'Cambria', 'serif'],
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFF0; overflow-x: hidden; }
+
+        .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); }
+        .glass-dark { background: rgba(45,45,45,0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+
+        .phone-mockup {
+            width: 280px; height: 570px;
+            background: #1a1a1a; border-radius: 44px;
+            padding: 12px; position: relative;
+            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.25), 0 30px 60px -30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        .phone-mockup::before {
+            content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+            width: 120px; height: 28px; background: #1a1a1a; border-radius: 20px; z-index: 10;
+        }
+        .phone-screen {
+            width: 100%; height: 100%; border-radius: 34px; overflow: hidden;
+            background: linear-gradient(135deg, #FFF8F0, #FFE4E1);
+        }
+
+        .phone-sm { width: 220px; height: 450px; border-radius: 36px; padding: 10px; }
+        .phone-sm::before { width: 90px; height: 22px; top: 10px; }
+        .phone-sm .phone-screen { border-radius: 28px; }
+
+        .float-animation { animation: float 6s ease-in-out infinite; }
+        .float-animation-delay { animation: float 6s ease-in-out infinite; animation-delay: -2s; }
+        .float-animation-delay2 { animation: float 6s ease-in-out infinite; animation-delay: -4s; }
+        @keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+
+        .fade-in { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        .gradient-text { background: linear-gradient(135deg, #B76E79, #D4A373, #B76E79); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+        .card-hover { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 30px 60px -12px rgba(183,110,121,0.15); }
+
+        .counter { font-variant-numeric: tabular-nums; }
+
+        .blob {
+            position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.3;
+            animation: blob 8s ease-in-out infinite;
+        }
+        @keyframes blob { 0%,100% { transform: scale(1) translate(0,0); } 33% { transform: scale(1.1) translate(20px,-20px); } 66% { transform: scale(0.9) translate(-10px,10px); } }
+
+        .timeline-line { position: relative; }
+        .timeline-line::before {
+            content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+            width: 2px; background: linear-gradient(to bottom, #FFE4E1, #B76E79, #9CAF88, #F7E7CE);
+            transform: translateX(-50%);
+        }
+
+        .sticky-download {
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+            z-index: 50; opacity: 0; transition: all 0.4s ease; pointer-events: none;
+        }
+        .sticky-download.show { opacity: 1; pointer-events: all; }
+
+        .parallax-slow { will-change: transform; }
+
+        @media (max-width: 768px) {
+            .phone-mockup { width: 220px; height: 450px; border-radius: 36px; padding: 10px; }
+            .phone-mockup::before { width: 90px; height: 22px; top: 10px; }
+            .phone-mockup .phone-screen { border-radius: 28px; }
+            .phone-sm { width: 160px; height: 330px; border-radius: 28px; padding: 8px; }
+            .phone-sm::before { width: 70px; height: 18px; top: 8px; }
+            .phone-sm .phone-screen { border-radius: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50 glass">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl">💒</span>
+            <span class="font-serif text-xl font-bold text-charcoal" data-i18n="nav_logo">JiaYee Wedding</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <button onclick="toggleLang()" class="px-3 py-1.5 rounded-full text-xs font-semibold border border-rose-gold/30 text-rose-gold hover:bg-rose-gold hover:text-white transition" id="lang-toggle-btn">中文 / EN</button>
+            <a href="#download" class="hidden sm:inline-flex items-center gap-2 bg-charcoal text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-rose-gold transition">
+                <i class="fa-solid fa-download text-xs"></i>
+                <span data-i18n="nav_download">Download App</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="min-h-screen relative flex items-center overflow-hidden pt-20">
+    <div class="blob w-96 h-96 bg-soft-pink top-20 -left-20"></div>
+    <div class="blob w-80 h-80 bg-champagne bottom-20 right-10" style="animation-delay: -3s;"></div>
+    <div class="blob w-64 h-64 bg-sage/40 top-1/2 left-1/3" style="animation-delay: -5s;"></div>
+
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+        <div class="text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-8">
+                <span class="text-yellow-500">★★★★★</span>
+                <span class="text-xs text-charcoal/70 font-medium" data-i18n="hero_badge">Loved by thousands of couples</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-charcoal leading-tight mb-6">
+                <span data-i18n="hero_title">Plan Every Wedding Moment</span><br>
+                <span class="gradient-text" data-i18n="hero_title2">Beautifully</span>
+            </h1>
+            <p class="text-lg text-charcoal/60 max-w-md mx-auto lg:mx-0 mb-10 leading-relaxed" data-i18n="hero_desc">Your dream wedding, perfectly organized. From guest lists to timelines — everything in one beautiful app.</p>
+
+            <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                <a href="#download" class="flex items-center gap-3 bg-charcoal text-white px-6 py-3.5 rounded-2xl hover:scale-105 transition-transform">
+                    <i class="fa-brands fa-apple text-2xl"></i>
+                    <div class="text-left"><span class="text-[10px] opacity-70 block" data-i18n="hero_apple_sub">Download on the</span><span class="text-sm font-semibold">App Store</span></div>
+                </a>
+                <a href="#download" class="flex items-center gap-3 bg-charcoal text-white px-6 py-3.5 rounded-2xl hover:scale-105 transition-transform">
+                    <i class="fa-brands fa-google-play text-xl"></i>
+                    <div class="text-left"><span class="text-[10px] opacity-70 block" data-i18n="hero_google_sub">GET IT ON</span><span class="text-sm font-semibold">Google Play</span></div>
+                </a>
+            </div>
+        </div>
+
+        <div class="relative flex justify-center items-center">
+            <!-- Floating decorations -->
+            <div class="absolute -top-8 -left-4 text-4xl float-animation opacity-60">🌸</div>
+            <div class="absolute top-20 -right-8 text-3xl float-animation-delay opacity-50">💌</div>
+            <div class="absolute bottom-10 -left-10 text-2xl float-animation-delay2 opacity-50">📅</div>
+            <div class="absolute -bottom-4 right-10 text-3xl float-animation opacity-40">💍</div>
+            <div class="absolute top-1/3 right-0 text-2xl float-animation-delay opacity-40">🎉</div>
+
+            <!-- Phone -->
+            <div class="phone-mockup float-animation">
+                <div class="phone-screen flex flex-col">
+                    <div class="pt-10 px-5 pb-4">
+                        <div class="text-xs text-rose-gold/70 font-medium">Good Morning ☀️</div>
+                        <div class="text-lg font-bold text-charcoal mt-1">Wedding Dashboard</div>
+                    </div>
+                    <div class="px-4 space-y-3 flex-1">
+                        <div class="bg-white/80 rounded-2xl p-3 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-semibold text-charcoal">⏳ Countdown</span>
+                                <span class="text-xs text-rose-gold font-bold">88 Days</span>
+                            </div>
+                            <div class="mt-2 h-2 bg-soft-pink/50 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-rose-gold to-champagne rounded-full" style="width:65%"></div></div>
+                        </div>
+                        <div class="bg-white/80 rounded-2xl p-3 shadow-sm">
+                            <div class="text-xs font-semibold text-charcoal mb-2">📋 Today's Tasks</div>
+                            <div class="space-y-1.5">
+                                <div class="flex items-center gap-2"><div class="w-4 h-4 rounded-full bg-sage/30 flex items-center justify-center text-[8px]">✓</div><span class="text-[11px] text-charcoal/70 line-through">Confirm florist</span></div>
+                                <div class="flex items-center gap-2"><div class="w-4 h-4 rounded-full border border-rose-gold/40"></div><span class="text-[11px] text-charcoal/70">Send invitations</span></div>
+                                <div class="flex items-center gap-2"><div class="w-4 h-4 rounded-full border border-rose-gold/40"></div><span class="text-[11px] text-charcoal/70">Cake tasting</span></div>
+                            </div>
+                        </div>
+                        <div class="bg-white/80 rounded-2xl p-3 shadow-sm">
+                            <div class="text-xs font-semibold text-charcoal mb-2">👥 Guest RSVP</div>
+                            <div class="flex items-center gap-3">
+                                <div class="flex -space-x-2">
+                                    <div class="w-6 h-6 rounded-full bg-soft-pink border-2 border-white"></div>
+                                    <div class="w-6 h-6 rounded-full bg-champagne border-2 border-white"></div>
+                                    <div class="w-6 h-6 rounded-full bg-sage/40 border-2 border-white"></div>
+                                </div>
+                                <span class="text-[11px] text-charcoal/60">128 confirmed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-4 py-3 flex justify-around border-t border-rose-gold/10">
+                        <div class="text-center"><i class="fa-solid fa-house text-rose-gold text-sm"></i><div class="text-[8px] text-rose-gold mt-0.5">Home</div></div>
+                        <div class="text-center"><i class="fa-solid fa-list-check text-charcoal/30 text-sm"></i><div class="text-[8px] text-charcoal/30 mt-0.5">Tasks</div></div>
+                        <div class="text-center"><i class="fa-solid fa-users text-charcoal/30 text-sm"></i><div class="text-[8px] text-charcoal/30 mt-0.5">Guests</div></div>
+                        <div class="text-center"><i class="fa-solid fa-user text-charcoal/30 text-sm"></i><div class="text-[8px] text-charcoal/30 mt-0.5">Profile</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- App Preview - Three Phones -->
+<section class="py-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl sm:text-4xl font-serif font-bold text-charcoal mb-4" data-i18n="preview_title">One App, Everything You Need</h2>
+            <p class="text-charcoal/50 max-w-lg mx-auto" data-i18n="preview_desc">Three powerful features working together seamlessly</p>
+        </div>
+
+        <div class="flex justify-center items-end gap-4 sm:gap-8 fade-in">
+            <!-- Phone 1 - Guest List -->
+            <div class="relative">
+                <div class="phone-sm float-animation-delay2" style="transform: rotate(-8deg);">
+                    <div class="phone-screen flex flex-col bg-gradient-to-b from-white to-soft-pink/30">
+                        <div class="pt-8 px-4 pb-3">
+                            <div class="text-sm font-bold text-charcoal">👥 Guest List</div>
+                        </div>
+                        <div class="px-3 space-y-2 flex-1">
+                            <div class="bg-white/90 rounded-xl p-2 flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-soft-pink"></div><div><div class="text-[10px] font-semibold">Sarah & Tom</div><div class="text-[8px] text-green-600">✓ Attending</div></div></div>
+                            <div class="bg-white/90 rounded-xl p-2 flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-champagne"></div><div><div class="text-[10px] font-semibold">Li Family</div><div class="text-[8px] text-green-600">✓ 4 guests</div></div></div>
+                            <div class="bg-white/90 rounded-xl p-2 flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-sage/40"></div><div><div class="text-[10px] font-semibold">Zhang Wei</div><div class="text-[8px] text-yellow-600">⏳ Pending</div></div></div>
+                            <div class="bg-white/90 rounded-xl p-2 flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-rose-gold/20"></div><div><div class="text-[10px] font-semibold">Mei Chen</div><div class="text-[8px] text-green-600">✓ Attending</div></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 glass px-3 py-1.5 rounded-full text-[10px] font-medium text-charcoal whitespace-nowrap" data-i18n="preview_label1">Guest Management</div>
+            </div>
+
+            <!-- Phone 2 - Dashboard (Center, larger) -->
+            <div class="relative z-10">
+                <div class="phone-mockup float-animation">
+                    <div class="phone-screen flex flex-col bg-gradient-to-b from-white to-champagne/20">
+                        <div class="pt-10 px-5 pb-3">
+                            <div class="text-lg font-bold text-charcoal">📊 Overview</div>
+                        </div>
+                        <div class="px-4 space-y-3 flex-1">
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="bg-white/90 rounded-xl p-3 text-center"><div class="text-2xl font-bold text-rose-gold">88</div><div class="text-[9px] text-charcoal/50">Days Left</div></div>
+                                <div class="bg-white/90 rounded-xl p-3 text-center"><div class="text-2xl font-bold text-sage">156</div><div class="text-[9px] text-charcoal/50">Guests</div></div>
+                            </div>
+                            <div class="bg-white/90 rounded-xl p-3">
+                                <div class="text-xs font-semibold text-charcoal mb-2">Budget</div>
+                                <div class="flex justify-between text-[10px] text-charcoal/60 mb-1"><span>Spent</span><span>RM 45,000 / RM 80,000</span></div>
+                                <div class="h-2.5 bg-beige rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-sage to-champagne rounded-full" style="width:56%"></div></div>
+                            </div>
+                            <div class="bg-white/90 rounded-xl p-3">
+                                <div class="text-xs font-semibold text-charcoal mb-2">Upcoming</div>
+                                <div class="space-y-1.5">
+                                    <div class="flex items-center gap-2 text-[10px]"><span class="text-rose-gold">●</span>Venue visit — Tomorrow</div>
+                                    <div class="flex items-center gap-2 text-[10px]"><span class="text-sage">●</span>Dress fitting — Fri</div>
+                                    <div class="flex items-center gap-2 text-[10px]"><span class="text-champagne">●</span>Menu tasting — Sat</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 glass px-3 py-1.5 rounded-full text-[10px] font-medium text-charcoal whitespace-nowrap" data-i18n="preview_label2">Wedding Dashboard</div>
+            </div>
+
+            <!-- Phone 3 - Timeline -->
+            <div class="relative">
+                <div class="phone-sm float-animation-delay" style="transform: rotate(8deg);">
+                    <div class="phone-screen flex flex-col bg-gradient-to-b from-white to-sage/10">
+                        <div class="pt-8 px-4 pb-3">
+                            <div class="text-sm font-bold text-charcoal">📅 Timeline</div>
+                        </div>
+                        <div class="px-3 space-y-2 flex-1">
+                            <div class="flex gap-2"><div class="w-0.5 bg-rose-gold/40 rounded-full"></div><div class="bg-white/90 rounded-xl p-2 flex-1"><div class="text-[9px] text-rose-gold">10:00 AM</div><div class="text-[10px] font-semibold">Bride Prep</div></div></div>
+                            <div class="flex gap-2"><div class="w-0.5 bg-sage/40 rounded-full"></div><div class="bg-white/90 rounded-xl p-2 flex-1"><div class="text-[9px] text-sage">2:00 PM</div><div class="text-[10px] font-semibold">Ceremony</div></div></div>
+                            <div class="flex gap-2"><div class="w-0.5 bg-champagne rounded-full"></div><div class="bg-white/90 rounded-xl p-2 flex-1"><div class="text-[9px] text-yellow-700">5:00 PM</div><div class="text-[10px] font-semibold">Reception</div></div></div>
+                            <div class="flex gap-2"><div class="w-0.5 bg-charcoal/20 rounded-full"></div><div class="bg-white/90 rounded-xl p-2 flex-1"><div class="text-[9px] text-charcoal/50">8:00 PM</div><div class="text-[10px] font-semibold">First Dance</div></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 glass px-3 py-1.5 rounded-full text-[10px] font-medium text-charcoal whitespace-nowrap" data-i18n="preview_label3">Event Timeline</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Couples Love It -->
+<section class="py-24 bg-white/50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl sm:text-4xl font-serif font-bold text-charcoal mb-4" data-i18n="why_title">Why Couples Love It</h2>
+            <p class="text-charcoal/50" data-i18n="why_desc">Everything you need to plan your perfect day</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 fade-in">
+            <div class="glass rounded-3xl p-8 text-center card-hover">
+                <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-soft-pink/50 flex items-center justify-center text-2xl">📱</div>
+                <h3 class="font-serif font-bold text-charcoal mb-2" data-i18n="why_card1_title">Everything in One Place</h3>
+                <p class="text-sm text-charcoal/50" data-i18n="why_card1_desc">No more scattered notes and spreadsheets</p>
+            </div>
+            <div class="glass rounded-3xl p-8 text-center card-hover">
+                <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-champagne/50 flex items-center justify-center text-2xl">🧘</div>
+                <h3 class="font-serif font-bold text-charcoal mb-2" data-i18n="why_card2_title">Stress-Free Planning</h3>
+                <p class="text-sm text-charcoal/50" data-i18n="why_card2_desc">Smart reminders keep you on track effortlessly</p>
+            </div>
+            <div class="glass rounded-3xl p-8 text-center card-hover">
+                <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-sage/20 flex items-center justify-center text-2xl">🎨</div>
+                <h3 class="font-serif font-bold text-charcoal mb-2" data-i18n="why_card3_title">Beautiful Design</h3>
+                <p class="text-sm text-charcoal/50" data-i18n="why_card3_desc">A wedding planner as elegant as your big day</p>
+            </div>
+            <div class="glass rounded-3xl p-8 text-center card-hover">
+                <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-rose-gold/10 flex items-center justify-center text-2xl">👨‍👩‍👧‍👦</div>
+                <h3 class="font-serif font-bold text-charcoal mb-2" data-i18n="why_card4_title">Share With Family</h3>
+                <p class="text-sm text-charcoal/50" data-i18n="why_card4_desc">Collaborate with your partner and wedding party</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Interactive Showcase -->
+<section class="py-24">
+    <div class="max-w-7xl mx-auto px-6 space-y-32">
+        <!-- Showcase 1 -->
+        <div class="grid lg:grid-cols-2 gap-16 items-center fade-in">
+            <div class="flex justify-center">
+                <div class="phone-mockup">
+                    <div class="phone-screen flex flex-col bg-gradient-to-b from-rose-gold/10 to-white">
+                        <div class="pt-10 px-5 pb-4 text-center">
+                            <div class="text-3xl mb-2">💒</div>
+                            <div class="text-xl font-serif font-bold text-charcoal">88</div>
+                            <div class="text-xs text-charcoal/50">days until forever</div>
+                        </div>
+                        <div class="px-4 flex-1 flex flex-col justify-center">
+                            <div class="grid grid-cols-4 gap-2 text-center">
+                                <div class="bg-white/80 rounded-xl p-2"><div class="text-lg font-bold text-charcoal">02</div><div class="text-[8px] text-charcoal/40">Months</div></div>
+                                <div class="bg-white/80 rounded-xl p-2"><div class="text-lg font-bold text-charcoal">28</div><div class="text-[8px] text-charcoal/40">Days</div></div>
+                                <div class="bg-white/80 rounded-xl p-2"><div class="text-lg font-bold text-charcoal">14</div><div class="text-[8px] text-charcoal/40">Hours</div></div>
+                                <div class="bg-white/80 rounded-xl p-2"><div class="text-lg font-bold text-charcoal">32</div><div class="text-[8px] text-charcoal/40">Min</div></div>
+                            </div>
+                            <div class="mt-4 bg-white/80 rounded-2xl p-4">
+                                <div class="text-xs font-semibold text-charcoal mb-2">Next Milestone</div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-champagne/50 flex items-center justify-center text-sm">💐</div>
+                                    <div><div class="text-[11px] font-medium">Floral consultation</div><div class="text-[9px] text-charcoal/40">In 3 days</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="inline-block px-3 py-1 rounded-full bg-soft-pink/30 text-xs font-medium text-rose-gold mb-4" data-i18n="showcase1_tag">Countdown</div>
+                <h3 class="text-2xl sm:text-3xl font-serif font-bold text-charcoal mb-4" data-i18n="showcase1_title">Every Second Counts</h3>
+                <p class="text-charcoal/60 leading-relaxed mb-6" data-i18n="showcase1_desc">Watch your wedding day approach with a beautiful live countdown. See upcoming milestones and never miss an important deadline.</p>
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2 text-sm text-charcoal/50"><i class="fa-solid fa-check text-sage"></i><span data-i18n="showcase1_f1">Live countdown</span></div>
+                    <div class="flex items-center gap-2 text-sm text-charcoal/50"><i class="fa-solid fa-check text-sage"></i><span data-i18n="showcase1_f2">Milestone alerts</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Showcase 2 -->
+        <div class="grid lg:grid-cols-2 gap-16 items-center fade-in">
+            <div class="order-2 lg:order-1">
+                <div class="inline-block px-3 py-1 rounded-full bg-sage/20 text-xs font-medium text-sage mb-4" data-i18n="showcase2_tag">Budget Planner</div>
+                <h3 class="text-2xl sm:text-3xl font-serif font-bold text-charcoal mb-4" data-i18n="showcase2_title">Stay on Budget, Beautifully</h3>
+                <p class="text-charcoal/60 leading-relaxed mb-6" data-i18n="showcase2_desc">Track every expense with visual charts. Know exactly where your money goes and never overspend on your special day.</p>
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2 text-sm text-charcoal/50"><i class="fa-solid fa-check text-sage"></i><span data-i18n="showcase2_f1">Visual analytics</span></div>
+                    <div class="flex items-center gap-2 text-sm text-charcoal/50"><i class="fa-solid fa-check text-sage"></i><span data-i18n="showcase2_f2">Vendor tracking</span></div>
+                </div>
+            </div>
+            <div class="order-1 lg:order-2 flex justify-center">
+                <div class="phone-mockup">
+                    <div class="phone-screen flex flex-col bg-gradient-to-b from-sage/10 to-white">
+                        <div class="pt-10 px-5 pb-3">
+                            <div class="text-lg font-bold text-charcoal">💰 Budget</div>
+                            <div class="text-xs text-charcoal/40">RM 45,000 of RM 80,000 spent</div>
+                        </div>
+                        <div class="px-4 space-y-3 flex-1">
+                            <div class="bg-white/90 rounded-2xl p-4">
+                                <div class="flex justify-center mb-3">
+                                    <div class="w-24 h-24 rounded-full border-8 border-sage/30 relative flex items-center justify-center">
+                                        <div class="absolute inset-1 rounded-full border-8 border-transparent border-t-sage border-r-sage" style="transform:rotate(45deg)"></div>
+                                        <span class="text-sm font-bold text-charcoal">56%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="bg-white/90 rounded-xl p-2.5 flex items-center justify-between"><div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-rose-gold"></span><span class="text-[10px]">Venue</span></div><span class="text-[10px] font-bold">RM 18,000</span></div>
+                                <div class="bg-white/90 rounded-xl p-2.5 flex items-center justify-between"><div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-champagne"></span><span class="text-[10px]">Catering</span></div><span class="text-[10px] font-bold">RM 12,000</span></div>
+                                <div class="bg-white/90 rounded-xl p-2.5 flex items-center justify-between"><div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-sage"></span><span class="text-[10px]">Photography</span></div><span class="text-[10px] font-bold">RM 8,000</span></div>
+                                <div class="bg-white/90 rounded-xl p-2.5 flex items-center justify-between"><div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-soft-pink"></span><span class="text-[10px]">Flowers</span></div><span class="text-[10px] font-bold">RM 4,500</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Showcase 3 -->
+        <div class="grid lg:grid-cols-2 gap-16 items-center fade-in">
+            <div class="flex justify-center">
+                <div class="phone-mockup">
+                    <div class="phone-screen flex flex-col bg-gradient-to-b from-champagne/20 to-white">
+                        <div class="pt-10 px-5 pb-3">
+                            <div class="text-lg font-bold text-charcoal">✉️ RSVP</div>
+                            <div class="text-xs text-charcoal/40">128 of 200 responded</div>
+                        </div>
+                        <div class="px-4 space-y-3 flex-1">
+                            <div class="grid grid-cols-3 gap-2">
+                                <div class="bg-green-50 rounded-xl p-2 text-center"><div class="text-lg font-bold text-green-600">96</div><div class="text-[8px] text-green-600">Attending</div></div>
+                                <div class="bg-yellow-50 rounded-xl p-2 text-center"><div class="text-lg font-bold text-yellow-600">20</div><div class="text-[8px] text-yellow-600">Maybe</div></div>
+                                <div class="bg-red-50 rounded-xl p-2 text-center"><div class="text-lg font-bold text-red-400">12</div><div class="text-[8px] text-red-400">Declined</div></div>
+                            </div>
+                            <div class="bg-white/90 rounded-2xl p-3">
+                                <div class="text-xs font-semibold mb-2">Recent RSVPs</div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-soft-pink"></div><div class="flex-1"><div class="text-[10px] font-medium">Emily & James</div><div class="text-[8px] text-charcoal/40">Just now</div></div><span class="text-[9px] text-green-600 font-medium">✓ Yes</span></div>
+                                    <div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-champagne"></div><div class="flex-1"><div class="text-[10px] font-medium">Wang Family</div><div class="text-[8px] text-charcoal/40">2h ago</div></div><span class="text-[9px] text-green-600 font-medium">✓ 4 pax</span></div>
+                                    <div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-sage/40"></div><div class="flex-1"><div class="text-[10px] font-medium">Ahmad & Siti</div><div class="text-[8px] text-charcoal/40">5h ago</div></div><span class="text-[9px] text-green-600 font-medium">✓ Yes</span></div>
+                                </div>
+                            </div>
+                            <div class="bg-white/90 rounded-2xl p-3">
+                                <div class="text-xs font-semibold mb-1">Diet Requirements</div>
+                                <div class="flex gap-2 flex-wrap">
+                                    <span class="text-[9px] bg-green-50 text-green-700 px-2 py-0.5 rounded-full">🥬 Veg: 12</span>
+                                    <span class="text-[9px] bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">🍖 Halal: 8</span>
+                                    <span class="text-[9px] bg-gray-50 text-gray-700 px-2 py-0.5 rounded-full">Regular: 108</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="inline-block px-3 py-1 rounded-full bg-champagne/30 text-xs font-medium text-yellow-700 mb-4" data-i18n="showcase3_tag">Guest RSVP</div>
+                <h3 class="text-2xl sm:text-3xl font-serif font-bold text-charcoal mb-4" data-i18n="showcase3_title">Know Who's Coming, Instantly</h3>
+                <p class="text-charcoal/60 leading-relaxed mb-6" data-i18n="showcase3_desc">Share your digital invitation link and watch RSVPs flow in real-time. Track dietary requirements, plus-ones, and seating preferences automatically.</p>
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2 text-sm text-charcoal/50"><i class="fa-solid fa-check text-sage"></i><span data-i18n="showcase3_f1">Real-time sync</span></div>
+                    <div class="flex items-center gap-2 text-sm text-charcoal/50"><i class="fa-solid fa-check text-sage"></i><span data-i18n="showcase3_f2">Diet tracking</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Wedding Journey Timeline -->
+<section class="py-24 bg-white/50 overflow-hidden">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl sm:text-4xl font-serif font-bold text-charcoal mb-4" data-i18n="journey_title">Your Wedding Journey</h2>
+            <p class="text-charcoal/50" data-i18n="journey_desc">We're with you every step of the way</p>
+        </div>
+
+        <div class="timeline-line relative space-y-12 fade-in">
+            <div class="flex items-center gap-6 sm:gap-12 relative">
+                <div class="flex-1 text-right"><h4 class="font-serif font-bold text-charcoal" data-i18n="journey_1_title">Engaged! 💍</h4><p class="text-xs text-charcoal/50 mt-1" data-i18n="journey_1_desc">Start your planning journey</p></div>
+                <div class="w-12 h-12 rounded-full bg-soft-pink flex items-center justify-center text-xl z-10 shadow-lg">💍</div>
+                <div class="flex-1"></div>
+            </div>
+            <div class="flex items-center gap-6 sm:gap-12 relative">
+                <div class="flex-1"></div>
+                <div class="w-12 h-12 rounded-full bg-champagne flex items-center justify-center text-xl z-10 shadow-lg">🏛️</div>
+                <div class="flex-1"><h4 class="font-serif font-bold text-charcoal" data-i18n="journey_2_title">Choose Venue</h4><p class="text-xs text-charcoal/50 mt-1" data-i18n="journey_2_desc">Find your dream location</p></div>
+            </div>
+            <div class="flex items-center gap-6 sm:gap-12 relative">
+                <div class="flex-1 text-right"><h4 class="font-serif font-bold text-charcoal" data-i18n="journey_3_title">Invite Guests</h4><p class="text-xs text-charcoal/50 mt-1" data-i18n="journey_3_desc">Send digital invitations</p></div>
+                <div class="w-12 h-12 rounded-full bg-sage/40 flex items-center justify-center text-xl z-10 shadow-lg">✉️</div>
+                <div class="flex-1"></div>
+            </div>
+            <div class="flex items-center gap-6 sm:gap-12 relative">
+                <div class="flex-1"></div>
+                <div class="w-12 h-12 rounded-full bg-rose-gold/20 flex items-center justify-center text-xl z-10 shadow-lg">⛪</div>
+                <div class="flex-1"><h4 class="font-serif font-bold text-charcoal" data-i18n="journey_4_title">Plan Ceremony</h4><p class="text-xs text-charcoal/50 mt-1" data-i18n="journey_4_desc">Every detail, perfected</p></div>
+            </div>
+            <div class="flex items-center gap-6 sm:gap-12 relative">
+                <div class="flex-1 text-right"><h4 class="font-serif font-bold text-charcoal" data-i18n="journey_5_title">Wedding Day! 🎉</h4><p class="text-xs text-charcoal/50 mt-1" data-i18n="journey_5_desc">Your perfect moment arrives</p></div>
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-rose-gold to-champagne flex items-center justify-center text-xl z-10 shadow-lg">👰</div>
+                <div class="flex-1"></div>
+            </div>
+            <div class="flex items-center gap-6 sm:gap-12 relative">
+                <div class="flex-1"></div>
+                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl z-10 shadow-lg">✈️</div>
+                <div class="flex-1"><h4 class="font-serif font-bold text-charcoal" data-i18n="journey_6_title">Honeymoon</h4><p class="text-xs text-charcoal/50 mt-1" data-i18n="journey_6_desc">Celebrate your love story</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Grid -->
+<section class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl sm:text-4xl font-serif font-bold text-charcoal mb-4" data-i18n="features_title">Packed With Features</h2>
+            <p class="text-charcoal/50" data-i18n="features_desc">Everything you need, nothing you don't</p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 fade-in">
+            <div class="glass rounded-2xl p-5 text-center card-hover"><div class="text-2xl mb-2">👥</div><div class="text-xs font-semibold text-charcoal" data-i18n="feat_guests">Guest Management</div></div>
+            <div class="glass rounded-2xl p-5 text-center card-hover"><div class="text-2xl mb-2">🏪</div><div class="text-xs font-semibold text-charcoal" data-i18n="feat_vendors">Vendor Booking</div></div>
+            <div class="glass rounded-2xl p-5 text-center card-hover"><div class="text-2xl mb-2">💰</div><div class="text-xs font-semibold text-charcoal" data-i18n="feat_budget">Budget Tracking</div></div>
+            <div class="glass rounded-2xl p-5 text-center card-hover"><div class="text-2xl mb-2">✅</div><div class="text-xs font-semibold text-charcoal" data-i18n="feat_checklist">Wedding Checklist</div></div>
+            <div class="glass rounded-2xl p-5 text-center card-hover"><div class="text-2xl mb-2">🎨</div><div class="text-xs font-semibold text-charcoal" data-i18n="feat_mood">Mood Board</div></div>
+            <div class="glass rounded-2xl p-5 text-center card-hover"><div class="text-2xl mb-2">📸</div><div class="text-xs font-semibold text-charcoal" data-i18n="feat_photos">Photo Sharing</div></div>
+            <div class="glass rounded-2xl p-5 text-center card-hover"><div class="text-2xl mb-2">📅</div><div class="text-xs font-semibold text-charcoal" data-i18n="feat_schedule">Event Schedule</div></div>
+            <div class="glass rounded-2xl p-5 text-center card-hover"><div class="text-2xl mb-2">🔔</div><div class="text-xs font-semibold text-charcoal" data-i18n="feat_notif">Notifications</div></div>
+            <div class="glass rounded-2xl p-5 text-center card-hover"><div class="text-2xl mb-2">🪑</div><div class="text-xs font-semibold text-charcoal" data-i18n="feat_seating">Table Seating</div></div>
+            <div class="glass rounded-2xl p-5 text-center card-hover"><div class="text-2xl mb-2">🤖</div><div class="text-xs font-semibold text-charcoal" data-i18n="feat_ai">AI Assistant</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Statistics -->
+<section class="py-24 bg-charcoal text-white relative overflow-hidden">
+    <div class="blob w-96 h-96 bg-rose-gold/20 -top-20 -right-20"></div>
+    <div class="blob w-80 h-80 bg-sage/20 bottom-0 left-0" style="animation-delay:-4s;"></div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl sm:text-4xl font-serif font-bold mb-4" data-i18n="stats_title">Trusted by Couples Worldwide</h2>
+        </div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 fade-in">
+            <div class="text-center">
+                <div class="text-4xl sm:text-5xl font-bold gradient-text counter" data-target="25000">0</div>
+                <div class="text-sm text-white/60 mt-2" data-i18n="stats_couples">Happy Couples</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl sm:text-5xl font-bold gradient-text counter" data-target="1000000">0</div>
+                <div class="text-sm text-white/60 mt-2" data-i18n="stats_guests">Guests Managed</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl sm:text-5xl font-bold gradient-text counter" data-target="50000">0</div>
+                <div class="text-sm text-white/60 mt-2" data-i18n="stats_events">Events Planned</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl sm:text-5xl font-bold text-champagne">4.9★</div>
+                <div class="text-sm text-white/60 mt-2" data-i18n="stats_rating">Average Rating</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl sm:text-4xl font-serif font-bold text-charcoal mb-4" data-i18n="testimonials_title">Love Stories</h2>
+            <p class="text-charcoal/50" data-i18n="testimonials_desc">What couples are saying</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
+            <div class="glass rounded-3xl p-6 card-hover relative">
+                <div class="absolute top-4 right-4 text-yellow-400 text-sm">★★★★★</div>
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-soft-pink to-rose-gold/40"></div>
+                    <div>
+                        <div class="font-semibold text-charcoal text-sm">Sarah & David</div>
+                        <div class="text-xs text-charcoal/40" data-i18n="test1_date">Married Dec 2025</div>
+                    </div>
+                </div>
+                <p class="text-sm text-charcoal/70 leading-relaxed" data-i18n="test1_text">"This app made our wedding planning journey so much easier. The guest management feature alone saved us countless hours!"</p>
+            </div>
+            <div class="glass rounded-3xl p-6 card-hover relative">
+                <div class="absolute top-4 right-4 text-yellow-400 text-sm">★★★★★</div>
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-champagne to-sage/40"></div>
+                    <div>
+                        <div class="font-semibold text-charcoal text-sm">Wei & Mei Ling</div>
+                        <div class="text-xs text-charcoal/40" data-i18n="test2_date">Married Mar 2026</div>
+                    </div>
+                </div>
+                <p class="text-sm text-charcoal/70 leading-relaxed" data-i18n="test2_text">"The bilingual feature was perfect for our multicultural wedding. Both our families could easily RSVP and view all the details."</p>
+            </div>
+            <div class="glass rounded-3xl p-6 card-hover relative">
+                <div class="absolute top-4 right-4 text-yellow-400 text-sm">★★★★★</div>
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-sage/40 to-blue-200"></div>
+                    <div>
+                        <div class="font-semibold text-charcoal text-sm">Ahmad & Nurul</div>
+                        <div class="text-xs text-charcoal/40" data-i18n="test3_date">Married Jun 2026</div>
+                    </div>
+                </div>
+                <p class="text-sm text-charcoal/70 leading-relaxed" data-i18n="test3_text">"Beautifully designed and so intuitive. The budget tracker kept us on track and the timeline feature was a lifesaver on our big day."</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Download Section -->
+<section id="download" class="py-24 bg-gradient-to-b from-ivory to-soft-pink/20 relative overflow-hidden">
+    <div class="blob w-80 h-80 bg-champagne/30 top-10 right-10"></div>
+    <div class="blob w-64 h-64 bg-sage/20 bottom-10 left-10" style="animation-delay:-3s;"></div>
+
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+        <div class="text-center fade-in">
+            <h2 class="text-3xl sm:text-5xl font-serif font-bold text-charcoal mb-4" data-i18n="download_title">Start Planning Today</h2>
+            <p class="text-charcoal/60 max-w-md mx-auto mb-12" data-i18n="download_desc">Download free and begin your journey to the perfect wedding</p>
+
+            <div class="flex justify-center mb-12">
+                <div class="phone-mockup float-animation">
+                    <div class="phone-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-soft-pink/30">
+                        <div class="text-5xl mb-4">💒</div>
+                        <div class="text-xl font-serif font-bold text-charcoal mb-1">JiaYee Wedding</div>
+                        <div class="text-xs text-charcoal/40 mb-6">Your perfect wedding planner</div>
+                        <div class="w-20 h-20 bg-charcoal rounded-2xl flex items-center justify-center mb-4">
+                            <div class="grid grid-cols-3 gap-0.5 p-2">
+                                <div class="w-2 h-2 bg-white rounded-sm"></div><div class="w-2 h-2 bg-white rounded-sm"></div><div class="w-2 h-2 bg-white rounded-sm"></div>
+                                <div class="w-2 h-2 bg-white rounded-sm"></div><div class="w-2 h-2 rounded-sm"></div><div class="w-2 h-2 bg-white rounded-sm"></div>
+                                <div class="w-2 h-2 bg-white rounded-sm"></div><div class="w-2 h-2 bg-white rounded-sm"></div><div class="w-2 h-2 bg-white rounded-sm"></div>
+                            </div>
+                        </div>
+                        <div class="text-[9px] text-charcoal/40" data-i18n="download_qr_label">Scan to download</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+                <a href="#" class="flex items-center gap-3 bg-charcoal text-white px-8 py-4 rounded-2xl hover:scale-105 transition-transform shadow-lg">
+                    <i class="fa-brands fa-apple text-3xl"></i>
+                    <div class="text-left"><span class="text-[10px] opacity-70 block" data-i18n="dl_apple_sub">Download on the</span><span class="text-base font-semibold">App Store</span></div>
+                </a>
+                <a href="#" class="flex items-center gap-3 bg-charcoal text-white px-8 py-4 rounded-2xl hover:scale-105 transition-transform shadow-lg">
+                    <i class="fa-brands fa-google-play text-2xl"></i>
+                    <div class="text-left"><span class="text-[10px] opacity-70 block" data-i18n="dl_google_sub">GET IT ON</span><span class="text-base font-semibold">Google Play</span></div>
+                </a>
+            </div>
+
+            <!-- Text me the app -->
+            <div class="max-w-sm mx-auto">
+                <div class="glass rounded-2xl p-4">
+                    <div class="text-xs font-medium text-charcoal/70 mb-2" data-i18n="download_sms">Text me the download link</div>
+                    <div class="flex gap-2">
+                        <input type="tel" placeholder="+60 12-345-6789" class="flex-1 px-4 py-2.5 rounded-xl bg-white/80 border border-rose-gold/20 text-sm outline-none focus:border-rose-gold transition">
+                        <button class="px-4 py-2.5 bg-rose-gold text-white rounded-xl text-sm font-medium hover:bg-rose-gold/80 transition" data-i18n="download_send">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-charcoal text-white/70 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="text-2xl">💒</span>
+                    <span class="font-serif text-lg font-bold text-white">JiaYee Wedding</span>
+                </div>
+                <p class="text-sm leading-relaxed" data-i18n="footer_tagline">Making every wedding moment beautiful, one couple at a time.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-4" data-i18n="footer_product">Product</h4>
+                <div class="space-y-2 text-sm">
+                    <div><a href="#" class="hover:text-white transition" data-i18n="footer_features">Features</a></div>
+                    <div><a href="#" class="hover:text-white transition" data-i18n="footer_pricing">Pricing</a></div>
+                    <div><a href="#download" class="hover:text-white transition" data-i18n="footer_download2">Download</a></div>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-4" data-i18n="footer_support">Support</h4>
+                <div class="space-y-2 text-sm">
+                    <div><a href="#" class="hover:text-white transition" data-i18n="footer_help">Help Center</a></div>
+                    <div><a href="#" class="hover:text-white transition" data-i18n="footer_privacy">Privacy Policy</a></div>
+                    <div><a href="#" class="hover:text-white transition" data-i18n="footer_terms">Terms of Service</a></div>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-4" data-i18n="footer_social">Follow Us</h4>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-rose-gold/50 transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-rose-gold/50 transition"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-rose-gold/50 transition"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-rose-gold/50 transition"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-white/10 pt-8 text-center text-xs text-white/40">
+            <span data-i18n="footer_copy">© 2026 JiaYee Wedding. All rights reserved.</span>
+        </div>
+    </div>
+</footer>
+
+<!-- Sticky Download Button -->
+<div class="sticky-download" id="sticky-download">
+    <a href="#download" class="glass-dark text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-xl hover:scale-105 transition-transform">
+        <i class="fa-solid fa-download text-sm"></i>
+        <span class="text-sm font-medium" data-i18n="sticky_btn">Download Free</span>
+    </a>
+</div>
+
+<script>
+// i18n
+const i18n = {
+    en: {
+        nav_logo: "JiaYee Wedding",
+        nav_download: "Download App",
+        hero_badge: "Loved by thousands of couples",
+        hero_title: "Plan Every Wedding Moment",
+        hero_title2: "Beautifully",
+        hero_desc: "Your dream wedding, perfectly organized. From guest lists to timelines — everything in one beautiful app.",
+        hero_apple_sub: "Download on the",
+        hero_google_sub: "GET IT ON",
+        preview_title: "One App, Everything You Need",
+        preview_desc: "Three powerful features working together seamlessly",
+        preview_label1: "Guest Management",
+        preview_label2: "Wedding Dashboard",
+        preview_label3: "Event Timeline",
+        why_title: "Why Couples Love It",
+        why_desc: "Everything you need to plan your perfect day",
+        why_card1_title: "Everything in One Place",
+        why_card1_desc: "No more scattered notes and spreadsheets",
+        why_card2_title: "Stress-Free Planning",
+        why_card2_desc: "Smart reminders keep you on track effortlessly",
+        why_card3_title: "Beautiful Design",
+        why_card3_desc: "A wedding planner as elegant as your big day",
+        why_card4_title: "Share With Family",
+        why_card4_desc: "Collaborate with your partner and wedding party",
+        showcase1_tag: "Countdown",
+        showcase1_title: "Every Second Counts",
+        showcase1_desc: "Watch your wedding day approach with a beautiful live countdown. See upcoming milestones and never miss an important deadline.",
+        showcase1_f1: "Live countdown",
+        showcase1_f2: "Milestone alerts",
+        showcase2_tag: "Budget Planner",
+        showcase2_title: "Stay on Budget, Beautifully",
+        showcase2_desc: "Track every expense with visual charts. Know exactly where your money goes and never overspend on your special day.",
+        showcase2_f1: "Visual analytics",
+        showcase2_f2: "Vendor tracking",
+        showcase3_tag: "Guest RSVP",
+        showcase3_title: "Know Who's Coming, Instantly",
+        showcase3_desc: "Share your digital invitation link and watch RSVPs flow in real-time. Track dietary requirements, plus-ones, and seating preferences automatically.",
+        showcase3_f1: "Real-time sync",
+        showcase3_f2: "Diet tracking",
+        journey_title: "Your Wedding Journey",
+        journey_desc: "We're with you every step of the way",
+        journey_1_title: "Engaged! 💍",
+        journey_1_desc: "Start your planning journey",
+        journey_2_title: "Choose Venue",
+        journey_2_desc: "Find your dream location",
+        journey_3_title: "Invite Guests",
+        journey_3_desc: "Send digital invitations",
+        journey_4_title: "Plan Ceremony",
+        journey_4_desc: "Every detail, perfected",
+        journey_5_title: "Wedding Day! 🎉",
+        journey_5_desc: "Your perfect moment arrives",
+        journey_6_title: "Honeymoon",
+        journey_6_desc: "Celebrate your love story",
+        features_title: "Packed With Features",
+        features_desc: "Everything you need, nothing you don't",
+        feat_guests: "Guest Management",
+        feat_vendors: "Vendor Booking",
+        feat_budget: "Budget Tracking",
+        feat_checklist: "Wedding Checklist",
+        feat_mood: "Mood Board",
+        feat_photos: "Photo Sharing",
+        feat_schedule: "Event Schedule",
+        feat_notif: "Notifications",
+        feat_seating: "Table Seating",
+        feat_ai: "AI Assistant",
+        stats_title: "Trusted by Couples Worldwide",
+        stats_couples: "Happy Couples",
+        stats_guests: "Guests Managed",
+        stats_events: "Events Planned",
+        stats_rating: "Average Rating",
+        testimonials_title: "Love Stories",
+        testimonials_desc: "What couples are saying",
+        test1_date: "Married Dec 2025",
+        test1_text: "\"This app made our wedding planning journey so much easier. The guest management feature alone saved us countless hours!\"",
+        test2_date: "Married Mar 2026",
+        test2_text: "\"The bilingual feature was perfect for our multicultural wedding. Both our families could easily RSVP and view all the details.\"",
+        test3_date: "Married Jun 2026",
+        test3_text: "\"Beautifully designed and so intuitive. The budget tracker kept us on track and the timeline feature was a lifesaver on our big day.\"",
+        download_title: "Start Planning Today",
+        download_desc: "Download free and begin your journey to the perfect wedding",
+        download_qr_label: "Scan to download",
+        dl_apple_sub: "Download on the",
+        dl_google_sub: "GET IT ON",
+        download_sms: "Text me the download link",
+        download_send: "Send",
+        footer_tagline: "Making every wedding moment beautiful, one couple at a time.",
+        footer_product: "Product",
+        footer_features: "Features",
+        footer_pricing: "Pricing",
+        footer_download2: "Download",
+        footer_support: "Support",
+        footer_help: "Help Center",
+        footer_privacy: "Privacy Policy",
+        footer_terms: "Terms of Service",
+        footer_social: "Follow Us",
+        footer_copy: "© 2026 JiaYee Wedding. All rights reserved.",
+        sticky_btn: "Download Free"
+    },
+    zh: {
+        nav_logo: "佳意婚礼",
+        nav_download: "下载应用",
+        hero_badge: "深受数千对新人喜爱",
+        hero_title: "规划每一个婚礼瞬间",
+        hero_title2: "优雅而美好",
+        hero_desc: "您的梦想婚礼，完美有序。从宾客名单到时间线——一切尽在一款精美的应用中。",
+        hero_apple_sub: "下载于",
+        hero_google_sub: "下载于",
+        preview_title: "一个应用，满足所有需求",
+        preview_desc: "三大核心功能无缝协作",
+        preview_label1: "宾客管理",
+        preview_label2: "婚礼仪表盘",
+        preview_label3: "活动时间线",
+        why_title: "新人为何钟爱它",
+        why_desc: "规划完美婚礼所需的一切",
+        why_card1_title: "一站式管理",
+        why_card1_desc: "告别分散的笔记和表格",
+        why_card2_title: "轻松筹备",
+        why_card2_desc: "智能提醒让一切井然有序",
+        why_card3_title: "精美设计",
+        why_card3_desc: "如同您的大日子一样优雅",
+        why_card4_title: "与家人共享",
+        why_card4_desc: "与伴侣和亲友团协同规划",
+        showcase1_tag: "倒计时",
+        showcase1_title: "每一秒都弥足珍贵",
+        showcase1_desc: "精美的实时倒计时，见证婚礼日的临近。查看即将到来的里程碑，绝不错过任何重要节点。",
+        showcase1_f1: "实时倒计时",
+        showcase1_f2: "里程碑提醒",
+        showcase2_tag: "预算规划",
+        showcase2_title: "优雅地掌控预算",
+        showcase2_desc: "通过可视化图表追踪每一笔支出。清楚知道钱花在哪里，为特别的一天精打细算。",
+        showcase2_f1: "可视化分析",
+        showcase2_f2: "供应商追踪",
+        showcase3_tag: "宾客回复",
+        showcase3_title: "即时知晓谁会出席",
+        showcase3_desc: "分享电子邀请链接，实时接收宾客回复。自动追踪饮食需求、随行人数和席位偏好。",
+        showcase3_f1: "实时同步",
+        showcase3_f2: "饮食追踪",
+        journey_title: "您的婚礼旅程",
+        journey_desc: "我们陪伴您的每一步",
+        journey_1_title: "订婚啦！💍",
+        journey_1_desc: "开启筹备之旅",
+        journey_2_title: "选定场地",
+        journey_2_desc: "找到梦想中的地点",
+        journey_3_title: "邀请宾客",
+        journey_3_desc: "发送电子请柬",
+        journey_4_title: "策划仪式",
+        journey_4_desc: "每一个细节，精益求精",
+        journey_5_title: "婚礼当天！🎉",
+        journey_5_desc: "完美时刻终于到来",
+        journey_6_title: "蜜月旅行",
+        journey_6_desc: "续写你们的爱情故事",
+        features_title: "功能丰富",
+        features_desc: "您需要的一切，一应俱全",
+        feat_guests: "宾客管理",
+        feat_vendors: "供应商预订",
+        feat_budget: "预算追踪",
+        feat_checklist: "婚礼清单",
+        feat_mood: "灵感板",
+        feat_photos: "照片分享",
+        feat_schedule: "活动日程",
+        feat_notif: "消息通知",
+        feat_seating: "席位安排",
+        feat_ai: "AI助手",
+        stats_title: "全球新人的信赖之选",
+        stats_couples: "幸福新人",
+        stats_guests: "宾客管理数",
+        stats_events: "婚礼策划数",
+        stats_rating: "平均评分",
+        testimonials_title: "爱的故事",
+        testimonials_desc: "听听新人们怎么说",
+        test1_date: "2025年12月结婚",
+        test1_text: ""这款应用让我们的婚礼筹备变得轻松多了。仅宾客管理功能就为我们节省了无数时间！"",
+        test2_date: "2026年3月结婚",
+        test2_text: ""双语功能非常适合我们的多文化婚礼。双方家人都能轻松回复和查看所有细节。"",
+        test3_date: "2026年6月结婚",
+        test3_text: ""设计精美，操作直观。预算追踪让我们不超支，时间线功能在婚礼当天简直是救星。"",
+        download_title: "今天就开始筹备",
+        download_desc: "免费下载，开启您的完美婚礼之旅",
+        download_qr_label: "扫码下载",
+        dl_apple_sub: "下载于",
+        dl_google_sub: "下载于",
+        download_sms: "发送下载链接到手机",
+        download_send: "发送",
+        footer_tagline: "让每一个婚礼瞬间都变得美好，一次只为一对新人。",
+        footer_product: "产品",
+        footer_features: "功能",
+        footer_pricing: "定价",
+        footer_download2: "下载",
+        footer_support: "支持",
+        footer_help: "帮助中心",
+        footer_privacy: "隐私政策",
+        footer_terms: "服务条款",
+        footer_social: "关注我们",
+        footer_copy: "© 2026 佳意婚礼。保留所有权利。",
+        sticky_btn: "免费下载"
+    }
+};
+
+let currentLang = 'en';
+
+function toggleLang() {
+    currentLang = currentLang === 'en' ? 'zh' : 'en';
+    applyLanguage(currentLang);
+}
+
+function applyLanguage(lang) {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[lang] && i18n[lang][key]) {
+            el.textContent = i18n[lang][key];
+        }
+    });
+    document.getElementById('lang-toggle-btn').textContent = lang === 'en' ? '中文 / EN' : 'EN / 中文';
+}
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Sticky download button
+const stickyBtn = document.getElementById('sticky-download');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 600) {
+        stickyBtn.classList.add('show');
+    } else {
+        stickyBtn.classList.remove('show');
+    }
+});
+
+// Counter animation
+function animateCounters() {
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        if (!target) return;
+        const duration = 2000;
+        const start = performance.now();
+        function update(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(eased * target);
+            if (target >= 1000000) counter.textContent = (current / 1000000).toFixed(1) + 'M+';
+            else if (target >= 1000) counter.textContent = (current / 1000).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (target >= 10000 ? '+' : '+');
+            else counter.textContent = current + '+';
+            if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+    });
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateCounters();
+            counterObserver.disconnect();
+        }
+    });
+}, { threshold: 0.3 });
+document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+// Init
+applyLanguage(currentLang);
+</script>
+
+</body>
+</html>
