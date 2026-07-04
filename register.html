@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script>
-        tailwind.config = {
+        try { tailwind.config = {
             theme: {
                 extend: {
                     colors: {
@@ -25,7 +25,7 @@
                     }
                 }
             }
-        }
+        } } catch(e) { console.warn('Tailwind config failed:', e); }
     </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -864,11 +864,11 @@ const i18n = {
         testimonials_title: "爱的故事",
         testimonials_desc: "听听新人们怎么说",
         test1_date: "2025年12月结婚",
-        test1_text: ""这款应用让我们的婚礼筹备变得轻松多了。仅宾客管理功能就为我们节省了无数时间！"",
+        test1_text: "「这款应用让我们的婚礼筹备变得轻松多了。仅宾客管理功能就为我们节省了无数时间！」",
         test2_date: "2026年3月结婚",
-        test2_text: ""双语功能非常适合我们的多文化婚礼。双方家人都能轻松回复和查看所有细节。"",
+        test2_text: "「双语功能非常适合我们的多文化婚礼。双方家人都能轻松回复和查看所有细节。」",
         test3_date: "2026年6月结婚",
-        test3_text: ""设计精美，操作直观。预算追踪让我们不超支，时间线功能在婚礼当天简直是救星。"",
+        test3_text: "「设计精美，操作直观。预算追踪让我们不超支，时间线功能在婚礼当天简直是救星。」",
         download_title: "今天就开始筹备",
         download_desc: "免费下载，开启您的完美婚礼之旅",
         download_qr_label: "扫码下载",
