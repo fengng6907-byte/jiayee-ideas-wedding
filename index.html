@@ -7,33 +7,36 @@
     <meta name="description" content="Beautiful wedding planning starts here">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="npc.css">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --bg-ivory: #faf8f5;
-            --blush: #f4e4e0;
-            --blush-deep: #e8c4bc;
-            --gold: #c5a059;
-            --gold-light: #e8d5a3;
-            --sage: #b8c5b0;
-            --charcoal: #2c2c2c;
-            --charcoal-light: #5a5a5a;
-            --white-glass: rgba(255, 255, 255, 0.72);
-            --white-glass-border: rgba(255, 255, 255, 0.45);
-            --shadow-soft: 0 8px 32px rgba(128, 0, 32, 0.06);
-            --shadow-elevated: 0 20px 60px rgba(128, 0, 32, 0.08);
-            --radius-xl: 24px;
-            --radius-lg: 16px;
-            --radius-md: 12px;
+            --primary: #DB2777;
+            --primary-light: #F472B6;
+            --primary-deep: #831843;
+            --accent-gold: #A16207;
+            --accent-gold-light: #D4A843;
+            --bg-blush: #FDF2F8;
+            --bg-warm: #FFF7ED;
+            --charcoal: #1C1917;
+            --charcoal-light: #57534E;
+            --glass-white: rgba(255, 255, 255, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.35);
+            --glass-glow: rgba(219, 39, 119, 0.08);
+            --shadow-soft: 0 8px 32px rgba(219, 39, 119, 0.06), 0 2px 8px rgba(0,0,0,0.02);
+            --shadow-elevated: 0 24px 64px rgba(219, 39, 119, 0.1), 0 8px 24px rgba(0,0,0,0.04);
+            --shadow-glow: 0 0 60px rgba(219, 39, 119, 0.12), 0 0 120px rgba(219, 39, 119, 0.06);
+            --radius-xl: 28px;
+            --radius-lg: 18px;
+            --radius-md: 14px;
         }
 
         html, body {
             height: 100%;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-ivory);
+            font-family: 'Cormorant Infant', 'Inter', -apple-system, BlinkMacSystemFont, serif;
+            background: var(--bg-blush);
             color: var(--charcoal);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
@@ -49,7 +52,6 @@
             padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
         }
 
-        /* Background decorations */
         .bg-layer {
             position: fixed;
             inset: 0;
@@ -58,108 +60,126 @@
             z-index: 0;
         }
 
-        .bg-gradient {
+        .bg-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.5;
-            animation: float 12s ease-in-out infinite;
+            filter: blur(100px);
+            will-change: transform;
         }
 
-        .bg-gradient-1 {
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, var(--blush) 0%, transparent 70%);
-            top: -10%; left: -10%;
-            animation-delay: 0s;
+        .bg-orb-1 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(244, 114, 182, 0.4) 0%, transparent 70%);
+            top: -15%; left: -15%;
+            animation: orb-drift-1 16s ease-in-out infinite;
         }
-        .bg-gradient-2 {
-            width: 350px; height: 350px;
-            background: radial-gradient(circle, var(--gold-light) 0%, transparent 70%);
-            bottom: -5%; right: -10%;
-            animation-delay: -4s;
-            opacity: 0.35;
+        .bg-orb-2 {
+            width: 450px; height: 450px;
+            background: radial-gradient(circle, rgba(161, 98, 7, 0.2) 0%, transparent 70%);
+            bottom: -10%; right: -15%;
+            animation: orb-drift-2 20s ease-in-out infinite;
         }
-        .bg-gradient-3 {
-            width: 250px; height: 250px;
-            background: radial-gradient(circle, var(--sage) 0%, transparent 70%);
-            top: 40%; right: 20%;
-            animation-delay: -8s;
-            opacity: 0.25;
+        .bg-orb-3 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(219, 39, 119, 0.15) 0%, transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            animation: orb-drift-3 14s ease-in-out infinite;
         }
 
-        /* Floating petals */
+        @keyframes orb-drift-1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -25px) scale(1.08); }
+            66% { transform: translate(-20px, 15px) scale(0.94); }
+        }
+        @keyframes orb-drift-2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            40% { transform: translate(-25px, -20px) scale(1.05); }
+            70% { transform: translate(15px, 10px) scale(0.96); }
+        }
+        @keyframes orb-drift-3 {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-45%, -55%) scale(1.12); }
+        }
+
         .petal {
             position: absolute;
-            width: 12px; height: 18px;
-            background: var(--blush-deep);
+            width: 10px; height: 16px;
+            background: var(--primary-light);
             border-radius: 50% 0 50% 50%;
-            opacity: 0.15;
-            animation: petal-fall 18s linear infinite;
+            opacity: 0;
+            animation: petal-fall 20s linear infinite;
         }
-        .petal:nth-child(2) { left: 20%; animation-delay: -3s; width: 8px; height: 12px; opacity: 0.1; }
-        .petal:nth-child(3) { left: 70%; animation-delay: -7s; width: 10px; height: 15px; opacity: 0.12; }
-        .petal:nth-child(4) { left: 85%; animation-delay: -11s; width: 14px; height: 20px; opacity: 0.08; }
-        .petal:nth-child(5) { left: 45%; animation-delay: -15s; width: 9px; height: 13px; opacity: 0.1; }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(15px, -20px) scale(1.05); }
-            66% { transform: translate(-10px, 10px) scale(0.95); }
-        }
+        .petal:nth-child(5) { left: 8%; animation-delay: 0s; width: 12px; height: 18px; }
+        .petal:nth-child(6) { left: 25%; animation-delay: -4s; width: 7px; height: 11px; }
+        .petal:nth-child(7) { left: 55%; animation-delay: -8s; width: 9px; height: 14px; }
+        .petal:nth-child(8) { left: 78%; animation-delay: -12s; width: 11px; height: 17px; }
+        .petal:nth-child(9) { left: 42%; animation-delay: -16s; width: 8px; height: 12px; }
+        .petal:nth-child(10) { left: 90%; animation-delay: -6s; width: 10px; height: 15px; }
 
         @keyframes petal-fall {
-            0% { transform: translateY(-60px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.15; }
-            90% { opacity: 0.15; }
-            100% { transform: translateY(calc(100vh + 60px)) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(-40px) rotate(0deg); opacity: 0; }
+            8% { opacity: 0.12; }
+            88% { opacity: 0.1; }
+            100% { transform: translateY(calc(100vh + 60px)) rotate(400deg); opacity: 0; }
         }
 
-        /* Main container */
         .auth-container {
             position: relative;
             z-index: 1;
             width: 100%;
-            max-width: 390px;
+            max-width: 400px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 0;
-            animation: fadeInUp 0.8s ease-out;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
+        .auth-container > * {
+            animation: reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        .auth-container > *:nth-child(1) { animation-delay: 0s; }
+        .auth-container > *:nth-child(2) { animation-delay: 0.08s; }
+        .auth-container > *:nth-child(3) { animation-delay: 0.16s; }
+        .auth-container > *:nth-child(4) { animation-delay: 0.24s; }
+        .auth-container > *:nth-child(5) { animation-delay: 0.32s; }
+
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); filter: blur(4px); }
+            to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
 
-        /* Header / Language */
         .auth-header {
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 4px 20px;
+            padding: 12px 4px 24px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .logo-icon {
-            width: 32px; height: 32px;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-            border-radius: 8px;
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-light) 100%);
+            border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 16px;
-            box-shadow: 0 2px 8px rgba(197, 160, 89, 0.25);
+            box-shadow: 0 2px 12px rgba(161, 98, 7, 0.25);
+        }
+
+        .logo-icon svg {
+            width: 18px; height: 18px;
+            color: #fff;
         }
 
         .logo-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 500;
-            font-size: 15px;
+            font-family: 'Cormorant Infant', serif;
+            font-weight: 600;
+            font-size: 16px;
             color: var(--charcoal);
             letter-spacing: 0.02em;
         }
@@ -168,198 +188,165 @@
             display: flex;
             align-items: center;
             gap: 2px;
-            background: var(--white-glass);
-            border: 1px solid var(--white-glass-border);
-            border-radius: 20px;
+            background: var(--glass-white);
+            border: 1px solid var(--glass-border);
+            border-radius: 22px;
             padding: 4px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
 
         .lang-btn {
             border: none;
             background: transparent;
             font-size: 11px;
-            font-weight: 500;
-            padding: 5px 10px;
-            border-radius: 16px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 18px;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             color: var(--charcoal-light);
             font-family: 'Inter', sans-serif;
         }
 
         .lang-btn.active {
             background: #fff;
-            color: var(--charcoal);
-            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(219, 39, 119, 0.1);
         }
 
-        /* Hero illustration */
         .hero-section {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 8px 0 28px;
+            padding: 0 0 32px;
         }
 
         .hero-illustration {
-            width: 200px;
+            width: 220px;
             height: 200px;
             position: relative;
-            margin-bottom: 28px;
-        }
-
-        .hero-phone {
-            width: 120px;
-            height: 200px;
-            background: linear-gradient(145deg, #fff 0%, #f9f7f4 100%);
-            border-radius: 22px;
-            border: 2px solid #e8e4df;
-            position: absolute;
-            left: 50%; top: 50%;
-            transform: translate(-50%, -50%) rotate(-3deg);
-            box-shadow: var(--shadow-elevated), inset 0 1px 0 rgba(255,255,255,0.8);
-            overflow: hidden;
-            animation: phone-float 6s ease-in-out infinite;
-        }
-
-        @keyframes phone-float {
-            0%, 100% { transform: translate(-50%, -50%) rotate(-3deg) translateY(0); }
-            50% { transform: translate(-50%, -50%) rotate(-3deg) translateY(-6px); }
-        }
-
-        .hero-phone-screen {
-            margin: 8px;
-            height: calc(100% - 16px);
-            border-radius: 14px;
-            background: linear-gradient(160deg, #fdf2f4 0%, #faf8f5 50%, #f0ebe4 100%);
-            display: flex;
-            flex-direction: column;
-            padding: 12px 8px;
-            gap: 6px;
-        }
-
-        .phone-bar { height: 4px; border-radius: 2px; background: var(--blush-deep); opacity: 0.4; }
-        .phone-bar:nth-child(2) { width: 60%; background: var(--gold-light); }
-        .phone-bar:nth-child(3) { width: 80%; background: var(--sage); opacity: 0.3; }
-        .phone-dot { width: 20px; height: 20px; border-radius: 50%; background: var(--blush); margin: 4px auto; }
-        .phone-line { height: 3px; border-radius: 2px; background: #e8e4df; margin-top: 4px; }
-        .phone-line:nth-child(6) { width: 70%; }
-
-        .hero-floral-1, .hero-floral-2 {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.6;
-        }
-        .hero-floral-1 {
-            width: 60px; height: 60px;
-            background: radial-gradient(circle, var(--blush) 30%, transparent 70%);
-            top: 10px; right: 10px;
-            animation: float 8s ease-in-out infinite;
-        }
-        .hero-floral-2 {
-            width: 45px; height: 45px;
-            background: radial-gradient(circle, var(--sage) 30%, transparent 70%);
-            bottom: 20px; left: 15px;
-            animation: float 10s ease-in-out infinite reverse;
+            margin-bottom: 32px;
         }
 
         .hero-headline {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 26px;
+            font-family: 'Great Vibes', cursive;
+            font-size: 36px;
             font-weight: 400;
-            line-height: 1.3;
+            line-height: 1.2;
             text-align: center;
-            color: var(--charcoal);
-            letter-spacing: -0.01em;
-            max-width: 320px;
+            color: var(--primary-deep);
+            max-width: 340px;
         }
 
         .hero-headline[data-lang="zh"] {
-            font-family: 'Noto Serif SC', 'Cormorant Garamond', serif;
-            font-size: 23px;
-            font-weight: 400;
-            letter-spacing: 0.02em;
+            font-family: 'Noto Serif SC', 'Cormorant Infant', serif;
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
             line-height: 1.5;
         }
 
         .hero-desc {
-            font-size: 13px;
+            font-family: 'Cormorant Infant', serif;
+            font-size: 15px;
             line-height: 1.7;
             color: var(--charcoal-light);
             text-align: center;
-            max-width: 300px;
-            margin-top: 12px;
-            font-weight: 300;
+            max-width: 320px;
+            margin-top: 14px;
+            font-weight: 400;
         }
 
         .hero-desc[data-lang="zh"] {
-            font-size: 12.5px;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 13px;
             line-height: 1.8;
             letter-spacing: 0.03em;
         }
 
-        /* Auth card */
         .auth-card {
             width: 100%;
-            background: var(--white-glass);
-            border: 1px solid var(--white-glass-border);
+            background: var(--glass-white);
+            border: 1px solid var(--glass-border);
             border-radius: var(--radius-xl);
-            padding: 28px 24px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-soft);
+            padding: 32px 28px;
+            backdrop-filter: blur(24px) saturate(1.4);
+            -webkit-backdrop-filter: blur(24px) saturate(1.4);
+            box-shadow: var(--shadow-elevated), var(--shadow-glow);
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            animation: fadeInUp 0.8s ease-out 0.15s both;
+            gap: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
         }
 
         .auth-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
-            height: 52px;
+            height: 54px;
             border-radius: var(--radius-md);
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             border: none;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Cormorant Infant', serif;
             letter-spacing: 0.01em;
             position: relative;
             overflow: hidden;
         }
 
         .auth-btn:active {
-            transform: scale(0.97);
+            transform: scale(0.96);
+            transition-duration: 0.1s;
         }
 
         .auth-btn-apple {
             background: var(--charcoal);
             color: #fff;
         }
-        .auth-btn-apple:hover { background: #1a1a1a; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+        .auth-btn-apple:hover {
+            background: #0a0a0a;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+            transform: translateY(-1px);
+        }
 
         .auth-btn-google {
             background: #fff;
             color: var(--charcoal);
-            border: 1px solid #e8e4df;
+            border: 1px solid rgba(0,0,0,0.08);
         }
-        .auth-btn-google:hover { background: #fafafa; border-color: #d4d0cc; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+        .auth-btn-google:hover {
+            background: #fafafa;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            transform: translateY(-1px);
+        }
 
         .auth-btn-email {
-            background: linear-gradient(135deg, var(--gold) 0%, #d4aa5c 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #E44D8D 100%);
             color: #fff;
-            box-shadow: 0 4px 16px rgba(197, 160, 89, 0.25);
+            box-shadow: 0 6px 20px rgba(219, 39, 119, 0.3);
         }
-        .auth-btn-email:hover { box-shadow: 0 6px 24px rgba(197, 160, 89, 0.35); transform: translateY(-1px); }
-        .auth-btn-email:active { transform: scale(0.97) translateY(0); }
+        .auth-btn-email:hover {
+            box-shadow: 0 10px 32px rgba(219, 39, 119, 0.4);
+            transform: translateY(-2px);
+        }
+        .auth-btn-email:active {
+            transform: scale(0.96) translateY(0);
+        }
 
         .auth-btn svg {
             width: 18px; height: 18px;
@@ -369,115 +356,128 @@
         .divider {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 4px 0;
+            gap: 16px;
+            padding: 2px 0;
         }
 
         .divider-line {
             flex: 1;
             height: 1px;
-            background: linear-gradient(90deg, transparent, #e8e4df, transparent);
+            background: linear-gradient(90deg, transparent, rgba(219, 39, 119, 0.12), transparent);
         }
 
         .divider-text {
             font-size: 11px;
-            color: #bbb;
+            color: var(--charcoal-light);
             font-weight: 400;
-            text-transform: lowercase;
+            opacity: 0.5;
+            font-family: 'Inter', sans-serif;
         }
 
-        /* Trust section */
         .trust-section {
             text-align: center;
-            padding: 24px 0 8px;
-            animation: fadeInUp 0.8s ease-out 0.3s both;
+            padding: 28px 0 8px;
         }
 
         .trust-stars {
-            font-size: 13px;
-            letter-spacing: 2px;
-            color: var(--gold);
-            margin-bottom: 6px;
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .trust-stars svg {
+            width: 14px; height: 14px;
+            color: var(--accent-gold);
+            fill: var(--accent-gold);
         }
 
         .trust-text {
-            font-size: 11px;
-            color: #aaa;
+            font-size: 12px;
+            color: var(--charcoal-light);
             font-weight: 400;
+            opacity: 0.6;
+            font-family: 'Cormorant Infant', serif;
         }
 
-        /* Footer */
         .auth-footer {
             text-align: center;
             padding: 16px 20px 8px;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
 
         .auth-footer p {
-            font-size: 10.5px;
-            color: #bbb;
-            line-height: 1.6;
+            font-size: 11px;
+            color: var(--charcoal-light);
+            line-height: 1.7;
+            opacity: 0.5;
+            font-family: 'Inter', sans-serif;
         }
 
         .auth-footer a {
-            color: var(--charcoal-light);
+            color: var(--charcoal);
             text-decoration: underline;
-            text-decoration-color: #ddd;
-            text-underline-offset: 2px;
+            text-decoration-color: rgba(219, 39, 119, 0.3);
+            text-underline-offset: 3px;
+            transition: text-decoration-color 0.3s ease;
         }
 
         .auth-footer a:hover {
-            color: var(--charcoal);
-            text-decoration-color: var(--gold);
+            text-decoration-color: var(--primary);
         }
 
-        /* Responsive */
         @media (max-width: 340px) {
             .auth-container { max-width: 100%; }
-            .hero-headline { font-size: 22px; }
+            .hero-headline { font-size: 30px; }
             .hero-headline[data-lang="zh"] { font-size: 20px; }
-            .auth-card { padding: 22px 18px; }
-            .auth-btn { height: 48px; font-size: 13px; }
+            .auth-card { padding: 24px 20px; }
+            .auth-btn { height: 50px; font-size: 14px; }
         }
 
         @media (min-width: 768px) {
-            .auth-container { max-width: 420px; }
-            .hero-headline { font-size: 30px; }
-            .hero-headline[data-lang="zh"] { font-size: 26px; }
-            .hero-illustration { width: 220px; height: 220px; }
-            .hero-phone { width: 130px; height: 216px; }
+            .auth-container { max-width: 440px; }
+            .hero-headline { font-size: 42px; }
+            .hero-headline[data-lang="zh"] { font-size: 28px; }
+            .hero-illustration { width: 240px; height: 220px; }
         }
 
-        /* Smooth transitions for language switch */
         .fade-content {
-            transition: opacity 0.25s ease, transform 0.25s ease;
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .fade-content.switching {
             opacity: 0;
-            transform: translateY(4px);
+            transform: translateY(6px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Background layer -->
     <div class="bg-layer">
-        <div class="bg-gradient bg-gradient-1"></div>
-        <div class="bg-gradient bg-gradient-2"></div>
-        <div class="bg-gradient bg-gradient-3"></div>
-        <div class="petal" style="left:10%"></div>
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+        <div class="bg-orb bg-orb-3"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
         <div class="petal"></div>
         <div class="petal"></div>
         <div class="petal"></div>
         <div class="petal"></div>
     </div>
 
-    <!-- Main content -->
     <div class="auth-container">
-        <!-- Header -->
         <div class="auth-header">
             <div class="logo">
-                <div class="logo-icon">💍</div>
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M7 6a2 2 0 0 1 4 0"/><path d="M13 6a2 2 0 0 1 4 0"/>
+                    </svg>
+                </div>
                 <span class="logo-text" id="logo-text">WedPlanner</span>
             </div>
             <div class="lang-switcher">
@@ -486,48 +486,46 @@
             </div>
         </div>
 
-        <!-- Hero -->
         <div class="hero-section fade-content" id="hero-section">
             <div class="hero-illustration" id="npc-auth-scene"></div>
-            <h1 class="hero-headline" id="headline">Every Beautiful Wedding Begins With One Step</h1>
-            <p class="hero-desc" id="description">Organize your guests, timeline, budget, vendors, and unforgettable moments—all in one beautifully designed place.</p>
+            <h1 class="hero-headline" id="headline">Every Love Story Deserves a Perfect Beginning</h1>
+            <p class="hero-desc" id="description">Elegantly manage your guests, timeline, budget, and every unforgettable moment in one beautifully crafted space.</p>
         </div>
 
-        <!-- Auth Card -->
         <div class="auth-card fade-content" id="auth-card">
-            <!-- Apple -->
             <button class="auth-btn auth-btn-apple" onclick="handleAuth('apple')">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
                 <span id="btn-apple-text">Continue with Apple</span>
             </button>
 
-            <!-- Google -->
             <button class="auth-btn auth-btn-google" onclick="handleAuth('google')">
                 <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
                 <span id="btn-google-text">Continue with Google</span>
             </button>
 
-            <!-- Divider -->
             <div class="divider">
                 <div class="divider-line"></div>
                 <span class="divider-text" id="divider-text">or</span>
                 <div class="divider-line"></div>
             </div>
 
-            <!-- Email -->
             <button class="auth-btn auth-btn-email" onclick="handleAuth('email')">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>
                 <span id="btn-email-text">Continue with Email</span>
             </button>
         </div>
 
-        <!-- Trust -->
         <div class="trust-section fade-content" id="trust-section">
-            <div class="trust-stars">★★★★★</div>
+            <div class="trust-stars">
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
             <p class="trust-text" id="trust-text">Trusted by 50,000+ Happy Couples</p>
         </div>
 
-        <!-- Footer -->
         <div class="auth-footer fade-content" id="footer-section">
             <p id="footer-text">By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
         </div>
@@ -537,8 +535,8 @@
     const i18n = {
         en: {
             logo: 'WedPlanner',
-            headline: 'Every Beautiful Wedding Begins With One Step',
-            description: 'Organize your guests, timeline, budget, vendors, and unforgettable moments—all in one beautifully designed place.',
+            headline: 'Every Love Story Deserves a Perfect Beginning',
+            description: 'Elegantly manage your guests, timeline, budget, and every unforgettable moment in one beautifully crafted space.',
             btn_apple: 'Continue with Apple',
             btn_google: 'Continue with Google',
             btn_email: 'Continue with Email',
@@ -593,7 +591,7 @@
             document.getElementById('footer-text').innerHTML = dict.footer;
 
             fadeEls.forEach(el => el.classList.remove('switching'));
-        }, 250);
+        }, 350);
     }
 
     function handleAuth(provider) {

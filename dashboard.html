@@ -5,39 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我们结婚了 · 婚礼数字座舱</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Serif+SC:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        serif: ['Noto Serif SC', 'serif'],
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Great Vibes', 'cursive'],
+                        serif: ['Cormorant Infant', 'Noto Serif SC', 'serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
                     },
                     colors: {
-                        burgundy: { 50:'#fdf2f4',100:'#fbe5ea',200:'#f7ccd5',500:'#800020',600:'#66001a',700:'#4d0013' },
-                        champagne: { 100:'#f9f3eb',500:'#c5a059',600:'#b08b43' },
-                        charcoal: '#222222'
+                        burgundy: { 50:'#FDF2F8',100:'#FCE7F3',200:'#FBCFE8',500:'#DB2777',600:'#BE185D',700:'#9D174D' },
+                        champagne: { 100:'#FEF3C7',500:'#A16207',600:'#854D0E' },
+                        charcoal: '#1C1917'
                     }
                 }
             }
         }
     </script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', 'Noto Serif SC', sans-serif; background-color: #faf8f5; }
-        .elegant-shadow { box-shadow: 0 4px 20px -2px rgba(128,0,32,0.05), 0 2px 8px -1px rgba(128,0,32,0.03); }
-        .input-underline { background-color:transparent; border-bottom:1px solid #e2e8f0; transition:all 0.3s; }
-        .input-underline:focus { outline:none; border-bottom-color:#800020; background-color:rgba(128,0,32,0.01); }
+        body { font-family: 'Cormorant Infant', 'Noto Serif SC', serif; background-color: #FDF2F8; }
+        .elegant-shadow { box-shadow: 0 4px 24px -2px rgba(219,39,119,0.06), 0 2px 8px -1px rgba(0,0,0,0.02); }
+        .glass-card { background: rgba(255,255,255,0.6); backdrop-filter: blur(20px) saturate(1.3); -webkit-backdrop-filter: blur(20px) saturate(1.3); border: 1px solid rgba(255,255,255,0.4); }
+        .input-underline { background-color:transparent; border-bottom:1px solid #FBCFE8; transition:all 0.35s cubic-bezier(0.16,1,0.3,1); }
+        .input-underline:focus { outline:none; border-bottom-color:#DB2777; background-color:rgba(219,39,119,0.02); }
         ::-webkit-scrollbar { width:6px; }
-        ::-webkit-scrollbar-track { background:#f7f5f0; }
-        ::-webkit-scrollbar-thumb { background:#c5a059; border-radius:3px; }
+        ::-webkit-scrollbar-track { background:#FDF2F8; }
+        ::-webkit-scrollbar-thumb { background:#F9A8D4; border-radius:3px; }
+        ::-webkit-scrollbar-thumb:hover { background:#DB2777; }
 
-        /* ── Party member role badge colours ── */
-        .badge-groom { background:#dbeafe; color:#1d4ed8; }
-        .badge-bride { background:#fce7f3; color:#9d174d; }
-        .badge-best-man { background:#ede9fe; color:#6d28d9; }
-        .badge-maid { background:#fdf2f4; color:#800020; }
+        .badge-groom { background:#DBEAFE; color:#1D4ED8; }
+        .badge-bride { background:#FCE7F3; color:#DB2777; }
+        .badge-best-man { background:#EDE9FE; color:#7C3AED; }
+        .badge-maid { background:#FDF2F8; color:#BE185D; }
+
+        .animate-fade { animation: dashFadeIn 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+        @keyframes dashFadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
 
         @media print {
             .no-print { display:none !important; }
@@ -59,43 +69,49 @@
 <div id="admin-shell">
 <!-- Language Toggle -->
 <div class="fixed top-4 right-4 z-50 no-print">
-    <button onclick="toggleLanguage()" id="lang-toggle-btn" class="bg-white hover:bg-gray-50 text-burgundy-500 border border-burgundy-100 text-xs font-bold py-2 px-3.5 rounded-full elegant-shadow transition duration-200 flex items-center gap-1.5">
-        <i class="fa-solid fa-globe text-[10px]"></i>
+    <button onclick="toggleLanguage()" id="lang-toggle-btn" class="glass-card hover:bg-white/80 text-burgundy-500 text-xs font-bold py-2.5 px-4 rounded-full transition duration-300 flex items-center gap-2 cursor-pointer">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         <span id="lang-toggle-label">EN</span>
     </button>
 </div>
-<header class="bg-gradient-to-b from-[#800020]/10 to-transparent pt-12 pb-8 px-4 text-center no-print">
-    <div class="max-w-5xl mx-auto">
-        <span class="text-xs uppercase tracking-widest text-burgundy-500 font-bold bg-burgundy-50 px-4 py-2 rounded-full border border-burgundy-100">✨ WE ARE GETTING MARRIED</span>
-        <h1 class="text-4xl md:text-6xl font-bold font-serif text-burgundy-500 mt-5 mb-2" data-i18n="header_title">我们结婚了</h1>
-        <p class="text-sm md:text-lg text-gray-600 font-serif tracking-wide mt-2">
-            "<span id="header-wedding-date" class="font-bold text-burgundy-600 underline decoration-champagne-500 underline-offset-4" data-i18n="header_select_date">请选择日期</span> <span data-i18n="header_subtitle">婚礼数字座舱 · 执子之手 与子偕老</span>"
+<header class="relative overflow-hidden pt-12 pb-8 px-4 text-center no-print">
+    <div class="absolute inset-0 bg-gradient-to-b from-burgundy-500/8 via-burgundy-500/3 to-transparent"></div>
+    <div class="absolute top-[-200px] left-[-100px] w-[500px] h-[500px] rounded-full bg-burgundy-500/5 blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-[-100px] right-[-100px] w-[400px] h-[400px] rounded-full bg-champagne-500/5 blur-[100px] pointer-events-none"></div>
+    <div class="max-w-5xl mx-auto relative z-10">
+        <span class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-burgundy-500 font-bold bg-white/60 backdrop-blur-md px-5 py-2.5 rounded-full border border-burgundy-100/50">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            WE ARE GETTING MARRIED
+        </span>
+        <h1 class="text-4xl md:text-6xl font-bold font-display text-burgundy-500 mt-6 mb-2" data-i18n="header_title">我们结婚了</h1>
+        <p class="text-sm md:text-lg text-gray-500 font-serif tracking-wide mt-2">
+            "<span id="header-wedding-date" class="font-bold text-burgundy-600 underline decoration-burgundy-200 underline-offset-4" data-i18n="header_select_date">请选择日期</span> <span data-i18n="header_subtitle">婚礼数字座舱 · 执子之手 与子偕老</span>"
         </p>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
-            <div class="bg-white rounded-2xl p-4 elegant-shadow border border-burgundy-50 text-center">
-                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider" data-i18n="countdown_label">距离婚礼盛典还有</div>
+            <div class="glass-card rounded-2xl p-4 text-center">
+                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider font-sans" data-i18n="countdown_label">距离婚礼盛典还有</div>
                 <div id="countdown-timer" class="text-lg font-bold text-burgundy-500 mt-1 font-serif" data-i18n="countdown_calculating">计算中...</div>
             </div>
-            <div class="bg-white rounded-2xl p-4 elegant-shadow border border-burgundy-50 text-center">
-                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider" data-i18n="task_readiness">协同任务核备率</div>
+            <div class="glass-card rounded-2xl p-4 text-center">
+                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider font-sans" data-i18n="task_readiness">协同任务核备率</div>
                 <div class="flex items-center justify-center mt-2">
-                    <div class="w-full bg-gray-100 rounded-full h-2 mr-2 max-w-[120px]"><div id="checklist-progress-bar" class="bg-champagne-500 h-2 rounded-full" style="width:0%"></div></div>
-                    <span id="checklist-progress-percent" class="text-xs font-bold text-champagne-600">0%</span>
+                    <div class="w-full bg-burgundy-50 rounded-full h-2 mr-2 max-w-[120px]"><div id="checklist-progress-bar" class="bg-gradient-to-r from-champagne-500 to-burgundy-500 h-2 rounded-full transition-all duration-500" style="width:0%"></div></div>
+                    <span id="checklist-progress-percent" class="text-xs font-bold text-champagne-600 font-sans">0%</span>
                 </div>
             </div>
-            <div class="bg-white rounded-2xl p-4 elegant-shadow border border-burgundy-50 text-center">
-                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider" data-i18n="budget_used_ratio">已用总预算占比</div>
+            <div class="glass-card rounded-2xl p-4 text-center">
+                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider font-sans" data-i18n="budget_used_ratio">已用总预算占比</div>
                 <div class="flex items-center justify-center mt-2">
-                    <div class="w-full bg-gray-100 rounded-full h-2 mr-2 max-w-[120px]"><div id="header-budget-bar" class="bg-red-500 h-2 rounded-full" style="width:0%"></div></div>
-                    <span id="header-budget-percent" class="text-xs font-bold text-red-600">0%</span>
+                    <div class="w-full bg-burgundy-50 rounded-full h-2 mr-2 max-w-[120px]"><div id="header-budget-bar" class="bg-red-500 h-2 rounded-full transition-all duration-500" style="width:0%"></div></div>
+                    <span id="header-budget-percent" class="text-xs font-bold text-red-600 font-sans">0%</span>
                 </div>
             </div>
-            <div class="bg-white rounded-2xl p-4 elegant-shadow border border-burgundy-50 flex items-center justify-center gap-2">
-                <button onclick="saveAllToLocalStorage()" class="flex-1 bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-3 rounded-lg transition duration-200" data-i18n="btn_save">💾 保存内容</button>
-                <button onclick="window.print()" class="flex-1 bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 px-3 rounded-lg transition duration-200" data-i18n="btn_print">🖨️ 打印/PDF</button>
+            <div class="glass-card rounded-2xl p-4 flex items-center justify-center gap-2">
+                <button onclick="saveAllToLocalStorage()" class="flex-1 bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-3 rounded-xl transition duration-300 cursor-pointer flex items-center justify-center gap-1.5" data-i18n="btn_save"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> 保存内容</button>
+                <button onclick="window.print()" class="flex-1 bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 px-3 rounded-xl transition duration-300 cursor-pointer flex items-center justify-center gap-1.5" data-i18n="btn_print"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> 打印/PDF</button>
             </div>
         </div>
-        <div id="save-status-toast" class="hidden text-xs text-green-600 mt-3 font-semibold transition-all duration-300" data-i18n="save_toast">✓ 更改已自动保存至浏览器 (Auto-Saved)</div>
+        <div id="save-status-toast" class="hidden text-xs text-green-600 mt-3 font-semibold transition-all duration-300 font-sans" data-i18n="save_toast">✓ 更改已自动保存至浏览器 (Auto-Saved)</div>
     </div>
 </header>
 
@@ -103,9 +119,9 @@
 
     <!-- Couple + Date -->
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
-        <div class="lg:col-span-7 bg-white rounded-2xl p-6 elegant-shadow border border-burgundy-50 print-card flex flex-col justify-between">
+        <div class="lg:col-span-7 glass-card rounded-2xl p-6 print-card flex flex-col justify-between">
             <div>
-                <h3 class="text-lg font-serif font-bold text-burgundy-500 mb-4 border-b border-burgundy-100 pb-2" data-i18n="couple_title">👩‍❤️‍👨 两位新人基本资料 &amp; 婚礼日期选择</h3>
+                <h3 class="text-lg font-serif font-bold text-burgundy-500 mb-4 border-b border-burgundy-100 pb-2 flex items-center gap-2" data-i18n="couple_title"><svg class="w-5 h-5 text-burgundy-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 两位新人基本资料 &amp; 婚礼日期选择</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                         <label class="block text-xs font-semibold text-gray-400 mb-1" data-i18n="groom_label">新郎姓名 (Groom)</label>
@@ -128,17 +144,17 @@
                 </div>
             </div>
             <div class="mt-6 p-3 bg-gray-50 rounded-xl border border-gray-100 text-xs text-gray-500">
-                <p class="font-bold text-gray-700" data-i18n="date_tip_title">📌 通书择日小百科：</p>
+                <p class="font-bold text-gray-700 flex items-center gap-1.5" data-i18n="date_tip_title"><svg class="w-3.5 h-3.5 text-burgundy-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> 通书择日小百科：</p>
                 <p class="mt-1 leading-relaxed" data-i18n="date_tip_body">黄历嫁娶吉日旨在寻找干支五行平衡。周末双休日通常多配有"天德、月德、三合"等吉星高照。避开"月破、闭日"等冲突日期即可获得美满顺遂的大好家庭！</p>
             </div>
         </div>
-        <div class="lg:col-span-5 bg-gradient-to-br from-[#800020] to-[#66001a] text-white rounded-2xl p-6 elegant-shadow border border-burgundy-700 flex flex-col justify-between relative overflow-hidden">
+        <div class="lg:col-span-5 bg-gradient-to-br from-burgundy-700 to-burgundy-600 text-white rounded-2xl p-6 elegant-shadow border border-burgundy-500/30 flex flex-col justify-between relative overflow-hidden">
             <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl font-serif">囍</div>
             <div class="border-b border-white/20 pb-4">
                 <span class="text-[10px] tracking-widest text-champagne-100 font-bold uppercase block font-serif">We Are Getting Married</span>
-                <h4 class="text-xl font-serif font-bold text-burgundy-600 mt-1"><span id="calendar-lunar" data-i18n="lunar_pending">农历待定</span></h4>
+                <h4 class="text-xl font-serif font-bold text-white/90 mt-1"><span id="calendar-lunar" data-i18n="lunar_pending">农历待定</span></h4>
             </div>
-            <div class="my-6"><div id="calendar-grade" class="text-lg font-bold font-serif text-white" data-i18n="auspicious_pending">✨ 待定吉日，喜结连理</div></div>
+            <div class="my-6"><div id="calendar-grade" class="text-lg font-bold font-serif text-white" data-i18n="auspicious_pending">待定吉日，喜结连理</div></div>
             <div class="space-y-3 text-xs bg-black/10 p-4 rounded-xl border border-white/5">
                 <div class="flex items-start gap-2.5">
                     <span class="bg-green-600/30 text-green-300 text-[10px] font-bold px-2 py-0.5 rounded font-mono" data-i18n="yi_label">宜</span>
@@ -154,28 +170,28 @@
     </section>
 
     <!-- ── Tab Navigation ── -->
-    <div class="flex border-b border-gray-200 mb-8 overflow-x-auto gap-2 no-print tab-btn-group">
-        <button onclick="switchTab('morning')" id="tab-morning" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-burgundy-500 text-burgundy-500 transition-all duration-200 whitespace-nowrap" data-i18n="tab_morning">第一幕：清晨喜庆接亲</button>
-        <button onclick="switchTab('afternoon')" id="tab-afternoon" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap" data-i18n="tab_afternoon">第二幕：傍晚首见外拍</button>
-        <button onclick="switchTab('evening')" id="tab-evening" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap" data-i18n="tab_evening">第三幕：无伴电影感晚宴</button>
-        <button onclick="switchTab('todo')" id="tab-todo" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap" data-i18n="tab_todo">📋 To-Do &amp; 双人同步</button>
-        <button onclick="switchTab('budget')" id="tab-budget" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap" data-i18n="tab_budget">💰 预算开销与比价</button>
-        <button onclick="switchTab('guests')" id="tab-guests" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap" data-i18n="tab_guests">👥 宾客管理 &amp; 桌席</button>
-        <button onclick="switchTab('checklist')" id="tab-checklist" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap" data-i18n="tab_checklist">📋 备婚倒计时清单</button>
-        <button onclick="switchTab('tools')" id="tab-tools" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all duration-200 whitespace-nowrap" data-i18n="tab_tools">📱 电子请柬与工具</button>
+    <div class="flex border-b border-burgundy-100/40 mb-8 overflow-x-auto gap-1 no-print tab-btn-group backdrop-blur-sm bg-white/30 rounded-t-2xl px-2 pt-1">
+        <button onclick="switchTab('morning')" id="tab-morning" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-burgundy-500 text-burgundy-500 transition-all duration-300 whitespace-nowrap cursor-pointer" data-i18n="tab_morning">第一幕：清晨喜庆接亲</button>
+        <button onclick="switchTab('afternoon')" id="tab-afternoon" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-burgundy-500 transition-all duration-300 whitespace-nowrap cursor-pointer" data-i18n="tab_afternoon">第二幕：傍晚首见外拍</button>
+        <button onclick="switchTab('evening')" id="tab-evening" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-burgundy-500 transition-all duration-300 whitespace-nowrap cursor-pointer" data-i18n="tab_evening">第三幕：无伴电影感晚宴</button>
+        <button onclick="switchTab('todo')" id="tab-todo" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-burgundy-500 transition-all duration-300 whitespace-nowrap cursor-pointer" data-i18n="tab_todo">To-Do &amp; 双人同步</button>
+        <button onclick="switchTab('budget')" id="tab-budget" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-burgundy-500 transition-all duration-300 whitespace-nowrap cursor-pointer" data-i18n="tab_budget">预算开销与比价</button>
+        <button onclick="switchTab('guests')" id="tab-guests" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-burgundy-500 transition-all duration-300 whitespace-nowrap cursor-pointer" data-i18n="tab_guests">宾客管理 &amp; 桌席</button>
+        <button onclick="switchTab('checklist')" id="tab-checklist" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-burgundy-500 transition-all duration-300 whitespace-nowrap cursor-pointer" data-i18n="tab_checklist">备婚倒计时清单</button>
+        <button onclick="switchTab('tools')" id="tab-tools" class="py-3 px-4 font-serif font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-burgundy-500 transition-all duration-300 whitespace-nowrap cursor-pointer" data-i18n="tab_tools">电子请柬与工具</button>
     </div>
 
     <!-- ── ACT 1: Morning ── -->
     <div id="content-morning" class="tab-content block animate-fade">
-        <div class="bg-burgundy-50/50 rounded-2xl p-6 mb-8 border border-burgundy-100 print-card flex justify-between items-center flex-wrap gap-4">
+        <div class="glass-card rounded-2xl p-6 mb-8 print-card flex justify-between items-center flex-wrap gap-4">
             <div>
                 <h2 class="text-xl font-bold font-serif text-burgundy-500 mb-2" data-i18n="act1_title">第一幕：传统喜庆接亲 (Morning Act)</h2>
-                <p class="text-xs text-gray-500 leading-relaxed" data-i18n="act1_desc">这是全天最热闹、最本土化的时段。支持点击以下内容直接编辑重置，打造您独一无二的备婚Runsheet时间表。</p>
+                <p class="text-xs text-gray-500 leading-relaxed font-sans" data-i18n="act1_desc">这是全天最热闹、最本土化的时段。支持点击以下内容直接编辑重置，打造您独一无二的备婚Runsheet时间表。</p>
             </div>
             <div class="flex gap-2 no-print">
-                <button onclick="addNewRunsheetStep('morning')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_add_morning_step">➕ 新增接亲步骤</button>
-                <button onclick="resetRunsheetToDefault()" class="bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_reset_template">🔄 恢复默认22步模板</button>
-                <button onclick="printSection('morning')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> <span data-i18n="btn_print_short">打印</span></button>
+                <button onclick="addNewRunsheetStep('morning')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1.5" data-i18n="btn_add_morning_step"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> 新增接亲步骤</button>
+                <button onclick="resetRunsheetToDefault()" class="bg-white/60 hover:bg-white/80 backdrop-blur text-gray-600 text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1.5 border border-gray-200/50" data-i18n="btn_reset_template"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> 恢复默认22步模板</button>
+                <button onclick="printSection('morning')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span data-i18n="btn_print_short">打印</span></button>
             </div>
         </div>
         <div id="runsheet-container-morning" class="space-y-6 relative border-l-2 border-champagne-100 ml-4 pl-6 md:ml-6 md:pl-8"></div>
@@ -183,15 +199,15 @@
 
     <!-- ── ACT 2: Afternoon ── -->
     <div id="content-afternoon" class="tab-content hidden animate-fade">
-        <div class="bg-burgundy-50/50 rounded-2xl p-6 mb-8 border border-burgundy-100 print-card flex justify-between items-center flex-wrap gap-4">
+        <div class="glass-card rounded-2xl p-6 mb-8 print-card flex justify-between items-center flex-wrap gap-4">
             <div>
                 <h2 class="text-xl font-bold font-serif text-burgundy-500 mb-2" data-i18n="act2_title">第二幕：私密第一眼与黄金外拍 (First Look Act)</h2>
-                <p class="text-xs text-gray-500 leading-relaxed" data-i18n="act2_desc">在晚宴喧嚣和宾客涌入之前，预留的一段极其尊贵、私密的电影感时段。</p>
+                <p class="text-xs text-gray-500 leading-relaxed font-sans" data-i18n="act2_desc">在晚宴喧嚣和宾客涌入之前，预留的一段极其尊贵、私密的电影感时段。</p>
             </div>
             <div class="flex gap-2 no-print">
-                <button onclick="addNewRunsheetStep('afternoon')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_add_afternoon_step">➕ 新增外拍步骤</button>
-                <button onclick="resetRunsheetToDefault()" class="bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_reset_template2">🔄 恢复默认22步模板</button>
-                <button onclick="printSection('afternoon')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> <span data-i18n="btn_print_short2">打印</span></button>
+                <button onclick="addNewRunsheetStep('afternoon')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1.5" data-i18n="btn_add_afternoon_step"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> 新增外拍步骤</button>
+                <button onclick="resetRunsheetToDefault()" class="bg-white/60 hover:bg-white/80 backdrop-blur text-gray-600 text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1.5 border border-gray-200/50" data-i18n="btn_reset_template2"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> 恢复默认22步模板</button>
+                <button onclick="printSection('afternoon')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span data-i18n="btn_print_short2">打印</span></button>
             </div>
         </div>
         <div id="runsheet-container-afternoon" class="space-y-6 relative border-l-2 border-champagne-100 ml-4 pl-6 md:ml-6 md:pl-8"></div>
@@ -199,15 +215,15 @@
 
     <!-- ── ACT 3: Evening ── -->
     <div id="content-evening" class="tab-content hidden animate-fade">
-        <div class="bg-burgundy-50/50 rounded-2xl p-6 mb-8 border border-burgundy-100 print-card flex justify-between items-center flex-wrap gap-4">
+        <div class="glass-card rounded-2xl p-6 mb-8 print-card flex justify-between items-center flex-wrap gap-4">
             <div>
                 <h2 class="text-xl font-bold font-serif text-burgundy-500 mb-2" data-i18n="act3_title">第三幕：无伴电影感晚宴 (Banquet Act)</h2>
-                <p class="text-xs text-gray-500 leading-relaxed" data-i18n="act3_desc">剔除繁琐传统流程，晚宴完全采用极简温情的流线设计。</p>
+                <p class="text-xs text-gray-500 leading-relaxed font-sans" data-i18n="act3_desc">剔除繁琐传统流程，晚宴完全采用极简温情的流线设计。</p>
             </div>
             <div class="flex gap-2 no-print">
-                <button onclick="addNewRunsheetStep('evening')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_add_evening_step">➕ 新增晚宴步骤</button>
-                <button onclick="resetRunsheetToDefault()" class="bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_reset_template3">🔄 恢复默认22步模板</button>
-                <button onclick="printSection('evening')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> <span data-i18n="btn_print_short3">打印</span></button>
+                <button onclick="addNewRunsheetStep('evening')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1.5" data-i18n="btn_add_evening_step"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> 新增晚宴步骤</button>
+                <button onclick="resetRunsheetToDefault()" class="bg-white/60 hover:bg-white/80 backdrop-blur text-gray-600 text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1.5 border border-gray-200/50" data-i18n="btn_reset_template3"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> 恢复默认22步模板</button>
+                <button onclick="printSection('evening')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span data-i18n="btn_print_short3">打印</span></button>
             </div>
         </div>
         <div id="runsheet-container-evening" class="space-y-6 relative border-l-2 border-champagne-100 ml-4 pl-6 md:ml-6 md:pl-8"></div>
@@ -215,73 +231,73 @@
 
     <!-- ── TO-DO ── -->
     <div id="content-todo" class="tab-content hidden animate-fade">
-        <div class="bg-burgundy-50/50 rounded-2xl p-6 mb-6 border border-burgundy-100 print-card flex flex-wrap justify-between items-center gap-4">
+        <div class="glass-card rounded-2xl p-6 mb-6 print-card flex flex-wrap justify-between items-center gap-4">
             <div>
-                <h2 class="text-lg font-bold font-serif text-burgundy-500 mb-1" data-i18n="todo_title">📋 双人防漏协作 To-Do 面板</h2>
-                <p class="text-xs text-gray-500 leading-relaxed" data-i18n="todo_desc">专设"一方宣告完成，对方点对点核准核签"，全面避免遗漏。</p>
+                <h2 class="text-lg font-bold font-serif text-burgundy-500 mb-1 flex items-center gap-2" data-i18n="todo_title"><svg class="w-5 h-5 text-burgundy-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 双人防漏协作 To-Do 面板</h2>
+                <p class="text-xs text-gray-500 leading-relaxed font-sans" data-i18n="todo_desc">专设"一方宣告完成，对方点对点核准核签"，全面避免遗漏。</p>
             </div>
-            <button onclick="triggerQuickAddTodo()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-200" data-i18n="btn_add_todo">➕ 新增协同待办</button>
+            <button onclick="triggerQuickAddTodo()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1.5" data-i18n="btn_add_todo"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> 新增协同待办</button>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white p-5 rounded-2xl elegant-shadow border border-gray-100 flex flex-col">
-                <div class="flex justify-between items-center pb-3 border-b border-gray-100 mb-4 font-semibold">
-                    <span class="text-xs font-bold text-burgundy-500 uppercase tracking-wider" data-i18n="todo_planning">🎯 策划推进中</span>
+            <div class="glass-card p-5 rounded-2xl flex flex-col">
+                <div class="flex justify-between items-center pb-3 border-b border-burgundy-100/40 mb-4 font-semibold">
+                    <span class="text-xs font-bold text-burgundy-500 uppercase tracking-wider flex items-center gap-1.5" data-i18n="todo_planning"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 策划推进中</span>
                     <span id="todo-count-planning" class="bg-burgundy-50 text-burgundy-500 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">0</span>
                 </div>
                 <div id="todo-list-planning" class="space-y-3 flex-1 overflow-y-auto max-h-[450px]"></div>
             </div>
-            <div class="bg-white p-5 rounded-2xl elegant-shadow border border-gray-100 flex flex-col">
-                <div class="flex justify-between items-center pb-3 border-b border-gray-100 mb-4 font-semibold">
-                    <span class="text-xs font-bold text-orange-500 uppercase tracking-wider" data-i18n="todo_verify">⏳ 对方待核签</span>
+            <div class="glass-card p-5 rounded-2xl flex flex-col">
+                <div class="flex justify-between items-center pb-3 border-b border-orange-100/40 mb-4 font-semibold">
+                    <span class="text-xs font-bold text-orange-500 uppercase tracking-wider flex items-center gap-1.5" data-i18n="todo_verify"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 对方待核签</span>
                     <span id="todo-count-verify" class="bg-orange-50 text-orange-500 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">0</span>
                 </div>
                 <div id="todo-list-verify" class="space-y-3 flex-1 overflow-y-auto max-h-[450px]"></div>
             </div>
-            <div class="bg-white p-5 rounded-2xl elegant-shadow border border-gray-100 flex flex-col">
-                <div class="flex justify-between items-center pb-3 border-b border-gray-100 mb-4 font-semibold">
-                    <span class="text-xs font-bold text-green-500 uppercase tracking-wider" data-i18n="todo_done">✅ 双方通过 · 尘埃落定</span>
+            <div class="glass-card p-5 rounded-2xl flex flex-col">
+                <div class="flex justify-between items-center pb-3 border-b border-green-100/40 mb-4 font-semibold">
+                    <span class="text-xs font-bold text-green-500 uppercase tracking-wider flex items-center gap-1.5" data-i18n="todo_done"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 双方通过 · 尘埃落定</span>
                     <span id="todo-count-done" class="bg-green-50 text-green-500 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">0</span>
                 </div>
                 <div id="todo-list-done" class="space-y-3 flex-1 overflow-y-auto max-h-[450px]"></div>
             </div>
         </div>
-        <div id="notification-toast" class="fixed bottom-5 right-5 z-50 bg-burgundy-600 text-white rounded-xl px-4 py-3 elegant-shadow text-xs font-semibold hidden flex items-center gap-2">
-            <i class="fa-solid fa-bell"></i>
+        <div id="notification-toast" class="fixed bottom-5 right-5 z-50 glass-card bg-burgundy-600/90 text-white rounded-xl px-4 py-3 text-xs font-semibold hidden flex items-center gap-2">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
             <span id="notification-toast-msg" data-i18n="toast_confirm">收到确认申请！</span>
         </div>
     </div>
 
     <!-- ── BUDGET ── -->
     <div id="content-budget" class="tab-content hidden animate-fade">
-        <div class="bg-[#faf3eb] rounded-2xl p-6 mb-6 border border-champagne-100 print-card flex flex-wrap justify-between items-center gap-4">
+        <div class="glass-card rounded-2xl p-6 mb-6 print-card flex flex-wrap justify-between items-center gap-4">
             <div>
-                <h2 class="text-lg font-bold font-serif text-burgundy-500 mb-1" data-i18n="budget_title">💰 婚礼智能预算控制水库</h2>
-                <p class="text-xs text-gray-500 leading-relaxed" data-i18n="budget_desc">开销类目明细、本地发票上传及多边报价比对，科学规避超支。</p>
+                <h2 class="text-lg font-bold font-serif text-burgundy-500 mb-1 flex items-center gap-2" data-i18n="budget_title"><svg class="w-5 h-5 text-champagne-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> 婚礼智能预算控制水库</h2>
+                <p class="text-xs text-gray-500 leading-relaxed font-sans" data-i18n="budget_desc">开销类目明细、本地发票上传及多边报价比对，科学规避超支。</p>
             </div>
             <div class="flex gap-2 no-print">
-                <button onclick="addNewBudgetItemNew()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-200" data-i18n="btn_add_expense">➕ 增加开销与发票</button>
-                <button onclick="printSection('budget')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition flex items-center gap-1.5"><i class="fa-solid fa-print text-[10px]"></i> <span data-i18n="btn_print_budget">打印预算表</span></button>
+                <button onclick="addNewBudgetItemNew()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1.5" data-i18n="btn_add_expense"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> 增加开销与发票</button>
+                <button onclick="printSection('budget')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1.5"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span data-i18n="btn_print_budget">打印预算表</span></button>
             </div>
         </div>
         <!-- ── Row 1: 4 summary chips ── -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-            <div class="bg-white p-5 rounded-2xl border border-burgundy-50 elegant-shadow text-center">
-                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1" data-i18n="budget_total_label">婚礼总预算底盘</span>
+            <div class="glass-card p-5 rounded-2xl text-center">
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1 font-sans" data-i18n="budget_total_label">婚礼总预算底盘</span>
                 <div class="flex justify-center items-center gap-1">
                     <span class="text-sm font-bold text-gray-400">RM</span>
-                    <input type="number" id="budget-total-new-input" oninput="calculateBudgetNewSummary()" class="text-xl font-bold text-burgundy-500 font-mono w-24 text-center border-b border-gray-200 focus:border-burgundy-500 focus:outline-none" value="60000">
+                    <input type="number" id="budget-total-new-input" oninput="calculateBudgetNewSummary()" class="text-xl font-bold text-burgundy-500 font-mono w-24 text-center border-b border-gray-200 focus:border-burgundy-500 focus:outline-none bg-transparent" value="60000">
                 </div>
             </div>
-            <div class="bg-white p-5 rounded-2xl border border-gray-100 elegant-shadow text-center">
-                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1" data-i18n="budget_spent_label">已花总数</span>
+            <div class="glass-card p-5 rounded-2xl text-center">
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1 font-sans" data-i18n="budget_spent_label">已花总数</span>
                 <div class="text-xl font-bold text-red-600 font-mono">RM <span id="budget-new-spent">0</span></div>
             </div>
-            <div class="bg-white p-5 rounded-2xl border border-gray-100 elegant-shadow text-center">
-                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1" data-i18n="budget_remaining_label">剩余可用余粮</span>
+            <div class="glass-card p-5 rounded-2xl text-center">
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1 font-sans" data-i18n="budget_remaining_label">剩余可用余粮</span>
                 <div class="text-xl font-bold text-green-600 font-mono">RM <span id="budget-new-left">0</span></div>
             </div>
-            <div class="bg-white p-5 rounded-2xl border border-gray-100 elegant-shadow text-center flex flex-col justify-center items-center">
-                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1" data-i18n="budget_warning_label">预警红线指标</span>
+            <div class="glass-card p-5 rounded-2xl text-center flex flex-col justify-center items-center">
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1 font-sans" data-i18n="budget_warning_label">预警红线指标</span>
                 <div class="flex items-center justify-center mt-1 w-full px-2">
                     <div class="w-full bg-gray-100 rounded-full h-2.5 mr-2"><div id="budget-new-progress-bar" class="bg-green-500 h-2.5 rounded-full transition-all duration-300" style="width:0%"></div></div>
                     <span id="budget-new-progress-percent" class="text-xs font-bold text-green-600">0%</span>
@@ -290,12 +306,12 @@
         </div>
 
         <!-- ── Row 2: Saving Goal (deposit log) ── -->
-        <div class="bg-white rounded-2xl elegant-shadow border border-champagne-100 mb-6 overflow-hidden">
+        <div class="glass-card rounded-2xl mb-6 overflow-hidden">
 
             <!-- Card header -->
-            <div class="bg-gradient-to-r from-[#faf3eb] to-white px-6 py-4 border-b border-champagne-100 flex flex-wrap items-center justify-between gap-3">
+            <div class="bg-gradient-to-r from-champagne-100/40 to-transparent px-6 py-4 border-b border-champagne-100/30 flex flex-wrap items-center justify-between gap-3">
                 <div class="flex items-center gap-2">
-                    <span class="text-lg">🏦</span>
+                    <svg class="w-5 h-5 text-champagne-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/></svg>
                     <div>
                         <h3 class="text-sm font-serif font-bold text-burgundy-500" data-i18n="saving_title">婚礼存钱目标 Saving Goal</h3>
                         <p class="text-[10px] text-gray-400 mt-0.5" data-i18n="saving_desc">每次存了多少就记录多少，自动累加追踪！</p>
@@ -378,15 +394,15 @@
                                 onkeydown="if(event.key==='Enter')addDepositEntry()">
                         </div>
                         <button onclick="addDepositEntry()"
-                            class="flex-shrink-0 bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition h-[34px] flex items-center gap-1">
-                            <i class="fa-solid fa-plus text-[10px]"></i> <span data-i18n="btn_deposit">存入</span>
+                            class="flex-shrink-0 bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition duration-300 cursor-pointer h-[34px] flex items-center gap-1">
+                            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> <span data-i18n="btn_deposit">存入</span>
                         </button>
                     </div>
 
                     <!-- Deposit history list -->
                     <div class="flex-1 max-h-52 overflow-y-auto space-y-2 pr-1" id="deposit-log-list">
                         <div class="text-center py-6 text-gray-300 text-xs" id="deposit-empty-state">
-                            <i class="fa-solid fa-piggy-bank text-2xl block mb-2"></i>
+                            <svg class="w-8 h-8 mx-auto mb-2 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/></svg>
                             <span data-i18n="deposit_empty">还没有存款记录，开始记录你们的第一笔婚礼基金吧！</span>
                         </div>
                     </div>
@@ -396,8 +412,8 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100 mb-8">
-            <h3 class="text-sm font-serif font-bold text-burgundy-500 mb-4 border-b border-burgundy-100 pb-2" data-i18n="expense_detail_title">📋 婚礼支出明细</h3>
+        <div class="glass-card rounded-2xl p-6 mb-8">
+            <h3 class="text-sm font-serif font-bold text-burgundy-500 mb-4 border-b border-burgundy-100/40 pb-2 flex items-center gap-2" data-i18n="expense_detail_title"><svg class="w-4 h-4 text-burgundy-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> 婚礼支出明细</h3>
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead><tr class="border-b border-gray-100 text-[10px] font-bold text-gray-400 uppercase tracking-wider">
@@ -407,10 +423,10 @@
                 </table>
             </div>
         </div>
-        <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100">
-            <div class="flex justify-between items-center mb-4 border-b border-gray-100 pb-2 flex-wrap gap-2">
-                <h3 class="text-sm font-serif font-bold text-burgundy-500" data-i18n="vendor_compare_title">📍 核心 Vendor 商家多边比价</h3>
-                <button onclick="addNewQuoteRow()" class="bg-champagne-500 hover:bg-champagne-600 text-white text-[10px] font-bold py-1 px-3 rounded-lg transition" data-i18n="btn_add_quote">➕ 新增比对方案</button>
+        <div class="glass-card rounded-2xl p-6">
+            <div class="flex justify-between items-center mb-4 border-b border-burgundy-100/40 pb-2 flex-wrap gap-2">
+                <h3 class="text-sm font-serif font-bold text-burgundy-500 flex items-center gap-2" data-i18n="vendor_compare_title"><svg class="w-4 h-4 text-burgundy-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> 核心 Vendor 商家多边比价</h3>
+                <button onclick="addNewQuoteRow()" class="bg-champagne-500 hover:bg-champagne-600 text-white text-[10px] font-bold py-1 px-3 rounded-lg transition duration-300 cursor-pointer flex items-center gap-1" data-i18n="btn_add_quote"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> 新增比对方案</button>
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
@@ -426,24 +442,24 @@
     <!-- ── VENDORS ── -->
 <!-- ── GUESTS ── -->
     <div id="content-guests" class="tab-content hidden animate-fade">
-        <div class="bg-[#faf3eb] rounded-2xl p-6 mb-6 border border-champagne-100 print-card flex flex-wrap justify-between items-center gap-4">
+        <div class="glass-card rounded-2xl p-6 mb-6 print-card flex flex-wrap justify-between items-center gap-4">
             <div>
-                <h2 class="text-lg font-bold font-serif text-burgundy-500 mb-1" data-i18n="guest_title">👥 宾客 RSVP 登账 &amp; 10人制桌位排座</h2>
-                <p class="text-xs text-gray-500 leading-relaxed" data-i18n="guest_desc">电子请柬提交的人数与温馨祝福将自动流入。系统智能排定席位。</p>
+                <h2 class="text-lg font-bold font-serif text-burgundy-500 mb-1 flex items-center gap-2" data-i18n="guest_title"><svg class="w-5 h-5 text-burgundy-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> 宾客 RSVP 登账 &amp; 10人制桌位排座</h2>
+                <p class="text-xs text-gray-500 leading-relaxed font-sans" data-i18n="guest_desc">电子请柬提交的人数与温馨祝福将自动流入。系统智能排定席位。</p>
             </div>
             <div class="flex gap-2 flex-wrap no-print">
-                <button onclick="addNewGuestRow()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-200" data-i18n="btn_add_guest">➕ 增加宾客记录</button>
-                <button onclick="printSection('guests')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition flex items-center gap-1.5"><i class="fa-solid fa-print text-[10px]"></i> <span data-i18n="btn_print_guests">打印宾客名单</span></button>
+                <button onclick="addNewGuestRow()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1.5" data-i18n="btn_add_guest"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> 增加宾客记录</button>
+                <button onclick="printSection('guests')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1.5"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span data-i18n="btn_print_guests">打印宾客名单</span></button>
             </div>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center"><span class="text-[10px] text-gray-400 font-bold block uppercase" data-i18n="guest_total">总应邀出席人数</span><span id="stats-guest-total" class="text-xl font-bold text-burgundy-500 font-mono">0</span></div>
-            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center"><span class="text-[10px] text-gray-400 font-bold block uppercase" data-i18n="guest_veg">素食人数 (Vegetarian)</span><span id="stats-guest-veg" class="text-xl font-bold text-gray-700 font-mono">0</span></div>
-            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center"><span class="text-[10px] text-gray-400 font-bold block uppercase" data-i18n="guest_halal">清真人数 (Halal)</span><span id="stats-guest-halal" class="text-xl font-bold text-green-600 font-mono">0</span></div>
-            <div class="bg-white p-4 rounded-xl border border-gray-100 elegant-shadow text-center flex items-center justify-center"><span class="text-[10px] text-gray-400 font-bold block uppercase" data-i18n="guest_seating_ok">宴会厅顺利排定</span></div>
+            <div class="glass-card p-4 rounded-xl text-center"><span class="text-[10px] text-gray-400 font-bold block uppercase font-sans" data-i18n="guest_total">总应邀出席人数</span><span id="stats-guest-total" class="text-xl font-bold text-burgundy-500 font-mono">0</span></div>
+            <div class="glass-card p-4 rounded-xl text-center"><span class="text-[10px] text-gray-400 font-bold block uppercase font-sans" data-i18n="guest_veg">素食人数 (Vegetarian)</span><span id="stats-guest-veg" class="text-xl font-bold text-gray-700 font-mono">0</span></div>
+            <div class="glass-card p-4 rounded-xl text-center"><span class="text-[10px] text-gray-400 font-bold block uppercase font-sans" data-i18n="guest_halal">清真人数 (Halal)</span><span id="stats-guest-halal" class="text-xl font-bold text-green-600 font-mono">0</span></div>
+            <div class="glass-card p-4 rounded-xl text-center flex items-center justify-center"><span class="text-[10px] text-gray-400 font-bold block uppercase font-sans" data-i18n="guest_seating_ok">宴会厅顺利排定</span></div>
         </div>
-        <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100 mb-8">
-            <h3 class="text-sm font-serif font-bold text-burgundy-500 mb-4 border-b border-burgundy-100 pb-2" data-i18n="guest_roster_title">📋 宾客花名登账簿</h3>
+        <div class="glass-card rounded-2xl p-6 mb-8">
+            <h3 class="text-sm font-serif font-bold text-burgundy-500 mb-4 border-b border-burgundy-100/40 pb-2 flex items-center gap-2" data-i18n="guest_roster_title"><svg class="w-4 h-4 text-burgundy-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> 宾客花名登账簿</h3>
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead><tr class="border-b border-gray-100 text-[10px] font-bold text-gray-400 uppercase tracking-wider">
@@ -453,13 +469,13 @@
                 </table>
             </div>
         </div>
-        <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100">
-            <div class="flex justify-between items-center mb-4 border-b border-burgundy-100 pb-2 flex-wrap gap-2">
-                <h3 class="text-sm font-serif font-bold text-burgundy-500" data-i18n="seating_title">🪑 晚宴桌席投影面 (10人制)</h3>
+        <div class="glass-card rounded-2xl p-6">
+            <div class="flex justify-between items-center mb-4 border-b border-burgundy-100/40 pb-2 flex-wrap gap-2">
+                <h3 class="text-sm font-serif font-bold text-burgundy-500 flex items-center gap-2" data-i18n="seating_title"><svg class="w-4 h-4 text-burgundy-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg> 晚宴桌席投影面 (10人制)</h3>
                 <div class="flex gap-2 flex-wrap no-print">
-                    <button onclick="addNewTable()" class="bg-champagne-500 hover:bg-champagne-600 text-white text-[10px] font-bold py-1.5 px-3 rounded-lg transition" data-i18n="btn_add_table">➕ 新增宴会桌</button>
-                    <button onclick="printSeatingChart()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-[10px] font-bold py-1.5 px-3 rounded-lg transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-print"></i> <span data-i18n="btn_print_seating">打印 / 导出 PDF</span>
+                    <button onclick="addNewTable()" class="bg-champagne-500 hover:bg-champagne-600 text-white text-[10px] font-bold py-1.5 px-3 rounded-lg transition duration-300 cursor-pointer flex items-center gap-1" data-i18n="btn_add_table"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> 新增宴会桌</button>
+                    <button onclick="printSeatingChart()" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-[10px] font-bold py-1.5 px-3 rounded-lg transition duration-300 cursor-pointer flex items-center gap-1.5">
+                        <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span data-i18n="btn_print_seating">打印 / 导出 PDF</span>
                     </button>
                 </div>
             </div>
@@ -469,13 +485,13 @@
 
     <!-- ── CHECKLIST ── -->
     <div id="content-checklist" class="tab-content hidden animate-fade">
-        <div class="bg-white rounded-2xl p-6 elegant-shadow border border-burgundy-50 print-card">
-            <div class="flex justify-between items-center border-b border-burgundy-100 pb-4 mb-6 flex-wrap gap-2">
-                <h2 class="text-xl font-bold font-serif text-burgundy-500" data-i18n="checklist_title">📋 备婚核心倒计时清单</h2>
+        <div class="glass-card rounded-2xl p-6 print-card">
+            <div class="flex justify-between items-center border-b border-burgundy-100/40 pb-4 mb-6 flex-wrap gap-2">
+                <h2 class="text-xl font-bold font-serif text-burgundy-500 flex items-center gap-2" data-i18n="checklist_title"><svg class="w-5 h-5 text-burgundy-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> 备婚核心倒计时清单</h2>
                 <div class="flex gap-2 no-print">
-                    <button onclick="addChecklistItem('week-1')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_add_week1">➕ 新增前1周任务</button>
-                    <button onclick="addChecklistItem('day-of')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition" data-i18n="btn_add_dayof">➕ 新增当天任务</button>
-                    <button onclick="printSection('checklist')" class="bg-gray-600 hover:bg-gray-700 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition flex items-center gap-1"><i class="fa-solid fa-print text-[10px]"></i> <span data-i18n="btn_print_short4">打印</span></button>
+                    <button onclick="addChecklistItem('week-1')" class="bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1.5" data-i18n="btn_add_week1"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> 新增前1周任务</button>
+                    <button onclick="addChecklistItem('day-of')" class="bg-champagne-500 hover:bg-champagne-600 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1.5" data-i18n="btn_add_dayof"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> 新增当天任务</button>
+                    <button onclick="printSection('checklist')" class="bg-gray-600 hover:bg-gray-700 text-white text-xs font-semibold py-2 px-3.5 rounded-xl shadow-sm transition duration-300 cursor-pointer flex items-center gap-1"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span data-i18n="btn_print_short4">打印</span></button>
                 </div>
             </div>
             <div class="space-y-6">
@@ -495,8 +511,8 @@
     <div id="content-tools" class="tab-content hidden animate-fade">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-5 space-y-6">
-                <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100">
-                    <h3 class="font-serif font-bold text-burgundy-500 border-b border-gray-100 pb-2 mb-4" data-i18n="invite_settings_title">📱 请柬高阶细节设定</h3>
+                <div class="glass-card rounded-2xl p-6">
+                    <h3 class="font-serif font-bold text-burgundy-500 border-b border-burgundy-100/40 pb-2 mb-4 flex items-center gap-2" data-i18n="invite_settings_title"><svg class="w-4 h-4 text-burgundy-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> 请柬高阶细节设定</h3>
                     <div class="space-y-4">
                         <div>
                             <label class="block text-xs text-gray-400 mb-1 font-semibold" data-i18n="invite_venue_label">婚礼晚宴举办场地</label>
@@ -506,39 +522,39 @@
                             <label class="block text-xs text-gray-400 mb-2 font-semibold" data-i18n="upload_photo_label">上传婚纱照</label>
                             <div class="flex items-center gap-3">
                                 <input type="file" id="wedding-photo-upload" onchange="handleWeddingPhotoUpload(this)" class="hidden" accept="image/*" multiple>
-                                <label for="wedding-photo-upload" class="cursor-pointer bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-bold py-2 px-4 rounded-xl shadow-sm transition"><i class="fa-solid fa-images mr-1"></i> <span data-i18n="btn_upload_photo">上传婚纱照</span></label>
+                                <label for="wedding-photo-upload" class="cursor-pointer bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-bold py-2 px-4 rounded-xl shadow-sm transition duration-300 inline-flex items-center gap-1.5"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> <span data-i18n="btn_upload_photo">上传婚纱照</span></label>
                                 <button onclick="resetDefaultPhotos()" class="text-xs text-gray-400 hover:text-red-500 font-semibold transition" data-i18n="btn_reset_photo">重置为样照</button>
                             </div>
                         </div>
                         <div class="pt-2 border-t border-gray-100">
-                            <label class="block text-xs text-gray-400 mb-2 font-semibold" data-i18n="invite_link_label">📨 发给来宾的电子请柬链接</label>
+                            <label class="text-xs text-gray-400 mb-2 font-semibold flex items-center gap-1.5" data-i18n="invite_link_label"><svg class="w-3.5 h-3.5 text-burgundy-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> 发给来宾的电子请柬链接</label>
                             <p class="text-[11px] text-gray-500 mb-3 leading-relaxed" data-i18n="invite_link_desc">复制以下链接发送给宾客，宾客打开后可直接填写 RSVP 回执，提交后自动同步进宾客管理系统。</p>
-                            <div class="flex gap-2 items-center bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 mb-2">
-                                <i class="fa-solid fa-link text-gray-300 text-xs flex-shrink-0"></i>
+                            <div class="flex gap-2 items-center bg-white/50 border border-gray-200/50 rounded-xl px-3 py-2 mb-2">
+                                <svg class="w-3.5 h-3.5 text-gray-300 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
                                 <span id="guest-link-display" class="text-[11px] text-gray-500 font-mono flex-1 truncate select-all" data-i18n="loading">加载中...</span>
                             </div>
                             <div class="flex gap-2">
-                                <button onclick="copyGuestLink()" class="flex-1 bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1.5">
-                                    <i class="fa-regular fa-copy text-[10px]"></i> <span data-i18n="btn_copy_link">复制链接</span>
+                                <button onclick="copyGuestLink()" class="flex-1 bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-bold py-2 rounded-xl transition duration-300 cursor-pointer flex items-center justify-center gap-1.5">
+                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> <span data-i18n="btn_copy_link">复制链接</span>
                                 </button>
-                                <button onclick="openGuestPage()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1.5">
-                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> <span data-i18n="btn_preview">预览</span>
+                                <button onclick="openGuestPage()" class="flex-1 bg-white/60 hover:bg-white/80 backdrop-blur text-gray-700 text-xs font-bold py-2 rounded-xl transition duration-300 cursor-pointer flex items-center justify-center gap-1.5 border border-gray-200/50">
+                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> <span data-i18n="btn_preview">预览</span>
                                 </button>
                             </div>
                             <p id="guest-link-copied" class="hidden text-[10px] text-green-600 font-semibold text-center mt-2" data-i18n="link_copied">✓ 链接已复制！</p>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-2xl p-6 elegant-shadow border border-gray-100">
-                    <h3 class="font-serif font-bold text-burgundy-500 border-b border-gray-100 pb-2 mb-4" data-i18n="music_title">🎵 婚礼经典音乐伴奏模拟</h3>
+                <div class="glass-card rounded-2xl p-6">
+                    <h3 class="font-serif font-bold text-burgundy-500 border-b border-burgundy-100/40 pb-2 mb-4 flex items-center gap-2" data-i18n="music_title"><svg class="w-4 h-4 text-burgundy-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> 婚礼经典音乐伴奏模拟</h3>
                     <div class="space-y-3">
-                        <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl">
+                        <div class="flex items-center justify-between p-2.5 bg-white/40 rounded-xl border border-white/30">
                             <div><h5 class="text-xs font-bold text-gray-800">Perfect (Ed Sheeran)</h5><p class="text-[10px] text-gray-400" data-i18n="music_perfect_desc">新郎独唱 / 甜蜜誓言</p></div>
-                            <button onclick="toggleMusicSimulation(1,this)" class="text-burgundy-500 hover:text-burgundy-700 text-sm"><i class="fa-solid fa-play"></i></button>
+                            <button onclick="toggleMusicSimulation(1,this)" class="text-burgundy-500 hover:text-burgundy-700 transition duration-300 cursor-pointer"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
                         </div>
-                        <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl">
+                        <div class="flex items-center justify-between p-2.5 bg-white/40 rounded-xl border border-white/30">
                             <div><h5 class="text-xs font-bold text-gray-800">Beautiful In White (Shane Filan)</h5><p class="text-[10px] text-gray-400" data-i18n="music_biw_desc">圣洁大进场主纱音乐</p></div>
-                            <button onclick="toggleMusicSimulation(2,this)" class="text-burgundy-500 hover:text-burgundy-700 text-sm"><i class="fa-solid fa-play"></i></button>
+                            <button onclick="toggleMusicSimulation(2,this)" class="text-burgundy-500 hover:text-burgundy-700 transition duration-300 cursor-pointer"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
                         </div>
                     </div>
                 </div>
@@ -553,22 +569,22 @@
                             <span class="text-[9px] tracking-widest text-burgundy-500 font-bold uppercase block font-serif">We Are Getting Married</span>
                             <h4 class="text-xl font-serif font-bold text-burgundy-600 mt-1"><span id="preview-groom">新郎</span> &amp; <span id="preview-bride">新娘</span></h4>
                             <div class="mt-2 bg-burgundy-500 text-white rounded-full py-1 px-3 text-[10px] inline-flex items-center gap-1 font-semibold mx-auto elegant-shadow">
-                                <i class="fa-solid fa-hourglass-start"></i><span data-i18n="invite_countdown_prefix">大典倒计时：</span><span id="invite-countdown-timer" data-i18n="invite_no_date">未选择日期</span>
+                                    <svg class="w-3 h-3 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="invite_countdown_prefix">大典倒计时：</span><span id="invite-countdown-timer" data-i18n="invite_no_date">未选择日期</span>
                             </div>
                         </div>
                         <div class="relative w-full h-[200px] rounded-2xl overflow-hidden bg-gray-100 mt-4 elegant-shadow group border-2 border-champagne-100">
                             <div id="carousel-images" class="w-full h-full flex transition-transform duration-500 ease-out"></div>
-                            <button onclick="slidePrev()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white w-6 h-6 rounded-full flex items-center justify-center text-[10px] transition"><i class="fa-solid fa-chevron-left"></i></button>
-                            <button onclick="slideNext()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white w-6 h-6 rounded-full flex items-center justify-center text-[10px] transition"><i class="fa-solid fa-chevron-right"></i></button>
+                            <button onclick="slidePrev()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white w-6 h-6 rounded-full flex items-center justify-center transition cursor-pointer"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+                            <button onclick="slideNext()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white w-6 h-6 rounded-full flex items-center justify-center transition cursor-pointer"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
                             <div id="carousel-dots" class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1"></div>
                         </div>
-                        <p class="text-[10px] text-gray-700 text-center font-bold mt-3 bg-white/70 py-1.5 rounded-lg border border-burgundy-100/30"><i class="fa-solid fa-location-dot text-burgundy-500"></i> <span id="preview-location">玻璃屋</span></p>
-                        <div class="mt-4 bg-[#800020]/5 border border-[#800020]/10 rounded-xl p-3">
-                            <span class="text-[9px] font-bold block text-burgundy-600 uppercase border-b border-[#800020]/10 pb-1 mb-2"><i class="fa-solid fa-heart animate-pulse"></i> <span data-i18n="wish_wall">💕 亲友祝福墙</span></span>
+                        <p class="text-[10px] text-gray-700 text-center font-bold mt-3 bg-white/70 py-1.5 rounded-lg border border-burgundy-100/30 flex items-center justify-center gap-1"><svg class="w-3 h-3 text-burgundy-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span id="preview-location">玻璃屋</span></p>
+                        <div class="mt-4 bg-burgundy-500/5 border border-burgundy-500/10 rounded-xl p-3">
+                            <span class="text-[9px] font-bold block text-burgundy-600 uppercase border-b border-burgundy-500/10 pb-1 mb-2 flex items-center gap-1"><svg class="w-3 h-3 text-burgundy-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> <span data-i18n="wish_wall">亲友祝福墙</span></span>
                             <div id="invite-wishes-board" class="space-y-2 max-h-[100px] overflow-y-auto"></div>
                         </div>
                         <div class="bg-white rounded-xl p-4 border border-burgundy-100/40 text-left mt-4 elegant-shadow">
-                            <span class="text-[10px] font-bold block text-burgundy-500 uppercase border-b border-gray-100 pb-1.5"><i class="fa-solid fa-file-signature"></i> <span data-i18n="rsvp_form_title">宾客 RSVP 登记回执</span></span>
+                            <span class="text-[10px] font-bold block text-burgundy-500 uppercase border-b border-gray-100 pb-1.5 flex items-center gap-1"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> <span data-i18n="rsvp_form_title">宾客 RSVP 登记回执</span></span>
                             <div class="space-y-2.5 mt-2.5">
                                 <div><label class="block text-[9px] text-gray-400 font-bold mb-0.5" data-i18n="rsvp_name">赴宴主宾客姓名</label><input type="text" id="mock-guest-name" class="w-full bg-gray-50 border border-gray-200 rounded p-1.5 text-xs focus:border-burgundy-500 outline-none" placeholder="例如：林志强" data-i18n-ph="rsvp_name_ph"></div>
                                 <div class="grid grid-cols-2 gap-2">
@@ -588,8 +604,8 @@
 </main>
 
 <!-- ── Custom Modal ── -->
-<div id="custom-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 no-print">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 elegant-shadow border border-burgundy-100">
+<div id="custom-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm p-4 no-print">
+    <div class="glass-card rounded-2xl max-w-md w-full p-6 bg-white/80">
         <h3 id="modal-title" class="text-lg font-serif font-bold text-burgundy-500 mb-2" data-i18n="modal_title">提示</h3>
         <p id="modal-message" class="text-sm text-gray-600 mb-6 leading-relaxed">消息内容</p>
         <div class="flex justify-end gap-3">
@@ -599,9 +615,9 @@
     </div>
 </div>
 
-<footer class="bg-white border-t border-gray-100 py-10 text-center text-xs text-gray-400 no-print">
-    <p data-i18n="footer_text">© 2026 我们结婚了 · 婚礼主控级数字座舱</p>
-    <p class="mt-2 text-burgundy-500/50 font-serif">"Everything else is just beautiful details. Enjoy every single second."</p>
+<footer class="glass-card border-t border-burgundy-100/30 py-10 text-center text-xs text-gray-400 no-print mt-8">
+    <p class="font-sans" data-i18n="footer_text">© 2026 我们结婚了 · 婚礼主控级数字座舱</p>
+    <p class="mt-2 text-burgundy-500/40 font-serif italic">"Everything else is just beautiful details. Enjoy every single second."</p>
 </footer>
 </div><!-- end #admin-shell -->
 <script>
@@ -629,54 +645,54 @@ const i18n = {
     countdown_calculating: "计算中...",
     task_readiness: "协同任务核备率",
     budget_used_ratio: "已用总预算占比",
-    btn_save: "💾 保存内容",
-    btn_print: "🖨️ 打印/PDF",
+    btn_save: "保存内容",
+    btn_print: "打印/PDF",
     save_toast: "✓ 更改已自动保存至浏览器 (Auto-Saved)",
-    couple_title: "👩‍❤️‍👨 两位新人基本资料 & 婚礼日期选择",
+    couple_title: "两位新人基本资料 & 婚礼日期选择",
     groom_label: "新郎姓名 (Groom)",
     bride_label: "新娘姓名 (Bride)",
     groom_ph: "请填写新郎姓名...",
     bride_ph: "请填写新娘姓名...",
     wedding_date_label: "婚礼举办公历日期 (Wedding Date)",
     date_eval_label: "吉日即时评估 (Date Evaluation)",
-    date_tip_title: "📌 通书择日小百科：",
+    date_tip_title: "通书择日小百科：",
     date_tip_body: "黄历嫁娶吉日旨在寻找干支五行平衡。周末双休日通常多配有「天德、月德、三合」等吉星高照。避开「月破、闭日」等冲突日期即可获得美满顺遂的大好家庭！",
     lunar_pending: "农历待定",
-    auspicious_pending: "✨ 待定吉日，喜结连理",
+    auspicious_pending: "待定吉日，喜结连理",
     tab_morning: "第一幕：清晨喜庆接亲",
     tab_afternoon: "第二幕：傍晚首见外拍",
     tab_evening: "第三幕：无伴电影感晚宴",
-    tab_todo: "📋 To-Do & 双人同步",
-    tab_budget: "💰 预算开销与比价",
-    tab_guests: "👥 宾客管理 & 桌席",
-    tab_checklist: "📋 备婚倒计时清单",
-    tab_tools: "📱 电子请柬与工具",
+    tab_todo: "To-Do & 双人同步",
+    tab_budget: "预算开销与比价",
+    tab_guests: "宾客管理 & 桌席",
+    tab_checklist: "备婚倒计时清单",
+    tab_tools: "电子请柬与工具",
     act1_title: "第一幕：传统喜庆接亲 (Morning Act)",
     act1_desc: "这是全天最热闹、最本土化的时段。支持点击以下内容直接编辑重置，打造您独一无二的备婚Runsheet时间表。",
-    btn_add_morning_step: "➕ 新增接亲步骤",
-    btn_reset_template: "🔄 恢复默认22步模板",
-    btn_reset_template2: "🔄 恢复默认22步模板",
-    btn_reset_template3: "🔄 恢复默认22步模板",
+    btn_add_morning_step: "新增接亲步骤",
+    btn_reset_template: "恢复默认22步模板",
+    btn_reset_template2: "恢复默认22步模板",
+    btn_reset_template3: "恢复默认22步模板",
     btn_print_short: "打印",
     btn_print_short2: "打印",
     btn_print_short3: "打印",
     btn_print_short4: "打印",
     act2_title: "第二幕：私密第一眼与黄金外拍 (First Look Act)",
     act2_desc: "在晚宴喧嚣和宾客涌入之前，预留的一段极其尊贵、私密的电影感时段。",
-    btn_add_afternoon_step: "➕ 新增外拍步骤",
+    btn_add_afternoon_step: "新增外拍步骤",
     act3_title: "第三幕：无伴电影感晚宴 (Banquet Act)",
     act3_desc: "剔除繁琐传统流程，晚宴完全采用极简温情的流线设计。",
-    btn_add_evening_step: "➕ 新增晚宴步骤",
-    todo_title: "📋 双人防漏协作 To-Do 面板",
+    btn_add_evening_step: "新增晚宴步骤",
+    todo_title: "双人防漏协作 To-Do 面板",
     todo_desc: "专设「一方宣告完成，对方点对点核准核签」，全面避免遗漏。",
-    btn_add_todo: "➕ 新增协同待办",
-    todo_planning: "🎯 策划推进中",
-    todo_verify: "⏳ 对方待核签",
-    todo_done: "✅ 双方通过 · 尘埃落定",
+    btn_add_todo: "新增协同待办",
+    todo_planning: "策划推进中",
+    todo_verify: "对方待核签",
+    todo_done: "双方通过 · 尘埃落定",
     toast_confirm: "收到确认申请！",
-    budget_title: "💰 婚礼智能预算控制水库",
+    budget_title: "婚礼智能预算控制水库",
     budget_desc: "开销类目明细、本地发票上传及多边报价比对，科学规避超支。",
-    btn_add_expense: "➕ 增加开销与发票",
+    btn_add_expense: "增加开销与发票",
     btn_print_budget: "打印预算表",
     budget_total_label: "婚礼总预算底盘",
     budget_spent_label: "已花总数",
@@ -694,58 +710,58 @@ const i18n = {
     deposit_amount_label: "金额 RM",
     btn_deposit: "存入",
     deposit_empty: "还没有存款记录，开始记录你们的第一笔婚礼基金吧！",
-    expense_detail_title: "📋 婚礼支出明细",
+    expense_detail_title: "婚礼支出明细",
     th_item: "分项类目",
     th_category: "分类",
     th_paid: "已付金额 (RM)",
     th_receipt: "收据留存",
     th_action: "操作",
-    vendor_compare_title: "📍 核心 Vendor 商家多边比价",
-    btn_add_quote: "➕ 新增比对方案",
+    vendor_compare_title: "核心 Vendor 商家多边比价",
+    btn_add_quote: "新增比对方案",
     th_vendor: "备选商家",
     th_quote: "报价 (RM)",
     th_details: "包含细节",
     th_pros_cons: "优劣对比",
     th_value: "性价比",
     th_action2: "操作",
-    guest_title: "👥 宾客 RSVP 登账 & 10人制桌位排座",
+    guest_title: "宾客 RSVP 登账 & 10人制桌位排座",
     guest_desc: "电子请柬提交的人数与温馨祝福将自动流入。系统智能排定席位。",
-    btn_add_guest: "➕ 增加宾客记录",
+    btn_add_guest: "增加宾客记录",
     btn_print_guests: "打印宾客名单",
     guest_total: "总应邀出席人数",
     guest_veg: "素食人数 (Vegetarian)",
     guest_halal: "清真人数 (Halal)",
     guest_seating_ok: "宴会厅顺利排定",
-    guest_roster_title: "📋 宾客花名登账簿",
+    guest_roster_title: "宾客花名登账簿",
     th_guest_name: "宾客姓名 & 留言",
     th_pax: "人数",
     th_diet: "饮食",
     th_table: "桌号",
     th_action3: "操作",
-    seating_title: "🪑 晚宴桌席投影面 (10人制)",
-    btn_add_table: "➕ 新增宴会桌",
+    seating_title: "晚宴桌席投影面 (10人制)",
+    btn_add_table: "新增宴会桌",
     btn_print_seating: "打印 / 导出 PDF",
-    checklist_title: "📋 备婚核心倒计时清单",
-    btn_add_week1: "➕ 新增前1周任务",
-    btn_add_dayof: "➕ 新增当天任务",
+    checklist_title: "备婚核心倒计时清单",
+    btn_add_week1: "新增前1周任务",
+    btn_add_dayof: "新增当天任务",
     checklist_week1: "婚礼前 1 周重点排查",
     checklist_dayof: "婚礼当天下午 (晚宴开场前)",
-    invite_settings_title: "📱 请柬高阶细节设定",
+    invite_settings_title: "请柬高阶细节设定",
     invite_venue_label: "婚礼晚宴举办场地",
     upload_photo_label: "上传婚纱照",
     btn_upload_photo: "上传婚纱照",
     btn_reset_photo: "重置为样照",
-    invite_link_label: "📨 发给来宾的电子请柬链接",
+    invite_link_label: "发给来宾的电子请柬链接",
     invite_link_desc: "复制以下链接发送给宾客，宾客打开后可直接填写 RSVP 回执，提交后自动同步进宾客管理系统。",
     btn_copy_link: "复制链接",
     btn_preview: "预览",
     link_copied: "✓ 链接已复制！",
-    music_title: "🎵 婚礼经典音乐伴奏模拟",
+    music_title: "婚礼经典音乐伴奏模拟",
     music_perfect_desc: "新郎独唱 / 甜蜜誓言",
     music_biw_desc: "圣洁大进场主纱音乐",
     invite_countdown_prefix: "大典倒计时：",
     invite_no_date: "未选择日期",
-    wish_wall: "💕 亲友祝福墙",
+    wish_wall: "亲友祝福墙",
     rsvp_form_title: "宾客 RSVP 登记回执",
     rsvp_name: "赴宴主宾客姓名",
     rsvp_name_ph: "例如：林志强",
@@ -774,15 +790,15 @@ const i18n = {
     countdown_format: "${d}天 ${h}时 ${m}分 ${s}秒",
     countdown_short: "${d}天 ${h}小时",
     countdown_pending: "待选公历日期",
-    countdown_expired: "💖 新婚快乐，幸福美满！",
-    countdown_expired_short: "已到期 🎉",
+    countdown_expired: "新婚快乐，幸福美满！",
+    countdown_expired_short: "已到期",
     select_date_prompt: "请选择日期",
     lunar_prefix: "农历",
     lunar_pending_full: "岁次与阴历待定",
-    eval_pending: "📅 请先在上方挑选公历日期以进行即时吉凶鉴定",
-    grade_top_weekend: "✨【上吉】鸾凤和鸣，天德合照之吉日",
-    grade_top_lucky: "✨【上吉】月德合吉，五合临照之吉日",
-    grade_bad: "⚠️【避忌】月破大耗，诸事避忌之凶日",
+    eval_pending: "请先在上方挑选公历日期以进行即时吉凶鉴定",
+    grade_top_weekend: "【上吉】鸾凤和鸣，天德合照之吉日",
+    grade_top_lucky: "【上吉】月德合吉，五合临照之吉日",
+    grade_bad: "【避忌】月破大耗，诸事避忌之凶日",
     grade_normal: "【平吉】岁德并照，宜成良缘之日",
     yi_weekend: "嫁娶、会亲友、订盟、纳采、祈福、安床、裁衣",
     ji_weekend: "开渠、掘井、作灶、伐木",
@@ -792,10 +808,10 @@ const i18n = {
     ji_bad: "结婚嫁娶、入宅动土、修造、移徙",
     yi_normal: "求医、祭祀、沐浴、整手足甲",
     ji_normal: "出行、栽种、开渠、盖屋",
-    advice_top_weekend: "🟢 【极佳吉日】鸾凤和鸣，天赐姻缘！非常适合在此周末举办婚礼盛典",
-    advice_top_lucky: "🟢 【上等良辰】神星庇护，气运极佳！极力推荐在此日成婚",
-    advice_bad: "🔴 【避忌凶日】通书标记今日忌嫁娶，建议新人另择佳期",
-    advice_normal: "🟡 【普通平吉】平稳祥和之日，可做备选方案",
+    advice_top_weekend: "【极佳吉日】鸾凤和鸣，天赐姻缘！非常适合在此周末举办婚礼盛典",
+    advice_top_lucky: "【上等良辰】神星庇护，气运极佳！极力推荐在此日成婚",
+    advice_bad: "【避忌凶日】通书标记今日忌嫁娶，建议新人另择佳期",
+    advice_normal: "【普通平吉】平稳祥和之日，可做备选方案",
     no_steps: "暂无该环节的自定义步骤，点击右上方按钮增加步骤。",
     new_step_title: "新增流程步骤",
     new_step_desc: "在此处编辑写下本步流程的具体操作要求。",
@@ -810,9 +826,9 @@ const i18n = {
     btn_mark_verify: "完成待验证",
     btn_approve: "准予通过",
     status_approved: "双方通过",
-    toast_verify: "🔔 提报了待办，待另一方核准！",
-    toast_done: "💖 双方均核签通过，任务归档！",
-    add_todo_title: "📝 新增备婚协同待办",
+    toast_verify: "提报了待办，待另一方核准！",
+    toast_done: "双方均核签通过，任务归档！",
+    add_todo_title: "新增备婚协同待办",
     add_todo_text_label: "待办事项内容",
     add_todo_text_ph: "如：向酒家核实订金账单",
     add_todo_owner_label: "主要负责人",
@@ -832,12 +848,12 @@ const i18n = {
     deposit_default_note: "存款",
     deposit_count: "共 ${n} 笔存款记录",
     deposit_empty_msg: "还没有存款记录，开始记录你们的第一笔婚礼基金吧！",
-    saving_goal_reached: "🎉 目标达成！",
-    saving_msg_100: "🎉 <strong>恭喜！存款目标已达成！</strong> 可以放心预订各项婚礼服务了！",
-    saving_msg_75: "✨ <strong>冲刺阶段！</strong> 已存 ${pct}%，还差 RM ${gap}，快了！",
-    saving_msg_50: "💪 <strong>过半了！</strong> 已达成 ${pct}%，继续保持！",
-    saving_msg_25: "🌱 <strong>良好起步！</strong> 建议每月存入 RM ${monthly} 可在一年内达标。",
-    saving_msg_0: "📌 <strong>婚礼基金已开启！</strong> 坚持每月定存，梦想婚礼不远了！",
+    saving_goal_reached: "目标达成！",
+    saving_msg_100: "<strong>恭喜！存款目标已达成！</strong> 可以放心预订各项婚礼服务了！",
+    saving_msg_75: "<strong>冲刺阶段！</strong> 已存 ${pct}%，还差 RM ${gap}，快了！",
+    saving_msg_50: "<strong>过半了！</strong> 已达成 ${pct}%，继续保持！",
+    saving_msg_25: "<strong>良好起步！</strong> 建议每月存入 RM ${monthly} 可在一年内达标。",
+    saving_msg_0: "<strong>婚礼基金已开启！</strong> 坚持每月定存，梦想婚礼不远了！",
     no_quotes: "目前无多方比对方案，点击右上角新增。",
     ph_vendor: "商家名称",
     ph_service: "包含细节",
@@ -854,13 +870,13 @@ const i18n = {
     unassigned_seat: "未安排席位",
     new_guest: "新宾客",
     family_suffix: "眷属",
-    seat_alert_title: "排位警报 ⚠️",
+    seat_alert_title: "排位警报",
     seat_alert_msg: "当前桌席仅剩 ${free} 个空座位，无法容纳该宾客及家属共 ${pax} 人！",
     empty_seat: "空座",
     new_table_name: "第 ${n} 桌 - 亲友席",
     rsvp_prompt_title: "提示",
     rsvp_prompt_msg: "请在模拟电子请柬中，填入赴宴宾客的名字！",
-    rsvp_success_title: "🎉 模拟宾客提交成功！",
+    rsvp_success_title: "模拟宾客提交成功！",
     rsvp_success_msg: "宾客 [${name}] 已经通过电子请柬成功登记！共 [${pax}] 人、温馨留言以及饮食需求已被实时反向统计，并同步到席位排位大表中。",
     sample_wish1_name: "李小明 (小姑堂弟)",
     sample_wish1: "恭喜恭喜！祝你们百年好合，白头偕老！",
@@ -875,9 +891,9 @@ const i18n = {
     gs_date_label: "婚礼日期 Date",
     gs_countdown_label: "倒计时",
     gs_countdown_days: "还有 ${d} 天",
-    gs_wall_title: "💕 亲友祝福墙",
+    gs_wall_title: "亲友祝福墙",
     gs_no_wishes: "快来成为第一个送上祝福的人！",
-    gs_form_title: "✍️ 填写出席回执 RSVP",
+    gs_form_title: "填写出席回执 RSVP",
     gs_name_label: "您的姓名 Your Name *",
     gs_name_ph: "例如：张大明",
     gs_pax_label: "出席人数 Pax",
@@ -892,7 +908,7 @@ const i18n = {
     gs_thanks: "感谢您的出席！",
     gs_thanks_detail: "我们已收到您的回执，<br>期待与您共度美好时光！",
     gs_retry: "再次填写",
-    print_btn: "🖨️ 打印 / 另存为 PDF",
+    print_btn: "打印 / 另存为 PDF",
     copy_success_title: "复制成功",
     copy_success_msg: "内容已经成功复制到您的系统剪贴板！",
     copy_fail_title: "复制失败",
@@ -906,54 +922,54 @@ const i18n = {
     countdown_calculating: "Calculating...",
     task_readiness: "Task Readiness",
     budget_used_ratio: "Budget Used",
-    btn_save: "💾 Save",
-    btn_print: "🖨️ Print/PDF",
+    btn_save: "Save",
+    btn_print: "Print/PDF",
     save_toast: "✓ Changes auto-saved to browser",
-    couple_title: "👩‍❤️‍👨 Couple Info & Wedding Date",
+    couple_title: "Couple Info & Wedding Date",
     groom_label: "Groom's Name",
     bride_label: "Bride's Name",
     groom_ph: "Enter groom's name...",
     bride_ph: "Enter bride's name...",
     wedding_date_label: "Wedding Date",
     date_eval_label: "Date Evaluation",
-    date_tip_title: "📌 Date Selection Tips:",
+    date_tip_title: "Date Selection Tips:",
     date_tip_body: "Traditional Chinese calendars seek balance in the Five Elements. Weekends often align with auspicious stars. Avoid conflicting dates for a harmonious start to your family!",
     lunar_pending: "Lunar date TBD",
-    auspicious_pending: "✨ Awaiting auspicious date",
+    auspicious_pending: "Awaiting auspicious date",
     tab_morning: "Act 1: Morning Gatecrash",
     tab_afternoon: "Act 2: First Look & Shoot",
     tab_evening: "Act 3: Evening Banquet",
-    tab_todo: "📋 To-Do & Sync",
-    tab_budget: "💰 Budget & Quotes",
-    tab_guests: "👥 Guests & Seating",
-    tab_checklist: "📋 Countdown Checklist",
-    tab_tools: "📱 Invitation & Tools",
+    tab_todo: "To-Do & Sync",
+    tab_budget: "Budget & Quotes",
+    tab_guests: "Guests & Seating",
+    tab_checklist: "Countdown Checklist",
+    tab_tools: "Invitation & Tools",
     act1_title: "Act 1: Traditional Morning Gatecrash",
     act1_desc: "The liveliest part of the day. Click any item to edit and build your custom runsheet timeline.",
-    btn_add_morning_step: "➕ Add Step",
-    btn_reset_template: "🔄 Reset to Default Template",
-    btn_reset_template2: "🔄 Reset to Default Template",
-    btn_reset_template3: "🔄 Reset to Default Template",
+    btn_add_morning_step: "Add Step",
+    btn_reset_template: "Reset to Default Template",
+    btn_reset_template2: "Reset to Default Template",
+    btn_reset_template3: "Reset to Default Template",
     btn_print_short: "Print",
     btn_print_short2: "Print",
     btn_print_short3: "Print",
     btn_print_short4: "Print",
     act2_title: "Act 2: First Look & Golden Hour Shoot",
     act2_desc: "A private, cinematic moment reserved before the evening festivities begin.",
-    btn_add_afternoon_step: "➕ Add Step",
+    btn_add_afternoon_step: "Add Step",
     act3_title: "Act 3: Elegant Evening Banquet",
     act3_desc: "A streamlined, minimalist banquet design with warmth and elegance.",
-    btn_add_evening_step: "➕ Add Step",
-    todo_title: "📋 Collaborative To-Do Board",
+    btn_add_evening_step: "Add Step",
+    todo_title: "Collaborative To-Do Board",
     todo_desc: "One person marks done, the other verifies — nothing gets missed.",
-    btn_add_todo: "➕ Add New Task",
-    todo_planning: "🎯 In Progress",
-    todo_verify: "⏳ Pending Verification",
-    todo_done: "✅ Completed & Confirmed",
+    btn_add_todo: "Add New Task",
+    todo_planning: "In Progress",
+    todo_verify: "Pending Verification",
+    todo_done: "Completed & Confirmed",
     toast_confirm: "Verification request received!",
-    budget_title: "💰 Smart Wedding Budget Control",
+    budget_title: "Smart Wedding Budget Control",
     budget_desc: "Expense tracking, receipt uploads, and vendor quote comparison.",
-    btn_add_expense: "➕ Add Expense",
+    btn_add_expense: "Add Expense",
     btn_print_budget: "Print Budget",
     budget_total_label: "Total Budget",
     budget_spent_label: "Total Spent",
@@ -971,58 +987,58 @@ const i18n = {
     deposit_amount_label: "Amount (RM)",
     btn_deposit: "Deposit",
     deposit_empty: "No deposits yet — start recording your first wedding fund!",
-    expense_detail_title: "📋 Wedding Expense Details",
+    expense_detail_title: "Wedding Expense Details",
     th_item: "Item",
     th_category: "Category",
     th_paid: "Paid (RM)",
     th_receipt: "Receipt",
     th_action: "Action",
-    vendor_compare_title: "📍 Vendor Quote Comparison",
-    btn_add_quote: "➕ Add Quote",
+    vendor_compare_title: "Vendor Quote Comparison",
+    btn_add_quote: "Add Quote",
     th_vendor: "Vendor",
     th_quote: "Quote (RM)",
     th_details: "Details",
     th_pros_cons: "Pros & Cons",
     th_value: "Value",
     th_action2: "Action",
-    guest_title: "👥 Guest RSVP & Seating (10 per table)",
+    guest_title: "Guest RSVP & Seating (10 per table)",
     guest_desc: "RSVP submissions and wishes sync automatically. Smart seating arrangement.",
-    btn_add_guest: "➕ Add Guest",
+    btn_add_guest: "Add Guest",
     btn_print_guests: "Print Guest List",
     guest_total: "Total Guests",
     guest_veg: "Vegetarian",
     guest_halal: "Halal",
     guest_seating_ok: "Seating Arranged",
-    guest_roster_title: "📋 Guest Roster",
+    guest_roster_title: "Guest Roster",
     th_guest_name: "Guest Name & Message",
     th_pax: "Pax",
     th_diet: "Diet",
     th_table: "Table",
     th_action3: "Action",
-    seating_title: "🪑 Banquet Seating Chart (10 per table)",
-    btn_add_table: "➕ Add Table",
+    seating_title: "Banquet Seating Chart (10 per table)",
+    btn_add_table: "Add Table",
     btn_print_seating: "Print / Export PDF",
-    checklist_title: "📋 Wedding Countdown Checklist",
-    btn_add_week1: "➕ Add Week-1 Task",
-    btn_add_dayof: "➕ Add Day-of Task",
+    checklist_title: "Wedding Countdown Checklist",
+    btn_add_week1: "Add Week-1 Task",
+    btn_add_dayof: "Add Day-of Task",
     checklist_week1: "1 Week Before Wedding — Key Checks",
     checklist_dayof: "Wedding Day Afternoon (Before Banquet)",
-    invite_settings_title: "📱 Invitation Advanced Settings",
+    invite_settings_title: "Invitation Advanced Settings",
     invite_venue_label: "Wedding Venue",
     upload_photo_label: "Upload Wedding Photos",
     btn_upload_photo: "Upload Photos",
     btn_reset_photo: "Reset to Samples",
-    invite_link_label: "📨 Guest E-Invitation Link",
+    invite_link_label: "Guest E-Invitation Link",
     invite_link_desc: "Copy this link to send to guests. They can fill in RSVP and it syncs to your guest management system.",
     btn_copy_link: "Copy Link",
     btn_preview: "Preview",
     link_copied: "✓ Link copied!",
-    music_title: "🎵 Wedding Music Preview",
+    music_title: "Wedding Music Preview",
     music_perfect_desc: "Groom Solo / Sweet Vows",
     music_biw_desc: "Grand Entrance Bridal Music",
     invite_countdown_prefix: "Countdown: ",
     invite_no_date: "No date selected",
-    wish_wall: "💕 Blessings Wall",
+    wish_wall: "Blessings Wall",
     rsvp_form_title: "Guest RSVP Form",
     rsvp_name: "Guest Name",
     rsvp_name_ph: "e.g.: John Smith",
@@ -1051,15 +1067,15 @@ const i18n = {
     countdown_format: "${d}d ${h}h ${m}m ${s}s",
     countdown_short: "${d} days ${h}h",
     countdown_pending: "Select a date",
-    countdown_expired: "💖 Happy Wedding Day!",
-    countdown_expired_short: "Today! 🎉",
+    countdown_expired: "Happy Wedding Day!",
+    countdown_expired_short: "Today!",
     select_date_prompt: "Select Date",
     lunar_prefix: "Lunar",
     lunar_pending_full: "Lunar date TBD",
-    eval_pending: "📅 Please select a date above for auspicious day evaluation",
-    grade_top_weekend: "✨ Excellent — Auspicious weekend for wedding",
-    grade_top_lucky: "✨ Excellent — Stars aligned, highly auspicious",
-    grade_bad: "⚠️ Avoid — Inauspicious day per Chinese almanac",
+    eval_pending: "Please select a date above for auspicious day evaluation",
+    grade_top_weekend: "Excellent — Auspicious weekend for wedding",
+    grade_top_lucky: "Excellent — Stars aligned, highly auspicious",
+    grade_bad: "Avoid — Inauspicious day per Chinese almanac",
     grade_normal: "Neutral — Acceptable day for wedding",
     yi_weekend: "Marriage, meet friends, betroth, pray, set bed, tailoring",
     ji_weekend: "Dig wells, build stove, cut trees",
@@ -1069,10 +1085,10 @@ const i18n = {
     ji_bad: "Marriage, move in, construction, relocation",
     yi_normal: "See doctor, worship, bathe, grooming",
     ji_normal: "Travel, planting, dig wells, build house",
-    advice_top_weekend: "🟢 Excellent day! Perfect weekend for your wedding celebration",
-    advice_top_lucky: "🟢 Highly auspicious! Strongly recommended for your wedding",
-    advice_bad: "🔴 Inauspicious — Chinese almanac advises against marriage today",
-    advice_normal: "🟡 Neutral — A calm, stable day, suitable as backup option",
+    advice_top_weekend: "Excellent day! Perfect weekend for your wedding celebration",
+    advice_top_lucky: "Highly auspicious! Strongly recommended for your wedding",
+    advice_bad: "Inauspicious — Chinese almanac advises against marriage today",
+    advice_normal: "Neutral — A calm, stable day, suitable as backup option",
     no_steps: "No custom steps yet. Click the button above to add one.",
     new_step_title: "New Step",
     new_step_desc: "Describe what happens in this step.",
@@ -1087,9 +1103,9 @@ const i18n = {
     btn_mark_verify: "Mark for Review",
     btn_approve: "Approve",
     status_approved: "Approved",
-    toast_verify: "🔔 Task submitted for partner review!",
-    toast_done: "💖 Both parties approved, task completed!",
-    add_todo_title: "📝 Add Wedding Task",
+    toast_verify: "Task submitted for partner review!",
+    toast_done: "Both parties approved, task completed!",
+    add_todo_title: "Add Wedding Task",
     add_todo_text_label: "Task description",
     add_todo_text_ph: "e.g.: Confirm deposit with banquet hall",
     add_todo_owner_label: "Assigned to",
@@ -1109,12 +1125,12 @@ const i18n = {
     deposit_default_note: "Deposit",
     deposit_count: "${n} deposit records",
     deposit_empty_msg: "No deposits yet — start recording your first wedding fund!",
-    saving_goal_reached: "🎉 Goal reached!",
-    saving_msg_100: "🎉 <strong>Congratulations! Saving goal reached!</strong> You can now book all wedding services with confidence!",
-    saving_msg_75: "✨ <strong>Almost there!</strong> Saved ${pct}%, only RM ${gap} to go!",
-    saving_msg_50: "💪 <strong>Halfway there!</strong> ${pct}% achieved, keep it up!",
-    saving_msg_25: "🌱 <strong>Great start!</strong> Save RM ${monthly}/month to reach your goal in a year.",
-    saving_msg_0: "📌 <strong>Wedding fund started!</strong> Keep depositing monthly, your dream wedding awaits!",
+    saving_goal_reached: "Goal reached!",
+    saving_msg_100: "<strong>Congratulations! Saving goal reached!</strong> You can now book all wedding services with confidence!",
+    saving_msg_75: "<strong>Almost there!</strong> Saved ${pct}%, only RM ${gap} to go!",
+    saving_msg_50: "<strong>Halfway there!</strong> ${pct}% achieved, keep it up!",
+    saving_msg_25: "<strong>Great start!</strong> Save RM ${monthly}/month to reach your goal in a year.",
+    saving_msg_0: "<strong>Wedding fund started!</strong> Keep depositing monthly, your dream wedding awaits!",
     no_quotes: "No vendor quotes yet. Click above to add one.",
     ph_vendor: "Vendor name",
     ph_service: "Service details",
@@ -1131,13 +1147,13 @@ const i18n = {
     unassigned_seat: "Not assigned",
     new_guest: "New Guest",
     family_suffix: "Guest",
-    seat_alert_title: "Seating Alert ⚠️",
+    seat_alert_title: "Seating Alert",
     seat_alert_msg: "This table only has ${free} seats left, cannot fit ${pax} guests!",
     empty_seat: "Empty",
     new_table_name: "Table ${n} - Friends & Family",
     rsvp_prompt_title: "Notice",
     rsvp_prompt_msg: "Please enter the guest's name in the invitation form!",
-    rsvp_success_title: "🎉 RSVP Submitted!",
+    rsvp_success_title: "RSVP Submitted!",
     rsvp_success_msg: "Guest [${name}] has been registered! ${pax} pax with wishes and dietary needs have been recorded and synced to the seating chart.",
     sample_wish1_name: "Xiao Ming (Cousin)",
     sample_wish1: "Congratulations! Wishing you a lifetime of happiness!",
@@ -1152,9 +1168,9 @@ const i18n = {
     gs_date_label: "Wedding Date",
     gs_countdown_label: "Countdown",
     gs_countdown_days: "${d} days left",
-    gs_wall_title: "💕 Blessings Wall",
+    gs_wall_title: "Blessings Wall",
     gs_no_wishes: "Be the first to send your blessings!",
-    gs_form_title: "✍️ RSVP Form",
+    gs_form_title: "RSVP Form",
     gs_name_label: "Your Name *",
     gs_name_ph: "e.g.: John Smith",
     gs_pax_label: "Number of Guests",
@@ -1169,7 +1185,7 @@ const i18n = {
     gs_thanks: "Thank you for your RSVP!",
     gs_thanks_detail: "We've received your response.<br>Looking forward to celebrating with you!",
     gs_retry: "Submit another",
-    print_btn: "🖨️ Print / Save as PDF",
+    print_btn: "Print / Save as PDF",
     copy_success_title: "Copied!",
     copy_success_msg: "Content copied to clipboard successfully!",
     copy_fail_title: "Copy Failed",
@@ -1386,7 +1402,7 @@ function showStandaloneGuestPage() {
         ? `<p style="font-size:10px;color:#bbb;text-align:center;font-style:italic;padding:8px 0">${t('gs_no_wishes')}</p>`
         : wishes.map(g => `
             <div style="background:#fdf2f4;border:1px solid #fbe5ea;border-radius:10px;padding:8px 12px">
-                <p style="font-size:10px;font-weight:700;color:#800020;margin-bottom:2px">💖 ${g.name}</p>
+                <p style="font-size:10px;font-weight:700;color:#DB2777;margin-bottom:2px">${g.name}</p>
                 <p style="font-size:10px;color:#666;font-style:italic">"${g.wish}"</p>
             </div>`).join('');
 
@@ -1417,16 +1433,16 @@ function showStandaloneGuestPage() {
             .gs-label { font-size:9px; text-transform:uppercase; letter-spacing:.08em; font-weight:700; margin-bottom:2px; }
             .gs-value { font-size:12px; font-weight:700; }
             .gs-wall { margin-bottom:16px; }
-            .gs-wall-title { font-size:10px; font-weight:700; color:#800020; text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px; }
+            .gs-wall-title { font-size:10px; font-weight:700; color:#DB2777; text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px; }
             .gs-wall-items { max-height:100px; overflow-y:auto; display:flex; flex-direction:column; gap:6px; }
             .gs-form { border-top:1px solid #f0ebe4; padding-top:16px; }
             .gs-form-title { font-size:12px; font-weight:700; color:#1a1a1a; margin-bottom:12px; font-family:serif; }
             .gs-input { width:100%; background:#f9f9f7; border:1px solid #e5e7eb; border-radius:12px; padding:9px 12px; font-size:12px; outline:none; box-sizing:border-box; font-family:inherit; }
-            .gs-input:focus { border-color:#800020; }
+            .gs-input:focus { border-color:#DB2777; }
             .gs-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
             .gs-field-label { font-size:10px; color:#999; font-weight:700; text-transform:uppercase; letter-spacing:.05em; display:block; margin-bottom:4px; }
-            .gs-btn { width:100%; background:#800020; color:#fff; border:none; border-radius:12px; padding:13px; font-size:13px; font-weight:700; cursor:pointer; font-family:serif; letter-spacing:.02em; transition:.2s; }
-            .gs-btn:hover { background:#66001a; }
+            .gs-btn { width:100%; background:#DB2777; color:#fff; border:none; border-radius:12px; padding:13px; font-size:13px; font-weight:700; cursor:pointer; font-family:serif; letter-spacing:.02em; transition:.2s; }
+            .gs-btn:hover { background:#BE185D; }
             .gs-success { text-align:center; padding:24px 0; }
             .gs-footer { font-size:9px; color:#ccc; font-style:italic; text-align:center; padding:12px 0 4px; }
         </style>
@@ -1449,12 +1465,12 @@ function showStandaloneGuestPage() {
             <div class="gs-body">
                 <!-- Date + venue chips -->
                 <div class="gs-chip" style="background:#fdf2f4;margin-bottom:8px">
-                    <span style="font-size:16px">📅</span>
+                    <svg style="width:16px;height:16px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="#DB2777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                     <div style="flex:1">
                         <div class="gs-label" style="color:#b08b43">${t('gs_date_label')}</div>
-                        <div class="gs-value" style="color:#800020">${dateStr}</div>
+                        <div class="gs-value" style="color:#DB2777">${dateStr}</div>
                     </div>
-                    ${daysLeft !== null ? `<div style="text-align:right"><div class="gs-label" style="color:#b08b43">${t('gs_countdown_label')}</div><div class="gs-value" style="color:#800020;font-family:monospace">${t('gs_countdown_days').replace('${d}',daysLeft)}</div></div>` : ''}
+                    ${daysLeft !== null ? `<div style="text-align:right"><div class="gs-label" style="color:#b08b43">${t('gs_countdown_label')}</div><div class="gs-value" style="color:#DB2777;font-family:monospace">${t('gs_countdown_days').replace('${d}',daysLeft)}</div></div>` : ''}
                 </div>
 
                 <!-- Wishes wall -->
@@ -1496,8 +1512,8 @@ function showStandaloneGuestPage() {
                         <button class="gs-btn" onclick="gstSubmit()">${t('gs_submit')}</button>
                     </div>
                     <div id="gst-success" style="display:none" class="gs-success">
-                        <div style="font-size:40px;margin-bottom:8px">🎉</div>
-                        <p style="font-family:serif;font-weight:700;color:#800020;font-size:15px">${t('gs_thanks')}</p>
+                        <svg style="width:40px;height:40px;margin:0 auto 8px" viewBox="0 0 24 24" fill="none" stroke="#DB2777" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <p style="font-family:serif;font-weight:700;color:#DB2777;font-size:15px">${t('gs_thanks')}</p>
                         <p style="font-size:11px;color:#888;margin-top:6px;line-height:1.6">${t('gs_thanks_detail')}</p>
                         <button onclick="gstReset()" style="margin-top:12px;font-size:11px;color:#bbb;background:none;border:none;cursor:pointer;text-decoration:underline">${t('gs_retry')}</button>
                     </div>
@@ -1650,7 +1666,7 @@ function renderTimelineByAct(actKey) {
                             </div>
                             <textarea oninput="updateRunsheetNodeValue('${node.id}','desc',this.value)" class="w-full text-xs text-gray-500 bg-transparent border-b border-transparent hover:border-gray-100 focus:border-burgundy-500 focus:outline-none resize-none leading-relaxed h-12" placeholder="${t('ph_desc')}">${node.desc}</textarea>
                         </div>
-                        <button onclick="deleteRunsheetNode('${node.id}')" class="text-gray-300 hover:text-red-500 text-xs py-1 px-2 transition opacity-0 group-hover:opacity-100 no-print"><i class="fa-solid fa-trash-can"></i></button>
+                        <button onclick="deleteRunsheetNode('${node.id}')" class="text-gray-300 hover:text-red-500 text-xs py-1 px-2 transition duration-300 cursor-pointer opacity-0 group-hover:opacity-100 no-print"><svg class="w-3.5 h-3.5 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
                     </div>
                 </div>
             </div>`);
@@ -1701,16 +1717,16 @@ function renderTodoList(){
         if(item.owner==='groom')badge=`<span class="bg-blue-50 text-blue-600 text-[10px] px-1.5 py-0.5 rounded font-bold">${t('owner_groom')}</span>`;
         else if(item.owner==='bride')badge=`<span class="bg-pink-50 text-pink-600 text-[10px] px-1.5 py-0.5 rounded font-bold">${t('owner_bride')}</span>`;
         else badge=`<span class="bg-purple-50 text-purple-600 text-[10px] px-1.5 py-0.5 rounded font-bold">${t('owner_joint')}</span>`;
-        const card=`<div class="bg-gray-50 border border-gray-100 p-3 rounded-xl hover:bg-white transition"><div class="flex justify-between items-start"><span class="text-xs font-bold text-gray-800 leading-relaxed">${item.text}</span><button onclick="deleteTodo('${item.id}')" class="text-gray-300 hover:text-red-500 text-[10px]"><i class="fa-solid fa-trash"></i></button></div><div class="flex justify-between items-center mt-3">${badge}${getTodoActionButton(item)}</div></div>`;
+        const card=`<div class="bg-white/40 border border-white/30 p-3 rounded-xl hover:bg-white/60 transition duration-300"><div class="flex justify-between items-start"><span class="text-xs font-bold text-gray-800 leading-relaxed">${item.text}</span><button onclick="deleteTodo('${item.id}')" class="text-gray-300 hover:text-red-500 transition cursor-pointer"><svg class="w-3 h-3 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></div><div class="flex justify-between items-center mt-3">${badge}${getTodoActionButton(item)}</div></div>`;
         if(item.status==='planning'){pC.insertAdjacentHTML('beforeend',card);cP++;}else if(item.status==='verify'){vC.insertAdjacentHTML('beforeend',card);cV++;}else{dC.insertAdjacentHTML('beforeend',card);cD++;}
     });
     const cpEl=document.getElementById('todo-count-planning'),cvEl=document.getElementById('todo-count-verify'),cdEl=document.getElementById('todo-count-done');
     if(cpEl)cpEl.innerText=cP;if(cvEl)cvEl.innerText=cV;if(cdEl)cdEl.innerText=cD;
 }
 function getTodoActionButton(item){
-    if(item.status==='planning')return`<button onclick="changeTodoStatus('${item.id}','verify')" class="bg-orange-500 hover:bg-orange-600 text-white text-[9px] font-bold py-1 px-2.5 rounded-lg transition">${t('btn_mark_verify')} <i class="fa-solid fa-paper-plane"></i></button>`;
-    if(item.status==='verify')return`<button onclick="changeTodoStatus('${item.id}','done')" class="bg-green-500 hover:bg-green-600 text-white text-[9px] font-bold py-1 px-2.5 rounded-lg transition"><i class="fa-solid fa-circle-check"></i> ${t('btn_approve')}</button>`;
-    return`<span class="text-[10px] text-green-600 font-bold"><i class="fa-solid fa-circle-check"></i> ${t('status_approved')}</span>`;
+    if(item.status==='planning')return`<button onclick="changeTodoStatus('${item.id}','verify')" class="bg-orange-500 hover:bg-orange-600 text-white text-[9px] font-bold py-1 px-2.5 rounded-lg transition duration-300 cursor-pointer flex items-center gap-1">${t('btn_mark_verify')} <svg class="w-3 h-3 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>`;
+    if(item.status==='verify')return`<button onclick="changeTodoStatus('${item.id}','done')" class="bg-green-500 hover:bg-green-600 text-white text-[9px] font-bold py-1 px-2.5 rounded-lg transition duration-300 cursor-pointer flex items-center gap-1"><svg class="w-3 h-3 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> ${t('btn_approve')}</button>`;
+    return`<span class="text-[10px] text-green-600 font-bold flex items-center gap-1"><svg class="w-3 h-3 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> ${t('status_approved')}</span>`;
 }
 function changeTodoStatus(id,newStatus){const item=todoItems.find(ti=>ti.id===id);if(item){item.status=newStatus;const toast=document.getElementById('notification-toast');const msg=document.getElementById('notification-toast-msg');if(toast&&msg){msg.innerText=newStatus==='verify'?t('toast_verify'):t('toast_done');toast.classList.remove('hidden');setTimeout(()=>toast.classList.add('hidden'),3500);}renderTodoList();saveAllToLocalStorage();}}
 function deleteTodo(id){todoItems=todoItems.filter(t=>t.id!==id);renderTodoList();saveAllToLocalStorage();}
@@ -1723,7 +1739,7 @@ function renderBudgetNewTable(){
     const tbody=document.getElementById('budget-new-tbody');if(!tbody)return;tbody.innerHTML='';
     if(budgetNewItems.length===0){tbody.innerHTML=`<tr><td colspan="5" class="text-center py-6 text-xs text-gray-400 italic">${t('no_expenses')}</td></tr>`;calculateBudgetNewSummary();return;}
     budgetNewItems.forEach(item=>{
-        tbody.insertAdjacentHTML('beforeend',`<tr class="border-b border-gray-50 text-xs text-gray-700 hover:bg-gray-50/50"><td class="py-2.5 pl-2"><input type="text" value="${item.name}" oninput="updateBudgetNewItem('${item.id}','name',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-semibold" placeholder="${t('ph_expense_name')}"></td><td><select onchange="updateBudgetNewItem('${item.id}','category',this.value)" class="bg-transparent outline-none text-gray-600 font-medium py-0.5"><option value="宴席" ${item.category==='宴席'?'selected':''}>${t('cat_banquet')}</option><option value="摄像" ${item.category==='摄像'?'selected':''}>${t('cat_photo')}</option><option value="妆造" ${item.category==='妆造'?'selected':''}>${t('cat_makeup')}</option><option value="布置" ${item.category==='布置'?'selected':''}>${t('cat_decor')}</option><option value="其他" ${item.category==='其他'?'selected':''}>${t('cat_other')}</option></select></td><td class="font-mono"><input type="number" value="${item.amount}" oninput="updateBudgetNewItem('${item.id}','amount',this.value)" class="w-20 bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-bold text-gray-800" placeholder="0"></td><td><div class="flex items-center gap-2 flex-wrap"><input type="file" id="file-${item.id}" onchange="handleReceiptUpload('${item.id}',this)" class="hidden" accept="image/*"><label for="file-${item.id}" class="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 text-[10px] font-bold py-1 px-2.5 rounded transition"><i class="fa-solid fa-upload"></i> ${t('btn_upload_receipt')}</label>${item.receiptURL?`<a href="${item.receiptURL}" target="_blank" class="text-burgundy-500 font-bold hover:underline text-[10px]"><i class="fa-regular fa-image"></i> ${t('btn_preview_receipt')}</a>`:`<span class="text-[10px] text-gray-300">${t('receipt_none')}</span>`}</div></td><td class="text-center"><button onclick="deleteBudgetNewItem('${item.id}')" class="text-red-500 hover:text-red-700 font-bold text-[11px]"><i class="fa-regular fa-trash-can"></i></button></td></tr>`);
+        tbody.insertAdjacentHTML('beforeend',`<tr class="border-b border-gray-50 text-xs text-gray-700 hover:bg-gray-50/50"><td class="py-2.5 pl-2"><input type="text" value="${item.name}" oninput="updateBudgetNewItem('${item.id}','name',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-semibold" placeholder="${t('ph_expense_name')}"></td><td><select onchange="updateBudgetNewItem('${item.id}','category',this.value)" class="bg-transparent outline-none text-gray-600 font-medium py-0.5"><option value="宴席" ${item.category==='宴席'?'selected':''}>${t('cat_banquet')}</option><option value="摄像" ${item.category==='摄像'?'selected':''}>${t('cat_photo')}</option><option value="妆造" ${item.category==='妆造'?'selected':''}>${t('cat_makeup')}</option><option value="布置" ${item.category==='布置'?'selected':''}>${t('cat_decor')}</option><option value="其他" ${item.category==='其他'?'selected':''}>${t('cat_other')}</option></select></td><td class="font-mono"><input type="number" value="${item.amount}" oninput="updateBudgetNewItem('${item.id}','amount',this.value)" class="w-20 bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-bold text-gray-800" placeholder="0"></td><td><div class="flex items-center gap-2 flex-wrap"><input type="file" id="file-${item.id}" onchange="handleReceiptUpload('${item.id}',this)" class="hidden" accept="image/*"><label for="file-${item.id}" class="cursor-pointer bg-white/60 hover:bg-white/80 backdrop-blur text-gray-700 text-[10px] font-bold py-1 px-2.5 rounded transition duration-300 inline-flex items-center gap-1 border border-gray-200/50"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> ${t('btn_upload_receipt')}</label>${item.receiptURL?`<a href="${item.receiptURL}" target="_blank" class="text-burgundy-500 font-bold hover:underline text-[10px] inline-flex items-center gap-1"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> ${t('btn_preview_receipt')}</a>`:`<span class="text-[10px] text-gray-300">${t('receipt_none')}</span>`}</div></td><td class="text-center"><button onclick="deleteBudgetNewItem('${item.id}')" class="text-red-400 hover:text-red-600 transition cursor-pointer"><svg class="w-3.5 h-3.5 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></td></tr>`);
     });
     calculateBudgetNewSummary();
 }
@@ -1785,7 +1801,7 @@ function renderDepositLog() {
     if (depositEntries.length === 0) {
         list.innerHTML = `
             <div class="text-center py-6 text-gray-300 text-xs" id="deposit-empty-state">
-                <i class="fa-solid fa-piggy-bank text-2xl block mb-2"></i>
+                <svg class="w-8 h-8 mx-auto mb-2 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/></svg>
                 ${t('deposit_empty_msg')}
             </div>`;
         if (countEl) countEl.textContent = '';
@@ -1799,7 +1815,7 @@ function renderDepositLog() {
         list.insertAdjacentHTML('beforeend', `
             <div class="flex items-center gap-3 bg-gray-50 hover:bg-champagne-100/20 rounded-xl px-3 py-2.5 group transition-all">
                 <div class="w-7 h-7 rounded-full bg-champagne-100 flex items-center justify-center flex-shrink-0">
-                    <i class="fa-solid fa-coins text-champagne-600 text-[10px]"></i>
+                    <svg class="w-3.5 h-3.5 text-champagne-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                 </div>
                 <div class="flex-1 min-w-0">
                     <p class="text-xs font-bold text-gray-800 truncate">${dep.note}</p>
@@ -1810,7 +1826,7 @@ function renderDepositLog() {
                 </div>
                 <button onclick="deleteDepositEntry('${dep.id}')"
                     class="text-gray-200 hover:text-red-400 text-[11px] opacity-0 group-hover:opacity-100 transition flex-shrink-0">
-                    <i class="fa-solid fa-trash-can"></i>
+                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                 </button>
             </div>
         `);
@@ -1884,10 +1900,10 @@ function renderQuotesTable(){
     const tbody=document.getElementById('vendor-quote-tbody');if(!tbody)return;tbody.innerHTML='';
     if(quoteItems.length===0){tbody.innerHTML=`<tr><td colspan="6" class="text-center py-6 text-xs text-gray-400 italic">${t('no_quotes')}</td></tr>`;return;}
     quoteItems.forEach(item=>{
-        tbody.insertAdjacentHTML('beforeend',`<tr class="border-b border-gray-50 text-xs text-gray-700 hover:bg-gray-50/50"><td class="py-2 pl-2"><input type="text" value="${item.vendor}" oninput="updateQuote('${item.id}','vendor',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-bold text-gray-800" placeholder="${t('ph_vendor')}"></td><td><input type="number" value="${item.price}" oninput="updateQuote('${item.id}','price',this.value)" class="w-20 bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-mono font-bold" placeholder="0"></td><td><input type="text" value="${item.service}" oninput="updateQuote('${item.id}','service',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500" placeholder="${t('ph_service')}"></td><td><input type="text" value="${item.prosCons}" oninput="updateQuote('${item.id}','prosCons',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500" placeholder="${t('ph_pros_cons')}"></td><td><select onchange="updateQuote('${item.id}','rating',this.value)" class="bg-transparent outline-none font-semibold text-champagne-600 py-0.5"><option value="🌟🌟🌟🌟🌟" ${item.rating==='🌟🌟🌟🌟🌟'?'selected':''}>🌟🌟🌟🌟🌟</option><option value="🌟🌟🌟🌟" ${item.rating==='🌟🌟🌟🌟'?'selected':''}>🌟🌟🌟🌟</option><option value="🌟🌟🌟" ${item.rating==='🌟🌟🌟'?'selected':''}>🌟🌟🌟</option></select></td><td class="text-center"><button onclick="deleteQuoteRow('${item.id}')" class="text-red-500 hover:text-red-700 font-semibold text-[11px]">🗑️</button></td></tr>`);
+        tbody.insertAdjacentHTML('beforeend',`<tr class="border-b border-gray-50 text-xs text-gray-700 hover:bg-gray-50/50"><td class="py-2 pl-2"><input type="text" value="${item.vendor}" oninput="updateQuote('${item.id}','vendor',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-bold text-gray-800" placeholder="${t('ph_vendor')}"></td><td><input type="number" value="${item.price}" oninput="updateQuote('${item.id}','price',this.value)" class="w-20 bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-mono font-bold" placeholder="0"></td><td><input type="text" value="${item.service}" oninput="updateQuote('${item.id}','service',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500" placeholder="${t('ph_service')}"></td><td><input type="text" value="${item.prosCons}" oninput="updateQuote('${item.id}','prosCons',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500" placeholder="${t('ph_pros_cons')}"></td><td><select onchange="updateQuote('${item.id}','rating',this.value)" class="bg-transparent outline-none font-semibold text-champagne-600 py-0.5"><option value="5" ${item.rating==='5'||item.rating===5?'selected':''}>★★★★★</option><option value="4" ${item.rating==='4'||item.rating===4?'selected':''}>★★★★</option><option value="3" ${item.rating==='3'||item.rating===3?'selected':''}>★★★</option></select></td><td class="text-center"><button onclick="deleteQuoteRow('${item.id}')" class="text-red-400 hover:text-red-600 transition cursor-pointer"><svg class="w-3.5 h-3.5 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></td></tr>`);
     });
 }
-function addNewQuoteRow(){quoteItems.push({id:'quote_'+Date.now(),vendor:'',price:0,service:'',prosCons:'',rating:'🌟🌟🌟🌟'});renderQuotesTable();saveAllToLocalStorage();}
+function addNewQuoteRow(){quoteItems.push({id:'quote_'+Date.now(),vendor:'',price:0,service:'',prosCons:'',rating:'4'});renderQuotesTable();saveAllToLocalStorage();}
 function deleteQuoteRow(id){quoteItems=quoteItems.filter(i=>i.id!==id);renderQuotesTable();saveAllToLocalStorage();}
 function updateQuote(id,field,value){const item=quoteItems.find(i=>i.id===id);if(item){item[field]=value;saveAllToLocalStorage();}}
 function sendWhatsAppInquiry(vendorName,phoneNum){const groom=document.getElementById('groom-name').value||t('groom_default');const bride=document.getElementById('bride-name').value||t('bride_default');const msg=t('whatsapp_msg').replace('${vendor}',vendorName).replace('${groom}',groom).replace('${bride}',bride);window.open(`https://api.whatsapp.com/send?phone=${phoneNum}&text=${encodeURIComponent(msg)}`,'_blank');}
@@ -1900,7 +1916,7 @@ function renderGuestsTable(){
     if(guestItems.length===0){tbody.innerHTML=`<tr><td colspan="6" class="text-center py-6 text-xs text-gray-400 italic">${t('no_guests')}</td></tr>`;calculateGuestStats();return;}
     guestItems.forEach(item=>{
         let tableOptions=`<option value="">${t('unassigned_seat')}</option>`;seatingData.forEach(tbl=>{tableOptions+=`<option value="${tbl.id}" ${item.tableId===tbl.id?'selected':''}>${tbl.name}</option>`;});
-        tbody.insertAdjacentHTML('beforeend',`<tr class="border-b border-gray-50 text-xs text-gray-700 hover:bg-gray-50/50"><td class="py-3 pl-2"><input type="text" value="${item.name}" oninput="updateGuest('${item.id}','name',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-bold text-gray-800" placeholder="${t('ph_guest_name')}"><div class="text-[11px] text-champagne-600 italic mt-1 leading-relaxed max-w-xs overflow-hidden text-ellipsis whitespace-nowrap" title="${item.wish||''}">${item.wish?`💬 "${item.wish}"`:`<span class="text-gray-300">${t('no_wish')}</span>`}</div></td><td><input type="number" value="${item.pax||1}" onchange="updateGuest('${item.id}','pax',this.value)" class="w-12 bg-transparent outline-none font-bold" min="1" max="10"></td><td><select onchange="updateGuest('${item.id}','rsvp',this.value)" class="bg-transparent outline-none font-semibold text-gray-600"><option value="going" ${item.rsvp==='going'?'selected':''}>${t('rsvp_going')}</option><option value="maybe" ${item.rsvp==='maybe'?'selected':''}>${t('rsvp_maybe')}</option><option value="no" ${item.rsvp==='no'?'selected':''}>${t('rsvp_no')}</option></select></td><td><select onchange="updateGuest('${item.id}','diet',this.value)" class="bg-transparent outline-none text-gray-600 font-medium"><option value="none" ${item.diet==='none'?'selected':''}>${t('diet_none_short')}</option><option value="vegetarian" ${item.diet==='vegetarian'?'selected':''}>${t('diet_veg_short')}</option><option value="halal" ${item.diet==='halal'?'selected':''}>${t('diet_halal_short')}</option></select></td><td><select onchange="assignGuestToSeatingTable('${item.id}',this.value)" class="bg-transparent outline-none text-burgundy-600 font-bold">${tableOptions}</select></td><td class="text-center"><button onclick="deleteGuest('${item.id}')" class="text-red-500 hover:text-red-700 font-bold text-[11px]"><i class="fa-regular fa-trash-can"></i></button></td></tr>`);
+        tbody.insertAdjacentHTML('beforeend',`<tr class="border-b border-gray-50 text-xs text-gray-700 hover:bg-gray-50/50"><td class="py-3 pl-2"><input type="text" value="${item.name}" oninput="updateGuest('${item.id}','name',this.value)" class="w-full bg-transparent outline-none py-0.5 border-b border-transparent focus:border-burgundy-500 font-bold text-gray-800" placeholder="${t('ph_guest_name')}"><div class="text-[11px] text-champagne-600 italic mt-1 leading-relaxed max-w-xs overflow-hidden text-ellipsis whitespace-nowrap" title="${item.wish||''}">${item.wish?`"${item.wish}"`:`<span class="text-gray-300">${t('no_wish')}</span>`}</div></td><td><input type="number" value="${item.pax||1}" onchange="updateGuest('${item.id}','pax',this.value)" class="w-12 bg-transparent outline-none font-bold" min="1" max="10"></td><td><select onchange="updateGuest('${item.id}','rsvp',this.value)" class="bg-transparent outline-none font-semibold text-gray-600"><option value="going" ${item.rsvp==='going'?'selected':''}>${t('rsvp_going')}</option><option value="maybe" ${item.rsvp==='maybe'?'selected':''}>${t('rsvp_maybe')}</option><option value="no" ${item.rsvp==='no'?'selected':''}>${t('rsvp_no')}</option></select></td><td><select onchange="updateGuest('${item.id}','diet',this.value)" class="bg-transparent outline-none text-gray-600 font-medium"><option value="none" ${item.diet==='none'?'selected':''}>${t('diet_none_short')}</option><option value="vegetarian" ${item.diet==='vegetarian'?'selected':''}>${t('diet_veg_short')}</option><option value="halal" ${item.diet==='halal'?'selected':''}>${t('diet_halal_short')}</option></select></td><td><select onchange="assignGuestToSeatingTable('${item.id}',this.value)" class="bg-transparent outline-none text-burgundy-600 font-bold">${tableOptions}</select></td><td class="text-center"><button onclick="deleteGuest('${item.id}')" class="text-red-400 hover:text-red-600 transition cursor-pointer"><svg class="w-3.5 h-3.5 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></td></tr>`);
     });
     calculateGuestStats();
 }
@@ -1922,7 +1938,7 @@ function renderSeatingTables(){
     const container=document.getElementById('seating-tables-container');if(!container)return;container.innerHTML='';
     seatingData.forEach(table=>{
         let seatsHtml='';for(let i=0;i<10;i++){const seatName=table.guests[i]||'';seatsHtml+=`<div class="flex items-center gap-1 py-1 border-b border-gray-50"><span class="text-[9px] font-mono text-gray-300 w-3">${i+1}</span><span class="text-xs font-semibold ${seatName?'text-burgundy-600 font-bold':'text-gray-300 italic'}">${seatName||t('empty_seat')}</span></div>`;}
-        container.insertAdjacentHTML('beforeend',`<div class="bg-[#faf8f5] rounded-2xl p-4 border border-burgundy-50 elegant-shadow flex flex-col justify-between"><div><div class="flex justify-between items-center border-b border-burgundy-100 pb-2 mb-3"><span class="font-serif font-bold text-xs text-burgundy-500">${table.name}</span><button onclick="deleteTable('${table.id}')" class="text-red-400 hover:text-red-600 text-[10px]"><i class="fa-solid fa-trash"></i></button></div><div class="grid grid-cols-2 gap-2">${seatsHtml}</div></div></div>`);
+        container.insertAdjacentHTML('beforeend',`<div class="glass-card rounded-2xl p-4 flex flex-col justify-between"><div><div class="flex justify-between items-center border-b border-burgundy-100/40 pb-2 mb-3"><span class="font-serif font-bold text-xs text-burgundy-500">${table.name}</span><button onclick="deleteTable('${table.id}')" class="text-red-400 hover:text-red-600 transition cursor-pointer"><svg class="w-3.5 h-3.5 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></div><div class="grid grid-cols-2 gap-2">${seatsHtml}</div></div></div>`);
     });
 }
 function addNewTable(){const newId='table_'+Date.now();seatingData.push({id:newId,name:t('new_table_name').replace('${n}',seatingData.length+1),guests:Array(10).fill('')});renderSeatingTables();renderGuestsTable();saveAllToLocalStorage();}
@@ -1964,7 +1980,7 @@ function renderWishesOnMockBoard(){
     const board=document.getElementById('invite-wishes-board');if(!board)return;board.innerHTML='';
     const messages=[];guestItems.forEach(g=>{if(g.wish&&g.wish.trim())messages.push({name:g.name,msg:g.wish});});
     if(messages.length===0){messages.push({name:t('sample_wish1_name'),msg:t('sample_wish1')});messages.push({name:t('sample_wish2_name'),msg:t('sample_wish2')});messages.push({name:t('sample_wish3_name'),msg:t('sample_wish3')});}
-    messages.forEach(item=>{board.insertAdjacentHTML('beforeend',`<div class="bg-white p-2 rounded-lg border border-burgundy-100/50 shadow-sm text-left scale-95 origin-left"><div class="flex justify-between items-center text-[8px] font-bold text-burgundy-500 mb-0.5"><span>💖 ${item.name}</span><span class="text-gray-300">${t('wish_time')}</span></div><p class="text-[9px] text-gray-600 leading-normal font-sans italic">"${item.msg}"</p></div>`);});
+    messages.forEach(item=>{board.insertAdjacentHTML('beforeend',`<div class="bg-white/70 p-2 rounded-lg border border-burgundy-100/50 shadow-sm text-left scale-95 origin-left"><div class="flex justify-between items-center text-[8px] font-bold text-burgundy-500 mb-0.5"><span>${item.name}</span><span class="text-gray-300">${t('wish_time')}</span></div><p class="text-[9px] text-gray-600 leading-normal font-sans italic">"${item.msg}"</p></div>`);});
     board.scrollTop=board.scrollHeight;
 }
 
@@ -1977,7 +1993,7 @@ function renderInteractiveChecklists(){
     if(w1Items.length===0)w1.innerHTML=`<p class="text-xs text-gray-400 italic py-2">${t('no_checklist')}</p>`;
     if(dOItems.length===0)dO.innerHTML=`<p class="text-xs text-gray-400 italic py-2">${t('no_checklist')}</p>`;
     checklistItems.forEach(item=>{
-        const domString=`<div class="flex items-center justify-between p-3 bg-gray-50/50 hover:bg-burgundy-50/10 rounded-xl border border-gray-100 transition group"><div class="flex items-center flex-1 mr-4"><input id="${item.id}" type="checkbox" ${item.checked?'checked':''} onchange="toggleChecklistItem('${item.id}')" class="w-4 h-4 text-burgundy-500 border-gray-300 rounded focus:ring-burgundy-500 cursor-pointer"><input type="text" value="${item.text}" oninput="updateChecklistItemText('${item.id}',this.value)" class="ml-3 text-xs text-gray-600 bg-transparent border-b border-transparent hover:border-gray-200 focus:border-burgundy-500 focus:outline-none flex-1 py-0.5 transition font-medium ${item.checked?'line-through text-gray-400':''}" placeholder="${t('ph_checklist')}"></div><button onclick="deleteChecklistItem('${item.id}')" class="text-gray-300 hover:text-red-500 text-[11px] opacity-0 group-hover:opacity-100 transition no-print"><i class="fa-solid fa-trash-can"></i></button></div>`;
+        const domString=`<div class="flex items-center justify-between p-3 bg-gray-50/50 hover:bg-burgundy-50/10 rounded-xl border border-gray-100 transition group"><div class="flex items-center flex-1 mr-4"><input id="${item.id}" type="checkbox" ${item.checked?'checked':''} onchange="toggleChecklistItem('${item.id}')" class="w-4 h-4 text-burgundy-500 border-gray-300 rounded focus:ring-burgundy-500 cursor-pointer"><input type="text" value="${item.text}" oninput="updateChecklistItemText('${item.id}',this.value)" class="ml-3 text-xs text-gray-600 bg-transparent border-b border-transparent hover:border-gray-200 focus:border-burgundy-500 focus:outline-none flex-1 py-0.5 transition font-medium ${item.checked?'line-through text-gray-400':''}" placeholder="${t('ph_checklist')}"></div><button onclick="deleteChecklistItem('${item.id}')" class="text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition duration-300 cursor-pointer no-print"><svg class="w-3.5 h-3.5 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></div>`;
         if(item.section==='week-1')w1.insertAdjacentHTML('beforeend',domString);else dO.insertAdjacentHTML('beforeend',domString);
     });
 }
@@ -1995,7 +2011,7 @@ function calculateChecklistProgress(){
 // MUSIC
 // ═══════════════════════════════════════
 let playingTrackId=null;
-function toggleMusicSimulation(trackId,btn){if(playingTrackId===trackId){playingTrackId=null;btn.innerHTML=`<i class="fa-solid fa-play"></i>`;}else{playingTrackId=trackId;btn.innerHTML=`<i class="fa-solid fa-pause text-red-500 animate-pulse"></i>`;}}
+function toggleMusicSimulation(trackId,btn){if(playingTrackId===trackId){playingTrackId=null;btn.innerHTML=`<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;}else{playingTrackId=trackId;btn.innerHTML=`<svg class="w-5 h-5 text-red-500 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`;}}
 
 // ═══════════════════════════════════════
 // PERSISTENCE
@@ -2024,7 +2040,7 @@ function loadAllFromLocalStorage(){
         todoItems=[{id:'todo1',text:'挑选大马吉隆坡经典宴会厅并支付酒席订金',owner:'joint',status:'planning'},{id:'todo2',text:'跟妆造型设计试妆',owner:'bride',status:'verify'}];
         guestItems=[{id:'g1',name:'陈大伯',rsvp:'going',diet:'none',pax:1,wish:"新婚大吉，恩爱永驻！",tableId:'table_1'},{id:'g2',name:'李阿姨',rsvp:'going',diet:'vegetarian',pax:2,wish:"恭喜新人！祝百年好合！",tableId:'table_2'}];
         budgetNewItems=[{id:'b1',name:'吉隆坡 Glasshouse Seputeh 场地费',category:'布置',amount:15000,receiptURL:''},{id:'b2',name:'影像摄制团队费用（包含接亲快剪）',category:'摄像',amount:4500,receiptURL:''}];
-        quoteItems=[{id:'q1',vendor:'Mocha Studio 吉隆坡',price:4500,service:'双摄 包含早上接亲快剪 SDE',prosCons:'本地好评、交片迅速，档期需要提早约',rating:'🌟🌟🌟🌟🌟'}];
+        quoteItems=[{id:'q1',vendor:'Mocha Studio 吉隆坡',price:4500,service:'双摄 包含早上接亲快剪 SDE',prosCons:'本地好评、交片迅速，档期需要提早约',rating:'5'}];
         checklistItems=JSON.parse(JSON.stringify(defaultChecklist));
         runsheetItems=JSON.parse(JSON.stringify(defaultRunsheetTemplates));
         renderSeatingTables();
@@ -2076,10 +2092,10 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#fff;colo
 @media print{.no-print{display:none!important}}
 .ph{text-align:center;padding-bottom:14px;border-bottom:1.5px solid #ddd;margin-bottom:20px}
 .ph .ey{font-size:9px;letter-spacing:.25em;color:#b08b43;text-transform:uppercase;margin-bottom:5px}
-.ph .nm{font-size:22px;font-weight:700;color:#800020;font-family:serif;letter-spacing:.03em}
+.ph .nm{font-size:22px;font-weight:700;color:#DB2777;font-family:serif;letter-spacing:.03em}
 .ph .sb{font-size:10px;color:#999;margin-top:3px}
-.pb{display:inline-flex;align-items:center;gap:6px;background:#800020;color:#fff;border:none;border-radius:7px;padding:7px 20px;font-size:11px;font-weight:700;cursor:pointer}
-.pb:hover{background:#66001a}
+.pb{display:inline-flex;align-items:center;gap:6px;background:#DB2777;color:#fff;border:none;border-radius:7px;padding:7px 20px;font-size:11px;font-weight:700;cursor:pointer}
+.pb:hover{background:#BE185D}
 .ft{text-align:center;font-size:9px;color:#ccc;margin-top:22px;font-style:italic;border-top:1px solid #eee;padding-top:10px}
 ${extraCss || ''}
 </style></head><body>
@@ -2115,11 +2131,11 @@ function printSeatingChart() {
             const x = (28 + 26 * Math.cos(a)).toFixed(1);
             const y = (28 + 26 * Math.sin(a)).toFixed(1);
             const on = table.guests[i] && table.guests[i].trim();
-            return `<circle cx="${x}" cy="${y}" r="4.5" fill="${on?'#800020':'#e5e7eb'}"/>`;
+            return `<circle cx="${x}" cy="${y}" r="4.5" fill="${on?'#DB2777':'#e5e7eb'}"/>`;
         }).join('');
         const svg = `<svg width="56" height="56" viewBox="0 0 56 56">
             <circle cx="28" cy="28" r="14" fill="#faf8f5" stroke="#e8ddd0" stroke-width="1.5"/>
-            <text x="28" y="32" text-anchor="middle" font-size="9" fill="#800020" font-weight="700">${filled}/10</text>
+            <text x="28" y="32" text-anchor="middle" font-size="9" fill="#DB2777" font-weight="700">${filled}/10</text>
             ${dots}</svg>`;
 
         // Seat rows — two columns side by side
@@ -2128,7 +2144,7 @@ function printSeatingChart() {
         const makeRow = (name, num) => `
             <div style="display:flex;align-items:center;gap:5px;padding:3px 0;border-bottom:1px solid #f5f0eb">
                 <span style="font-size:9px;color:#ccc;width:12px;text-align:right;flex-shrink:0">${num}</span>
-                <span style="font-size:11px;font-weight:${name?'600':'400'};color:${name?'#800020':'#bbb'}">${name||'—'}</span>
+                <span style="font-size:11px;font-weight:${name?'600':'400'};color:${name?'#DB2777':'#bbb'}">${name||'—'}</span>
             </div>`;
         const leftHtml  = leftSeats.map((n,i) => makeRow(n, i+1)).join('');
         const rightHtml = rightSeats.map((n,i) => makeRow(n, i+6)).join('');
@@ -2138,7 +2154,7 @@ function printSeatingChart() {
             <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f0e8df;padding-bottom:8px">
                 <div>
                     <div style="font-size:9px;color:#b08b43;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px">Table ${idx+1}</div>
-                    <div style="font-size:12px;font-weight:700;color:#800020;font-family:serif">${table.name}</div>
+                    <div style="font-size:12px;font-weight:700;color:#DB2777;font-family:serif">${table.name}</div>
                 </div>
                 ${svg}
             </div>
@@ -2157,8 +2173,8 @@ function printSeatingChart() {
 
     const summary = `
         <div style="display:flex;gap:10px;justify-content:center;margin-bottom:18px;flex-wrap:wrap">
-            ${[`🪑 ${currentLang==='zh'?'共':'Total'} ${seatingData.length} ${currentLang==='zh'?'桌':'tables'}`,`👥 ${currentLang==='zh'?'已排':'Seated'} ${totalGuests} ${currentLang==='zh'?'位':'pax'}`,`💺 ${currentLang==='zh'?'空位':'Empty'} ${seatingData.length*10-totalGuests} ${currentLang==='zh'?'个':'seats'}`]
-                .map(s=>`<span style="background:#faf3eb;border:1px solid #e8ddd0;border-radius:99px;padding:4px 14px;font-size:10px;color:#800020;font-weight:600">${s}</span>`).join('')}
+            ${[`${currentLang==='zh'?'共':'Total'} ${seatingData.length} ${currentLang==='zh'?'桌':'tables'}`,`${currentLang==='zh'?'已排':'Seated'} ${totalGuests} ${currentLang==='zh'?'位':'pax'}`,`${currentLang==='zh'?'空位':'Empty'} ${seatingData.length*10-totalGuests} ${currentLang==='zh'?'个':'seats'}`]
+                .map(s=>`<span style="background:#FDF2F8;border:1px solid #FCE7F3;border-radius:99px;padding:4px 14px;font-size:10px;color:#DB2777;font-weight:600">${s}</span>`).join('')}
         </div>`;
 
     const body = seatingData.length === 0
@@ -2195,9 +2211,9 @@ function _buildRunsheet(act, title) {
     const rows = items.map((r, i) => `
         <tr>
             <td style="${_TD};width:22px;text-align:center">
-                <span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#800020;color:#fff;font-size:9px;font-weight:700">${i+1}</span>
+                <span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DB2777;color:#fff;font-size:9px;font-weight:700">${i+1}</span>
             </td>
-            <td style="${_TD};width:100px;color:#800020;font-weight:600;white-space:nowrap">${r.time}</td>
+            <td style="${_TD};width:100px;color:#DB2777;font-weight:600;white-space:nowrap">${r.time}</td>
             <td style="${_TD};font-weight:700;color:#1a1a1a">${r.title}</td>
             <td style="${_TD};color:#555;line-height:1.5">${r.desc}</td>
         </tr>`).join('');
@@ -2225,21 +2241,21 @@ function _buildGuestList() {
         `<span style="background:${color}15;border:1px solid ${color}40;border-radius:99px;padding:3px 12px;font-size:10px;color:${color};font-weight:600">${label} ${val}</span>`;
 
     const summary = `<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
-        ${chips('👥 出席',total,'#800020')}
-        ${chips('🌿 素食',veg,'#16a34a')}
-        ${chips('☪️ 清真',hal,'#0369a1')}
+        ${chips(currentLang==='zh'?'出席':'Attending',total,'#DB2777')}
+        ${chips(currentLang==='zh'?'素食':'Vegetarian',veg,'#16a34a')}
+        ${chips(currentLang==='zh'?'清真':'Halal',hal,'#0369a1')}
     </div>`;
 
     const rows = guestItems.map((g,i) => {
         const table = seatingData.find(tb => tb.id === g.tableId);
         const dietLabel = {none:'—', vegetarian:t('diet_veg_short'), halal:t('diet_halal_short')}[g.diet] || '—';
-        const rsvpLabel = {going:`✅ ${t('rsvp_going')}`, maybe:`⏳ ${t('rsvp_maybe')}`, no:`❌ ${t('rsvp_no')}`}[g.rsvp] || g.rsvp;
+        const rsvpLabel = {going:t('rsvp_going'), maybe:t('rsvp_maybe'), no:t('rsvp_no')}[g.rsvp] || g.rsvp;
         return `<tr style="background:${i%2===0?'#fff':'#faf8f5'}">
             <td style="${_TD};font-weight:600;color:#1a1a1a">${g.name}</td>
             <td style="${_TD};text-align:center">${g.pax||1}</td>
             <td style="${_TD}">${rsvpLabel}</td>
             <td style="${_TD};color:#555">${dietLabel}</td>
-            <td style="${_TD};color:#800020;font-weight:600">${table ? table.name : t('unassigned_seat')}</td>
+            <td style="${_TD};color:#DB2777;font-weight:600">${table ? table.name : t('unassigned_seat')}</td>
             <td style="${_TD};color:#777;font-style:italic;font-size:10px">${g.wish ? '"'+g.wish+'"' : ''}</td>
         </tr>`;
     }).join('');
@@ -2269,7 +2285,7 @@ function _buildChecklist() {
         const items = checklistItems.filter(c => c.section === sec.key);
         if (items.length === 0) return;
         body += `<div style="margin-bottom:20px">
-            <div style="font-size:11px;font-weight:700;color:#800020;border-left:3px solid #800020;padding-left:8px;margin-bottom:10px">${sec.label}</div>
+            <div style="font-size:11px;font-weight:700;color:#DB2777;border-left:3px solid #DB2777;padding-left:8px;margin-bottom:10px">${sec.label}</div>
             ${items.map(c => `
                 <div style="display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid #f5f0eb">
                     <span style="font-size:14px;flex-shrink:0;line-height:1">${c.checked ? '☑' : '☐'}</span>
@@ -2289,7 +2305,7 @@ function _buildBudget() {
 
     const summary = `
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px">
-            ${[[t('budget_total_label'),`RM ${totalBudget.toLocaleString()}`,'#800020'],
+            ${[[t('budget_total_label'),`RM ${totalBudget.toLocaleString()}`,'#DB2777'],
                [t('budget_spent_label'),`RM ${spent.toLocaleString()}`,'#dc2626'],
                [t('budget_remaining_label'),`RM ${left.toLocaleString()}`,left>=0?'#16a34a':'#dc2626']]
                 .map(([l,v,c])=>`<div style="border:1px solid #eee;border-radius:8px;padding:10px;text-align:center">
