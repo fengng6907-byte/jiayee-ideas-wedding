@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="npc.css">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -487,20 +488,7 @@
 
         <!-- Hero -->
         <div class="hero-section fade-content" id="hero-section">
-            <div class="hero-illustration">
-                <div class="hero-phone">
-                    <div class="hero-phone-screen">
-                        <div class="phone-bar"></div>
-                        <div class="phone-bar"></div>
-                        <div class="phone-bar"></div>
-                        <div class="phone-dot"></div>
-                        <div class="phone-line"></div>
-                        <div class="phone-line"></div>
-                    </div>
-                </div>
-                <div class="hero-floral-1"></div>
-                <div class="hero-floral-2"></div>
-            </div>
+            <div class="hero-illustration" id="npc-auth-scene"></div>
             <h1 class="hero-headline" id="headline">Every Beautiful Wedding Begins With One Step</h1>
             <p class="hero-desc" id="description">Organize your guests, timeline, budget, vendors, and unforgettable moments—all in one beautifully designed place.</p>
         </div>
@@ -611,6 +599,12 @@
     function handleAuth(provider) {
         window.location.href = '/dashboard';
     }
+    </script>
+    <script src="npc.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            NPC.authScene(document.getElementById('npc-auth-scene'));
+        });
     </script>
 </body>
 </html>

@@ -51,6 +51,7 @@
     </style>
 </head>
 <body class="text-charcoal antialiased">
+<link rel="stylesheet" href="npc.css">
 
 <!-- ═══════════════════════════════════════════════════════════
      ADMIN — HEADER
@@ -1216,6 +1217,7 @@ function applyLanguage(lang) {
 
 function toggleLanguage() {
     applyLanguage(currentLang === 'zh' ? 'en' : 'zh');
+    if(typeof NPC!=='undefined')NPC.react('langSwitch');
 }
 
 let carouselPhotos = [
@@ -1902,7 +1904,7 @@ function renderGuestsTable(){
     });
     calculateGuestStats();
 }
-function addNewGuestRow(nameVal='',dietVal='none',rsvpVal='going',paxVal=1,wishVal=''){guestItems.push({id:'guest_'+Date.now()+Math.floor(Math.random()*100),name:nameVal||t('new_guest'),rsvp:rsvpVal,diet:dietVal,pax:parseInt(paxVal)||1,wish:wishVal||'',tableId:''});renderGuestsTable();saveAllToLocalStorage();}
+function addNewGuestRow(nameVal='',dietVal='none',rsvpVal='going',paxVal=1,wishVal=''){guestItems.push({id:'guest_'+Date.now()+Math.floor(Math.random()*100),name:nameVal||t('new_guest'),rsvp:rsvpVal,diet:dietVal,pax:parseInt(paxVal)||1,wish:wishVal||'',tableId:''});renderGuestsTable();saveAllToLocalStorage();if(typeof NPC!=='undefined')NPC.react('rsvp');}
 function deleteGuest(id){const guest=guestItems.find(g=>g.id===id);if(guest&&guest.tableId)removeGuestFromTable(guest.tableId,guest.name);guestItems=guestItems.filter(g=>g.id!==id);renderGuestsTable();renderSeatingTables();saveAllToLocalStorage();}
 function updateGuest(id,field,value){const item=guestItems.find(g=>g.id===id);if(item){if(field==='pax'){item.pax=parseInt(value)||1;if(item.tableId)assignGuestToSeatingTable(item.id,item.tableId);}else{item[field]=value;}calculateGuestStats();saveAllToLocalStorage();}}
 function calculateGuestStats(){let t=0,v=0,h=0;guestItems.forEach(item=>{if(item.rsvp==='going'){const px=parseInt(item.pax)||1;t+=px;if(item.diet==='vegetarian')v+=px;if(item.diet==='halal')h+=px;}});const sT=document.getElementById('stats-guest-total'),sV=document.getElementById('stats-guest-veg'),sH=document.getElementById('stats-guest-halal');if(sT)sT.innerText=t;if(sV)sV.innerText=v;if(sH)sH.innerText=h;}
@@ -1979,7 +1981,7 @@ function renderInteractiveChecklists(){
         if(item.section==='week-1')w1.insertAdjacentHTML('beforeend',domString);else dO.insertAdjacentHTML('beforeend',domString);
     });
 }
-function toggleChecklistItem(id){const item=checklistItems.find(c=>c.id===id);if(item){item.checked=!item.checked;renderInteractiveChecklists();calculateChecklistProgress();saveAllToLocalStorage();}}
+function toggleChecklistItem(id){const item=checklistItems.find(c=>c.id===id);if(item){item.checked=!item.checked;renderInteractiveChecklists();calculateChecklistProgress();saveAllToLocalStorage();if(item.checked&&typeof NPC!=='undefined')NPC.react('complete');}}
 function updateChecklistItemText(id,value){const item=checklistItems.find(c=>c.id===id);if(item){item.text=value;saveAllToLocalStorage();}}
 function addChecklistItem(sectionKey){const newItem={id:'chk_custom_'+Date.now(),text:'',section:sectionKey,checked:false};checklistItems.push(newItem);renderInteractiveChecklists();calculateChecklistProgress();saveAllToLocalStorage();}
 function deleteChecklistItem(id){checklistItems=checklistItems.filter(c=>c.id!==id);renderInteractiveChecklists();calculateChecklistProgress();saveAllToLocalStorage();}
@@ -2012,6 +2014,7 @@ function saveAllToLocalStorage(){
     };
     localStorage.setItem('wedding_v9_data',JSON.stringify(payload));
     const toast=document.getElementById('save-status-toast');if(toast){toast.classList.remove('hidden');setTimeout(()=>toast.classList.add('hidden'),1200);}
+    if(typeof NPC!=='undefined')NPC.react('save');
 }
 
 function loadAllFromLocalStorage(){
@@ -2344,6 +2347,13 @@ function triggerCustomModal(title,message,isConfirm=false,onConfirmCallback=null
     newOk.addEventListener('click',()=>{modal.classList.add('hidden');if(onConfirmCallback)onConfirmCallback();});newCancelBtn.addEventListener('click',()=>modal.classList.add('hidden'));
 }
 function copyToClipboard(text){const ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');triggerCustomModal(t('copy_success_title'),t('copy_success_msg'));}catch(err){triggerCustomModal(t('copy_fail_title'),t('copy_fail_msg'));}document.body.removeChild(ta);}
+</script>
+<script src="npc.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    NPC.init();
+    setTimeout(() => NPC.react('pageLoad'), 800);
+});
 </script>
 </body>
 </html>

@@ -1,0 +1,449 @@
+/* ═══════════════════════════════════════════════════════════
+   NPC MASCOT SYSTEM — 喜婚记 Wedding Made Simple
+   Bride & Groom living characters
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── BASE ─────────────────────────────────────────────────── */
+.npc-layer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 900;
+    height: 180px;
+    overflow: visible;
+}
+
+.npc-container {
+    position: absolute;
+    bottom: 20px;
+    transition: left 1.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+                right 1.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.4s ease;
+    will-change: transform, left;
+}
+
+.npc-bride { left: 8%; }
+.npc-groom { right: 8%; }
+
+.npc-sprite {
+    width: 90px;
+    height: 120px;
+    position: relative;
+    cursor: pointer;
+    pointer-events: auto;
+    filter: drop-shadow(0 3px 6px rgba(196, 30, 58, 0.1));
+}
+
+/* ── IDLE BREATHING ──────────────────────────────────────── */
+.npc-sprite .body-group {
+    animation: npc-breathe 3s ease-in-out infinite;
+    transform-origin: center bottom;
+}
+
+@keyframes npc-breathe {
+    0%, 100% { transform: scaleY(1) translateY(0); }
+    50% { transform: scaleY(1.015) translateY(-1px); }
+}
+
+/* ── BLINKING ────────────────────────────────────────────── */
+.npc-sprite .eyes {
+    animation: npc-blink 4s ease-in-out infinite;
+}
+
+@keyframes npc-blink {
+    0%, 42%, 46%, 100% { transform: scaleY(1); }
+    44% { transform: scaleY(0.05); }
+}
+
+/* ── HAIR / DRESS SWAY ───────────────────────────────────── */
+.npc-bride .hair-sway {
+    animation: npc-hair-sway 4s ease-in-out infinite;
+    transform-origin: top center;
+}
+
+@keyframes npc-hair-sway {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(1.5deg); }
+    75% { transform: rotate(-1.5deg); }
+}
+
+.npc-bride .dress-sway {
+    animation: npc-dress-sway 3.5s ease-in-out infinite;
+    transform-origin: top center;
+}
+
+@keyframes npc-dress-sway {
+    0%, 100% { transform: skewX(0deg); }
+    30% { transform: skewX(1deg); }
+    70% { transform: skewX(-1deg); }
+}
+
+/* ── EMOTION STATES ──────────────────────────────────────── */
+
+/* Happy — bounce */
+.npc-state-happy .npc-sprite {
+    animation: npc-happy-bounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 3;
+}
+@keyframes npc-happy-bounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    30% { transform: translateY(-18px) rotate(-3deg); }
+    50% { transform: translateY(-22px) rotate(3deg); }
+    70% { transform: translateY(-10px) rotate(-2deg); }
+}
+
+/* Celebrating — jump + spin */
+.npc-state-celebrating .npc-sprite {
+    animation: npc-celebrate 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 2;
+}
+@keyframes npc-celebrate {
+    0% { transform: translateY(0) scale(1) rotate(0deg); }
+    25% { transform: translateY(-30px) scale(1.05) rotate(-5deg); }
+    50% { transform: translateY(-35px) scale(1.08) rotate(5deg); }
+    75% { transform: translateY(-15px) scale(1.02) rotate(-3deg); }
+    100% { transform: translateY(0) scale(1) rotate(0deg); }
+}
+
+/* Sad — droop */
+.npc-state-sad .npc-sprite {
+    animation: npc-sad 2s ease-in-out infinite;
+}
+@keyframes npc-sad {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(3px) rotate(-2deg); }
+}
+
+/* Thinking — head tilt */
+.npc-state-thinking .npc-sprite {
+    animation: npc-think 2.5s ease-in-out infinite;
+}
+@keyframes npc-think {
+    0%, 100% { transform: rotate(0deg); }
+    30% { transform: rotate(5deg); }
+    70% { transform: rotate(-3deg); }
+}
+
+/* Sleeping */
+.npc-state-sleeping .npc-sprite {
+    animation: npc-sleep 3s ease-in-out infinite;
+    opacity: 0.7;
+}
+@keyframes npc-sleep {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(2px) rotate(-5deg); }
+}
+
+/* Walking */
+.npc-state-walking .npc-sprite {
+    animation: npc-walk 0.6s ease-in-out infinite;
+}
+@keyframes npc-walk {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-4px) rotate(3deg); }
+    75% { transform: translateY(-4px) rotate(-3deg); }
+}
+
+/* Wave */
+.npc-state-waving .arm-wave {
+    animation: npc-wave-arm 0.4s ease-in-out 4;
+    transform-origin: bottom center;
+}
+@keyframes npc-wave-arm {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-25deg); }
+}
+
+/* Dancing */
+.npc-state-dancing .npc-sprite {
+    animation: npc-dance 0.7s ease-in-out infinite;
+}
+@keyframes npc-dance {
+    0%, 100% { transform: translateY(0) rotate(0deg) scaleX(1); }
+    25% { transform: translateY(-10px) rotate(-5deg) scaleX(1.03); }
+    50% { transform: translateY(0) rotate(0deg) scaleX(1); }
+    75% { transform: translateY(-10px) rotate(5deg) scaleX(1.03); }
+}
+
+/* ── PARTICLES ───────────────────────────────────────────── */
+.npc-particles {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    width: 80px;
+    height: 80px;
+}
+
+.npc-particle {
+    position: absolute;
+    font-size: 14px;
+    opacity: 0;
+    animation: npc-particle-rise 1.2s ease-out forwards;
+}
+
+@keyframes npc-particle-rise {
+    0% { opacity: 1; transform: translateY(0) scale(0.5); }
+    100% { opacity: 0; transform: translateY(-50px) scale(1.2); }
+}
+
+.npc-particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+.npc-particle:nth-child(2) { left: 40%; animation-delay: 0.15s; }
+.npc-particle:nth-child(3) { left: 70%; animation-delay: 0.3s; }
+.npc-particle:nth-child(4) { left: 25%; animation-delay: 0.1s; }
+.npc-particle:nth-child(5) { left: 55%; animation-delay: 0.25s; }
+
+/* ── SPEECH BUBBLE ───────────────────────────────────────── */
+.npc-speech {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    background: #fff;
+    border: 2px solid #c41e3a;
+    border-radius: 16px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #c41e3a;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 12px rgba(196, 30, 58, 0.12);
+    font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.npc-speech::after {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-right: 2px solid #c41e3a;
+    border-bottom: 2px solid #c41e3a;
+}
+
+.npc-speech.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-12px);
+}
+
+/* ── ZZZ FOR SLEEPING ────────────────────────────────────── */
+.npc-zzz {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 16px;
+    opacity: 0;
+    color: #c41e3a;
+    font-weight: 700;
+}
+
+.npc-state-sleeping .npc-zzz {
+    animation: npc-zzz 2s ease-in-out infinite;
+}
+
+@keyframes npc-zzz {
+    0% { opacity: 0; transform: translate(0, 0) scale(0.6); }
+    50% { opacity: 0.7; transform: translate(8px, -15px) scale(1); }
+    100% { opacity: 0; transform: translate(16px, -30px) scale(0.8); }
+}
+
+/* ── FLOATING HEARTS ─────────────────────────────────────── */
+.npc-hearts {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    pointer-events: none;
+}
+
+.npc-heart {
+    position: absolute;
+    color: #c41e3a;
+    font-size: 12px;
+    opacity: 0;
+}
+
+.npc-heart.animate {
+    animation: npc-heart-float 1.5s ease-out forwards;
+}
+
+@keyframes npc-heart-float {
+    0% { opacity: 1; transform: translateY(0) scale(0.5); }
+    100% { opacity: 0; transform: translateY(-40px) scale(1.1); }
+}
+
+/* ── CONFETTI ────────────────────────────────────────────── */
+.npc-confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.npc-confetti-piece {
+    position: absolute;
+    top: -10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 1px;
+    animation: npc-confetti-fall 2.5s ease-in forwards;
+}
+
+@keyframes npc-confetti-fall {
+    0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+}
+
+/* ── CLICK RIPPLE ────────────────────────────────────────── */
+.npc-tap-ripple {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #c41e3a;
+    opacity: 0;
+    animation: npc-ripple 0.6s ease-out forwards;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes npc-ripple {
+    0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.3); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .npc-sprite { width: 70px; height: 95px; }
+    .npc-layer { height: 140px; }
+    .npc-bride { left: 3%; }
+    .npc-groom { right: 3%; }
+    .npc-speech { font-size: 10px; padding: 5px 9px; }
+}
+
+@media (min-width: 768px) {
+    .npc-sprite { width: 100px; height: 135px; }
+    .npc-bride { left: 12%; }
+    .npc-groom { right: 12%; }
+}
+
+/* ── LOADING SCREEN ──────────────────────────────────────── */
+.npc-loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: #faf8f5;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    transition: opacity 0.5s ease;
+}
+
+.npc-loading-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.npc-loading-scene {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.npc-loading-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: #c41e3a;
+    letter-spacing: 0.1em;
+    animation: npc-loading-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes npc-loading-pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* ── AUTH PAGE SPECIAL ───────────────────────────────────── */
+.auth-npc-scene {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0;
+    width: 200px;
+    height: 160px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.auth-npc-scene .npc-sprite {
+    width: 80px;
+    height: 110px;
+    position: relative;
+}
+
+.auth-npc-scene .npc-bride-sprite {
+    animation: auth-bride-idle 3s ease-in-out infinite;
+}
+
+.auth-npc-scene .npc-groom-sprite {
+    animation: auth-groom-idle 3s ease-in-out infinite 0.3s;
+}
+
+@keyframes auth-bride-idle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    30% { transform: translateY(-5px) rotate(-2deg); }
+    60% { transform: translateY(-2px) rotate(1deg); }
+}
+
+@keyframes auth-groom-idle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-3px) rotate(2deg); }
+    55% { transform: translateY(-6px) rotate(-1deg); }
+}
+
+/* Floating hearts between them */
+.auth-floating-hearts {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 60px;
+}
+
+.auth-heart {
+    position: absolute;
+    color: #c41e3a;
+    font-size: 10px;
+    animation: auth-heart-drift 3s ease-in-out infinite;
+}
+
+.auth-heart:nth-child(1) { left: 5px; animation-delay: 0s; }
+.auth-heart:nth-child(2) { left: 18px; animation-delay: 1s; font-size: 8px; }
+.auth-heart:nth-child(3) { left: 28px; animation-delay: 2s; font-size: 12px; }
+
+@keyframes auth-heart-drift {
+    0% { opacity: 0; transform: translateY(20px) scale(0.5); }
+    30% { opacity: 0.8; }
+    100% { opacity: 0; transform: translateY(-30px) scale(1); }
+}
+
+/* ── PRINT HIDE ──────────────────────────────────────────── */
+@media print {
+    .npc-layer, .npc-loading-overlay, .npc-confetti-container { display: none !important; }
+}
